@@ -476,8 +476,16 @@ if (session_status() === PHP_SESSION_NONE) {
               </ul>
 
             </li>
-            <!--  -->
-
+            <!-- Mantenimiento -->
+            <li class="nav-item has-treeview" style="display:block">
+              <a href="../vistas/movil_menu_mantenimiento_vista.php" class="nav-link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                  Mantenimiento App 
+                  <i class="fas fa-angle-left right"></i>
+                  <span class="badge badge-info right"></span>
+                </p>
+              </a>
 
           </ul>
         </nav>
