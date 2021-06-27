@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-06-2021 a las 06:07:49
+-- Tiempo de generación: 28-06-2021 a las 00:30:56
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.5
 
@@ -29,7 +29,6 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `asignar_docente` (IN `_id_superviso
 START TRANSACTION;
 set @nombre_docente =(select nombres from tbl_personas where id_persona=_id_docente);
 UPDATE tbl_practica_estudiantes SET docente_supervisor = @nombre_docente WHERE id_persona=_id_supervisor;
-
 COMMIT;
 END$$
 
@@ -1193,12 +1192,6 @@ INSERT INTO  tbl_roles(rol, descripcion, estado,Fecha_creacion,Creado_por)
 VALUES (n_rol, descripcionrol, estado_, sysdate()
 ,usuario_);
 end$$
-/*segmento */
-CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_insertar_segmento`(`nombre` VARCHAR(150), `descripcion` VARCHAR(250), `creadopor` VARCHAR(150),`fechadecreacion` DATE )  BEGIN
-INSERT INTO  tbl_movil_segmentos(nombre, descripcion, creado por, fecha de creacion)
-VALUES (nombre, descripcion, creadopor, fechadecreacion );
-END$$
-
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_insertar_subida_informacion` (IN `id_persona_` BIGINT(16))  begin
 INSERT INTO `tbl_subida_documentacion`( `id_persona`,`fecha_creacion`) VALUES (id_persona_,sysdate());
@@ -28888,7 +28881,101 @@ INSERT INTO `tbl_bitacora` (`Id_bitacora`, `Id_usuario`, `Id_objeto`, `Fecha`, `
 (24584, 75, 10, '2021-06-13 23:58:00', 'Ingreso', 'A Gestion de permisos usuarios'),
 (24585, 75, 9, '2021-06-13 23:58:31', 'Ingreso', 'A Permisos a roles y pantallas'),
 (24586, 75, 92, '2021-06-14 17:53:26', 'Ingresó', 'a mantenimiento de dias feriados'),
-(24587, 75, 92, '2021-06-14 17:53:43', 'Ingresó', 'a mantenimiento de dias feriados');
+(24587, 75, 92, '2021-06-14 17:53:43', 'Ingresó', 'a mantenimiento de dias feriados'),
+(24588, 75, 8, '2021-06-23 19:42:01', 'Ingreso', 'A Bitacora del sistema'),
+(24589, 75, 8, '2021-06-23 19:44:19', 'Ingreso', 'A Bitacora del sistema'),
+(24590, 75, 8, '2021-06-23 19:51:52', 'Ingreso', 'A Bitacora del sistema'),
+(24591, 75, 8, '2021-06-23 20:39:02', 'Ingreso', 'A Bitacora del sistema'),
+(24592, 75, 125, '2021-06-23 20:39:20', 'Ingreso', 'A Crear Segmentos'),
+(24593, 75, 125, '2021-06-23 23:44:58', 'Ingreso', 'A Crear Segmentos'),
+(24594, 75, 125, '2021-06-23 23:47:34', 'Ingreso', 'A Crear Segmentos'),
+(24595, 75, 125, '2021-06-23 23:47:38', 'Ingreso', 'A Crear Segmentos'),
+(24596, 75, 125, '2021-06-23 23:47:45', 'Ingreso', 'A Crear Segmentos'),
+(24597, 75, 125, '2021-06-23 23:48:39', 'Ingreso', 'A Crear Segmentos'),
+(24598, 75, 125, '2021-06-24 00:46:09', 'Ingreso', 'A Crear Segmentos'),
+(24599, 75, 125, '2021-06-24 01:16:39', 'Ingreso', 'A Crear Segmentos'),
+(24600, 75, 125, '2021-06-24 01:40:23', 'Ingreso', 'A Crear Segmentos'),
+(24601, 75, 125, '2021-06-24 01:40:53', 'Ingreso', 'A Crear Segmentos'),
+(24602, 75, 125, '2021-06-24 01:43:47', 'Ingreso', 'A Crear Segmentos'),
+(24603, 75, 125, '2021-06-24 01:43:48', 'Ingreso', 'A Crear Segmentos'),
+(24604, 75, 125, '2021-06-24 01:43:49', 'Ingreso', 'A Crear Segmentos'),
+(24605, 75, 125, '2021-06-24 01:43:50', 'Ingreso', 'A Crear Segmentos'),
+(24606, 75, 125, '2021-06-24 01:46:47', 'Ingreso', 'A Crear Segmentos'),
+(24607, 75, 125, '2021-06-24 01:54:29', 'Ingreso', 'A Crear Segmentos'),
+(24608, 75, 125, '2021-06-24 02:04:51', 'Ingreso', 'A Crear Segmentos'),
+(24609, 75, 125, '2021-06-24 02:08:20', 'Ingreso', 'A Crear Segmentos'),
+(24610, 75, 125, '2021-06-24 02:12:09', 'Ingreso', 'A Crear Segmentos'),
+(24611, 75, 125, '2021-06-24 02:12:12', 'Ingreso', 'A Crear Segmentos'),
+(24612, 75, 125, '2021-06-24 02:12:13', 'Ingreso', 'A Crear Segmentos'),
+(24613, 75, 125, '2021-06-24 02:23:09', 'Ingreso', 'A Crear Segmentos'),
+(24614, 75, 125, '2021-06-24 02:23:12', 'Ingreso', 'A Crear Segmentos'),
+(24615, 75, 125, '2021-06-24 02:23:12', 'Ingreso', 'A Crear Segmentos'),
+(24616, 75, 125, '2021-06-24 02:23:13', 'Ingreso', 'A Crear Segmentos'),
+(24617, 75, 125, '2021-06-24 02:23:13', 'Ingreso', 'A Crear Segmentos'),
+(24618, 75, 125, '2021-06-24 02:23:14', 'Ingreso', 'A Crear Segmentos'),
+(24619, 75, 125, '2021-06-24 07:58:39', 'Ingreso', 'A Crear Segmentos'),
+(24620, 75, 125, '2021-06-24 07:58:43', 'Ingreso', 'A Crear Segmentos'),
+(24621, 75, 125, '2021-06-24 08:11:52', 'Ingreso', 'A Crear Segmentos'),
+(24622, 75, 125, '2021-06-24 08:11:55', 'Ingreso', 'A Crear Segmentos'),
+(24623, 75, 125, '2021-06-24 08:14:05', 'Ingreso', 'A Crear Segmentos'),
+(24624, 75, 125, '2021-06-24 08:14:08', 'Ingreso', 'A Crear Segmentos'),
+(24625, 75, 125, '2021-06-24 08:17:51', 'Ingreso', 'A Crear Segmentos'),
+(24626, 75, 125, '2021-06-24 08:17:54', 'Ingreso', 'A Crear Segmentos'),
+(24627, 75, 125, '2021-06-24 08:17:57', 'Ingreso', 'A Crear Segmentos'),
+(24628, 75, 125, '2021-06-24 08:18:30', 'Ingreso', 'A Crear Segmentos'),
+(24629, 75, 125, '2021-06-24 08:18:48', 'Ingreso', 'A Crear Segmentos'),
+(24630, 75, 125, '2021-06-24 08:18:52', 'Ingreso', 'A Crear Segmentos'),
+(24631, 75, 125, '2021-06-24 08:18:54', 'Ingreso', 'A Crear Segmentos'),
+(24632, 75, 125, '2021-06-24 08:18:56', 'Ingreso', 'A Crear Segmentos'),
+(24633, 75, 125, '2021-06-24 08:18:58', 'Ingreso', 'A Crear Segmentos'),
+(24634, 75, 125, '2021-06-24 08:18:59', 'Ingreso', 'A Crear Segmentos'),
+(24635, 75, 125, '2021-06-24 08:19:00', 'Ingreso', 'A Crear Segmentos'),
+(24636, 75, 125, '2021-06-24 08:19:01', 'Ingreso', 'A Crear Segmentos'),
+(24637, 75, 125, '2021-06-24 08:27:07', 'Ingreso', 'A Crear Segmentos'),
+(24638, 75, 125, '2021-06-24 08:27:09', 'Ingreso', 'A Crear Segmentos'),
+(24639, 75, 125, '2021-06-24 08:28:30', 'Ingreso', 'A Crear Segmentos'),
+(24640, 75, 125, '2021-06-24 08:29:10', 'Ingreso', 'A Crear Segmentos'),
+(24641, 75, 125, '2021-06-24 08:34:55', 'Ingreso', 'A Crear Segmentos'),
+(24642, 75, 125, '2021-06-24 08:44:45', 'Ingreso', 'A Crear Segmentos'),
+(24643, 75, 125, '2021-06-24 08:44:50', 'Ingreso', 'A Crear Segmentos'),
+(24644, 75, 125, '2021-06-24 22:08:27', 'Ingreso', 'A Crear Segmentos'),
+(24645, 75, 125, '2021-06-24 22:09:01', 'Ingreso', 'A Crear Segmentos'),
+(24646, 75, 125, '2021-06-24 22:09:21', 'Ingreso', 'A Crear Segmentos'),
+(24647, 75, 125, '2021-06-24 22:09:24', 'Ingreso', 'A Crear Segmentos'),
+(24648, 75, 125, '2021-06-24 22:11:40', 'Ingreso', 'A Crear Segmentos'),
+(24649, 75, 125, '2021-06-24 22:12:32', 'Ingreso', 'A Crear Segmentos'),
+(24650, 75, 125, '2021-06-24 22:12:45', 'Ingreso', 'A Crear Segmentos'),
+(24651, 75, 125, '2021-06-24 22:16:15', 'Ingreso', 'A Crear Segmentos'),
+(24652, 75, 125, '2021-06-24 22:19:33', 'Ingreso', 'A Crear Segmentos'),
+(24653, 75, 125, '2021-06-24 22:22:38', 'Ingreso', 'A Crear Segmentos'),
+(24654, 75, 125, '2021-06-24 22:28:01', 'Ingreso', 'A Crear Segmentos'),
+(24655, 75, 125, '2021-06-24 22:36:21', 'Ingreso', 'A Crear Segmentos'),
+(24656, 75, 125, '2021-06-24 22:38:01', 'Ingreso', 'A Crear Segmentos'),
+(24657, 75, 125, '2021-06-24 22:40:32', 'Ingreso', 'A Crear Segmentos'),
+(24658, 75, 125, '2021-06-24 23:05:02', 'Ingreso', 'A Crear Segmentos'),
+(24659, 75, 125, '2021-06-24 23:26:32', 'Ingreso', 'A Crear Segmentos'),
+(24660, 75, 125, '2021-06-24 23:49:31', 'Ingreso', 'A Crear Segmentos'),
+(24661, 75, 125, '2021-06-24 23:49:34', 'Ingreso', 'A Crear Segmentos'),
+(24662, 75, 125, '2021-06-24 23:59:04', 'Ingreso', 'A Crear Segmentos'),
+(24663, 75, 125, '2021-06-25 00:03:12', 'Ingreso', 'A Crear Segmentos'),
+(24664, 75, 125, '2021-06-25 00:03:14', 'Ingreso', 'A Crear Segmentos'),
+(24665, 75, 125, '2021-06-25 00:10:52', 'Ingreso', 'A Crear Segmentos'),
+(24666, 75, 125, '2021-06-25 00:10:55', 'Ingreso', 'A Crear Segmentos'),
+(24667, 75, 125, '2021-06-25 00:29:43', 'Ingreso', 'A Crear Segmentos'),
+(24668, 75, 125, '2021-06-25 00:29:59', 'Ingreso', 'A Crear Segmentos'),
+(24669, 75, 125, '2021-06-25 00:30:00', 'Ingreso', 'A Crear Segmentos'),
+(24670, 75, 125, '2021-06-25 00:30:03', 'Ingreso', 'A Crear Segmentos'),
+(24671, 75, 125, '2021-06-25 00:30:54', 'Ingreso', 'A Crear Segmentos'),
+(24672, 75, 125, '2021-06-25 00:30:57', 'Ingreso', 'A Crear Segmentos'),
+(24673, 75, 125, '2021-06-25 00:31:35', 'Ingreso', 'A Crear Segmentos'),
+(24674, 75, 125, '2021-06-25 00:31:38', 'Ingreso', 'A Crear Segmentos'),
+(24675, 75, 125, '2021-06-25 00:35:15', 'Ingreso', 'A Crear Segmentos'),
+(24676, 75, 125, '2021-06-25 00:40:22', 'Ingreso', 'A Crear Segmentos'),
+(24677, 75, 125, '2021-06-25 00:41:15', 'Ingreso', 'A Crear Segmentos'),
+(24678, 75, 125, '2021-06-25 00:41:18', 'Ingreso', 'A Crear Segmentos'),
+(24679, 75, 125, '2021-06-25 00:41:43', 'Ingreso', 'A Crear Segmentos'),
+(24680, 75, 125, '2021-06-25 00:42:45', 'Ingreso', 'A Crear Segmentos'),
+(24681, 75, 125, '2021-06-25 00:42:55', 'Ingreso', 'A Crear Segmentos');
 
 -- --------------------------------------------------------
 
@@ -30742,7 +30829,7 @@ INSERT INTO `tbl_modalidades_proyecto` (`Id_modalidad`, `modalidad`, `Fecha_crea
 --
 
 CREATE TABLE `tbl_movil_bitacoras` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `usuario_id` bigint(20) NOT NULL,
   `objeto_id` bigint(20) NOT NULL,
   `accion` varchar(45) NOT NULL,
@@ -30751,42 +30838,31 @@ CREATE TABLE `tbl_movil_bitacoras` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `tbl_movil_bitacoras`
+-- Disparadores `tbl_movil_bitacoras`
+--
+DELIMITER $$
+CREATE TRIGGER `tgr_movil_bitacora_deleted` BEFORE DELETE ON `tbl_movil_bitacoras` FOR EACH ROW INSERT INTO tbl_movil_bitacoras_deleted                  (id,usuario_id,objeto_id,accion,descripcion,fecha,user_delete,fecha_eliminacion) 
+        values 
+        (OLD.id,OLD.usuario_id,OLD.objeto_id,OLD.accion,OLD.descripcion,OLD.fecha,CURRENT_USER,NOW())
+$$
+DELIMITER ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_movil_bitacoras_deleted`
 --
 
-INSERT INTO `tbl_movil_bitacoras` (`id`, `usuario_id`, `objeto_id`, `accion`, `descripcion`, `fecha`) VALUES
-(4, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:47:13'),
-(5, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:47:17'),
-(6, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:48:36'),
-(7, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:48:42'),
-(8, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:48:45'),
-(9, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:48:47'),
-(10, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:49:13'),
-(11, 1, 30, 'ingreso', 'qwewqweqeq', '2021-06-14 07:49:58'),
-(12, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:50:09'),
-(13, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:52:26'),
-(14, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:52:43'),
-(15, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:52:49'),
-(16, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:53:07'),
-(18, 75, 123, 'INGRESO', 'A GESTION DE NOTIFICACIONES ', '2021-06-13 23:55:47'),
-(19, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-13 23:55:53'),
-(20, 75, 123, 'INGRESO', 'A GESTION DE NOTIFICACIONES ', '2021-06-14 00:03:21'),
-(21, 75, 123, 'INGRESO', 'A GESTION DE NOTIFICACIONES ', '2021-06-14 00:14:17'),
-(22, 75, 123, 'INGRESO', 'A GESTION DE NOTIFICACIONES ', '2021-06-14 00:16:29'),
-(23, 75, 123, 'INGRESO', 'A GESTION DE NOTIFICACIONES ', '2021-06-14 00:16:34'),
-(24, 75, 123, 'INGRESO', 'A GESTION DE NOTIFICACIONES ', '2021-06-14 00:16:36'),
-(25, 75, 123, 'INGRESO', 'A GESTION DE NOTIFICACIONES ', '2021-06-14 00:33:07'),
-(26, 75, 123, 'INGRESO', 'A GESTION DE NOTIFICACIONES ', '2021-06-14 00:47:33'),
-(27, 75, 127, 'INGRESO', 'A GESTION DE SEGMENTOS ', '2021-06-14 00:47:47'),
-(28, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-14 00:47:51'),
-(29, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-14 17:35:33'),
-(30, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-14 17:35:48'),
-(31, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-14 17:46:38'),
-(32, 75, 123, 'INGRESO', 'A GESTION DE NOTIFICACIONES ', '2021-06-14 17:46:50'),
-(33, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-14 17:46:53'),
-(34, 75, 127, 'INGRESO', 'A GESTION DE SEGMENTOS ', '2021-06-14 17:55:08'),
-(35, 75, 128, 'Ingreso', 'A Bitacora del sistema movil', '2021-06-14 18:26:28'),
-(36, 75, 123, 'INGRESO', 'A GESTION DE NOTIFICACIONES ', '2021-06-14 18:26:57');
+CREATE TABLE `tbl_movil_bitacoras_deleted` (
+  `id` int(11) NOT NULL,
+  `usuario_id` bigint(20) DEFAULT NULL,
+  `objeto_id` bigint(20) DEFAULT NULL,
+  `accion` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(100) DEFAULT NULL,
+  `fecha` datetime DEFAULT NULL,
+  `user_delete` varchar(100) DEFAULT NULL,
+  `fecha_eliminacion` datetime DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -30795,9 +30871,9 @@ INSERT INTO `tbl_movil_bitacoras` (`id`, `usuario_id`, `objeto_id`, `accion`, `d
 --
 
 CREATE TABLE `tbl_movil_chats` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
-  `fecha y hora` datetime DEFAULT NULL,
+  `fecha_hora` datetime DEFAULT NULL,
   `interaccion` varchar(45) DEFAULT NULL,
   `tipo_mensaje_id` int(11) NOT NULL,
   `usuario_emisor_id` bigint(20) NOT NULL,
@@ -30811,11 +30887,11 @@ CREATE TABLE `tbl_movil_chats` (
 --
 
 CREATE TABLE `tbl_movil_noticias` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `titulo` varchar(45) NOT NULL,
   `descripcion` longtext NOT NULL,
   `fecha` datetime NOT NULL,
-  `fecha de vencimiento` datetime NOT NULL,
+  `fecha_vencimiento` datetime NOT NULL,
   `remitente` varchar(45) NOT NULL,
   `segmento_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -30838,7 +30914,7 @@ CREATE TABLE `tbl_movil_noticia_recurso` (
 --
 
 CREATE TABLE `tbl_movil_notificaciones` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `titulo` varchar(45) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `fecha` datetime NOT NULL,
@@ -30848,13 +30924,6 @@ CREATE TABLE `tbl_movil_notificaciones` (
   `image_enable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `tbl_movil_notificaciones`
---
-
-INSERT INTO `tbl_movil_notificaciones` (`id`, `titulo`, `descripcion`, `fecha`, `remitente`, `segmento_id`, `tipo_notificacion_id`, `image_enable`) VALUES
-(1, 'prueba noticia', 'asdadandjkahnjkldhnajkldklajd', '2021-06-14 08:16:06', 'admin', 1, 1, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -30862,11 +30931,11 @@ INSERT INTO `tbl_movil_notificaciones` (`id`, `titulo`, `descripcion`, `fecha`, 
 --
 
 CREATE TABLE `tbl_movil_parametros` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `parametro` varchar(45) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   `valor` varchar(45) NOT NULL,
-  `fecha de modificacion` datetime NOT NULL,
+  `fecha_modificacion` datetime NOT NULL,
   `modificado por` varchar(45) NOT NULL,
   `usuario_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -30878,19 +30947,12 @@ CREATE TABLE `tbl_movil_parametros` (
 --
 
 CREATE TABLE `tbl_movil_segmentos` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
-  `creado por` varchar(45) NOT NULL,
-  `fecha de creacion` datetime NOT NULL
+  `creado_por` varchar(45) NOT NULL,
+  `fecha_creacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `tbl_movil_segmentos`
---
-
-INSERT INTO `tbl_movil_segmentos` (`id`, `nombre`, `descripcion`, `creado por`, `fecha de creacion`) VALUES
-(1, 'estudiantes', 'estudiantes unah', 'admin', '2021-06-14 08:12:40');
 
 -- --------------------------------------------------------
 
@@ -30903,13 +30965,6 @@ CREATE TABLE `tbl_movil_segmento_usuario` (
   `segmento_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `tbl_movil_segmento_usuario`
---
-
-INSERT INTO `tbl_movil_segmento_usuario` (`usuario_id`, `segmento_id`) VALUES
-(75, 1);
-
 -- --------------------------------------------------------
 
 --
@@ -30917,7 +30972,7 @@ INSERT INTO `tbl_movil_segmento_usuario` (`usuario_id`, `segmento_id`) VALUES
 --
 
 CREATE TABLE `tbl_movil_tipo_mensajes` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `tipo_mensaje` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -30928,16 +30983,9 @@ CREATE TABLE `tbl_movil_tipo_mensajes` (
 --
 
 CREATE TABLE `tbl_movil_tipo_notificaciones` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `descripcion` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `tbl_movil_tipo_notificaciones`
---
-
-INSERT INTO `tbl_movil_tipo_notificaciones` (`id`, `descripcion`) VALUES
-(1, 'notificaion normal');
 
 -- --------------------------------------------------------
 
@@ -30946,7 +30994,7 @@ INSERT INTO `tbl_movil_tipo_notificaciones` (`id`, `descripcion`) VALUES
 --
 
 CREATE TABLE `tbl_movil_tipo_recursos` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `descripcion` varchar(45) DEFAULT NULL,
   `url` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -30958,7 +31006,7 @@ CREATE TABLE `tbl_movil_tipo_recursos` (
 --
 
 CREATE TABLE `tbl_movil_tipo_transacciones` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
   `descripcion` varchar(90) DEFAULT NULL,
   `external_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -30970,9 +31018,9 @@ CREATE TABLE `tbl_movil_tipo_transacciones` (
 --
 
 CREATE TABLE `tbl_movil_transacciones` (
-  `id` int(11) NOT NULL,
-  `fecha de envio` datetime DEFAULT NULL,
-  `request envio` varchar(45) DEFAULT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `fecha_envio` datetime DEFAULT NULL,
+  `request_envio` varchar(45) DEFAULT NULL,
   ` response` varchar(45) DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,
   `tipo_transaccion_id` int(11) NOT NULL
@@ -33446,15 +33494,19 @@ ALTER TABLE `tbl_modalidades_proyecto`
 -- Indices de la tabla `tbl_movil_bitacoras`
 --
 ALTER TABLE `tbl_movil_bitacoras`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_bitacoras_tbl_usuarios1_idx` (`usuario_id`),
   ADD KEY `fk_tbl_movil_bitacoras_tbl_objetos1_idx` (`objeto_id`);
+
+--
+-- Indices de la tabla `tbl_movil_bitacoras_deleted`
+--
+ALTER TABLE `tbl_movil_bitacoras_deleted`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tbl_movil_chats`
 --
 ALTER TABLE `tbl_movil_chats`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_chats_tbl_movil_tipo_mensajes1_idx` (`tipo_mensaje_id`),
   ADD KEY `fk_tbl_movil_chats_tbl_usuarios1_idx` (`usuario_emisor_id`),
   ADD KEY `fk_tbl_movil_chats_tbl_usuarios2_idx` (`usuario_receptor_id`);
@@ -33463,7 +33515,6 @@ ALTER TABLE `tbl_movil_chats`
 -- Indices de la tabla `tbl_movil_noticias`
 --
 ALTER TABLE `tbl_movil_noticias`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_noticias_tbl_segmentos1_idx` (`segmento_id`);
 
 --
@@ -33477,7 +33528,6 @@ ALTER TABLE `tbl_movil_noticia_recurso`
 -- Indices de la tabla `tbl_movil_notificaciones`
 --
 ALTER TABLE `tbl_movil_notificaciones`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_notificaciones_tbl_movil_segmentos1_idx` (`segmento_id`),
   ADD KEY `fk_tbl_movil_notificaciones_tbl_movil_tipo_notificaciones1_idx` (`tipo_notificacion_id`);
 
@@ -33485,14 +33535,7 @@ ALTER TABLE `tbl_movil_notificaciones`
 -- Indices de la tabla `tbl_movil_parametros`
 --
 ALTER TABLE `tbl_movil_parametros`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_parametros_tbl_usuarios1_idx` (`usuario_id`);
-
---
--- Indices de la tabla `tbl_movil_segmentos`
---
-ALTER TABLE `tbl_movil_segmentos`
-  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tbl_movil_segmento_usuario`
@@ -33502,34 +33545,9 @@ ALTER TABLE `tbl_movil_segmento_usuario`
   ADD KEY `fk_tbl_movil_segmento_usuario_tbl_movil_segmentos1_idx` (`segmento_id`);
 
 --
--- Indices de la tabla `tbl_movil_tipo_mensajes`
---
-ALTER TABLE `tbl_movil_tipo_mensajes`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `tbl_movil_tipo_notificaciones`
---
-ALTER TABLE `tbl_movil_tipo_notificaciones`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `tbl_movil_tipo_recursos`
---
-ALTER TABLE `tbl_movil_tipo_recursos`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indices de la tabla `tbl_movil_tipo_transacciones`
---
-ALTER TABLE `tbl_movil_tipo_transacciones`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `tbl_movil_transacciones`
 --
 ALTER TABLE `tbl_movil_transacciones`
-  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_transacciones_tbl_movil_tipo_transacciones1_idx` (`tipo_transaccion_id`);
 
 --
@@ -33805,7 +33823,7 @@ ALTER TABLE `tbl_aula`
 -- AUTO_INCREMENT de la tabla `tbl_bitacora`
 --
 ALTER TABLE `tbl_bitacora`
-  MODIFY `Id_bitacora` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24588;
+  MODIFY `Id_bitacora` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24682;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_cambio_carrera`
@@ -34052,24 +34070,6 @@ ALTER TABLE `tbl_modalidad`
 --
 ALTER TABLE `tbl_modalidades_proyecto`
   MODIFY `Id_modalidad` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de la tabla `tbl_movil_bitacoras`
---
-ALTER TABLE `tbl_movil_bitacoras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=37;
-
---
--- AUTO_INCREMENT de la tabla `tbl_movil_chats`
---
-ALTER TABLE `tbl_movil_chats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `tbl_movil_notificaciones`
---
-ALTER TABLE `tbl_movil_notificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_municipios_hn`
@@ -34545,6 +34545,14 @@ ALTER TABLE `tbl_requisito_asignatura`
 ALTER TABLE `tbl_usuarios`
   ADD CONSTRAINT `FK_tbl_usuarios_tbl_roles` FOREIGN KEY (`Id_rol`) REFERENCES `tbl_roles` (`Id_rol`),
   ADD CONSTRAINT `FKpersonas_usuario` FOREIGN KEY (`id_persona`) REFERENCES `tbl_personas` (`id_persona`);
+
+DELIMITER $$
+--
+-- Eventos
+--
+CREATE DEFINER=`root`@`localhost` EVENT `event_vaciado_tabla_movil_bitacoras` ON SCHEDULE EVERY 30 DAY STARTS '2021-06-27 16:23:18' ON COMPLETION NOT PRESERVE ENABLE DO TRUNCATE TABLE tbl_movil_bitacoras$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
