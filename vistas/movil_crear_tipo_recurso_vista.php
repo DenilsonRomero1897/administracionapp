@@ -13,9 +13,9 @@ require_once('../clases/funcion_permisos.php');
 require_once('../Modelos/segmentos_modelo.php');
 
 
-$Id_objeto = 125;
+$Id_objeto = 128;
 
-bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto, 'Ingreso', 'A Crear Segmentos');
+bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto, 'Ingreso', 'A Crear Tipo Recurso');
 
 $visualizacion = permiso_ver($Id_objeto);
 if (isset($_REQUEST['msj'])) {
@@ -25,7 +25,7 @@ if (isset($_REQUEST['msj'])) {
     echo '<script type="text/javascript">
                     swal({
                        title:"",
-                       text:"Lo sentimos el segmento ya existe",
+                       text:"Lo sentimos el tipo recurso  ya existe",
                        type: "info",
                        showConfirmButton: false,
                        timer: 3000
@@ -136,11 +136,11 @@ ob_end_flush();
       <div class="container-fluid">
         <!-- pantalla 1 -->
 
-        <form action="../Controlador/guardar_segmento_controlador.php" method="POST" >
+        <form action="../Controlador/movil_guardar_tiporecurso_controlador.php" method="POST" >
 
           <div class="card card-default">
             <div class="card-header">
-              <h3 class="card-title">Tipo Notificación</h3>
+              <h3 class="card-title">Tipo Recurso</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
@@ -162,14 +162,14 @@ ob_end_flush();
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="nombre"> Descripción </label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="nombre" name="nombre" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <label for="descripcion"> Descripción </label>
+                    <input autofocus class="form-control" type="text" maxlength="60" id="descripcion" name="descripcion" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
 
 
                   <div class="form-group">
-                    <label for="descripcion">Ubicación URL</label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" required style="text-transform: uppercase" onkeyup="Espacio(this, event)" onkeypress="return Letras(event)" onkeypress="return comprobar(this.value, event, this.id)" maxlength="30">
+                    <label for="ubicacion url">Ubicación URL</label>
+                    <input class="form-control" type="text" id="url" name="url" required style="text-transform: uppercase" onkeyup="Espacio(this, event)" onkeypress="return Letras(event)" onkeypress="return comprobar(this.value, event, this.id)" maxlength="30">
                   </div>
 
                 </div>
@@ -183,7 +183,7 @@ ob_end_flush();
             </div>
           </div>
           <p class="text-center" style="margin-top: 20px;">
-            <button type="submit" class="btn btn-primary" id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
+            <button type="submit" class="btn btn-primary" id="btn_guardar_tiporecurso" name="btn_guardar_tiporecurso"><i class="zmdi zmdi-floppy"></i>Guardar</button>
           </p>
         </form>
 

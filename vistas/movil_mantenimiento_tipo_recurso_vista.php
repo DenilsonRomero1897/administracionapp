@@ -7,7 +7,7 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 require_once('../Modelos/segmentos_modelo.php');
 
-$Id_objeto = 127;
+$Id_objeto = 128;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
   echo '<script type="text/javascript">
@@ -22,13 +22,13 @@ if ($visualizacion == 0) {
 
    </script>';
 } else {
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A GESTION DE SEGMENTOS ');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'MANTENIMIENTO TIPO RECURSO ');
 }
 
 // /* Esta condicion sirve para  verificar el valor que se esta enviando al momento de dar click en el icono modicar */
 if (isset($_GET['id'])) {
-  $sql_segmento = "SELECT * FROM tbl_movil_segmentos";
-  $resultado_segmento = $mysqli->query($sql_segmento);
+  $sql_tiporecurso = "SELECT * FROM tbl_movil_tipo_recursos";
+  $resultado_tiporecurso = $mysqli->query($sql_tiporecurso);
 
   $id = $_GET['id'];
 
@@ -37,23 +37,23 @@ if (isset($_GET['id'])) {
 
   //  /* Hace un select para mandar a traer todos los datos de la 
   //  tabla donde rol sea igual al que se ingreso e el input */
-  $sql = "SELECT * FROM tbl_movil_segmentos WHERE id = '$id'";
+  $sql = "SELECT * FROM tbl_movil_tipo_recursos WHERE id = '$id'";
   $resultado = $mysqli->query($sql);
   //     /* Manda a llamar la fila */
   $row = $resultado->fetch_array(MYSQLI_ASSOC);
 
   $id = $row['id'];
-  $_SESSION['txtNombre'] = $row['nombre'];
-  $_SESSION['txtDescripcion'] = $row['descripcion'];
-  $_SESSION['txtCreado_por'] = $row['creado_por'];
+  $_SESSION['txtdescripcion'] = $row['descripcion'];
+  $_SESSION['txturl'] = $row['url'];
+ 
 
-  if (isset($_SESSION['txtNombre'])) {
+  if (isset($_SESSION['txtdescripcion'])) {
 
 
 ?>
     <script>
       $(function() {
-        $('#modal_modificar_segmento').modal('toggle')
+        $('#modal_modificar_tiporecurso').modal('toggle')
       })
     </script>;
 
@@ -70,7 +70,7 @@ if (isset($_REQUEST['msj'])) {
     echo '<script type="text/javascript">
                     swal({
                        title:"",
-                       text:"Lo sentimos el segmento ya existe",
+                       text:"Lo sentimos el Tipo Recurso ya existe",
                        type: "info",
                        showConfirmButton: false,
                        timer: 3000
@@ -142,6 +142,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
+              <li class="breadcrumb-item"><a href="../vistas/movil_menu_mantenimiento_vista.php">Mantenimiento APP</a></li>
             </ol>
           </div>
 
@@ -174,24 +175,24 @@ ob_end_flush();
           </thead>
           <tbody>
             <?php
-            $sql_segmentos = "select * from tbl_movil_tipo_recursos";
-            $resultado_segmentos = $mysqli->query($sql_segmentos);
-            while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
+            $sql_tiporecurso = "select * from tbl_movil_tipo_recursos";
+            $resultado_tiporecurso = $mysqli->query($sql_tiporecurso);
+            while ($tiporecurso = $resultado_tiporecurso->fetch_array(MYSQLI_ASSOC)) { ?>
               <tr>
-                <td><?php echo $segmento['id']; ?></td>
-                <td><?php echo $segmento['descripcion']; ?></td>
-                <td><?php echo $segmento['url']; ?></td>
+                <td><?php echo $tiporecurso['id']; ?></td>
+                <td><?php echo $tiporecurso['descripcion']; ?></td>
+                <td><?php echo $tiporecurso['url']; ?></td>
                 
 
                 <td style="text-align: center;">
 
-                  <a href="../vistas/movil_gestion_segmentos_vista.php?&id=<?php echo $segmento['id']; ?>" class="btn btn-primary btn-raised btn-xs">
+                  <a href="../vistas/movil_mantenimiento_tipo_recurso_vista.php?&id=<?php echo $tiporecurso['id']; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-edit"></i>
                   </a>
                 </td>
 
                 <td style="text-align: center;">
-                  <form action="../Controlador/guardar_segmento_controlador.php?op=eliminar&id=<?php echo $segmento['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
+                  <form action="../Controlador/movil_guardar_tiporecurso_controlador.php?op=eliminar&id=<?php echo $tiporecurso['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
@@ -226,13 +227,13 @@ ob_end_flush();
 
   </div>
 
-  <form action="../Controlador/guardar_segmento_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
+  <form action="../Controlador/movil_guardar_tiporecurso_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
 
-    <div class="modal fade" id="modal_modificar_segmento">
+    <div class="modal fade" id="modal_modificar_tiporecurso">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Modificar Segmento</h4>
+            <h4 class="modal-title">Modificar Tipo Recurso </h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -246,16 +247,16 @@ ob_end_flush();
                 <div class="col-md-12">
 
                   <div class="form-group">
-                    <label>Segmento</label>
+                    <label>Descripcion</label>
 
-                    <input class="form-control" type="text" id="nombre" name="nombre" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtNombre']; ?>">
+                    <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtdescripcion']; ?>">
 
                   </div>
 
                   <div class="form-group">
-                    <label>Descripcion</label>
+                    <label>URL</label>
 
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtDescripcion']; ?>">
+                    <input class="form-control" type="text" id="url" name="url" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txturl']; ?>">
 
                   </div>
 
@@ -267,7 +268,7 @@ ob_end_flush();
           <!--Footer del modal-->
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" id="btn_modificar_segmento" name="btn_modificar_segmento">Guardar Cambios</button>
+            <button type="submit" class="btn btn-primary" id="btn_modificar_tiporecurso" name="btn_modificar_tiporecurso">Guardar Cambios</button>
           </div>
         </div>
         <!-- /.modal-content -->
