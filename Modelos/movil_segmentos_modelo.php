@@ -1,5 +1,5 @@
 <?php
-require "../clases/conexion_mantenimientos.php";
+require "../clases/conexion.php";
 
 $instancia_conexion = new conexion();
 
