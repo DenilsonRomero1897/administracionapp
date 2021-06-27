@@ -3,7 +3,12 @@
 ob_start();
 session_start();
 
+
 <body>
+
+
+?>
+
 
 <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -95,8 +100,4 @@ session_start();
               </div>
 
 }
-    <section>
-    <body>
-    </style>
-<?php
 
