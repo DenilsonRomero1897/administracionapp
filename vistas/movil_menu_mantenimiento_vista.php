@@ -195,7 +195,7 @@ if (permiso_ver('89') == '1') {
 
 
 
-?>
+?> 
 <!DOCTYPE html>
 <html>
 
@@ -489,52 +489,19 @@ if (permiso_ver('89') == '1') {
           <!--/. container-fluid -->
         </div>
       </section>
+ <!-- /.content -->
+ 
+              <!-- /.info-box -->
+            </div>
+           
+
+                
+              </div>
 
 
      
 
-      <!-- /.content -->
-      <section class="content">
-        <div class="container-fluid">
-          <!-- Info boxes -->
-          <div class="row" style="  display: flex;
-    align-items: center;
-    justify-content: center;">
-
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-light">
-                <div class="inner">
-                  <h4>Crear nuevo segmento Usuario</h4>
-                  <p><?php echo $_SESSION['mantenimiento_crear_genero_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-plus-square"></i>
-                </div>
-
-                <a href="../vistas/movil_crear_usuario_segmento_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- fix for small devices only -->
-            <div class="clearfix hidden-md-up"></div>
-
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-primary">
-                <div class="inner">
-                  <h4>Mantenimiento Segmento </h4>
-                  <p><?php echo $_SESSION['mantenimiento_genero_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-edit"></i>
-                </div>
-
-                <a href="../vistas/movil_mantenimiento_segmento_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-
+     
 
 
               
