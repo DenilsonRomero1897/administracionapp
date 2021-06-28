@@ -24,7 +24,54 @@ if ($visualizacion == 0) {
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A GESTION DE NOTIFICACIONES ');
 }
 
+if (isset($_REQUEST['msj'])) {
+  $msj = $_REQUEST['msj'];
 
+  if ($msj == 1) {
+    echo '<script type="text/javascript">
+                    swal({
+                       title:"",
+                       text:"Lo sentimos el segmento ya existe",
+                       type: "info",
+                       showConfirmButton: false,
+                       timer: 3000
+                        });
+                </script>';
+  }
+  if ($msj == 2) {
+    echo '<script type="text/javascript">
+                    swal({
+                       title:"",
+                       text:"Los datos se almacenaron correctamente",
+                       type: "success",
+                       showConfirmButton: false,
+                       timer: 3000
+                        });
+                </script>';
+  }
+  if ($msj == 3) {
+    echo '<script type="text/javascript">
+                    swal({
+                       title:"",
+                       text:"Lo sentimos tiene campos por rellenar.",
+                       type: "error",
+                       showConfirmButton: false,
+                       timer: 3000
+                    });
+                </script>';
+  }
+  if ($msj == 4) {
+    echo '<script type="text/javascript">
+                    swal({
+                       title:"",
+                       text:"los datos se eliminaron correctamente.",
+                       type: "error",
+                       showConfirmButton: false,
+                       timer: 3000
+                    });
+                </script>';
+  }
+}
 
 
 ?>

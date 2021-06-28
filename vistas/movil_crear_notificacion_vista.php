@@ -94,16 +94,16 @@ ob_end_flush();
                   <?php 
                   $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";
                   $resultado_segmentos = $mysqli->query($sql_segmentos);
-                  while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) : ?>
-                        <option value="<?php $segmento['id'] ?>"><?php $segmento['nombre'] ?></option>
-                  <?php endwhile; ?>
+                  while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <option value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
+                  <?php } ?>
                 </select>
               </div>
 
               <div class="form-group">
                 <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
-                <label>Fecha y Hora de Publicacion:</label>
-                <input class="form-control" type="date" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false">
+                <label for="txt_fecha_Publicacion">Fecha y Hora de Publicacion:</label>
+                <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false">
 
               </div>
 
