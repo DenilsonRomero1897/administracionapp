@@ -6,7 +6,8 @@ require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 require_once('../Modelos/movil_segmentos_modelo.php');
-$Id_objeto = 129;
+
+$Id_objeto = 128;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
   echo '<script type="text/javascript">
@@ -23,82 +24,7 @@ if ($visualizacion == 0) {
 } else {
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A MANTENIMIENTO TIPO NOTIFICACION ');
 }
-
-// /* Esta condicion sirve para  verificar el valor que se esta enviando al momento de dar click en el icono modicar */
-if (isset($_GET['id'])) {
-  $sql_segmento = "SELECT * FROM tbl_movil_tipo_notificacione";
-  $resultado_segmento = $mysqli->query($sql_segmento);
-
-  $id = $_GET['id'];
-
-  // /* Iniciar la variable de sesion y la crea */
-
-
-  //  /* Hace un select para mandar a traer todos los datos de la 
-  //  tabla donde rol sea igual al que se ingreso e el input */
-  $sql = "SELECT * FROM tbl_movil_segmentos WHERE id = '$id'";
-  $resultado = $mysqli->query($sql);
-  //     /* Manda a llamar la fila */
-  $row = $resultado->fetch_array(MYSQLI_ASSOC);
-
-  $id = $row['id'];
-  $_SESSION['txtNombre'] = $row['nombre'];
-  $_SESSION['txtDescripcion'] = $row['descripcion'];
-  $_SESSION['txtCreado_por'] = $row['creado_por'];
-
-  if (isset($_SESSION['txtNombre'])) {
-
-
-?>
-    <script>
-      $(function() {
-        $('#modal_modificar_segmento').modal('toggle')
-      })
-    </script>;
-
-<?php
-
-
-  }
-}
-
-if (isset($_REQUEST['msj'])) {
-  $msj = $_REQUEST['msj'];
-
-  if ($msj == 1) {
-    echo '<script type="text/javascript">
-                    swal({
-                       title:"",
-                       text:"Lo sentimos el segmento ya existe",
-                       type: "info",
-                       showConfirmButton: false,
-                       timer: 3000
-                        });
-                </script>';
-  }
-  if ($msj == 2) {
-    echo '<script type="text/javascript">
-                    swal({
-                       title:"",
-                       text:"Los datos se almacenaron correctamente",
-                       type: "success",
-                       showConfirmButton: false,
-                       timer: 3000
-                        });
-                </script>';
-  }
-  if ($msj == 3) {
-    echo '<script type="text/javascript">
-                    swal({
-                       title:"",
-                       text:"Lo sentimos tiene campos por rellenar.",
-                       type: "error",
-                       showConfirmButton: false,
-                       timer: 3000
-                    });
-                </script>';
-  }
-  if ($msj == 4) {
+ /* if ($msj == 1) {
     echo '<script type="text/javascript">
                     swal({
                        title:"",
@@ -110,7 +36,7 @@ if (isset($_REQUEST['msj'])) {
                 </script>';
   }
 }
-ob_end_flush();
+ob_end_flush(); */
 
 
 ?>
@@ -179,7 +105,7 @@ ob_end_flush();
                 <td><?php echo $segmento['descripcion']; ?></td>
 
                 <td style="text-align: center;">
-                  <form action="../Controlador/guardar_segmento_controlador.php?op=eliminar&id=<?php echo $segmento['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
+                  <form action="../Controlador/movil_eliminar_tiponotificacion_controlador.php?op=eliminar&id=<?php echo $segmento['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
