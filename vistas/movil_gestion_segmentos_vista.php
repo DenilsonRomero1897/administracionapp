@@ -198,7 +198,7 @@ ob_end_flush();
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
-                    <div class="RespuestaAjax"></div>
+                    
                   </form>
                 </td>
 
@@ -212,11 +212,6 @@ ob_end_flush();
       <!-- /.card-body -->
     </div>
 
-
-    <!-- /.card-body -->
-    <div class="card-footer">
-
-    </div>
   </div>
 
   </div>
