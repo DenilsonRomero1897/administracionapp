@@ -1,11 +1,12 @@
 <?php
 
 require_once('../vistas/pagina_inicio_vista.php');
-require_once('../clases/Conexion.php');
+require_once('../clases/conexion_mantenimientos.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
-require_once('../Modelos/segmentos_modelo.php');
+require_once('../Modelos/movil_segmentos_modelo.php');
+
 
 $Id_objeto = 128;
 $visualizacion = permiso_ver($Id_objeto);
@@ -31,8 +32,6 @@ if (isset($_GET['id'])) {
   $resultado_tiporecurso = $mysqli->query($sql_tiporecurso);
 
   $id = $_GET['id'];
-
-  // /* Iniciar la variable de sesion y la crea */
 
 
   //  /* Hace un select para mandar a traer todos los datos de la 
