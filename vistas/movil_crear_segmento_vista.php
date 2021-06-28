@@ -159,7 +159,7 @@ ob_end_flush();
 
                   <div class="form-group">
                     <label for="descripcion">Descripción</label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" required style="text-transform: uppercase" onkeyup="Espacio(this, event)" onkeypress="return Letras(event)" onkeypress="return comprobar(this.value, event, this.id)" maxlength="30">
+                    <input autofocus class="form-control" type="text" maxlength="60" id="descripcion" name="descripcion" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
 
                 </div>
