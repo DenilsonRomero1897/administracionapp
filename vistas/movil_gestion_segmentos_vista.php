@@ -5,7 +5,7 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
-require_once('../Modelos/segmentos_modelo.php');
+//require_once('../Modelos/movil_segmentos_modelo.php');
 
 $Id_objeto = 127;
 $visualizacion = permiso_ver($Id_objeto);
@@ -194,7 +194,7 @@ ob_end_flush();
                 </td>
 
                 <td style="text-align: center;">
-                  <form action="../Controlador/guardar_segmento_controlador.php?op=eliminar&id=<?php echo $segmento['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
+                  <form action="../Controlador/movil_segmentos_controlador.php?op=eliminar&id=<?php echo $segmento['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
@@ -229,7 +229,7 @@ ob_end_flush();
 
   </div>
 
-  <form action="../Controlador/guardar_segmento_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
+  <form action="../Controlador/movil_segmentos_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
 
     <div class="modal fade" id="modal_modificar_segmento">
       <div class="modal-dialog">

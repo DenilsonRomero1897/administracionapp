@@ -134,7 +134,7 @@ ob_end_flush();
       <div class="container-fluid">
         <!-- pantalla 1 -->
 
-        <form action="../Controlador/guardar_segmento_controlador.php" method="POST" >
+        <form action="../Controlador/movil_segmentos_controlador.php" method="POST" >
 
           <div class="card card-default">
             <div class="card-header">
@@ -144,15 +144,6 @@ ob_end_flush();
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
               </div>
             </div>
-
-
-            <tbody>
-              <tr>
-
-
-              </tr>
-            </tbody>
-
 
             <!-- /.card-header -->
             <div class="card-body">

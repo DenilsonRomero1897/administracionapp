@@ -3,12 +3,11 @@ session_start();
 
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
-require_once('../Modelos/segmentos_modelo.php');
+//require_once('../Modelos/movil_segmentos_modelo.php');
 
 $Id_objeto = 127;
 $opcion = $_GET['op'];
 
-$segmento = new segmentos();
 if ($opcion == 'eliminar') {
   $id_segmento = isset($_GET["id"]) ? ($_GET["id"]) : "";
   $sql = "DELETE FROM tbl_movil_segmentos WHERE id = $id_segmento";
