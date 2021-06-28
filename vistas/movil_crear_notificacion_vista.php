@@ -64,6 +64,10 @@ ob_end_flush();
     <section class="content">
       <div class="container-fluid">
 
+      <!--PANTALLA --> 
+
+      <form action="../Controlador/movil_notificacion_controlador.php" method="POST" >
+
         <div class="card card-default">
           <div class="card-header">
             <div class="card-tools">
@@ -104,10 +108,18 @@ ob_end_flush();
             <p class="text-center" style="margin-top: 20px;">
               <button type="submit" class="btn btn-primary" id="btn_guardar" name="btn_guardar"><i class="zmdi zmdi-floppy"></i>Guardar</button>
             </p>
+         </form>
+
+         <!-- /.card-body -->
+        <div class="card-footer">
+
 
           </div>
-
         </div>
+
+        <div class="RespuestaAjax"></div>
+      </form>
+      </div>
     </section>
 
 </body>
