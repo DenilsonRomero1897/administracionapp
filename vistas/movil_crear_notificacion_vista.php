@@ -8,7 +8,7 @@ require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 
-$Id_objeto = 125;
+$Id_objeto = 128;
 
 bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'Ingreso', 'A Crear Notificacion');
 
@@ -64,62 +64,58 @@ ob_end_flush();
     <section class="content">
       <div class="container-fluid">
 
-      <!--PANTALLA --> 
+        <!--PANTALLA -->
 
-      <form action="../Controlador/movil_notificacion_controlador.php" method="POST" >
+        <form action="../Controlador/movil_notificacion_controlador.php?op=insert" method="POST">
 
-        <div class="card card-default">
-          <div class="card-header">
-            <div class="card-tools">
-              <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+          <div class="card card-default">
+            <div class="card-header">
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+              </div>
+            </div>
+
+            <div class="card-body">
+
+              <div class="form-group">
+                <label for="titulo"> Titulo:</label>
+                <input autofocus class="form-control" type="text" maxlength="60" id="titulo" name="titulo" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+              </div>
+
+              <div class="form-group">
+                <label for="Contenido">Contenido:</label>
+                <input class="form-control" type="text" maxlength="60" id="Contenido" name="Contenido" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+              </div>
+
+              <div class="form-group">
+                <label>Segmentos: </label>
+                <select class="form-control" name="Segmentos" id="Segmentos">
+                  <option value="">Seleccione una opción :</option>
+                  <?php 
+                  $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";
+                  $resultado_segmentos = $mysqli->query($sql_segmentos);
+                  while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) : ?>
+                        <option value="<?php $segmento['id'] ?>"><?php $segmento['nombre'] ?></option>
+                  <?php endwhile; ?>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
+                <label>Fecha y Hora de Publicacion:</label>
+                <input class="form-control" type="date" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false">
+
+              </div>
+
+              <p class="text-center" style="margin-top: 20px;">
+                <button type="submit" class="btn btn-primary" id="btn_guardar" name="btn_guardar"><i class="zmdi zmdi-floppy"></i>Guardar</button>
+              </p>
             </div>
           </div>
-
-          <div class="card-body">
-
-            <div class="form-group">
-              <label for="titulo"> Titulo:</label>
-              <input autofocus class="form-control" type="text" maxlength="60" id="titulo" name="titulo" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
-            </div>
-
-            <div class="form-group">
-              <label for="Contenido">Contenido:</label>
-              <input autofocus class="form-control" type="text" maxlength="60" id="Contenido" name="Contenido" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
-            </div>
-
-            <div class="form-group">
-              <label>Segmentos: </label>
-              <select class="form-control" name="Segmentos" id="Segmentos" onchange="Constancia();">
-                <option value="0">Seleccione una opción :</option>
-                <option value="Docente">Docente</option>
-                <option value="Estudiante">Estudiante</option>
-                <option value="Coordinador">Coordinador</option>
-                <option value="Todos">Todos</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
-              <label>Fecha y Hora de Publicacion:</label>
-              <input class="form-control" type="date" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false" required>
-
-            </div>
-
-            <p class="text-center" style="margin-top: 20px;">
-              <button type="submit" class="btn btn-primary" id="btn_guardar" name="btn_guardar"><i class="zmdi zmdi-floppy"></i>Guardar</button>
-            </p>
-         </form>
-
-         <!-- /.card-body -->
-        <div class="card-footer">
-
-
-          </div>
-        </div>
-
-        <div class="RespuestaAjax"></div>
-      </form>
+        </form>
       </div>
-    </section>
+  
+  </section>
+</div>
 
 </body>
