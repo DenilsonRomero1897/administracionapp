@@ -3,19 +3,22 @@ session_start();
 
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
-require_once('../Modelos/segmentos_modelo.php');
+
+/*require_once('../Modelos/segmentos_modelo.php');*/
 
 $Id_objeto = 128;
 $opcion = $_GET['op'];
-$tiporecurso = new segmentos();
+/*$tiporecurso = new segmentos();*/
+
+
+$Id_objeto = 128;
+$opcion = $_GET['op'];
+
+
 if ($opcion == 'eliminar') {
   $id_tiporecurso = isset($_GET["id"]) ? ($_GET["id"]) : "";
   $sql = "DELETE FROM tbl_movil_tipo_recursos WHERE id = $id_tiporecurso";
-  //Logica para traer el nombre del tipo recurso
-  $sqlnombre = "select descripcion from tbl_movil_tipo_recursos where id='$id_tiporecurso'";
-  //Obtener la fila del query
-  $rows = mysqli_fetch_assoc($mysqli->query($sqlnombre));
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', 'TIPO RECURSO  ' . $rows['descripcion'] . '');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', "$sql");
   $resultado = $mysqli->query($sql);
   if($resultado === TRUE){
             echo '<script type="text/javascript">
@@ -74,15 +77,12 @@ if ($_POST['descripcion']  <> ' ' and  $_POST['url'] <> '' ) {
   } else {
 
     /* Query para que haga el insert*/
-    $sqlID = "SELECT id FROM `tbl_movil_tipo_recursos` ORDER BY id DESC LIMIT 1";
-    $IDs = mysqli_fetch_assoc($mysqli->query($sqlID));
-    $id = (int)$IDs['id'] + 1;
-    $sql = "INSERT into tbl_movil_tipo_recursos (id,descripcion,url) VALUES ($id,'$descripcion','$url')";
+    $sql = "INSERT into tbl_movil_tipo_recursos (id,descripcion,url) VALUES (null,'$descripcion','$url')";
     $resultado = $mysqli->query($sql);
 
 
     if ($resultado) {
-      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'inserto', 'EL TIPO RECURSO ' . $descripcion . '');
+      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'inserto', "$sql");
 
       header('location: ../vistas/movil_mantenimiento_tipo_recurso_vista.php?msj=2');
     } else {
