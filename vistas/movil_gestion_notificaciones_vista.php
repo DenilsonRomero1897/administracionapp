@@ -133,10 +133,73 @@ if (isset($_REQUEST['msj'])) {
               <th>FECHA Y HORA</th>
               <th>SEGMENTO</th>
               <th>TIPO NOTIFICACION</th>
+              <th>EDITAR</th>
+              <th>ELIMINAR</th>
               <th hidden>IMAGEN ENABLE</th>
+             
+
             </tr>
           </thead>
           <tbody>
+          <!--aqui debemos colocar los td-->
+          <?php
+        $con=mysqli_connect('127.0.0.1','root','','bdadministracionapp') or die ('Error en la conexion');  
+        $sql="SELECT * FROM tbl_movil_notificaciones ORDER BY id";  
+        $resultado=mysqli_query($con,$sql) or die ('Error en el query database');  
+        //Valida que la consulta esté bien hecha
+        if( $resultado ){
+
+              //Ahora valida que la consuta haya traido registros
+          if( mysqli_num_rows( $resultado ) > 0){
+
+             //Mientras mysqli_fetch_array traiga algo, lo agregamos a una variable temporal
+             while($fila = mysqli_fetch_array( $resultado ) ){
+
+              //Ahora $fila tiene la primera fila de la consulta, pongamos que tienes
+              //un campo en tu DB llamado NOMBRE, así accederías
+              $id = $fila['id'];
+              $titulo = $fila['titulo'];
+              $descripcion = $fila['descripcion'];
+              $fecha = $fila['fecha'];
+              $segmento_id = $fila['segmento_id'];
+              $tipo_notificacion_id = $fila['tipo_notificacion_id'];
+      ?>
+                              <tr>
+
+                                  <td > <?php echo $id ?>
+                                  </td>
+                                  <td > <?php echo $titulo?>
+                                  </td>
+                                  <td > <?php echo $descripcion?>
+                                  </td>
+                                  <td > <?php echo $fecha?>
+                                  </td>
+                                  <td > <?php echo $segmento_id?>
+                                  </td>
+                                  <td > <?php echo $tipo_notificacion_id?>
+                                  </td>
+                                  <td>
+                                    <button type="button"  rel="tooltip" data-toggle="modal" data-target="#modalEditarSexo" title="Editar" class="btn btn-primary btn-link btn-sm" onclick="#">
+                                      <i class="material-icons">edit</i>
+                                    </button>
+                                  </td>
+                                  <td>
+                                    <a title="Eliminar" href="#" data-href="#" data-toggle="modal" data-target="#modalEliminarSexo"><i class="material-icons" style="color: red;">Eliminar</i></a>
+                                  </td>
+                              <?php
+    }
+
+  }
+
+  //liberar la memoria del resultado, 
+  mysqli_free_result( $resultado );
+
+  //cerrar conexion
+  mysqli_close( $con );
+
+}
+    ?>
+        
           </tbody>
         </table>
       </div>
