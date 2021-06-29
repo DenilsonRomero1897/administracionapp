@@ -10,14 +10,11 @@ $opcion = $_GET['op'];
 
 if ($opcion == 'eliminar') {
   $id_segmento = isset($_GET["id"]) ? ($_GET["id"]) : "";
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', "$sql");
   $sql = "DELETE FROM tbl_movil_segmentos WHERE id = $id_segmento";
-  //Logica para traer el nombre del segmento
-  $sqlnombre = "select nombre from tbl_movil_segmentos where id='$id_segmento'";
-  //Obtener la fila del query
-  $rows = mysqli_fetch_assoc($mysqli->query($sqlnombre));
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', "$sqlnombre");
   $resultado = $mysqli->query($sql);
-  if($resultado === TRUE){
+  var_dump($resultado) or die;
+  if($resultado){
             echo '<script type="text/javascript">
                 swal({
                      title:"",
@@ -50,7 +47,7 @@ if ($opcion == 'eliminar') {
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', "$sql");
   $mysqli->query($sql);
   header('location: ../vistas/movil_gestion_segmentos_vista.php?msj=2');
-}else{
+}else{ // insertar datos
   $nombre = isset($_POST["nombre"]) ? ($_POST["nombre"]) : "";
   $descripcion = isset($_POST["descripcion"]) ? ($_POST["descripcion"]) : "";
   $creadopor = isset($_SESSION['id_usuario']) ? ($_SESSION['id_usuario']) : "";
@@ -76,14 +73,11 @@ if ($_POST['nombre']  <> ' ' and  $_POST['descripcion'] <> '' and  $_POST['TP'] 
   } else {
 
     /* Query para que haga el insert*/
-    $sqlID = "SELECT id FROM `tbl_movil_segmentos` ORDER BY id DESC LIMIT 1";
-    $IDs = mysqli_fetch_assoc($mysqli->query($sqlID));
-    $id = (int)$IDs['id'] + 1;
-    $sql = "INSERT into tbl_movil_segmentos (id,nombre,descripcion,creado_por,fecha_creacion) VALUES ($id,'$nombre','$descripcion','$creadopor',sysdate())";
+    $sql = "INSERT into tbl_movil_segmentos (nombre,descripcion,creado_por,fecha_creacion) VALUES ('$nombre','$descripcion','$creadopor',sysdate())";
     $resultado = $mysqli->query($sql);
 
 
-    if ($resultado) {
+    if ($resultado == true) {
       bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'inserto', "$sql");
 
       header('location: ../vistas/movil_gestion_segmentos_vista.php?msj=2');

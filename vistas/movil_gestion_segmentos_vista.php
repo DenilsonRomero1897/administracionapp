@@ -27,16 +27,8 @@ if ($visualizacion == 0) {
 
 // /* Esta condicion sirve para  verificar el valor que se esta enviando al momento de dar click en el icono modicar */
 if (isset($_GET['id'])) {
-  $sql_segmento = "SELECT * FROM tbl_movil_segmentos";
-  $resultado_segmento = $mysqli->query($sql_segmento);
-
   $id = $_GET['id'];
 
-  // /* Iniciar la variable de sesion y la crea */
-
-
-  //  /* Hace un select para mandar a traer todos los datos de la 
-  //  tabla donde rol sea igual al que se ingreso e el input */
   $sql = "SELECT * FROM tbl_movil_segmentos WHERE id = '$id'";
   $resultado = $mysqli->query($sql);
   //     /* Manda a llamar la fila */
@@ -48,7 +40,6 @@ if (isset($_GET['id'])) {
   $_SESSION['txtCreado_por'] = $row['creado_por'];
 
   if (isset($_SESSION['txtNombre'])) {
-
 
 ?>
     <script>
@@ -198,7 +189,6 @@ ob_end_flush();
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
-                    
                   </form>
                 </td>
 

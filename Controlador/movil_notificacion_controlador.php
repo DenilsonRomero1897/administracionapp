@@ -12,8 +12,8 @@ switch ($_GET['op']) {
         $titulo = $_POST['titulo'];
         $contenido = $_POST['Contenido'];
         $segmento = $_POST['Segmentos'];
-        $fecha_publicacion = date('Y-m-d ',strtotime($_POST['txt_fecha_Publicacion']));
-        $sql = "INSERT into tbl_movil_notificaciones VALUES (null,'$titulo','$contenido',$fecha_publicacion,'ADMIN',$segmento,1,0)";
+        $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
+        $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,1,0)";
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
             header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
@@ -32,9 +32,6 @@ switch ($_GET['op']) {
         $segmento = $_POST['Segmentos'];
         $fecha_publicacion = $_POST['txt_fecha_Publicacion'];
 
-        break;
-    case 'mostrar':
-        
         break;
     
     default:

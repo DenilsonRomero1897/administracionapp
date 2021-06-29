@@ -24,6 +24,36 @@ if ($visualizacion == 0) {
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A GESTION DE NOTIFICACIONES ');
 }
 
+if (isset($_GET['id'])) {
+  $id = $_GET['id'];
+
+  $sql = "SELECT * FROM tbl_movil_notificaciones WHERE id = '$id'";
+  $resultado = $mysqli->query($sql);
+  //     /* Manda a llamar la fila */
+  $row = $resultado->fetch_array(MYSQLI_ASSOC);
+
+  $id = $row['id'];
+  $_SESSION['txtTitulo'] = $row['titulo'];
+  $_SESSION['txtDescripcion'] = $row['descripcion'];
+  $_SESSION['txtFecha'] = $row['fecha'];
+  $_SESSION['txtSegmento_id'] = $row['segmento_id'];
+  $_SESSION['txtTipoNotificacionId'] = $row['tipo_notificacion_id'];
+
+  if (isset($_SESSION['txtTitulo'])) {
+
+?>
+
+    <script>
+      $(function() {
+        $('#modal_modificar_notificacion').modal('toggle')
+      })
+    </script>;
+
+<?php
+
+ }
+}
+
 if (isset($_REQUEST['msj'])) {
   $msj = $_REQUEST['msj'];
 
@@ -130,93 +160,116 @@ if (isset($_REQUEST['msj'])) {
             <tr>
               <th>ID</th>
               <th>TITULO</th>
+<<<<<<< Updated upstream
               <th>DESCRIPCIÓN</th>
               <th>FECHA Y HORA</th>
+=======
+              <th>DESCRIPCION</th>
+              <th>FECHA</th>
+>>>>>>> Stashed changes
               <th>SEGMENTO</th>
               <th>TIPO NOTIFICACIÓN</th>
               <th>EDITAR</th>
               <th>ELIMINAR</th>
               <th hidden>IMAGEN ENABLE</th>
-             
-
             </tr>
           </thead>
           <tbody>
           <!--aqui debemos colocar los td-->
           <?php
-        $con=mysqli_connect('127.0.0.1','root','','bdadministracionapp') or die ('Error en la conexion');  
-        $sql="SELECT * FROM tbl_movil_notificaciones ORDER BY id";  
-        $resultado=mysqli_query($con,$sql) or die ('Error en el query database');  
-        //Valida que la consulta esté bien hecha
-        if( $resultado ){
+               $sql="SELECT * FROM tbl_movil_notificaciones";  
+               $resultado_notificaciones = $mysqli->query($sql);
+            while ($fila = $resultado_notificaciones->fetch_array(MYSQLI_ASSOC)) { ?>
+              <tr>
+                <td><?php echo $fila['id']; ?></td>
+                <td><?php echo $fila['titulo']; ?></td>
+                <td><?php echo $fila['descripcion']; ?></td>
+                <td><?php echo $fila['fecha']; ?></td>
+                <td><?php echo $fila['segmento_id']; ?></td>
+                <td><?php echo $fila['tipo_notificacion_id']; ?></td>
 
-              //Ahora valida que la consuta haya traido registros
-          if( mysqli_num_rows( $resultado ) > 0){
+                <td style="text-align: center;">
 
-             //Mientras mysqli_fetch_array traiga algo, lo agregamos a una variable temporal
-             while($fila = mysqli_fetch_array( $resultado ) ){
+                  <a href="../vistas/movil_gestion_notificaciones_vista.php?&id=<?php echo $fila['id']; ?>" class="btn btn-primary btn-raised btn-xs">
+                    <i class="far fa-edit"></i>
+                  </a>
+                </td>
 
-              //Ahora $fila tiene la primera fila de la consulta, pongamos que tienes
-              //un campo en tu DB llamado NOMBRE, así accederías
-              $id = $fila['id'];
-              $titulo = $fila['titulo'];
-              $descripcion = $fila['descripcion'];
-              $fecha = $fila['fecha'];
-              $segmento_id = $fila['segmento_id'];
-              $tipo_notificacion_id = $fila['tipo_notificacion_id'];
-      ?>
-                              <tr>
+                <td style="text-align: center;">
+                  <form action="../Controlador/movil_segmentos_controlador.php?op=eliminar&id=<?php echo $segmento['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
+                    <button type="submit" class="btn btn-danger btn-raised btn-xs">
+                      <i class="far fa-trash-alt"></i>
+                    </button>
+                  </form>
+                </td>
 
-                                  <td > <?php echo $id ?>
-                                  </td>
-                                  <td > <?php echo $titulo?>
-                                  </td>
-                                  <td > <?php echo $descripcion?>
-                                  </td>
-                                  <td > <?php echo $fecha?>
-                                  </td>
-                                  <td > <?php echo $segmento_id?>
-                                  </td>
-                                  <td > <?php echo $tipo_notificacion_id?>
-                                  </td>
-                                  <td>
-                                    <button type="button"  rel="tooltip" data-toggle="modal" data-target="#modalEditarSexo" title="Editar" class="btn btn-primary btn-link btn-sm" onclick="#">
-                                      <i class="material-icons">edit</i>
-                                    </button>
-                                  </td>
-                                  <td>
-                                    <a title="Eliminar" href="#" data-href="#" data-toggle="modal" data-target="#modalEliminarSexo"><i class="material-icons" style="color: red;">Eliminar</i></a>
-                                  </td>
-                              <?php
-    }
+              </tr>
 
-  }
+            <?php } ?>
 
-  //liberar la memoria del resultado, 
-  mysqli_free_result( $resultado );
-
-  //cerrar conexion
-  mysqli_close( $con );
-
-}
-    ?>
-        
           </tbody>
         </table>
       </div>
       <!-- /.card-body -->
     </div>
+  </div>
+
+  </div>
+
+  <form action="../Controlador/movil_notificacion_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
+
+<div class="modal fade" id="modal_modificar_notificacion">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title">Modificar Notificacion</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
 
 
-    <!-- /.card-body -->
-    <div class="card-footer">
+      <!--Cuerpo del modal-->
+      <div class="modal-body">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-md-12">
 
+              <div class="form-group">
+                <label>Segmento</label>
+
+                <input class="form-control" type="text" id="nombre" name="nombre" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtNombre']; ?>">
+
+              </div>
+
+              <div class="form-group">
+                <label>Descripcion</label>
+
+                <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtDescripcion']; ?>">
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!--Footer del modal-->
+      <div class="modal-footer justify-content-between">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+        <button type="submit" class="btn btn-primary" id="btn_modificar_segmento" name="btn_modificar_segmento">Guardar Cambios</button>
+      </div>
     </div>
+    <!-- /.modal-content -->
   </div>
+  <!-- /.modal-dialog -->
+</div>
 
-  </div>
+<!-- /.  finaldel modal -->
 
 
+
+</form>
 
 
 
