@@ -1,5 +1,5 @@
 <?php
-/*require "../clases/conexion.php";
+require "../clases/conexion.php";
 
 
 
@@ -18,11 +18,11 @@ class segmentos
 		$sql="UPDATE tbl_movil_segmentos set nombre = $nombre , descripcion = $descripcion WHERE id = $id";
 		return 
 		
-	}*/
-   /* public function eliminar($id){
+	}
+    public function eliminar($id){
        
         $sql = "DELETE tbl_movil_segmento WHERE id = $id";
         return 
     }
 
-}*/
+}
