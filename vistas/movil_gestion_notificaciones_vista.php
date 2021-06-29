@@ -184,7 +184,7 @@ if (isset($_REQUEST['msj'])) {
                                     </button>
                                   </td>
                                   <td>
-                                    <a title="Eliminar" href="#" data-href="#" data-toggle="modal" data-target="#modalEliminarSexo"><i class="material-icons" style="color: red;">close</i></a>
+                                    <a title="Eliminar" href="#" data-href="#" data-toggle="modal" data-target="#modalEliminarSexo"><i class="material-icons" style="color: red;">Eliminar</i></a>
                                   </td>
                               <?php
     }
