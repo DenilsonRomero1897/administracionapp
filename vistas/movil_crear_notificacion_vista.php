@@ -43,7 +43,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nueva Notificacion</h1>
+            <h1>Nueva Notificación</h1>
           </div>
 
 
@@ -78,7 +78,7 @@ ob_end_flush();
             <div class="card-body">
 
               <div class="form-group">
-                <label for="titulo"> Titulo:</label>
+                <label for="titulo"> Título:</label>
                 <input autofocus class="form-control" type="text" maxlength="60" id="titulo" name="titulo" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
               </div>
 
@@ -102,7 +102,7 @@ ob_end_flush();
 
               <div class="form-group">
                 <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
-                <label for="txt_fecha_Publicacion">Fecha y Hora de Publicacion:</label>
+                <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
                 <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false">
 
               </div>

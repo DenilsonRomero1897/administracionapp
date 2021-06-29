@@ -166,7 +166,7 @@ ob_end_flush();
           <thead>
             <tr>
               <th>ID</th>
-              <th>DESCRIPCION</th>
+              <th>DESCRIPCIÓN</th>
               <th>URL</th>
               <th>EDITAR</th>
               <th>BORRAR</th>
@@ -246,7 +246,7 @@ ob_end_flush();
                 <div class="col-md-12">
 
                   <div class="form-group">
-                    <label>Descripcion</label>
+                    <label>Descripción</label>
 
                     <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtdescripcion']; ?>">
 

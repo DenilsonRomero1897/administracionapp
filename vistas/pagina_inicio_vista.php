@@ -435,7 +435,7 @@ if (session_status() === PHP_SESSION_NONE) {
               <a href="#" class="nav-link">
                 <i class="nav-icon fab fa-buysellads"></i>
                 <p>
-                  Administracion App
+                  Administración App
                   <i class="fas fa-angle-left right"></i>
                   <span class="badge badge-info right"></span>
                 </p>
@@ -469,7 +469,7 @@ if (session_status() === PHP_SESSION_NONE) {
                 <li class="nav-item" style="display:block">
                   <a href="../vistas/movil_bitacora_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
-                    <p> Bitacora </p>
+                    <p> Bitácora </p>
                   </a>
                 </li>
 

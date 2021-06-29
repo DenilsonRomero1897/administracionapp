@@ -40,7 +40,7 @@ if (permiso_ver('123') == '1') {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">Administracion App </h1>
+              <h1 class="m-0 text-dark">Administración App </h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -68,7 +68,7 @@ if (permiso_ver('123') == '1') {
             <div class="col-6 col-sm-6 col-md-4">
               <div class="small-box bg-light">
                 <div class="inner">
-                  <h4>Crear Notificacion </h4>
+                  <h4>Crear Notificación </h4>
                   <p><?php echo $_SESSION['crear_notificacion_vista']; ?></p>
                 </div>
                 <div class="icon">

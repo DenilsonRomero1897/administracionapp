@@ -95,7 +95,7 @@ if (isset($_REQUEST['msj'])) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestion de Notificaciones</h1>
+            <h1>Gestión de Notificaciones</h1>
           </div>
 
           <div class="col-sm-6">
@@ -129,10 +129,10 @@ if (isset($_REQUEST['msj'])) {
             <tr>
               <th>ID</th>
               <th>TITULO</th>
-              <th>DESCRIPCION</th>
+              <th>DESCRIPCIÓN</th>
               <th>FECHA Y HORA</th>
               <th>SEGMENTO</th>
-              <th>TIPO NOTIFICACION</th>
+              <th>TIPO NOTIFICACIÓN</th>
               <th>EDITAR</th>
               <th>ELIMINAR</th>
               <th hidden>IMAGEN ENABLE</th>

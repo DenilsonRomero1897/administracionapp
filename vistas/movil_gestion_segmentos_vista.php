@@ -136,7 +136,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestion de Segmentos</h1>
+            <h1>Gestión de Segmentos</h1>
           </div>
 
           <div class="col-sm-6">
@@ -167,9 +167,9 @@ ob_end_flush();
             <tr>
               <th>ID</th>
               <th>NOMBRE</th>
-              <th>DESCRIPCION</th>
+              <th>DESCRIPCIÓN</th>
               <th>CREADO POR</th>
-              <th>FECHA DE CREACION</th>
+              <th>FECHA DE CREACIÓN</th>
               <th>EDITAR</th>
               <th>ELIMINAR</th>
             </tr>
