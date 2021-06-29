@@ -13,7 +13,6 @@ switch ($_GET['op']) {
         $contenido = $_POST['Contenido'];
         $segmento = $_POST['Segmentos'];
         $fecha_publicacion = date('Y-m-d ',strtotime($_POST['txt_fecha_Publicacion']));
-        var_dump($fecha_publicacion) or die;
         $sql = "INSERT into tbl_movil_notificaciones VALUES (null,'$titulo','$contenido',$fecha_publicacion,'ADMIN',$segmento,1,0)";
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
