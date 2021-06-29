@@ -25,7 +25,17 @@ switch ($_GET['op']) {
         $sql = "DELETE from tbl_movil_notificaciones WHERE id = $id";
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
-            header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=4');
+                echo '<script type="text/javascript">
+                swal({
+                     title:"",
+                     text:"Los datos  se eliminaron correctamente",
+                     type: "success",
+                     showConfirmButton: false,
+                     timer: 3000
+                  });
+                  $(".FormularioAjax")[0].reset();
+                                 window.location = "../vistas/movil_gestion_notificaciones_vista.php";
+              </script>';
             }
         break; 
         

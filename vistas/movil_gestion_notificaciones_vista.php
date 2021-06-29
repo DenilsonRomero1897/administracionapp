@@ -150,7 +150,7 @@ if (isset($_REQUEST['msj'])) {
       <div class="card-header">
         <h3 class="card-title">Notificaciones</h3>
         <div class="card-tools">
-          <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+        <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_notificacion_vista.php">Nuevo</a>
         </div>
       </div>
       <!-- /.card-header -->
@@ -250,9 +250,11 @@ if (isset($_REQUEST['msj'])) {
                   while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
                         <?php if($segmento['id'] == $_SESSION['txtSegmento_id']) {?>
                         <option selected value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
-                         <?php } ?> 
-                        <option value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
-                  <?php } ?>
+                         <?php }else{ ?> 
+                          <option value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
+                  <?php } 
+                  }
+                  ?>
                 </select>
               </div>
 
@@ -266,9 +268,11 @@ if (isset($_REQUEST['msj'])) {
                   while ($fila = $resultado_tn->fetch_array(MYSQLI_ASSOC)) { ?>
                         <?php if($fila['id'] == $_SESSION['txtTipoNotificacionId']) {?>
                         <option selected value="<?php echo $fila['id'] ?>"><?php echo $fila['descripcion'] ?></option>
-                         <?php } ?> 
+                         <?php }else{ ?> 
                         <option value="<?php echo $fila['id'] ?>"><?php echo $fila['descripcion'] ?></option>
-                  <?php } ?>
+                  <?php } 
+                  }
+                  ?>
                 </select>
               </div>
 
@@ -309,7 +313,6 @@ if (isset($_REQUEST['msj'])) {
 
   <script type="text/javascript">
     $(function() {
-
       $('#tabla').DataTable({
         "paging": true,
         "lengthChange": true,
