@@ -4,12 +4,6 @@ session_start();
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 
-/*require_once('../Modelos/segmentos_modelo.php');*/
-
-$Id_objeto = 128;
-$opcion = $_GET['op'];
-/*$tiporecurso = new segmentos();*/
-
 
 $Id_objeto = 128;
 $opcion = $_GET['op'];

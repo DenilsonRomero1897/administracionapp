@@ -249,7 +249,6 @@ if ($visualizacion == 0) {
                 <td><?php echo strtoupper($row['accion']); ?></td>
                 <td><?php echo strtoupper($row['descripcion']); ?></td>
                 <td><?php echo $row['Fecha']; ?></td>
-
               </tr>
             <?php } ?>
           </tbody>
@@ -270,18 +269,11 @@ if ($visualizacion == 0) {
   </div>
 
 
-
-
-
   </section>
 
   </div>
 
-
-
-
   <script type="text/javascript">
-  
 
   $(function () {
     
