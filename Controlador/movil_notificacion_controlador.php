@@ -21,22 +21,28 @@ switch ($_GET['op']) {
         break;
 
     case 'delete':
-        $id_publicacion = $_POST['id'];
-
+        $id = $_GET['id'];
+        $sql = "DELETE from tbl_movil_notificaciones WHERE id = $id";
+        $resultado = $mysqli->query($sql);
+            if($resultado === TRUE){
+            header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=4');
+            }
         break; 
         
-    case 'update':
-        $id_publicacion = $_POST['id'];
+    case 'editar':
+        $id = $_GET['id'];
         $titulo = $_POST['titulo'];
         $contenido = $_POST['Contenido'];
         $segmento = $_POST['Segmentos'];
-        $fecha_publicacion = $_POST['txt_fecha_Publicacion'];
-
+        $tipo_notificacion = $_POST['tipo_notificacion'];
+        $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
+        $sql = "UPDATE tbl_movil_notificaciones SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion', remitente = 'ADMIN', segmento_id = $segmento, tipo_notificacion_id = $tipo_notificacion , image_enable = 0 where id = $id";
+        $resultado = $mysqli->query($sql);
+            if($resultado === TRUE){
+            header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
+            }
         break;
     
-    default:
-        # code...
-        break;
 }
 
 

@@ -10,23 +10,22 @@ $opcion = $_GET['op'];
 
 if ($opcion == 'eliminar') {
   $id_segmento = isset($_GET["id"]) ? ($_GET["id"]) : "";
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', "$sql");
   $sql = "DELETE FROM tbl_movil_segmentos WHERE id = $id_segmento";
   $resultado = $mysqli->query($sql);
   var_dump($resultado) or die;
-  if($resultado){
-            echo '<script type="text/javascript">
-                swal({
-                     title:"",
-                     text:"Los datos se eliminaron correctamente",
-                     type: "success",
-                     showConfirmButton: false,
-                     timer: 3000
-                  });
-                  $(".FormularioAjax")[0].reset();
-                                 window.location = "../vistas/movil_gestion_segmentos_vista.php";
-
-              </script>';
+  if($resultado === true){
+    bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', "$sql");
+    echo '<script type="text/javascript">
+    swal({
+         title:"",
+         text:"Los datos  se eliminaron correctamente",
+         type: "success",
+         showConfirmButton: false,
+         timer: 3000
+                 });
+                 $(".FormularioAjax")[0].reset();
+                 window.location = "../vistas/mantenimiento_jornadas_docente_vista.php";
+                 </script>';   
           }else{
             echo '<script type="text/javascript">
                       swal({
@@ -39,7 +38,7 @@ if ($opcion == 'eliminar') {
                        $(".FormularioAjax")[0].reset();
                   </script>';
           }
-}elseif ($opcion == 'editar') {
+} elseif ($opcion == 'editar') {
   $id_segmento = isset($_GET["id"]) ? ($_GET["id"]) : "";
   $nombre = isset($_POST["nombre"]) ? ($_POST["nombre"]) : "";
   $descripcion = isset($_POST["descripcion"]) ? ($_POST["descripcion"]) : "";
@@ -47,7 +46,7 @@ if ($opcion == 'eliminar') {
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', "$sql");
   $mysqli->query($sql);
   header('location: ../vistas/movil_gestion_segmentos_vista.php?msj=2');
-}else{ // insertar datos
+} else { // insertar datos
   $nombre = isset($_POST["nombre"]) ? ($_POST["nombre"]) : "";
   $descripcion = isset($_POST["descripcion"]) ? ($_POST["descripcion"]) : "";
   $creadopor = isset($_SESSION['id_usuario']) ? ($_SESSION['id_usuario']) : "";
@@ -78,7 +77,7 @@ if ($_POST['nombre']  <> ' ' and  $_POST['descripcion'] <> '' and  $_POST['TP'] 
 
 
     if ($resultado == true) {
-      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'inserto', "$sql");
+      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto,'inserto', "$sql");
 
       header('location: ../vistas/movil_gestion_segmentos_vista.php?msj=2');
     } else {

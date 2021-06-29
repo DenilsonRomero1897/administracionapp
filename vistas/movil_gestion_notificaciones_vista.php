@@ -160,13 +160,8 @@ if (isset($_REQUEST['msj'])) {
             <tr>
               <th>ID</th>
               <th>TITULO</th>
-<<<<<<< Updated upstream
               <th>DESCRIPCIÓN</th>
               <th>FECHA Y HORA</th>
-=======
-              <th>DESCRIPCION</th>
-              <th>FECHA</th>
->>>>>>> Stashed changes
               <th>SEGMENTO</th>
               <th>TIPO NOTIFICACIÓN</th>
               <th>EDITAR</th>
@@ -196,7 +191,7 @@ if (isset($_REQUEST['msj'])) {
                 </td>
 
                 <td style="text-align: center;">
-                  <form action="../Controlador/movil_segmentos_controlador.php?op=eliminar&id=<?php echo $segmento['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
+                  <form action="../Controlador/movil_notificacion_controlador.php?op=delete&id=<?php echo $fila['id'] ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
@@ -235,20 +230,54 @@ if (isset($_REQUEST['msj'])) {
           <div class="row">
             <div class="col-md-12">
 
-              <div class="form-group">
-                <label>Segmento</label>
-
-                <input class="form-control" type="text" id="nombre" name="nombre" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtNombre']; ?>">
-
+            <div class="form-group">
+                <label for="titulo"> Título:</label>
+                <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="45" id="titulo" name="titulo" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
               </div>
 
               <div class="form-group">
-                <label>Descripcion</label>
-
-                <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtDescripcion']; ?>">
-
+                <label for="Contenido">Contenido:</label>
+                <input class="form-control" type="text" value="<?php echo $_SESSION['txtDescripcion'] ?>" maxlength="255" id="Contenido" name="Contenido" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
               </div>
 
+              <div class="form-group">
+                <label>Segmentos: </label>
+                <select class="form-control" name="Segmentos" id="Segmentos">
+                  <option value="">Seleccione una opción :</option>
+                  <?php 
+                  $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";
+                  $resultado_segmentos = $mysqli->query($sql_segmentos);
+                  while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <?php if($segmento['id'] == $_SESSION['txtSegmento_id']) {?>
+                        <option selected value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
+                         <?php } ?> 
+                        <option value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label>Tipo Notificacion: </label>
+                <select class="form-control" name="tipo_notificacion" id="tipo_notificacion">
+                  <option value="">Seleccione una opción :</option>
+                  <?php 
+                  $sql_tn= "SELECT id,descripcion FROM tbl_movil_tipo_notificaciones";
+                  $resultado_tn = $mysqli->query($sql_tn);
+                  while ($fila = $resultado_tn->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <?php if($fila['id'] == $_SESSION['txtTipoNotificacionId']) {?>
+                        <option selected value="<?php echo $fila['id'] ?>"><?php echo $fila['descripcion'] ?></option>
+                         <?php } ?> 
+                        <option value="<?php echo $fila['id'] ?>"><?php echo $fila['descripcion'] ?></option>
+                  <?php } ?>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
+                <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
+                <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false">
+
+              </div>
             </div>
           </div>
         </div>
