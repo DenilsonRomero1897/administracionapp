@@ -12,7 +12,6 @@ if ($opcion == 'eliminar') {
   $id_segmento = isset($_GET["id"]) ? ($_GET["id"]) : "";
   $sql = "DELETE FROM tbl_movil_segmentos WHERE id = $id_segmento";
   $resultado = $mysqli->query($sql);
-  var_dump($resultado) or die;
   if($resultado === true){
     bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', "$sql");
     echo '<script type="text/javascript">
@@ -24,7 +23,7 @@ if ($opcion == 'eliminar') {
          timer: 3000
                  });
                  $(".FormularioAjax")[0].reset();
-                 window.location = "../vistas/mantenimiento_jornadas_docente_vista.php";
+                 window.location = "../vistas/movil_gestion_segmentos_vista.php";
                  </script>';   
           }else{
             echo '<script type="text/javascript">
