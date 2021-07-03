@@ -148,8 +148,10 @@ if (isset($_REQUEST['msj'])) {
 
     <div class="card card-default">
       <div class="card-header">
-        <h3 class="card-title">Notificaciones</h3>
+        <!--<h3 class="card-title">Notificaciones</h3>-->
+        <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
         <div class="card-tools">
+        <label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="tabla"></label>
         <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_notificacion_vista.php">Nuevo</a>
         </div>
       </div>
@@ -323,7 +325,11 @@ if (isset($_REQUEST['msj'])) {
         "responsive": true,
       });
     });
+    function ventana() {
+      window.open("../Controlador/reporte_gestion_notificaciones.php", "REPORTE");
+    }
   </script>
+
 </body>
 
 </html>

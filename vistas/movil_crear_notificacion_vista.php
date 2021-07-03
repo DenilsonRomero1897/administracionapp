@@ -79,12 +79,13 @@ ob_end_flush();
 
               <div class="form-group">
                 <label for="titulo"> Título:</label>
-                <input autofocus class="form-control" type="text" maxlength="60" id="titulo" name="titulo" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                <input autofocus class="form-control" type="text" maxlength="60" id="titulo" name="titulo" onkeypress="return check(event)" required>
+                <!--<input class="tf w-input" id="txtCurp" name="txtCurp" maxlength="256" onkeypress="return check(event)" placeholder="No. de CURP" type="text">-->
               </div>
 
               <div class="form-group">
                 <label for="Contenido">Contenido:</label>
-                <input class="form-control" type="text" maxlength="60" id="Contenido" name="Contenido" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                <input class="form-control" type="text" maxlength="60" id="Contenido" name="Contenido" required >
               </div>
 
               <div class="form-group">
@@ -103,8 +104,20 @@ ob_end_flush();
               <div class="form-group">
                 <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                 <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
-                <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false">
+                <?php 
+                /*$ahora =date('d-m-Y H:i');
+                $fecha_n = strtotime ('+1 hour' , strtotime($ahora));
+                $fecha_n = date ('d-m-Y H:i' , $fecha_n);
+                //Agregando el valor maximo para la fecha
+                $despues = date('d-m-Y H:i');
+                $f_despues = strtotime ('+100 days' , strtotime($despues));
+                $f_despues = date ('d-m-Y H:i' , $f_despues);*/
+                $fe=date("Y-m-d\TH:i");
+                //echo "HOra serfver: ".$fe;
+                 ?>
+                <!--<input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false" min="<?php $fecha_n?>" max="<?php $f_despues?>">-->
 
+                <input class="form-control" value="<?php $fe=date("Y-m-d\TH:i");?>" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion"  min="<?php echo date("Y-m-d\TH:i",strtotime($fe."+1 hour"));?>" max="<?php echo date("Y-m-d\TH:i",strtotime($fe."+ 5 month"));?>" required >
               </div>
 
               <p class="text-center" style="margin-top: 20px;">
@@ -117,5 +130,19 @@ ob_end_flush();
   
   </section>
 </div>
+<script>
+function check(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
 
+    //Tecla de retroceso para borrar, siempre la permite
+    if (tecla == 8) {
+        return true;
+    }
+
+    // Patron de entrada, en este caso solo acepta numeros y letras
+    patron = /[A-Za-z0-9 ]/;
+    tecla_final = String.fromCharCode(tecla);
+    return patron.test(tecla_final);
+}
+</script>
 </body>
