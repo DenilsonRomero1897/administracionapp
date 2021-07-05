@@ -158,8 +158,10 @@ ob_end_flush();
 
     <div class="card card-default">
       <div class="card-header">
+      <div class="card-tools">
           <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_tipo_recurso_vista.php">Nuevo</a>
       </div>
+      <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
       <!-- /.card-header -->
       <div class="card-body">
         <table id="tabla" class="table table-bordered table-striped">
@@ -295,6 +297,9 @@ ob_end_flush();
         "responsive": true,
       });
     });
+    function ventana() {
+      window.open("../Controlador/movil_reporte_tipo_recurso_controlador.php", "REPORTE");
+    }
   </script>
 </body>
 
