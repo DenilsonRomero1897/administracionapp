@@ -13,7 +13,11 @@ switch ($_GET['op']) {
         $contenido = $_POST['Contenido'];
         $segmento = $_POST['Segmentos'];
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
-        $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,1,0)";
+        $sql_id_notificacion = "SELECT id FROM tbl_movil_tipo_notificaciones WHERE descripcion = 'notificacion normal'";
+        $resul = $mysqli->query($sql_id_notificacion);
+        $id_tipo_notificacion = $resul->fetch_assoc();
+        $tipo_notificacion = (int)$id_tipo_notificacion['id'];
+        $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,0)";
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
             header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
