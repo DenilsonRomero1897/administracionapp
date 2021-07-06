@@ -27,48 +27,6 @@ if ($visualizacion == 0) {
   $sql_tabla_bitacora_movil = "select u.Usuario, o.objeto, b.accion, b.descripcion, Date_format(b.fecha,'%Y-%m-%d %H:%i:%S') as Fecha from tbl_usuarios u, tbl_movil_bitacoras b, tbl_objetos o where u.Id_usuario=b.usuario_id and b.objeto_id=o.Id_objeto";
   $resultadotabla_bitacora = $mysqli->query($sql_tabla_bitacora_movil);
 
-
-  // if (isset($_REQUEST['query'])) {
-  //   $query = $_REQUEST['query'];
-
-  //   if ($query == 1) {
-  //     $sql_bitacora_usuario_accion_fecha = " select u.Usuario as Usuario, b.accion, b.descripcion,Date_format(b.fecha,'%Y-%m-%d') as Fecha from tbl_usuarios u, tbl_movil_bitacoras b where u.id_usuario=b.usuario_id and u.Usuario='" . $_GET['usuario'] . "' and b.accion='" . $_GET['accion'] . "' and  b.fecha>='" . $_GET['fechainicio'] . "' and b.fecha<=(DATE_ADD('" . $_GET['fechafinal'] . "', INTERVAL 1 DAY))  ";
-  //     $resultadotabla_bitacora = $mysqli->query($sql_bitacora_usuario_accion_fecha);
-  //   }
-
-  //   if ($query == 2) {
-  //     $sql_bitacora_usuario_accion = " select u.Usuario as Usuario, b.Accion, b.Descripcion,Date_format(b.Fecha,'%Y-%m-%d') as Fecha from tbl_usuarios u, tbl_bitacora b where u.id_usuario=b.id_usuario and u.Usuario='" . $_GET['usuario'] . "' and b.accion='" . $_GET['accion'] . "'  ";
-  //     $resultadotabla_bitacora = $mysqli->query($sql_bitacora_usuario_accion);
-  //   }
-
-  //   if ($query == 3) {
-  //     $sql_bitacora_usuario_fecha = " select u.Usuario as Usuario, b.Accion, b.Descripcion,Date_format(b.Fecha,'%Y-%m-%d') as Fecha from tbl_usuarios u, tbl_bitacora b where u.id_usuario=b.id_usuario and u.Usuario='" . $_GET['usuario'] . "' and  b.fecha>='" . $_GET['fechainicio'] . "' and b.fecha<=(DATE_ADD('" . $_GET['fechafinal'] . "', INTERVAL 1 DAY))  ";
-  //     $resultadotabla_bitacora = $mysqli->query($sql_bitacora_usuario_fecha);
-  //   }
-
-  //   if ($query == 4) {
-  //     $sql_bitacora_accion_fecha = " select u.Usuario as Usuario, b.Accion, b.Descripcion,Date_format(b.Fecha,'%Y-%m-%d') as Fecha from tbl_usuarios u, tbl_bitacora b where u.id_usuario=b.id_usuario  and b.accion='" . $_GET['accion'] . "' and  b.fecha>='" . $_GET['fechainicio'] . "' and b.fecha<=(DATE_ADD('" . $_GET['fechafinal'] . "', INTERVAL 1 DAY))  ";
-  //     $resultadotabla_bitacora = $mysqli->query($sql_bitacora_accion_fecha);
-  //   }
-
-
-  //   if ($query == 5) {
-  //     $sql_bitacora_accion = " select u.Usuario as Usuario, b.Accion, b.Descripcion,Date_format(b.Fecha,'%Y-%m-%d') as Fecha from tbl_usuarios u, tbl_bitacora b where u.id_usuario=b.id_usuario  and b.accion='" . $_GET['accion'] . "' ";
-  //     $resultadotabla_bitacora = $mysqli->query($sql_bitacora_accion);
-  //   }
-
-
-  //   if ($query == 6) {
-  //     $sql_bitacora_fecha = " select u.Usuario as Usuario, b.Accion, b.Descripcion,Date_format(b.Fecha,'%Y-%m-%d') as Fecha from tbl_usuarios u, tbl_bitacora b where u.id_usuario=b.id_usuario and  b.fecha>='" . $_GET['fechainicio'] . "' and b.fecha<=(DATE_ADD('" . $_GET['fechafinal'] . "', INTERVAL 1 DAY))  ";
-  //     $resultadotabla_bitacora = $mysqli->query($sql_bitacora_fecha);
-  //   }
-  //   if ($query == 7) {
-  //     $sql_bitacora_usuario = " select u.Usuario as Usuario, b.Accion, b.Descripcion,Date_format(b.Fecha,'%Y-%m-%d') as Fecha from tbl_usuarios u, tbl_bitacora b where u.id_usuario=b.id_usuario and u.Usuario='" . $_GET['usuario'] . "' ";
-  //     $resultadotabla_bitacora = $mysqli->query($sql_bitacora_usuario);
-  //   }
-  // }
-
-
   if (isset($_REQUEST['msj'])) {
     $msj = $_REQUEST['msj'];
 
@@ -87,7 +45,6 @@ if ($visualizacion == 0) {
 
 ?>
 
-
 <!DOCTYPE html>
 <html>
 
@@ -95,9 +52,7 @@ if ($visualizacion == 0) {
   <title></title>
 </head>
 
-
 <body>
-
 
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -105,7 +60,6 @@ if ($visualizacion == 0) {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-
 
             <h1>Bitacora del Sistema Movil</h1>
           </div>
@@ -117,15 +71,9 @@ if ($visualizacion == 0) {
             </ol>
           </div>
 
-
-
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
-
-
-
 
     <!-- <section class="content">
       <div class="container-fluid">
@@ -219,8 +167,6 @@ if ($visualizacion == 0) {
       </div>
     </section> -->
     <!--Pantalla 2-->
-
-
 
     <div class="card card-default">
       <div class="card-header">
