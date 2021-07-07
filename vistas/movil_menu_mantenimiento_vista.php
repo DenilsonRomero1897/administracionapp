@@ -362,7 +362,7 @@ if (permiso_ver('89') == '1') {
                   <i class="fas fa-plus-square"></i>
                 </div>
 
-                <a href="#" class="small-box-footer">
+                <a href="../vistas/movil_crear_tipo_mensaje_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
@@ -381,7 +381,7 @@ if (permiso_ver('89') == '1') {
                   <i class="fas fa-edit"></i>
                 </div>
 
-                <a href="#" class="small-box-footer">
+                <a href="../vistas/movil_mantenimiento_tipo_mensaje_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
