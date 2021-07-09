@@ -11,7 +11,7 @@ require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
-////////////////declaracion de variables para la busqueda//////////
+
 
 
 $Id_objeto = 125;
@@ -85,27 +85,6 @@ ob_end_flush();
 
 
 ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 <!DOCTYPE html>
@@ -190,14 +169,34 @@ ob_end_flush();
 
               </div>
 
-             
-           
+              <div class="form-group">
+                <label>Usuarios</label>
+                <div class="row container">
+                  <div class="col-md-6">
+                    <label>Tipo persona</label><br>
+                    <input type="checkbox" class="TP" name="TP" value="docente">:Docente<br>
+                    <input type="checkbox" class="TP" name="TP" value="estudiante">:Estudiante<br>
+                    <input type="checkbox" class="TP" name="TP" value="coordinador">:Coordinador<br>
+                    <input type="checkbox" class="TP" name="TP" value="todos">:Todos
+                  </div>
+                  <div class="col-md-6">
+                    <label>Genero</label><br>
+                    <input type="checkbox" class="genero" name="genero" value="hombres">:Hombres<br>
+                    <input type="checkbox" class="genero" name="genero" value="mujeres">:Mujeres<br>
+                    <input type="checkbox" class="genero" name="genero" value="todos">:Todos
+                  </div>
+                </div>
+            
 
+            </div>
+           
+      
+          
 
 
             <div class="form-group">
                 <label>Tipo de Persona: </label>
-                <select class="form-control" name="buscar_tipo_persona" id="buscar_tipo_persona" value="<¿php echo $_POST[buscar_tipo_persona]?> ">
+                <select class="form-control" name="tipo_persona" id="tipo_persona">
                   <option value="">Seleccione una opción :</option>
                   <?php 
                   $sql_tipo_persona = "SELECT id_tipo_persona,tipo_persona FROM tbl_tipos_persona";
@@ -224,7 +223,7 @@ ob_end_flush();
             </tr>
           </thead>
           <tbody>
-          <?php
+            <?php
             $sql_segmentos = "select * from tbl_personas";
             $resultado_segmentos = $mysqli->query($sql_segmentos);
             while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
@@ -241,13 +240,12 @@ ob_end_flush();
               
         
                 <?php } ?>
-            
+
+
 
 
           <p class="text-center" style="margin-top: 20px;">
             <button type="submit" class="btn btn-primary" id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
-            
-          </p>
           </p>
         </form>
 
