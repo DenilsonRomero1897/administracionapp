@@ -185,11 +185,12 @@ ob_end_flush();
                 </td>
 
                 <td style="text-align: center;">
-                  <form action="../Controlador/movil_segmentos_controlador.php?op=eliminar&id=<?php echo $segmento['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
+                  <form action="../Controlador/movil_segmentos_controlador.php?op=eliminar&id=<?php echo $segmento['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off" >
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
                   </form>
+                  <div class="RespuestaAjax"></div>
                 </td>
 
               </tr>
