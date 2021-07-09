@@ -8,7 +8,7 @@ $Id_objeto = 127;
 $opcion = $_GET['op'];
 
 if ($opcion == 'eliminar') {
-  $id_segmento = isset($_GET["id"]) ? ($_GET["id"]) : "";
+  $id_segmento = isset($_GET["id"]) ? ((int)$_GET["id"]) : "";
   $sql = "DELETE FROM tbl_movil_segmentos WHERE id = $id_segmento";
   $resultado = $mysqli->query($sql);
   if($resultado === true){
