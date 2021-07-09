@@ -455,7 +455,7 @@ if (session_status() === PHP_SESSION_NONE) {
                   </a>
                 </li>
                 <li class="nav-item" style="display:block">
-                  <a href="#" class="nav-link">
+                  <a href="../vistas/movil_chat_vista.php" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p> Chat </p>
                   </a>

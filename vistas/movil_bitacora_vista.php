@@ -212,12 +212,6 @@ if ($visualizacion == 0) {
     </div>
   </div>
 
-  </div>
-
-
-  </section>
-
-  </div>
 
   <script type="text/javascript">
 
@@ -231,9 +225,11 @@ if ($visualizacion == 0) {
        "info": true,
        "autoWidth": true,
        "responsive": true,
+       "language": {
+      "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+    }
      });
    });
- 
  
  </script>
 </body>
