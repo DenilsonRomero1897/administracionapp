@@ -79,18 +79,18 @@ ob_end_flush();
 
               <div class="form-group">
                 <label for="titulo"> Título:</label>
-                <input autofocus class="form-control" type="text" maxlength="60" id="titulo" name="titulo" onkeypress="return check(event)" required>
+                <input autofocus class="form-control" type="text" maxlength="90" id="titulo" name="titulo" onkeypress="return check(event)" required>
                 <!--<input class="tf w-input" id="txtCurp" name="txtCurp" maxlength="256" onkeypress="return check(event)" placeholder="No. de CURP" type="text">-->
               </div>
 
               <div class="form-group">
                 <label for="Contenido">Contenido:</label>
-                <input class="form-control" type="text" maxlength="60" id="Contenido" name="Contenido" required >
+                <input class="form-control" type="text" maxlength="255" id="Contenido" name="Contenido" required onkeypress="return check(event)" >
               </div>
 
               <div class="form-group">
                 <label>Segmentos: </label>
-                <select class="form-control" name="Segmentos" id="Segmentos">
+                <select class="form-control" name="Segmentos" id="Segmentos" required>
                   <option value="">Seleccione una opción :</option>
                   <?php 
                   $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";

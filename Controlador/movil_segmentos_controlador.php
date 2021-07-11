@@ -12,7 +12,7 @@ if ($opcion == 'eliminar') {
   $sql = "DELETE FROM tbl_movil_segmentos WHERE id = $id_segmento";
   $resultado = $mysqli->query($sql);
   if($resultado === true){
-    bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', "$sql");
+    bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'ELIMINO', strtoupper("$sql"));
     echo '<script type="text/javascript">
     swal({
          title:"",
@@ -41,12 +41,12 @@ if ($opcion == 'eliminar') {
   $nombre = isset($_POST["nombre"]) ? ($_POST["nombre"]) : "";
   $descripcion = isset($_POST["descripcion"]) ? ($_POST["descripcion"]) : "";
   $sql="UPDATE tbl_movil_segmentos set nombre = '$nombre', descripcion = '$descripcion' WHERE id = $id_segmento";
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', "$sql");
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'MODIFICO', strtoupper("$sql"));
   $mysqli->query($sql);
   header('location: ../vistas/movil_gestion_segmentos_vista.php?msj=2');
 } else { // insertar datos
-  $nombre = isset($_POST["nombre"]) ? ($_POST["nombre"]) : "";
-  $descripcion = isset($_POST["descripcion"]) ? ($_POST["descripcion"]) : "";
+  $nombre = isset($_POST["nombre"]) ? (strtoupper($_POST["nombre"])) : "";
+  $descripcion = isset($_POST["descripcion"]) ? (strtoupper($_POST["descripcion"])) : "";
   $creadopor = isset($_SESSION['id_usuario']) ? ($_SESSION['id_usuario']) : "";
   $tipo_persona = isset($_POST["TP"]) ? ($_POST["TP"]) : "";
   $genero = isset($_POST["genero"]) ? ($_POST["genero"]) : "";
@@ -75,7 +75,7 @@ if ($_POST['nombre']  <> ' ' and  $_POST['descripcion'] <> '' and  $_POST['TP'] 
 
 
     if ($resultado == true) {
-      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto,'inserto', "$sql");
+      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto,'inserto', strtoupper("$sql"));
 
       header('location: ../vistas/movil_gestion_segmentos_vista.php?msj=2');
     } else {
