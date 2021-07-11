@@ -13,7 +13,7 @@ switch ($_GET['op']) {
         $contenido = isset($_POST['Contenido']) ? strtoupper($_POST['Contenido']) : '';
         $segmento = isset($_POST['Segmentos']) ? $_POST['Segmentos'] : '';
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
-        $notificacioin = isset($_POST['notificacion']) ? $_POST['notificacion'] : 'NOTIFICACION NORMAL';
+        $notificacion = isset($_POST['notificacion']) ? $_POST['notificacion'] : 'NOTIFICACION NORMAL';
         //buscar el id notificacion normal
         $sql_id_notificacion = "SELECT id FROM tbl_movil_tipo_notificaciones WHERE descripcion = '$notificacion'";
         $resul = $mysqli->query($sql_id_notificacion);
