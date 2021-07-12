@@ -182,10 +182,10 @@ ob_end_flush();
                     <?php } ?>
                 </tbody>
               </table>
-            </div> 
-              <p class="text-center" style="margin-top: 20px;">
-                      <button type="submit" class="btn btn-primary" id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
-                    </p>
+            </div>
+            <p class="text-center" style="margin-top: 20px;">
+              <button type="submit" class="btn btn-primary" id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
+            </p>
         </form>
       </div>
     </section>
@@ -193,35 +193,34 @@ ob_end_flush();
 
   </div>
   <script>
-function realizaProceso(){
-   var tipo_persona = document.getElementById('buscar_tipo_persona').value;
-   console.log(tipo_persona);
-   var parametros = {"tipoPersona": tipo_persona}
-        $.ajax({
-                data:  parametros, //datos que se envian a traves de ajax
-                url:   '../Controlador/movil_buscar_personas_controlador.php', //archivo que recibe la peticion
-                type:  'post', //método de envio
-                beforeSend: function () {
-                        $("#resultado").html("Procesando, espere por favor...");
-                },
-                success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                        $("#resultado").html(response);
-                }
-        });
-}
+    function realizaProceso() {
+      var tipo_persona = document.getElementById('buscar_tipo_persona').value;
+      console.log(tipo_persona);
+      var parametros = {
+        "tipoPersona": tipo_persona
+      }
+      $.ajax({
+        data: parametros, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_buscar_personas_controlador.php', //archivo que recibe la peticion
+        type: 'post', //método de envio
+        beforeSend: function() {
+          $("#resultado").html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          $("#resultado").html(response);
+        }
+      });
+    }
 
-function toggle(source) {
-  checkboxes = document.getElementsByName('persona');
+    function toggle(source) {
+      checkboxes = document.getElementsByName('persona');
 
-  for(var i=0, n=checkboxes.length;i<n;i++) {
-    checkboxes[i].checked = source.checked;
-  }
+      for (var i = 0, n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+      }
 
-}
-</script>
-
-
-
+    }
+  </script>
 
 </body>
 
