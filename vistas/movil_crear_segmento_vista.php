@@ -175,7 +175,7 @@ ob_end_flush();
                       <td><?php echo $segmento['nombres']; ?></td>
                       <td><?php echo $segmento['apellidos']; ?></td>
                       <td style="text-align: center;">
-                        <input type="checkbox" class="" name="persona" value="<?php echo $segmento['id_persona']; ?>"><br>
+                        <input type="checkbox" class="" name="persona" value="<?php echo $segmento['id_persona']; ?>" onchange="AddArray()"><br>
                         </a>
                       </td>
 
@@ -219,6 +219,18 @@ ob_end_flush();
         checkboxes[i].checked = source.checked;
       }
 
+    }
+
+    function AddArray() {
+      var tmp = [];
+      var checkbox = document.getElementById('persona');
+        if (this.checked) {
+          tmp.push(checkbox.value);
+        }else{
+          index = tmp.findIndex(element => element === checkbox.value);
+          tmp.splice(index,1);
+        }
+      console.log(tmp);
     }
   </script>
 

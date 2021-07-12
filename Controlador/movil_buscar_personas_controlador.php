@@ -10,9 +10,7 @@ while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) {
     $id = $segmento['id_persona'];
     $nombre = $segmento['nombres'];
     $apellidos = $segmento['apellidos'];
-    ?>
-
-<?php echo"
+    echo"
   <tr>
     <td hidden> $id</td>
     <td> $nombre </td>
