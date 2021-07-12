@@ -34424,55 +34424,55 @@ ALTER TABLE `tbl_horario_docentes`
 -- Filtros para la tabla `tbl_movil_bitacoras`
 --
 ALTER TABLE `tbl_movil_bitacoras`
-  ADD CONSTRAINT `fk_tbl_movil_bitacoras_tbl_objetos1` FOREIGN KEY (`objeto_id`) REFERENCES `tbl_objetos` (`Id_objeto`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tbl_movil_bitacoras_tbl_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tbl_movil_bitacoras_tbl_objetos1` FOREIGN KEY (`objeto_id`) REFERENCES `tbl_objetos` (`Id_objeto`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_movil_bitacoras_tbl_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tbl_movil_chats`
 --
 ALTER TABLE `tbl_movil_chats`
-  ADD CONSTRAINT `fk_tbl_movil_chats_tbl_movil_tipo_mensajes1` FOREIGN KEY (`tipo_mensaje_id`) REFERENCES `tbl_movil_tipo_mensajes` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tbl_movil_chats_tbl_usuarios1` FOREIGN KEY (`usuario_emisor_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tbl_movil_chats_tbl_usuarios2` FOREIGN KEY (`usuario_receptor_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tbl_movil_chats_tbl_movil_tipo_mensajes1` FOREIGN KEY (`tipo_mensaje_id`) REFERENCES `tbl_movil_tipo_mensajes` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_movil_chats_tbl_usuarios1` FOREIGN KEY (`usuario_emisor_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_movil_chats_tbl_usuarios2` FOREIGN KEY (`usuario_receptor_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tbl_movil_noticias`
 --
 ALTER TABLE `tbl_movil_noticias`
-  ADD CONSTRAINT `fk_tbl_movil_noticias_tbl_segmentos1` FOREIGN KEY (`segmento_id`) REFERENCES `tbl_movil_segmentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tbl_movil_noticias_tbl_segmentos1` FOREIGN KEY (`segmento_id`) REFERENCES `tbl_movil_segmentos` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tbl_movil_noticia_recurso`
 --
 ALTER TABLE `tbl_movil_noticia_recurso`
-  ADD CONSTRAINT `fk_tbl_movil_noticia_recurso_tbl_movil_noticias` FOREIGN KEY (`noticia_id`) REFERENCES `tbl_movil_noticias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tbl_movil_noticia_recurso_tbl_movil_tipo_recursos1` FOREIGN KEY (`recurso_id`) REFERENCES `tbl_movil_tipo_recursos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tbl_movil_noticia_recurso_tbl_movil_noticias` FOREIGN KEY (`noticia_id`) REFERENCES `tbl_movil_noticias` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_movil_noticia_recurso_tbl_movil_tipo_recursos1` FOREIGN KEY (`recurso_id`) REFERENCES `tbl_movil_tipo_recursos` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tbl_movil_notificaciones`
 --
 ALTER TABLE `tbl_movil_notificaciones`
-  ADD CONSTRAINT `fk_tbl_movil_notificaciones_tbl_movil_segmentos1` FOREIGN KEY (`segmento_id`) REFERENCES `tbl_movil_segmentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tbl_movil_notificaciones_tbl_movil_tipo_notificaciones1` FOREIGN KEY (`tipo_notificacion_id`) REFERENCES `tbl_movil_tipo_notificaciones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tbl_movil_notificaciones_tbl_movil_segmentos1` FOREIGN KEY (`segmento_id`) REFERENCES `tbl_movil_segmentos` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_movil_notificaciones_tbl_movil_tipo_notificaciones1` FOREIGN KEY (`tipo_notificacion_id`) REFERENCES `tbl_movil_tipo_notificaciones` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tbl_movil_parametros`
 --
 ALTER TABLE `tbl_movil_parametros`
-  ADD CONSTRAINT `fk_tbl_movil_parametros_tbl_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tbl_movil_parametros_tbl_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tbl_movil_segmento_usuario`
 --
 ALTER TABLE `tbl_movil_segmento_usuario`
-  ADD CONSTRAINT `fk_tbl_movil_segmento_usuario_tbl_movil_segmentos1` FOREIGN KEY (`segmento_id`) REFERENCES `tbl_movil_segmentos` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tbl_movil_segmento_usuario_tbl_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tbl_movil_segmento_usuario_tbl_movil_segmentos1` FOREIGN KEY (`segmento_id`) REFERENCES `tbl_movil_segmentos` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_movil_segmento_usuario_tbl_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tbl_movil_transacciones`
 --
 ALTER TABLE `tbl_movil_transacciones`
-  ADD CONSTRAINT `fk_tbl_movil_transacciones_tbl_movil_tipo_transacciones1` FOREIGN KEY (`tipo_transaccion_id`) REFERENCES `tbl_movil_tipo_transacciones` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tbl_movil_transacciones_tbl_movil_tipo_transacciones1` FOREIGN KEY (`tipo_transaccion_id`) REFERENCES `tbl_movil_tipo_transacciones` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tbl_municipios_hn`
