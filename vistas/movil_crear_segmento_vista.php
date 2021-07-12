@@ -162,10 +162,39 @@ ob_end_flush();
                     <th hidden>ID</th>
                     <th>NOMBRE</th>
                     <th>APELLIDOS</th>
+
                     <th>SELECCIONAR</th>
                   </tr>
                 </thead>
                 <tbody id="resultado">
+
+                    <th>SELECCIONAR</th> 
+                   </tr>
+                   </thead>
+                <tbody>
+               
+                <div class="card-header">
+                <div class="card-tools">
+                <input type="checkbox" class=" " name=" " id="marcartodas">Seleccionar Todos<br>
+                </div>
+                <script src="js/jquery-3.4.1.min.js"></script>
+              
+              
+              
+              
+              <script>
+                
+            $('marcartodas').click(function() {
+            $('input[type="checkbox"]').attr('checked',$('marcartodas').is(':checked'));
+            });
+
+              </script>   
+
+
+
+
+
+
                   <?php
                   $sql_segmentos = "SELECT id_persona,nombres,apellidos FROM tbl_personas";
                   $resultado_segmentos = $mysqli->query($sql_segmentos);
@@ -182,8 +211,8 @@ ob_end_flush();
                     <?php } ?>
                 </tbody>
               </table>
-            </div>
-            <p class="text-center" style="margin-top: 20px;">
+            </div> 
+              <p class="text-center" style="margin-top: 20px;">
                       <button type="submit" class="btn btn-primary" id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
                     </p>
         </form>
@@ -210,6 +239,10 @@ function realizaProceso(){
         });
 }
 </script>
+
+
+
+
 </body>
 
 </html>
