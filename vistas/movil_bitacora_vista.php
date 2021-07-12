@@ -170,10 +170,10 @@ if ($visualizacion == 0) {
 
     <div class="card card-default">
       <div class="card-header">
-        <h3 class="card-title">Registros de Bitacora Movil</h3>
         <div class="card-tools">
           <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
         </div>
+        <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
       </div>
       <!-- /.card-header -->
       <div class="card-body">
@@ -230,7 +230,10 @@ if ($visualizacion == 0) {
     }
      });
    });
- 
+  
+   function ventana() {
+      window.open("../Controlador/movil_reporte_bitacora.php", "REPORTE");
+    }
  </script>
 </body>
 

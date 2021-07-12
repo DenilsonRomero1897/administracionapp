@@ -175,7 +175,7 @@ ob_end_flush();
                       <td><?php echo $segmento['nombres']; ?></td>
                       <td><?php echo $segmento['apellidos']; ?></td>
                       <td style="text-align: center;">
-                        <input type="checkbox" class="" name="persona" value="<?php echo $segmento['id_persona']; ?>" onchange="AddArray()"><br>
+                        <input type="checkbox" class="" name="persona" value="<?php echo $segmento['id_persona']; ?>"><br>
                         </a>
                       </td>
 
@@ -195,7 +195,6 @@ ob_end_flush();
   <script>
     function realizaProceso() {
       var tipo_persona = document.getElementById('buscar_tipo_persona').value;
-      console.log(tipo_persona);
       var parametros = {
         "tipoPersona": tipo_persona
       }
@@ -214,24 +213,12 @@ ob_end_flush();
 
     function toggle(source) {
       checkboxes = document.getElementsByName('persona');
-
       for (var i = 0, n = checkboxes.length; i < n; i++) {
         checkboxes[i].checked = source.checked;
       }
 
     }
-
-    function AddArray() {
-      var tmp = [];
-      var checkbox = document.getElementById('persona');
-        if (this.checked) {
-          tmp.push(checkbox.value);
-        }else{
-          index = tmp.findIndex(element => element === checkbox.value);
-          tmp.splice(index,1);
-        }
-      console.log(tmp);
-    }
+   
   </script>
 
 </body>

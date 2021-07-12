@@ -12,7 +12,8 @@ if ($opcion == 'eliminar') {
   $resultado = $mysqli->query($sql);
   if($resultado === true){
     bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'ELIMINO', strtoupper("$sql"));
-   }
+    
+  }
 
 
 
@@ -43,7 +44,7 @@ $sqlexiste = ("select count(nombre) as nombre  from tbl_movil_segmentos where no
 $existe = mysqli_fetch_assoc($mysqli->query($sqlexiste));
 
 /* Logica para que no acepte campos vacios */
-if ($_POST['nombre']  <> ' ' and  $_POST['descripcion'] <> '' and  $_POST['TP'] <> '' and  $_POST['genero'] <> '') {
+if ($_POST['nombre']  <> ' ' and  $_POST['descripcion'] <> '') {
 
   /* Condicion para que no se repita el rol*/
   if ($existe['nombre'] == 1) {
@@ -51,7 +52,7 @@ if ($_POST['nombre']  <> ' ' and  $_POST['descripcion'] <> '' and  $_POST['TP'] 
  	header('location: ../vistas/movil_crear_segmento.php?msj=1'); 
   } else {
     /* Query para que haga el insert*/
-    $sql = "INSERT into tbl_movil_segmentos (nombre,descripcion,creado_por,fecha_creacion) VALUES ('$nombre','$descripcion','$creadopor',sysdate())";
+    $sql = "INSERT into tbl_movil_segmentos VALUES (null,'$nombre','$descripcion','$creadopor',sysdate())";
     $resultado = $mysqli->query($sql);
     if ($resultado == true) {
       bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto,'inserto', strtoupper("$sql"));

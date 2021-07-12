@@ -79,13 +79,13 @@ ob_end_flush();
 
               <div class="form-group">
                 <label for="titulo"> Título:</label>
-                <input autofocus class="form-control" type="text" maxlength="90" id="titulo" name="titulo" onkeypress="return check(event)" required>
+                <input autofocus class="form-control" type="text" maxlength="90" id="titulo" name="titulo" style="text-transform: uppercase" onkeypress="return check(event)" required>
                 <!--<input class="tf w-input" id="txtCurp" name="txtCurp" maxlength="256" onkeypress="return check(event)" placeholder="No. de CURP" type="text">-->
               </div>
 
               <div class="form-group">
                 <label for="Contenido">Contenido:</label>
-                <input class="form-control" type="text" maxlength="255" id="Contenido" name="Contenido" required onkeypress="return check(event)" >
+                <input class="form-control" type="text" maxlength="255" id="Contenido" name="Contenido" style="text-transform: uppercase" required onkeypress="return check(event)" >
               </div>
 
               <div class="form-group">
@@ -112,12 +112,12 @@ ob_end_flush();
                 $despues = date('d-m-Y H:i');
                 $f_despues = strtotime ('+100 days' , strtotime($despues));
                 $f_despues = date ('d-m-Y H:i' , $f_despues);*/
-                $fe=date("Y-m-d\TH:i");
+                $fe=date("Y-m-d H:i");
                 //echo "HOra serfver: ".$fe;
                  ?>
                 <!--<input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false" min="<?php $fecha_n?>" max="<?php $f_despues?>">-->
 
-                <input class="form-control" value="<?php $fe=date("Y-m-d\TH:i");?>" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion"  min="<?php echo date("Y-m-d\TH:i",strtotime($fe."+1 hour"));?>" max="<?php echo date("Y-m-d\TH:i",strtotime($fe."+ 5 month"));?>" required >
+                <input class="form-control" value="<?php $fe ;?>" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion"  min="<?php echo date("Y-m-d\TH:i",strtotime($fe."+1 hour"));?>" max="<?php echo date("Y-m-d\TH:i",strtotime($fe."+ 5 month"));?>" required >
               </div>
 
               <p class="text-center" style="margin-top: 20px;">

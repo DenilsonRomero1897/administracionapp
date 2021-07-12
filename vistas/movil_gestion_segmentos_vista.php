@@ -149,8 +149,10 @@ ob_end_flush();
 
     <div class="card card-default">
       <div class="card-header">
-          <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_segmento_vista.php">Nuevo</a>
+      <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>   
+      <a class="btn btn-primary btn-xs float-right" href="../vistas/movil_crear_segmento_vista.php">Nuevo</a>
       </div>
+     
       <!-- /.card-header -->
       <div class="card-body">
         <table id="tabla" class="table table-bordered table-striped">
@@ -287,6 +289,10 @@ ob_end_flush();
     }
       });
     });
+
+    function ventana() {
+      window.open("../Controlador/movil_reporte_gestion_segmentos.php", "REPORTE");
+    }
   </script>
 </body>
 
