@@ -250,7 +250,119 @@ ob_end_flush();
 
                   </div>
 
+                  <div class="form-group">
+                <label>Tipo de Persona: </label>
+                <select class="form-control" name="buscar_tipo_persona" id="buscar_tipo_persona" onchange="realizaProceso()">
+                  <option value="">Seleccione una opción :</option>
+                  <?php
+                  $sql_tipo_persona = "SELECT id_tipo_persona,tipo_persona FROM tbl_tipos_persona";
+                  $resultado_tipo_persona = $mysqli->query($sql_tipo_persona);
+                  while ($tipo_persona = $resultado_tipo_persona->fetch_array(MYSQLI_ASSOC)) { ?>
+                    <option value="<?php echo $tipo_persona['id_tipo_persona'] ?>"><?php echo $tipo_persona['tipo_persona'] ?></option>
+                  <?php } ?>
+                </select>
+              </div>
                 </div>
+
+                 <!-- /.card-header -->
+            <div class="card-body">
+              <table id="tabla" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th hidden>ID</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDOS</th>
+                    <th>SELECCIONAR <input type="checkbox" class="ml-2" name="marcar_todos" id="marcar_todos" onclick="toggle(this)"></th>
+                  </tr>
+                </thead>
+                <tbody id="resultado">
+                  <?php
+                  $sql_segmentos = "SELECT id_persona,nombres,apellidos FROM tbl_personas";
+                  $resultado_segmentos = $mysqli->query($sql_segmentos);
+                  while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
+                    <tr>
+                      <td hidden><?php echo $segmento['id_persona']; ?></td>
+                      <td><?php echo $segmento['nombres']; ?></td>
+                      <td><?php echo $segmento['apellidos']; ?></td>
+                      <td style="text-align: center;">
+                        <input type="checkbox" class="" name="persona" value="<?php echo $segmento['id_persona']; ?>"><br>
+                        </a>
+                      </td>
+
+                    <?php } ?>
+                </tbody>
+              </table>
+            </div>
+            <script>
+    function realizaProceso() {
+      var tipo_persona = document.getElementById('buscar_tipo_persona').value;
+      var parametros = {
+        "tipoPersona": tipo_persona
+      }
+      $.ajax({
+        data: parametros, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_buscar_personas_controlador.php', //archivo que recibe la peticion
+        type: 'post', //método de envio
+        beforeSend: function() {
+          $("#resultado").html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          $("#resultado").html(response);
+        }
+      });
+    }
+
+    function toggle(source) {
+      checkboxes = document.getElementsByName('persona');
+      for (var i = 0, n = checkboxes.length; i < n; i++) {
+        checkboxes[i].checked = source.checked;
+      }
+
+    }
+   
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+              
               </div>
             </div>
           </div>
