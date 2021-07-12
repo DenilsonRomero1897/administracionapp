@@ -143,13 +143,13 @@ ob_end_flush();
               </div>
               <div class="form-group">
                 <label>Tipo de Persona: </label>
-                <select class="form-control" name="buscar_tipo_persona" id="buscar_tipo_persona" value="">
+                <select class="form-control" name="buscar_tipo_persona" id="buscar_tipo_persona" onchange="realizaProceso()">
                   <option value="">Seleccione una opción :</option>
                   <?php
                   $sql_tipo_persona = "SELECT id_tipo_persona,tipo_persona FROM tbl_tipos_persona";
                   $resultado_tipo_persona = $mysqli->query($sql_tipo_persona);
                   while ($tipo_persona = $resultado_tipo_persona->fetch_array(MYSQLI_ASSOC)) { ?>
-                    <option value="<?php echo $tipo_persona['id_tipo_persona'] ?>" onclick="realizarproceso(<?php echo $tipo_persona['id_tipo_persona'] ?>)"><?php echo $tipo_persona['tipo_persona'] ?></option>
+                    <option value="<?php echo $tipo_persona['id_tipo_persona'] ?>"><?php echo $tipo_persona['tipo_persona'] ?></option>
                   <?php } ?>
                 </select>
               </div>
@@ -165,7 +165,7 @@ ob_end_flush();
                     <th>SELECCIONAR</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="resultado">
                   <?php
                   $sql_segmentos = "SELECT id_persona,nombres,apellidos FROM tbl_personas";
                   $resultado_segmentos = $mysqli->query($sql_segmentos);
@@ -193,13 +193,13 @@ ob_end_flush();
 
   </div>
   <script>
-function realizaProceso(valorCaja1){
-        var parametros = {
-                "valorCaja1" : valorCaja1,
-        };
+function realizaProceso(){
+   var tipo_persona = document.getElementById('buscar_tipo_persona').value;
+   console.log(tipo_persona);
+   var parametros = {"tipoPersona": tipo_persona}
         $.ajax({
                 data:  parametros, //datos que se envian a traves de ajax
-                url:   '', //archivo que recibe la peticion
+                url:   '../Controlador/movil_buscar_personas_controlador.php', //archivo que recibe la peticion
                 type:  'post', //método de envio
                 beforeSend: function () {
                         $("#resultado").html("Procesando, espere por favor...");
