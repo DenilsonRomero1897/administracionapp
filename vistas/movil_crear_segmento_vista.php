@@ -162,39 +162,10 @@ ob_end_flush();
                     <th hidden>ID</th>
                     <th>NOMBRE</th>
                     <th>APELLIDOS</th>
-
-                    <th>SELECCIONAR</th>
+                    <th>SELECCIONAR <input type="checkbox" class="ml-2" name="marcar_todos" id="marcar_todos" onclick="toggle(this)"></th>
                   </tr>
                 </thead>
                 <tbody id="resultado">
-
-                    <th>SELECCIONAR</th> 
-                   </tr>
-                   </thead>
-                <tbody>
-               
-                <div class="card-header">
-                <div class="card-tools">
-                <input type="checkbox" class=" " name=" " id="marcartodas">Seleccionar Todos<br>
-                </div>
-                <script src="js/jquery-3.4.1.min.js"></script>
-              
-              
-              
-              
-              <script>
-                
-            $('marcartodas').click(function() {
-            $('input[type="checkbox"]').attr('checked',$('marcartodas').is(':checked'));
-            });
-
-              </script>   
-
-
-
-
-
-
                   <?php
                   $sql_segmentos = "SELECT id_persona,nombres,apellidos FROM tbl_personas";
                   $resultado_segmentos = $mysqli->query($sql_segmentos);
@@ -237,6 +208,15 @@ function realizaProceso(){
                         $("#resultado").html(response);
                 }
         });
+}
+
+function toggle(source) {
+  checkboxes = document.getElementsByName('persona');
+
+  for(var i=0, n=checkboxes.length;i<n;i++) {
+    checkboxes[i].checked = source.checked;
+  }
+
 }
 </script>
 
