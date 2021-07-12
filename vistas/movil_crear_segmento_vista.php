@@ -143,13 +143,13 @@ ob_end_flush();
               </div>
               <div class="form-group">
                 <label>Tipo de Persona: </label>
-                <select class="form-control" name="buscar_tipo_persona" id="buscar_tipo_persona" value="<¿php echo $_POST[buscar_tipo_persona]?> ">
+                <select class="form-control" name="buscar_tipo_persona" id="buscar_tipo_persona" value="">
                   <option value="">Seleccione una opción :</option>
                   <?php
                   $sql_tipo_persona = "SELECT id_tipo_persona,tipo_persona FROM tbl_tipos_persona";
                   $resultado_tipo_persona = $mysqli->query($sql_tipo_persona);
                   while ($tipo_persona = $resultado_tipo_persona->fetch_array(MYSQLI_ASSOC)) { ?>
-                    <option value="<?php echo $tipo_persona['id_tipo_persona'] ?>"><?php echo $tipo_persona['tipo_persona'] ?></option>
+                    <option value="<?php echo $tipo_persona['id_tipo_persona'] ?>" onclick="realizarproceso(<?php echo $tipo_persona['id_tipo_persona'] ?>)"><?php echo $tipo_persona['tipo_persona'] ?></option>
                   <?php } ?>
                 </select>
               </div>
@@ -159,51 +159,57 @@ ob_end_flush();
               <table id="tabla" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>ID</th>
+                    <th hidden>ID</th>
                     <th>NOMBRE</th>
                     <th>APELLIDOS</th>
-                    <th>TIPO PERSONA</th>
                     <th>SELECCIONAR</th>
                   </tr>
                 </thead>
                 <tbody>
                   <?php
-                  $sql_segmentos = "select * from tbl_personas";
+                  $sql_segmentos = "SELECT id_persona,nombres,apellidos FROM tbl_personas";
                   $resultado_segmentos = $mysqli->query($sql_segmentos);
                   while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
                     <tr>
-                      <td><?php echo $segmento['id_persona']; ?></td>
+                      <td hidden><?php echo $segmento['id_persona']; ?></td>
                       <td><?php echo $segmento['nombres']; ?></td>
                       <td><?php echo $segmento['apellidos']; ?></td>
-                      <td><?php echo $segmento['id_tipo_persona']; ?></td>
                       <td style="text-align: center;">
-                        <input type="checkbox" class="" name="" value=""><br>
+                        <input type="checkbox" class="" name="persona" value="<?php echo $segmento['id_persona']; ?>"><br>
                         </a>
                       </td>
 
                     <?php } ?>
-
-                    <p class="text-center" style="margin-top: 20px;">
+                </tbody>
+              </table>
+            </div>
+            <p class="text-center" style="margin-top: 20px;">
                       <button type="submit" class="btn btn-primary" id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
                     </p>
-                    </p>
         </form>
-
-        <!-- /.card-body -->
-        <div class="card-footer">
-
-        </div>
       </div>
-
-      <div class="RespuestaAjax"></div>
-      </form>
-
-  </div>
-  </section>
+    </section>
 
 
   </div>
-
+  <script>
+function realizaProceso(valorCaja1){
+        var parametros = {
+                "valorCaja1" : valorCaja1,
+        };
+        $.ajax({
+                data:  parametros, //datos que se envian a traves de ajax
+                url:   '', //archivo que recibe la peticion
+                type:  'post', //método de envio
+                beforeSend: function () {
+                        $("#resultado").html("Procesando, espere por favor...");
+                },
+                success:  function (response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                        $("#resultado").html(response);
+                }
+        });
+}
+</script>
 </body>
 
 </html>
