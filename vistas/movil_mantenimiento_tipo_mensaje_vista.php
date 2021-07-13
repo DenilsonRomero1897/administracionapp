@@ -168,6 +168,8 @@ ob_end_flush();
             <tr>
               <th>ID</th>
               <th>TIPO MENSAJE</th>
+              <th>EDITAR</th>
+              <th>BORRAR</th>
               
             </tr>
           </thead>

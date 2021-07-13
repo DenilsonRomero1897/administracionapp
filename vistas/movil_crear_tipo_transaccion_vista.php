@@ -136,7 +136,7 @@ ob_end_flush();
       <div class="container-fluid">
         <!-- pantalla 1 -->
 
-        <form action="../Controlador/movil_guardar_tipomensaje_controlador.php" method="POST" >
+        <form action="../Controlador/movil_guardar_tipotransaccion_controlador.php" method="POST" >
 
           <div class="card card-default">
             <div class="card-header">
