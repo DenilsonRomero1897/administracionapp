@@ -9,27 +9,26 @@ require_once ('../clases/funcion_bitacora_movil.php');
 $id_segmento = isset($_GET["id"]) ? ((int)$_GET["id"]) : "";
 
 $Id_objeto=127;
-
-// if () {
-///Logica para el que se repite
-//$sqlexiste = ("select count(nombre) as nombre  from tbl_movil_segmentos where nombre='$nombre'");
+$sqlexiste = ("select count(nombre) as nombre  from tbl_movil_segmentos where id=$id_segmento");
 //Obtener la fila del query
-//$existe = mysqli_fetch_assoc($mysqli->query($sqlexiste));
-//   echo '<script type="text/javascript">
-//                               swal({
-//                                    title:"",
-//                                    text:"Lo sentimos no tiene permiso para eliminar",
-//                                    type: "error",
-//                                    showConfirmButton: false,
-//                                    timer: 3000
-//                                 });
-//                                 $(".FormularioAjax")[0].reset();
-//                                                window.location = "../vistas/movil_gestion_segmentos_vista.php";
+$existe = mysqli_fetch_assoc($mysqli->query($sqlexiste));
+//validar eliminacion
+if ($existe['nombre'] == 1) {
+  echo '<script type="text/javascript">
+                              swal({
+                                   title:"",
+                                   text:"Lo sentimos no tiene permiso para eliminar",
+                                   type: "error",
+                                   showConfirmButton: false,
+                                   timer: 3000
+                                });
+                                $(".FormularioAjax")[0].reset();
+                                               window.location = "../vistas/movil_gestion_segmentos_vista.php";
 
-//                             </script>';
-// }
-// else
-// {
+                            </script>';
+}
+else
+{
 
 
 
@@ -64,4 +63,4 @@ $Id_objeto=127;
                                      $(".FormularioAjax")[0].reset();
                                 </script>';
                         }
-//}
+}
