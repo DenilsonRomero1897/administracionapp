@@ -41,14 +41,15 @@ if ($opcion == 'eliminar') {
           }
 }elseif ($opcion == 'editar') {
   $id_tipotransaccion = isset($_GET["id"]) ? ($_GET["id"]) : "";
-  $descripcion = isset($_POST["descripcion"]) ? ($_POST["descripcion"]) : "";
-  $sql="UPDATE tbl_movil_tipo_transacciones set descripcion= '$descripcion' WHERE id = $id_tipotransaccion";
+  $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
+  $external_id =isset($_POST["external_id"]) ? ($_POST["external_id"]) : "";
+  $sql="UPDATE tbl_movil_tipo_transacciones set descripcion= '$descripcion', external_id ='$external_id' WHERE id = $id_tipotransaccion";
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', 'EL TIPO TRANSACCION' . $descripcion . '');
   $mysqli->query($sql);
   header('location: ../vistas/movil_mantenimiento_tipo_transaccion_vista.php?msj=2');
 }else{
-  $descripcion = isset($_POST["descripcion"]) ? ($_POST["descripcion"]) : "";
-  
+  $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
+  $external_id =isset($_POST["external_id"]) ? ($_POST["external_id"]) : "";
   
 
 
@@ -70,7 +71,7 @@ if ($_POST['descripcion']  ) {
   } else {
 
     /* Query para que haga el insert*/
-    $sql = "INSERT into tbl_movil_tipo_transacciones (id,descripcion) VALUES (null,'$tipo_mensaje')";
+    $sql = "INSERT into tbl_movil_tipo_transacciones (id,descripcion,external_id) VALUES (null,'$descripcion','$external_id')";
     $resultado = $mysqli->query($sql);
 
 

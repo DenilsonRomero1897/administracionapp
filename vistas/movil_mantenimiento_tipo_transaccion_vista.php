@@ -70,7 +70,7 @@ if (isset($_REQUEST['msj'])) {
     echo '<script type="text/javascript">
                     swal({
                        title:"",
-                       text:"Lo sentimos el Tipo Notificacion ya existe",
+                       text:"Lo sentimos el Tipo Transaccion ya existe",
                        type: "info",
                        showConfirmButton: false,
                        timer: 3000
@@ -198,7 +198,7 @@ ob_end_flush();
 
                 <td style="text-align: center;">
 
-                  <a href="../vistas/movil_mantenimiento_tipo_transacciones_vista.php?&id=<?php echo $transaccion['id']; ?>" class="btn btn-primary btn-raised btn-xs">
+                  <a href="../vistas/movil_mantenimiento_tipo_transaccion_vista.php?&id=<?php echo $transaccion['id']; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-edit"></i>
                   </a>
                 </td>
@@ -267,8 +267,8 @@ ob_end_flush();
         
                   <div class="form-group">
                     <label>External ID</label>
-
-                    <input class="form-control" type="text" id="external_id" name="external_id" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtexternal_id']; ?>">
+                    <input class="form-control" type="text" id="external_id" name="external_id" style="text-transform: uppercase" onkeypress=" " onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtexternal_id']; ?>">    
+                    
 
                   </div>
 

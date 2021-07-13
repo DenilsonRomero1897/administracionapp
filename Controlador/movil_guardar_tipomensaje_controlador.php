@@ -41,13 +41,13 @@ if ($opcion == 'eliminar') {
           }
 }elseif ($opcion == 'editar') {
   $id_tipomensaje = isset($_GET["id"]) ? ($_GET["id"]) : "";
-  $tipo_mensaje = isset($_POST["tipo_mensaje"]) ? ($_POST["tipo_mensaje"]) : "";
+  $tipo_mensaje = isset($_POST["tipo_mensaje"]) ? strtoupper($_POST["tipo_mensaje"]) : "";
   $sql="UPDATE tbl_movil_tipo_mensajes set tipo_mensaje= '$tipo_mensaje' WHERE id = $id_tipomensaje";
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', 'EL TIPO MENSAJE' . $tipo_mensaje . '');
   $mysqli->query($sql);
   header('location: ../vistas/movil_mantenimiento_tipo_mensaje_vista.php?msj=2');
 }else{
-  $tipo_mensaje = isset($_POST["tipo_mensaje"]) ? ($_POST["tipo_mensaje"]) : "";
+  $tipo_mensaje = isset($_POST["tipo_mensaje"]) ? strtoupper($_POST["tipo_mensaje"]) : "";
   
   
 
