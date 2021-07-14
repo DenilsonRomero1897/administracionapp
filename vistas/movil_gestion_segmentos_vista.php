@@ -155,7 +155,7 @@ ob_end_flush();
      
       <!-- /.card-header -->
       <div class="card-body">
-        <table id="tabla" class="table table-bordered table-striped">
+        <table id="tablaSegmento" class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>ID</th>
@@ -266,7 +266,7 @@ ob_end_flush();
 
                  <!-- /.card-header -->
             <div class="card-body">
-              <table id="tabla" class="table table-bordered table-striped">
+              <table id="tablaSegmento" class="table table-bordered table-striped">
                 <thead>
                   <tr>
                     <th hidden>ID</th>
@@ -313,14 +313,14 @@ ob_end_flush();
     }
 
     function toggle(source) {
-      checkboxes = document.getElementsByName('persona');
+      checkboxes = document.getElementsByName('persona[]');
       for (var i = 0, n = checkboxes.length; i < n; i++) {
         checkboxes[i].checked = source.checked;
       }
 
     }
     $(function() {
-      $('#tabla').DataTable({
+      $('#tablaSegemnto').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
