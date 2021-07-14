@@ -320,7 +320,7 @@ ob_end_flush();
 
     }
     $(function() {
-      $('#tablaSegemnto').DataTable({
+      $('#tablaSegmento').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
