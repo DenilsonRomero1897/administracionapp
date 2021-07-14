@@ -9,7 +9,7 @@
 			   	$sql = "INSERT INTO  tbl_movil_bitacoras (usuario_id, objeto_id, accion , descripcion , fecha)
     			 VALUES ('$usuario_id', '$objeto_id' , '$accion', '$descripcion2' , sysdate())";
 		
-			$resultado = $mysqli->query($sql);
+			$mysqli->query($sql);
 		}
 		
 }
