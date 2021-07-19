@@ -15,7 +15,7 @@ require_once('../clases/funcion_permisos.php');
 
 $Id_objeto = 128;
 
-bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto, 'Ingreso', 'A Crear una Nueva Transaccion');
+bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'Ingreso', 'A Crear una Nueva Transaccion');
 
 $visualizacion = permiso_ver($Id_objeto);
 if (isset($_REQUEST['msj'])) {
@@ -136,7 +136,7 @@ ob_end_flush();
       <div class="container-fluid">
         <!-- pantalla 1 -->
 
-        <form action="../Controlador/movil_guardar_transacciones_controlador.php" method="POST" >
+        <form action="../Controlador/movil_guardar_transacciones_controlador.php" method="POST">
 
           <div class="card card-default">
             <div class="card-header">
@@ -146,16 +146,6 @@ ob_end_flush();
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
               </div>
             </div>
-
-
-            <tbody>
-              <tr>
-
-
-              </tr>
-            </tbody>
-
-
             <!-- /.card-header -->
             <div class="card-body">
               <div class="row">
@@ -185,7 +175,7 @@ ob_end_flush();
                       <?php
                       $sql_transacciones = "SELECT id,descripcion FROM tbl_movil_tipo_transacciones";
                       $resultado_transacciones = $mysqli->query($sql_transacciones);
-                      while ($transacciones= $resultado_transacciones->fetch_array(MYSQLI_ASSOC)) { ?>
+                      while ($transacciones = $resultado_transacciones->fetch_array(MYSQLI_ASSOC)) { ?>
                         <?php if ($transacciones['id'] == $_SESSION['txtTipotransaccion']) { ?>
                           <option selected value="<?php echo $transacciones['id'] ?>"><?php echo $transacciones['descripcion'] ?></option>
                         <?php } else { ?>
@@ -194,17 +184,11 @@ ob_end_flush();
                       }
                       ?>
                     </select>
-                    </div>
-
-
-
-
+                  </div>
 
                 </div>
 
               </div>
-
-              
 
               <br>
 
@@ -222,19 +206,13 @@ ob_end_flush();
         </div>
       </div>
 
-
-
       <div class="RespuestaAjax"></div>
       </form>
 
   </div>
   </section>
 
-
   </div>
-
-
-  
 
 </body>
 

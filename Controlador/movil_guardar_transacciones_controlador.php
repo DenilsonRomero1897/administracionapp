@@ -6,7 +6,7 @@ require_once('../clases/funcion_bitacora_movil.php');
 
 
 $Id_objeto = 128;
-$opcion = $_GET['op'];
+$opcion = isset($_GET["op"]) ? ($_GET["op"]) : "";
 
 
 if ($opcion == 'eliminar') {
@@ -40,6 +40,7 @@ if ($opcion == 'eliminar') {
                   </script>';
           }
 }elseif ($opcion == 'editar') {
+  //funcionalidad para ejecutar el update
   $id_transacciones = isset($_GET["id"]) ? ($_GET["id"]) : "";
   $fecha_envio = isset($_POST["fecha_envio"]) ? strtoupper($_POST["fecha_envio"]) : "";
   $request_envio = isset($_POST["request_envio"]) ? strtoupper($_POST["request_envio"]) : "";
@@ -53,44 +54,27 @@ if ($opcion == 'eliminar') {
   $mysqli->query($sql);
   header('location: ../vistas/movil_gestion_transacciones_vista.php?msj=2');
 }else{
-  $fecha_envio = isset($_POST["fecha_envio"]) ? strtoupper($_POST["fecha_envio"]) : "";
+  //se almacenan los valores para realizar el insert
   $request_envio = isset($_POST["request_envio"]) ? strtoupper($_POST["request_envio"]) : "";
   $response = isset($_POST["response"]) ? strtoupper($_POST["response"]) : "";
   $estado = isset($_POST["estado"]) ? strtoupper($_POST["estado"]) : "";
-  $tipo_transaccion_id= isset($_POST["tipo_transaccion_id "]) ? strtoupper($_POST["tipo_transaccion_id "]) : "";
+  $tipo_transaccion_id = isset($_POST["tipo_transaccion_id"]) ? (int)$_POST["tipo_transaccion_id"] : "";
   
-
-
-///Logica para el que se repite
-$sqlexiste = ("select count(id) as id from tbl_movil_transacciones where id='$id_transacciones'");
-//Obtener la fila del query
-$existe = mysqli_fetch_assoc($mysqli->query($sqlexiste));
-
-
-
 /* Logica para que no acepte campos vacios */
-if ($_POST['fecha_envio']  <> ' ' and  $_POST['request_envio'] <>  ' ' and  $_POST['response'] <>' 'and  $_POST['estado'] <> '' and  $_POST['tipo_transaccion_id'] <> '' ) {
-
-  /* Condicion para que no se repita el rol*/
-  if ($existe['id'] == 1) {
-    //redireccion ya que el nombre segmento existe
- 	header('location: ../vistas/movil_gestion_transacciones_vista.php?msj=1'); 
-    
-  } else {
-
+if ($_POST['request_envio'] <>  ' ' and  $_POST['response'] <>' 'and  $_POST['estado'] <> '' and  $_POST['tipo_transaccion_id'] <> '' ) {
     /* Query para que haga el insert*/
-    $sql = "INSERT into tbl_movil_transacciones (id,fecha_envio,request_envio,response,estado,tipo_transaccion_id) VALUES (null,'$fecha_envio','$request_envio', '$response', '$estado','$tipo_transaccion_id')";
+    $sql = "INSERT into tbl_movil_transacciones VALUES (null,sysdate(),'$request_envio', '$response', '$estado','$tipo_transaccion_id')";
+    
     $resultado = $mysqli->query($sql);
-
-
+ 
     if ($resultado) {
       bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'inserto',strtoupper("$sql"));
 
-      header('location: ../vistas/movil_gestion_transacciones.php?msj=2');
+      header('location: ../vistas/movil_gestion_transacciones_vista.php?msj=2');
     } else {
       echo "Error: " . $sql;
     }
-  }
+  
 } else {
   header('location: ../vistas/movil_gestion_transacciones_vista.php?msj=3');
 }
