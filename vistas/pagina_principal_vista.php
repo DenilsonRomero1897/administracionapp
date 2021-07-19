@@ -21,7 +21,7 @@ require_once ('../clases/Conexion.php');
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-          <center></center>  
+          <center>  </center>  
           </div>
 
 		<div class="full-box text-center">

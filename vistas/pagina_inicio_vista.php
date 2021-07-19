@@ -460,22 +460,8 @@ if (session_status() === PHP_SESSION_NONE) {
                     <p> Chat </p>
                   </a>
                 </li>
-                <li class="nav-item" style="display:block">
-                  <a href="../vistas/movil_menu_segmentos_vista.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p> Segmentos </p>
-                  </a>
-                </li>
-                <li class="nav-item" style="display:block">
-                  <a href="../vistas/movil_bitacora_vista.php" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p> Bitácora </p>
-                  </a>
-                </li>
-
-              </ul>
-
-            </li>
+                
+               
             <!-- Mantenimiento -->
             <li class="nav-item has-treeview" style="display:block">
               <a href="../vistas/movil_menu_mantenimiento_vista.php" class="nav-link">
@@ -486,6 +472,25 @@ if (session_status() === PHP_SESSION_NONE) {
                   <span class="badge badge-info right"></span>
                 </p>
               </a>
+
+              <!-- Gestion -->
+            <li class="nav-item has-treeview" style="display:block">
+              <a href="../vistas/movil_menu_gestion_vista.php" class="nav-link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>
+                  Gestión  App 
+                  <i class="fas fa-angle-left right"></i>
+                  <span class="badge badge-info right"></span>
+                </p>
+              </a>
+
+
+
+
+
+
+
+
 
           </ul>
         </nav>
