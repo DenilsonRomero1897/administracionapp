@@ -20,13 +20,13 @@ if ($visualizacion == 0) {
   window.location = "../vistas/pagina_principal_vista.php";
    </script>';
 } else {
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A GESTION DE NOTIFICACIONES ');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A GESTION DE NOTICIAS ');
 }
 
 if (isset($_GET['id'])) {
   $id = $_GET['id'];
 
-  $sql = "SELECT * FROM tbl_movil_notificaciones WHERE id = '$id'";
+  $sql = "SELECT * FROM tbl_movil_noticias WHERE id = '$id'";
   $resultado = $mysqli->query($sql);
   //     /* Manda a llamar la fila */
   $row = $resultado->fetch_array(MYSQLI_ASSOC);
@@ -35,8 +35,9 @@ if (isset($_GET['id'])) {
   $_SESSION['txtTitulo'] = $row['titulo'];
   $_SESSION['txtDescripcion'] = $row['descripcion'];
   $_SESSION['txtFecha'] = $row['fecha'];
+  $_SESSION['txtFecha_vencimiento'] = $row['fecha_vencimiento'];
   $_SESSION['txtSegmento_id'] = $row['segmento_id'];
-  $_SESSION['txtTipoNotificacionId'] = $row['tipo_notificacion_id'];
+
 
   if (isset($_SESSION['txtTitulo'])) {
 
@@ -44,7 +45,7 @@ if (isset($_GET['id'])) {
 
     <script>
       $(function() {
-        $('#modal_modificar_notificacion').modal('toggle')
+        $('#modal_modificar_noticia').modal('toggle')
       })
     </script>;
 
@@ -102,11 +103,7 @@ if (isset($_REQUEST['msj'])) {
   }
 }
 
-
 ?>
-
-
-
 <!DOCTYPE html>
 <html>
 
@@ -114,23 +111,20 @@ if (isset($_REQUEST['msj'])) {
   <title></title>
 </head>
 
-
 <body>
-
-
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestión de Notificaciones</h1>
+            <h1>Gestión Noticias</h1>
           </div>
 
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item active"><a href="../vistas/movil_crear_notificacion_vista.php">Nueva Notificacion</a></li>
+              <li class="breadcrumb-item"><a href="../vistas/movil_menu_noticias_vista.php">Menú de Noticias</a></li>
             </ol>
           </div>
 
@@ -140,19 +134,15 @@ if (isset($_REQUEST['msj'])) {
       </div><!-- /.container-fluid -->
     </section>
 
-
     <!--Pantalla 2-->
-
-
-
     <div class="card card-default">
       <div class="card-header">
-        <div class="card-tools">
-          <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_notificacion_vista.php">Nuevo</a>
+      <div class="card-tools">
+          <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_noticia_vista.php">Nuevo</a>
           <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
         </div>
         <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
-      </div>
+      <div >
       <div class="card-body">
         <table id="tabla" class="table table-bordered table-striped">
           <thead>
@@ -160,41 +150,34 @@ if (isset($_REQUEST['msj'])) {
               <th>ID</th>
               <th>TITULO</th>
               <th>CONTENIDO</th>
-              <th>FECHA Y HORA</th>
+              <th>FECHA Y HORA DE PUBLICACIÓN</th>
+              <th>FECHA Y HORA DE VENCIMIENTO</th>
               <th>SEGMENTO</th>
-              <th>TIPO NOTIFICACIÓN</th>
-              <th>IMAGEN</th>
               <th>EDITAR</th>
-              <th>ELIMINAR</th>
+              <th>BORRAR</th>
             </tr>
           </thead>
           <tbody>
-            <?php
-            $sql = "SELECT * FROM tbl_movil_notificaciones";
-            $resultado_notificaciones = $mysqli->query($sql);
-            while ($fila = $resultado_notificaciones->fetch_array(MYSQLI_ASSOC)) { ?>
+          <?php
+            $sql = "SELECT * FROM tbl_movil_noticias";
+            $resultado_noticias = $mysqli->query($sql);
+            while ($fila = $resultado_noticias->fetch_array(MYSQLI_ASSOC)) { ?>
               <tr>
                 <td><?php echo $fila['id']; ?></td>
                 <td><?php echo $fila['titulo']; ?></td>
                 <td><?php echo $fila['descripcion']; ?></td>
                 <td><?php echo $fila['fecha']; ?></td>
+                <td><?php echo $fila['fecha_vencimiento']; ?></td>
                 <td><?php echo $fila['segmento_id']; ?></td>
-                <td><?php echo $fila['tipo_notificacion_id']; ?></td>
-                
-                <td><?php if($fila['image_enable']=='1'){
-                  echo 'SI';
-                }else{
-                  echo 'NO';
-                } ?></td>
 
                 <td style="text-align: center;">
-                  <a href="../vistas/movil_gestion_notificaciones_vista.php?&id=<?php echo $fila['id']; ?>" class="btn btn-primary btn-raised btn-xs">
+                  <a href="../vistas/movil_gestion_noticia_vista.php?&id=<?php echo $fila['id']; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-edit"></i>
                   </a>
                 </td>
 
                 <td style="text-align: center;">
-                  <form action="../Controlador/movil_notificacion_controlador.php?op=delete&id=<?php echo $fila['id'] ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
+                  <form action="../Controlador/movil_noticia_controlador.php?op=delete&id=<?php echo $fila['id'] ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
@@ -207,19 +190,17 @@ if (isset($_REQUEST['msj'])) {
       </div><!-- /.card-body -->
     </div>
   </div>
-  <form action="../Controlador/movil_notificacion_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
-
-    <div class="modal fade" id="modal_modificar_notificacion">
+  <form action="../Controlador/movil_noticia_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
+    
+  <div class="modal fade" id="modal_modificar_noticia">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Modificar Notificacion</h4>
+            <h4 class="modal-title">Modificar Noticia</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
-
           <!--Cuerpo del modal-->
           <div class="modal-body">
             <div class="card-body">
@@ -255,29 +236,14 @@ if (isset($_REQUEST['msj'])) {
                   </div>
 
                   <div class="form-group">
-                    <label>Tipo Notificacion: </label>
-                    <select class="form-control" name="tipo_notificacion" id="tipo_notificacion">
-                      <option value="">Seleccione una opción :</option>
-                      <?php
-                      $sql_tn = "SELECT id,descripcion FROM tbl_movil_tipo_notificaciones";
-                      $resultado_tn = $mysqli->query($sql_tn);
-                      while ($fila = $resultado_tn->fetch_array(MYSQLI_ASSOC)) { ?>
-                        <?php if ($fila['id'] == $_SESSION['txtTipoNotificacionId']) { ?>
-                          <option selected value="<?php echo $fila['id'] ?>"><?php echo $fila['descripcion'] ?></option>
-                        <?php } else { ?>
-                          <option value="<?php echo $fila['id'] ?>"><?php echo $fila['descripcion'] ?></option>
-                      <?php }
-                      }
-                      ?>
-                    </select>
-                  </div>
-
-                  <div class="form-group">
                     <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                     <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
                     <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false">
-
-                  </div>
+                   </div>
+                   <div class="form-group">
+                    <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
+                    <label for="txt_fecha_vencimiento">Fecha y Hora de Vencimiento:</label>
+                    <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" required onkeydown="return false">
                 </div>
               </div>
             </div>
@@ -317,7 +283,7 @@ if (isset($_REQUEST['msj'])) {
     });
     
     function ventana() {
-      window.open("../Controlador/reporte_gestion_notificaciones.php", "REPORTE");
+      window.open("../Controlador/movil_reporte_gestion_noticia.php", "REPORTE");
     }
   </script>
 

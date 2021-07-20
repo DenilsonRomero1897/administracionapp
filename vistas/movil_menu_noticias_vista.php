@@ -70,7 +70,7 @@ if (permiso_ver('125') == '1') {
                 <div class="icon">
                   <i class="fas fa-newspaper"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="../vistas/movil_crear_noticia_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
@@ -92,7 +92,7 @@ if (permiso_ver('125') == '1') {
                 <div class="icon">
                   <i class="fas fa-newspaper"></i>
                 </div>
-                <a href="#" class="small-box-footer">
+                <a href="../vistas/movil_gestion_noticia_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
