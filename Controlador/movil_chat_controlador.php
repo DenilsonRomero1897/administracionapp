@@ -48,7 +48,7 @@ function mensajes($id_chat)
     <div class="flex items-center border-b border-gray-300 pl-3 py-3">
         <img class="h-10 w-10 rounded-full object-cover" src="https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="username" />
         <span class="w-80 block mr-10 ml-2 font-bold text-base text-white">' . $id_chat . '</span>
-        <button onclick="cerrar()" class="ml-10 btn btn-danger btn-xs">Cerrar</button>
+        <button onclick="cerrar()" hidden class="ml-10 btn btn-danger btn-xs">Cerrar</button>
     </div>
     <div id="chat" class="w-full overflow-y-auto p-1 relative" style="height: 585px;" ref="toolbarChat">
         <ul>
@@ -63,8 +63,8 @@ function mensajes($id_chat)
             <svg class="text-gray-400 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
             </svg>
-            <input name="subir_archivos" id="subir_archivo" style="display:none;" type="file"/>
         </button>
+        <input name="subir_archivos" id="subir_archivo" style="display:none;" type="file"/>
 
         <input aria-placeholder="Escribe un mensaje aquí" placeholder="Escribe un mensaje aquí" class="py-2 mx-3 pl-5 block w-full rounded-full bg-gray-100 outline-none focus:text-gray-700" type="text" name="message" />
 
@@ -149,7 +149,6 @@ function NuevoChat()
     while ($row <= 20) {
         $id = $row;
         $nombre_usuario = 'nombre_usuario';
-        $mensaje = 'descripcion';
         $row += 1;
         //se muertran los chats en pantalla
         echo "
