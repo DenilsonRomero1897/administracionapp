@@ -64,8 +64,8 @@ ob_end_flush();
       <div class="container-fluid">
         <!-- pantalla 1 -->
 
-        <form action="../Controlador/movil_noticia_controlador.php"method="POST" >
-
+        <form action="../Controlador/movil_noticia_controlador.php?op=insert" method="POST" >
+     
           <div class="card card-default">
             <div class="card-header">
               <h3 class="card-title"></h3>
@@ -80,14 +80,15 @@ ob_end_flush();
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="descripcion"> Título </label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="descripcion" name="descripcion" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <label for="titulo"> Título </label>
+                    <input autofocus class="form-control" type="text" maxlength="60" id="titulo" name="titulo" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
                 <label for="Contenido">Contenido:</label>
-                <input class="form-control" type="text" maxlength="60" id="Contenido" name="Contenido" required >
+                <br>
+                <textarea name="Contenido" id="Contenido" cols="150" rows="5" maxlength="1000" requires></textarea>
               </div>
-
+              
               <div class="form-group">
                 <label>Segmentos: </label>
                 <select class="form-control" name="Segmentos" id="Segmentos">

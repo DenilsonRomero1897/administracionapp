@@ -238,12 +238,12 @@ if (isset($_REQUEST['msj'])) {
                   <div class="form-group">
                     <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                     <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
-                    <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false">
+                    <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" value="<? php echo date("Y-m-d\TH-i");?> "required onkeydown="return false">
                    </div>
                    <div class="form-group">
                     <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                     <label for="txt_fecha_vencimiento">Fecha y Hora de Vencimiento:</label>
-                    <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" required onkeydown="return false">
+                    <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" value="<? php echo date("Y-m-d\TH-i");?> "required onkeydown="return false">
                 </div>
               </div>
             </div>

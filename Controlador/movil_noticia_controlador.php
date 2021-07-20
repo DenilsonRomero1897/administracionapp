@@ -13,8 +13,8 @@ switch ($_GET['op']) {
         $contenido = isset($_POST['Contenido']) ? strtoupper($_POST['Contenido']) : '';
         $segmento = isset($_POST['Segmentos']) ? $_POST['Segmentos'] : '';
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
-        $fecha_vencimiento= date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_vencimiento ']))
-        $sql = "INSERT into tbl_movil_noticias (titulo,descripcion,fecha,fecha_vencimiento,remitente,segmento_id) VALUES ('$titulo','$contenido','$fecha_publicacion','$fecha_vencimiento','ADMIN',$segmento,0)";
+        $fecha_vencimiento= date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_vencimiento']));
+        $sql = "INSERT into tbl_movil_noticias (titulo,descripcion,fecha,fecha_vencimiento,remitente,segmento_id) VALUES ('$titulo','$contenido','$fecha_publicacion','$fecha_vencimiento','ADMIN',$segmento)";
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
@@ -31,7 +31,7 @@ switch ($_GET['op']) {
                 echo '<script type="text/javascript">
                 swal({
                      title:"",
-                     text:"Los datos  se eliminaron correctamente",
+                     text:"Los datos se eliminaron correctamente",
                      type: "success",
                      showConfirmButton: false,
                      timer: 3000
@@ -49,7 +49,7 @@ switch ($_GET['op']) {
         $segmento = $_POST['Segmentos'];
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
         $fecha_vencimiento = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_vencimiento']));
-        $sql = "UPDATE tbl_movil_noticias SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion',fecha_vencimiento = '$fecha_vencimiento', remitente = 'ADMIN', segmento_id = $segmento = 0 where id = $id";
+        $sql = "UPDATE tbl_movil_noticias SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion',fecha_vencimiento = '$fecha_vencimiento', remitente = 'ADMIN', segmento_id = $segmento where id = $id";
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));

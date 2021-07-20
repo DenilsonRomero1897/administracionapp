@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once('../clases/conexion_mantenimientos.php');
-require_once "../Modelos/reporte_docentes_modelo.php";
 require_once('../Reporte/pdf/fpdf.php');
 $instancia_conexion = new conexion();
 
@@ -66,7 +65,7 @@ class myPDF extends FPDF
             descripcion,
             fecha,
             remitente,
-            segmento_id,
+            segmento_id
            
         FROM
             tbl_movil_noticias";
