@@ -272,12 +272,12 @@ if (permiso_ver('89') == '1') {
             </div>
             <!-- fix for small devices only -->
             <div class="clearfix hidden-md-up"></div>
-            <!-- /.info-box -->
+
             <div class="col-6 col-sm-6 col-md-4">
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h4>Gestión Parámetro</h4>
-                  <p><?php echo $_SESSION[' ']; ?></p>
+                  <h4>Gestión de Parametros</h4>
+                  <p><?php echo $_SESSION['mantenimiento_grados_academicos_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-edit"></i>
@@ -287,7 +287,7 @@ if (permiso_ver('89') == '1') {
                   Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
-
+              <!-- /.info-box -->
             </div>
             <!-- /.row -->
           </div>
@@ -409,66 +409,6 @@ if (permiso_ver('89') == '1') {
           <!--/. container-fluid -->
         </div>
       </section>
-
-      <section class="content">
-        <div class="container-fluid">
-          <!-- Info boxes -->
-          <div class="row" style="  display: flex;
-    align-items: center;
-    justify-content: center;">
-
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-light">
-                <div class="inner">
-                  <h4>Bitácora</h4>
-                  <p><?php echo $_SESSION['mantenimiento_crear_jornada_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-plus-square"></i>
-                </div>
-
-                <a href="../vistas/movil_bitacora_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- fix for small devices only -->
-            <div class="clearfix hidden-md-up"></div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-              <div class="small-box bg-primary">
-                <div class="inner">
-                  <h4>  </h4>
-                  <p><?php echo $_SESSION['mantenimiento_jornada_docente_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-edit"></i>
-                </div>
-
-                <a href="                          " class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-
-            </div>
-
-            <!-- /.row -->
-          </div>
-          <!--/. container-fluid -->
-        </div>
-      </section>
-     
-
-     
-
-     
-
-
-              
-
-
-
   </div>
 
   </div>

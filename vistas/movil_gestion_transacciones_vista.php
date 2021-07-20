@@ -136,7 +136,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/movil_menu_gestion_vista.php">Mantenimiento APP</a></li>
+              <li class="breadcrumb-item"><a href="../vistas/movil_menu_gestion_vista.php">Gestión APP</a></li>
             </ol>
           </div>
           <div class="RespuestaAjax"></div>
@@ -151,7 +151,7 @@ ob_end_flush();
           <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
         </div>
         <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
-      </div>
+     
         <div class="card-body">
             <table id="tabla" class="table table-bordered table-striped">
               <thead>
@@ -280,7 +280,7 @@ ob_end_flush();
       });
     });
     function ventana() {
-      window.open("../Controlador/movil_reporte_tipo_notificacion_controlador.php", "REPORTE");
+      window.open("../Controlador/movil_reporte_transacciones_controlador.php", "REPORTE");
     }
   </script>
 </body>

@@ -106,10 +106,6 @@ ob_end_flush();
 
 
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html>
 
@@ -127,7 +123,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestión de Parámetros</h1>
+            <h1>Gestión de Parametros</h1>
           </div>
 
           <div class="col-sm-6">
@@ -152,10 +148,15 @@ ob_end_flush();
       <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>   
       <a class="btn btn-primary btn-xs float-right" href="../vistas/movil_crear_parametros_vista.php">Nuevo</a>
       </div>
+
+
+
+        
      
+
       <!-- /.card-header -->
       <div class="card-body">
-        <table id="tablaSegmento" class="table table-bordered table-striped">
+        <table id="tablaparamestros" class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>ID</th>
@@ -191,12 +192,12 @@ ob_end_flush();
                 </td>
 
                 <td style="text-align: center;">
-                  <form action="../Controlador/movil_eliminar_parametro_controlador.php?id=<?php echo $parametro['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off" >
+                  <form action="../Controlador/movil_guardar_parametro_controlador.php?id=<?php echo $parametro['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off" >
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
                   </form>
-                  <div class="RespuestaAjax"></div>
+                  
                 </td>
 
               </tr>
@@ -206,18 +207,8 @@ ob_end_flush();
           </tbody>
         </table>
       </div>
-      <!-- /.card-body -->
+     
     </div>
-
-  </div>
-
-  </div>
-
-
-
-
-
-  </section>
 
   </div>
 
@@ -260,11 +251,10 @@ ob_end_flush();
                     <input class="form-control" type="text" id="valor" name="valor" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtvalor']; ?>">
 
                   </div>
-
                   </div>
               </div>
             </div>
-          </div>
+          
 
           <!--Footer del modal-->
           <div class="modal-footer justify-content-between">
@@ -272,12 +262,10 @@ ob_end_flush();
             <button type="submit" class="btn btn-primary" id="btn_modificar_parametro" name="btn_modificar_parametro">Guardar Cambios</button>
           </div>
         </div>
-        <!-- /.modal-content -->
+       
       </div>
-      <!-- /.modal-dialog -->
-    </div>
-
-    <!-- /.  finaldel modal -->
+      
+   </div>
            
   </form>
 
@@ -299,7 +287,7 @@ ob_end_flush();
       });
     });
     function ventana() {
-      window.open("../Controlador/movil_reporte_tipo_recurso_controlador.php", "REPORTE");
+      window.open("../Controlador/movil_reporte_gestion_parametros.php", "REPORTE");
     }
   </script>
 </body>

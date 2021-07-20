@@ -178,12 +178,15 @@ ob_end_flush();
 
                 <div class="form-group">
                     <label for="ubicacion url">Valor del Parámetro</label>
-                    <input class="form-control" type="text" id="valor" name="valor" required style="text-transform: uppercase" onkeyup="Espacio(this, event)" onkeypress="return Letras(event)" onkeypress="return comprobar(this.value, event, this.id)" maxlength="30">
+                    <input class="form-control" type="text" id="valor" name="valor" required style="text-transform: uppercase"  maxlength="30">
                   </div>
 
                 </div>
 
-
+                <div class="form-group">
+                    <label for="ubicacion url">Fecha Modificación</label>
+                    <input class="form-control" type="datetime-local" id="fecha_modificacion" name="fecha_modificacion" required style="text-transform: uppercase" onkeyup="Espacio(this, event)" onkeypress="return Letras(event)" onkeypress="return comprobar(this.value, event, this.id)" maxlength="30">
+                  </div>
 
 
 
