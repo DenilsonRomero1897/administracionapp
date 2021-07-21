@@ -34,8 +34,8 @@ if (isset($_GET['id'])) {
   $id = $row['id'];
   $_SESSION['txtTitulo'] = $row['titulo'];
   $_SESSION['txtDescripcion'] = $row['descripcion'];
-  $_SESSION['txtFecha'] = $row['fecha'];
-  $_SESSION['txtFecha_vencimiento'] = $row['fecha_vencimiento'];
+  $_SESSION['txtFecha'] = strtotime($row['fecha']);
+  $_SESSION['txtFecha_vencimiento'] = strtotime($row['fecha_vencimiento']);
   $_SESSION['txtSegmento_id'] = $row['segmento_id'];
 
 
@@ -238,12 +238,14 @@ if (isset($_REQUEST['msj'])) {
                   <div class="form-group">
                     <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                     <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
-                    <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" value="<? php echo date("Y-m-d\TH-i");?> "required onkeydown="return false">
+                    <?php echo date("d-m-Y\ H:i",$_SESSION['txtFecha'])?>
+                    <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" value="<?php echo date("Y-m-d H:i",$_SESSION['txtFecha']) ?>" onkeydown="return false">
                    </div>
                    <div class="form-group">
                     <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                     <label for="txt_fecha_vencimiento">Fecha y Hora de Vencimiento:</label>
-                    <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" value="<? php echo date("Y-m-d\TH-i");?> "required onkeydown="return false">
+                    <?php echo date("Y-m-d\ H:i",$_SESSION['txtFecha_vencimiento'])?>
+                    <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" value="<?php echo date("d-m-Y\ H:i",$_SESSION['txtFecha_vencimiento']) ?> " onkeydown="return false">
                 </div>
               </div>
             </div>
