@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-06-2021 a las 00:30:56
+-- Tiempo de generación: 21-07-2021 a las 09:47:21
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.5
 
@@ -1274,6 +1274,8 @@ INSERT INTO tbl_periodo(num_periodo, num_anno, fecha_inicio, fecha_final, Fecha_
 VALUES (num_periodo_, num_anno_, fecha_inicio_, fecha_final_, SYSDATE(),usuario_, id_tipo_periodo_, fecha_adic_canc_, fecha_desbloqueo_);
 
 END$$
+
+CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_insert_segmento_usuario` (IN `id` BIGINT, IN `segmento` INT)  INSERT INTO tbl_movil_segmento_usuario SELECT u.Id_usuario,s.id FROM tbl_usuarios u INNER JOIN tbl_movil_segmentos s ON u.Id_usuario=id and s.id=segmento$$
 
 CREATE DEFINER=`root`@`localhost` PROCEDURE `proc_ins_personas` (IN `nombre_` VARCHAR(255), IN `apellido_` VARCHAR(255), IN `sexo_` VARCHAR(255), IN `identidad_` VARCHAR(255), IN `nacionalidad_` VARCHAR(50), IN `estado_civil_` VARCHAR(25), IN `fecha_nacimiento_` DATE, IN `tipo_persona_` INT, IN `telefono_` VARCHAR(50), `correo_` VARCHAR(50), IN `direccion_` VARCHAR(50))  BEGIN
 INSERT INTO tbl_personas(nombres, apellidos, sexo, identidad, nacionalidad, estado_civil, fecha_nacimiento, id_tipo_persona)
@@ -30829,11 +30831,11 @@ INSERT INTO `tbl_modalidades_proyecto` (`Id_modalidad`, `modalidad`, `Fecha_crea
 --
 
 CREATE TABLE `tbl_movil_bitacoras` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `usuario_id` bigint(20) NOT NULL,
   `objeto_id` bigint(20) NOT NULL,
   `accion` varchar(45) NOT NULL,
-  `descripcion` varchar(100) DEFAULT NULL,
+  `descripcion` varchar(255) DEFAULT NULL,
   `fecha` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -30871,7 +30873,7 @@ CREATE TABLE `tbl_movil_bitacoras_deleted` (
 --
 
 CREATE TABLE `tbl_movil_chats` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   `fecha_hora` datetime DEFAULT NULL,
   `interaccion` varchar(45) DEFAULT NULL,
@@ -30887,7 +30889,7 @@ CREATE TABLE `tbl_movil_chats` (
 --
 
 CREATE TABLE `tbl_movil_noticias` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `titulo` varchar(45) NOT NULL,
   `descripcion` longtext NOT NULL,
   `fecha` datetime NOT NULL,
@@ -30895,6 +30897,36 @@ CREATE TABLE `tbl_movil_noticias` (
   `remitente` varchar(45) NOT NULL,
   `segmento_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tbl_movil_noticias`
+--
+
+INSERT INTO `tbl_movil_noticias` (`id`, `titulo`, `descripcion`, `fecha`, `fecha_vencimiento`, `remitente`, `segmento_id`) VALUES
+(23, 'PRUEBA INFORMATICA', 'HOLA MUNDO', '2021-07-23 04:01:00', '2021-07-24 05:02:00', 'ADMIN', 1),
+(24, 'HOLA', 'MUNDO', '2021-07-28 04:03:00', '2021-07-29 05:04:00', 'ADMIN', 1),
+(25, 'HOLA', 'MUNDO', '2021-07-28 04:03:00', '2021-07-29 05:04:00', 'ADMIN', 1),
+(26, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
+(27, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
+(28, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
+(29, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
+(30, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
+(31, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
+(32, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
+(33, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
+(34, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
+(35, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
+(36, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
+(37, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
+(38, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
+(39, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
+(40, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
+(41, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
+(42, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
+(43, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
+(44, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
+(45, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
+(46, 'NUEVA NOTIFICACION', 'FASD', '2021-07-23 04:30:00', '2021-07-30 06:32:00', 'ADMIN', 1);
 
 -- --------------------------------------------------------
 
@@ -30907,6 +30939,15 @@ CREATE TABLE `tbl_movil_noticia_recurso` (
   `recurso_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `tbl_movil_noticia_recurso`
+--
+
+INSERT INTO `tbl_movil_noticia_recurso` (`noticia_id`, `recurso_id`) VALUES
+(36, 1),
+(46, 5),
+(46, 6);
+
 -- --------------------------------------------------------
 
 --
@@ -30914,7 +30955,7 @@ CREATE TABLE `tbl_movil_noticia_recurso` (
 --
 
 CREATE TABLE `tbl_movil_notificaciones` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `titulo` varchar(45) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `fecha` datetime NOT NULL,
@@ -30924,6 +30965,13 @@ CREATE TABLE `tbl_movil_notificaciones` (
   `image_enable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `tbl_movil_notificaciones`
+--
+
+INSERT INTO `tbl_movil_notificaciones` (`id`, `titulo`, `descripcion`, `fecha`, `remitente`, `segmento_id`, `tipo_notificacion_id`, `image_enable`) VALUES
+(1, 'PRUEBA INFORMATICA', 'QWEW', '2021-07-15 19:54:00', 'ADMIN', 1, 1, 0);
+
 -- --------------------------------------------------------
 
 --
@@ -30931,7 +30979,7 @@ CREATE TABLE `tbl_movil_notificaciones` (
 --
 
 CREATE TABLE `tbl_movil_parametros` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `parametro` varchar(45) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   `valor` varchar(45) NOT NULL,
@@ -30947,12 +30995,20 @@ CREATE TABLE `tbl_movil_parametros` (
 --
 
 CREATE TABLE `tbl_movil_segmentos` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   `creado_por` varchar(45) NOT NULL,
   `fecha_creacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tbl_movil_segmentos`
+--
+
+INSERT INTO `tbl_movil_segmentos` (`id`, `nombre`, `descripcion`, `creado_por`, `fecha_creacion`) VALUES
+(1, 'excelencia academica', 'estudiantes de la carrera con un indice de excelencia ', 'admin', '2021-07-13 10:12:12'),
+(21, 'ASDASD', 'CATEGORIA NUEVA', '75', '2021-07-14 05:05:48');
 
 -- --------------------------------------------------------
 
@@ -30965,6 +31021,14 @@ CREATE TABLE `tbl_movil_segmento_usuario` (
   `segmento_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Volcado de datos para la tabla `tbl_movil_segmento_usuario`
+--
+
+INSERT INTO `tbl_movil_segmento_usuario` (`usuario_id`, `segmento_id`) VALUES
+(51, 1),
+(75, 1);
+
 -- --------------------------------------------------------
 
 --
@@ -30972,9 +31036,17 @@ CREATE TABLE `tbl_movil_segmento_usuario` (
 --
 
 CREATE TABLE `tbl_movil_tipo_mensajes` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `tipo_mensaje` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tbl_movil_tipo_mensajes`
+--
+
+INSERT INTO `tbl_movil_tipo_mensajes` (`id`, `tipo_mensaje`) VALUES
+(1, 'mensaje normal'),
+(2, 'mensaje audio');
 
 -- --------------------------------------------------------
 
@@ -30983,9 +31055,16 @@ CREATE TABLE `tbl_movil_tipo_mensajes` (
 --
 
 CREATE TABLE `tbl_movil_tipo_notificaciones` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `descripcion` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tbl_movil_tipo_notificaciones`
+--
+
+INSERT INTO `tbl_movil_tipo_notificaciones` (`id`, `descripcion`) VALUES
+(1, 'NOTIFICACION NORMAL');
 
 -- --------------------------------------------------------
 
@@ -30994,10 +31073,22 @@ CREATE TABLE `tbl_movil_tipo_notificaciones` (
 --
 
 CREATE TABLE `tbl_movil_tipo_recursos` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   `url` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tbl_movil_tipo_recursos`
+--
+
+INSERT INTO `tbl_movil_tipo_recursos` (`id`, `descripcion`, `url`) VALUES
+(1, 'archivo subido desde crear noticia', '../archivos/movil/IMG7.jpeg'),
+(2, 'archivo subido desde crear noticia', '../archivos/movil/IMG7.jpeg'),
+(3, 'archivo subido desde crear noticia', '../archivos/movil/IMG7.jpeg'),
+(4, 'archivo subido desde crear noticia', '../archivos/movil/IMG7.jpeg'),
+(5, 'archivo subido desde crear noticia', '../archivos/movil/IMG1.jpeg'),
+(6, 'archivo subido desde crear noticia', '../archivos/movil/IMG5.jpeg');
 
 -- --------------------------------------------------------
 
@@ -31006,10 +31097,17 @@ CREATE TABLE `tbl_movil_tipo_recursos` (
 --
 
 CREATE TABLE `tbl_movil_tipo_transacciones` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `descripcion` varchar(90) DEFAULT NULL,
   `external_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tbl_movil_tipo_transacciones`
+--
+
+INSERT INTO `tbl_movil_tipo_transacciones` (`id`, `descripcion`, `external_id`) VALUES
+(1, 'SADASD', 1);
 
 -- --------------------------------------------------------
 
@@ -31018,10 +31116,10 @@ CREATE TABLE `tbl_movil_tipo_transacciones` (
 --
 
 CREATE TABLE `tbl_movil_transacciones` (
-  `id` int(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `fecha_envio` datetime DEFAULT NULL,
   `request_envio` varchar(45) DEFAULT NULL,
-  ` response` varchar(45) DEFAULT NULL,
+  `response` varchar(45) DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL,
   `tipo_transaccion_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -33494,6 +33592,7 @@ ALTER TABLE `tbl_modalidades_proyecto`
 -- Indices de la tabla `tbl_movil_bitacoras`
 --
 ALTER TABLE `tbl_movil_bitacoras`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_bitacoras_tbl_usuarios1_idx` (`usuario_id`),
   ADD KEY `fk_tbl_movil_bitacoras_tbl_objetos1_idx` (`objeto_id`);
 
@@ -33507,6 +33606,7 @@ ALTER TABLE `tbl_movil_bitacoras_deleted`
 -- Indices de la tabla `tbl_movil_chats`
 --
 ALTER TABLE `tbl_movil_chats`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_chats_tbl_movil_tipo_mensajes1_idx` (`tipo_mensaje_id`),
   ADD KEY `fk_tbl_movil_chats_tbl_usuarios1_idx` (`usuario_emisor_id`),
   ADD KEY `fk_tbl_movil_chats_tbl_usuarios2_idx` (`usuario_receptor_id`);
@@ -33515,6 +33615,7 @@ ALTER TABLE `tbl_movil_chats`
 -- Indices de la tabla `tbl_movil_noticias`
 --
 ALTER TABLE `tbl_movil_noticias`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_noticias_tbl_segmentos1_idx` (`segmento_id`);
 
 --
@@ -33528,6 +33629,7 @@ ALTER TABLE `tbl_movil_noticia_recurso`
 -- Indices de la tabla `tbl_movil_notificaciones`
 --
 ALTER TABLE `tbl_movil_notificaciones`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_notificaciones_tbl_movil_segmentos1_idx` (`segmento_id`),
   ADD KEY `fk_tbl_movil_notificaciones_tbl_movil_tipo_notificaciones1_idx` (`tipo_notificacion_id`);
 
@@ -33535,19 +33637,52 @@ ALTER TABLE `tbl_movil_notificaciones`
 -- Indices de la tabla `tbl_movil_parametros`
 --
 ALTER TABLE `tbl_movil_parametros`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_parametros_tbl_usuarios1_idx` (`usuario_id`);
+
+--
+-- Indices de la tabla `tbl_movil_segmentos`
+--
+ALTER TABLE `tbl_movil_segmentos`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tbl_movil_segmento_usuario`
 --
 ALTER TABLE `tbl_movil_segmento_usuario`
+  ADD UNIQUE KEY `usuario_id` (`usuario_id`),
   ADD KEY `fk_tbl_movil_segmento_usuario_tbl_usuarios1_idx` (`usuario_id`),
   ADD KEY `fk_tbl_movil_segmento_usuario_tbl_movil_segmentos1_idx` (`segmento_id`);
+
+--
+-- Indices de la tabla `tbl_movil_tipo_mensajes`
+--
+ALTER TABLE `tbl_movil_tipo_mensajes`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tbl_movil_tipo_notificaciones`
+--
+ALTER TABLE `tbl_movil_tipo_notificaciones`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tbl_movil_tipo_recursos`
+--
+ALTER TABLE `tbl_movil_tipo_recursos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `tbl_movil_tipo_transacciones`
+--
+ALTER TABLE `tbl_movil_tipo_transacciones`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tbl_movil_transacciones`
 --
 ALTER TABLE `tbl_movil_transacciones`
+  ADD PRIMARY KEY (`id`),
   ADD KEY `fk_tbl_movil_transacciones_tbl_movil_tipo_transacciones1_idx` (`tipo_transaccion_id`);
 
 --
@@ -34070,6 +34205,72 @@ ALTER TABLE `tbl_modalidad`
 --
 ALTER TABLE `tbl_modalidades_proyecto`
   MODIFY `Id_modalidad` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_bitacoras`
+--
+ALTER TABLE `tbl_movil_bitacoras`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_chats`
+--
+ALTER TABLE `tbl_movil_chats`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_noticias`
+--
+ALTER TABLE `tbl_movil_noticias`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_notificaciones`
+--
+ALTER TABLE `tbl_movil_notificaciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_parametros`
+--
+ALTER TABLE `tbl_movil_parametros`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_segmentos`
+--
+ALTER TABLE `tbl_movil_segmentos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_tipo_mensajes`
+--
+ALTER TABLE `tbl_movil_tipo_mensajes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_tipo_notificaciones`
+--
+ALTER TABLE `tbl_movil_tipo_notificaciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_tipo_recursos`
+--
+ALTER TABLE `tbl_movil_tipo_recursos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_tipo_transacciones`
+--
+ALTER TABLE `tbl_movil_tipo_transacciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT de la tabla `tbl_movil_transacciones`
+--
+ALTER TABLE `tbl_movil_transacciones`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_municipios_hn`
