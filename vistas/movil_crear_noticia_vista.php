@@ -64,7 +64,7 @@ ob_end_flush();
       <div class="container-fluid">
         <!-- pantalla 1 -->
 
-        <form action="../Controlador/movil_noticia_controlador.php?op=insert" method="POST" >
+        <form action="../Controlador/movil_noticia_controlador.php?op=insert" method="POST" enctype="multipart/form-data">
      
           <div class="card card-default">
             <div class="card-header">
@@ -104,7 +104,7 @@ ob_end_flush();
               <div class="col-sm-12">
                   <div class="form-group">
                   <label> Adjuntar Archivos</label>
-                    <input class="form-control" type="file" class="form-control" id="txt_documentos[]" name="txt_documentos[]" multiple="">
+                    <input class="form-control" type="file" class="form-control" id="txt_documentos" name="txt_documentos[]" multiple>
                 </div>
                  </div>
             <div class="form-group">

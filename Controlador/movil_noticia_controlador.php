@@ -3,12 +3,13 @@ session_start();
 
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
-
-
-
+require_once "../Modelos/movil_noticia_modelo.php";
+    
 
 switch ($_GET['op']) {
+    
     case 'insert':
+        $modelo = new modelo_registro_noticia();
         $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
         $contenido = isset($_POST['Contenido']) ? strtoupper($_POST['Contenido']) : '';
         $segmento = isset($_POST['Segmentos']) ? $_POST['Segmentos'] : '';
@@ -17,30 +18,17 @@ switch ($_GET['op']) {
         $sql = "INSERT into tbl_movil_noticias (titulo,descripcion,fecha,fecha_vencimiento,remitente,segmento_id) VALUES ('$titulo','$contenido','$fecha_publicacion','$fecha_vencimiento','ADMIN',$segmento)";
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
+                $idNoticia = $modelo->buscar_id_noticia($titulo,$fecha_publicacion);
+                $i = 0;
+                foreach ($_FILES['txt_documentos'] as $item){
+                    $idRecurso = subirDocumentos($i);
+                    $modelo->insert_noticia_recurso((int)$idNoticia['id'],(int)$idRecurso['id']); 
+                    $i += 1;
+                }
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
                 header('location: ../vistas/movil_gestion_noticia_vista.php?msj=2');
             }
         break;
-
-    case 'delete':
-        $id = $_GET['id'];
-        $sql = "DELETE from tbl_movil_noticias WHERE id = $id";
-        $resultado = $mysqli->query($sql);
-            if($resultado === TRUE){
-                bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'ELIMINO',strtoupper("$sql"));
-                echo '<script type="text/javascript">
-                swal({
-                     title:"",
-                     text:"Los datos se eliminaron correctamente",
-                     type: "success",
-                     showConfirmButton: false,
-                     timer: 3000
-                  });
-                  $(".FormularioAjax")[0].reset();
-                                 window.location = "../vistas/movil_gestion_noticia_vista.php";
-              </script>';
-            }
-        break; 
         
     case 'editar':
         $id = $_GET['id'];
@@ -60,4 +48,23 @@ switch ($_GET['op']) {
 }
 
 
+function subirDocumentos($i){
+
+    $MP = new modelo_registro_noticia();
+    //$nombrearchivo = htmlspecialchars($_POST['txt_documentos']['name']['0'],ENT_QUOTES,'UTF-8');
+    $tmp_name = $_FILES['txt_documentos']['tmp_name']["$i"];
+    $name = $_FILES['txt_documentos']['name']["$i"];
+    if(is_array($_FILES) && count($_FILES)>0){
+        if(move_uploaded_file($tmp_name,"../archivos/movil/".$name)){
+          $nombrearchivo= '../archivos/movil/'.$name;
+          $MP->Registrar_foto($nombrearchivo);  
+          $idRecurso = $MP->buscar_id_recurso($nombrearchivo);
+          return $idRecurso;
+        }else{
+            echo 0;
+        }
+    }else{
+        echo 0;
+    }
+}
 ?>
