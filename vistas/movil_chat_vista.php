@@ -13,7 +13,7 @@ require_once('../Controlador/movil_chat_controlador.php');
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://unpkg.com/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
+    <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
 
 </head>
 
@@ -23,7 +23,18 @@ require_once('../Controlador/movil_chat_controlador.php');
         <div class="w-100 h-auto">
             <div class="grid grid-cols-3 min-w-full border rounded" style="min-height: 80vh;">
                 <!-- pagina chats -->
-                <div class="col-span-1" style="background-color: #343A40;">
+                <div x-data="{
+        search: '',
+
+        items: [0,1,2,3,4,5,6,7,8,9,10],
+
+        get filteredItems() {
+            return this.items.filter(
+                i => i.startsWith(this.search)
+            )
+        }
+    }" 
+                      class="col-span-1" style="background-color: #343A40;">
                     <div class="my-3 mx-3 border-b border-gray-300">
                         <div class="relative text-gray-600 focus-within:text-gray-400">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -31,7 +42,7 @@ require_once('../Controlador/movil_chat_controlador.php');
                                     <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
                             </span>
-                            <input aria-placeholder="Busca tus amigos o contacta nuevos" placeholder="Buscar Chat" class="py-2 pl-10 block w-full rounded bg-gray-100 outline-none focus:text-gray-700" type="search" name="search" required autocomplete="search" />
+                            <input x-model="search" aria-placeholder="Busca tus amigos o contacta nuevos" placeholder="Buscar Chat" class="py-2 pl-10 block w-full rounded bg-gray-100 outline-none focus:text-gray-700" type="search" name="search" required autocomplete="search" />
                         </div>
                     </div>
 
@@ -49,66 +60,86 @@ require_once('../Controlador/movil_chat_controlador.php');
                 <!-- pagina mensajes -->
                 <div class="col-span-2" style="background-image: url(../archivos/movil/background_chat3.png); background-position:center; background-size:400px;">
                     <div id="resultado_chat" class="col-span-2 bg-transparent overflow-auto" style="height: 743px;">
-                    
+
                     </div>
                 </div>
             </div>
-            <script>
-                function getChats(id_chat) {
-                    var parametros = {
-                        "id_chat": id_chat,
-                        "llamando_chats": 'true'
-                    }
-                    $.ajax({
-                        data: parametros, //datos que se envian a traves de ajax
-                        url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
-                        type: 'post', //método de envio
-                        beforeSend: function() {
-                            $("#resultado_chat").html("Procesando, espere por favor...");
-                        },
-                        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                            $("#resultado_chat").html(response);
-                        }
-                    });
+        </div>
+    </div>
+    <script>
+        function getChats(id_chat) {
+            var parametros = {
+                "id_chat": id_chat,
+                "llamando_chats": 'true'
+            }
+            $.ajax({
+                data: parametros, //datos que se envian a traves de ajax
+                url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
+                type: 'post', //método de envio
+                beforeSend: function() {
+                    $("#resultado_chat").html("Procesando, espere por favor...");
+                },
+                success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                    $("#resultado_chat").html(response);
                 }
+            });
+        }
 
-                function getUser() {
-                    var parametros = {
-                        "funcion": 'buscarUsuarios'
-                    }
-                    $.ajax({
-                        data: parametros, //datos que se envian a traves de ajax
-                        url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
-                        type: 'post', //método de envio
-                        beforeSend: function() {
-                            $("#resultado_chat").html("Procesando, espere por favor...");
-                        },
-                        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                            $("#resultado_chat").html(response);
-                        }
-                    });
+        function getUser() {
+            var parametros = {
+                "funcion": 'buscarUsuarios'
+            }
+            $.ajax({
+                data: parametros, //datos que se envian a traves de ajax
+                url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
+                type: 'post', //método de envio
+                beforeSend: function() {
+                    $("#resultado_chat").html("Procesando, espere por favor...");
+                },
+                success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                    $("#resultado_chat").html(response);
                 }
+            });
+        }
 
-                function cerrar() {
-                    var parametros = {
-                        "funcion": 'cerrar'
-                    }
-                    $.ajax({
-                        data: parametros, //datos que se envian a traves de ajax
-                        url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
-                        type: 'post', //método de envio
-                        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                            $("#resultado_chat").html(response);
-                        }
-                    });
+        function cerrar() {
+            var parametros = {
+                "funcion": 'cerrar'
+            }
+            $.ajax({
+                data: parametros, //datos que se envian a traves de ajax
+                url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
+                type: 'post', //método de envio
+                success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                    $("#resultado_chat").html(response);
                 }
-                $(function() {
-                    $('[data-toggle="tooltip"]').tooltip()
-                })
+            });
+        }
 
-                function click() {
-                    $('#subir_archivo').click();
+        function getid() {
+            var parametros = {
+                "funcion": 'crearNuevoChat'
+            }
+            $.ajax({
+                data: parametros, //datos que se envian a traves de ajax
+                url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
+                type: 'post', //método de envio
+                beforeSend: function() {
+                    $("#resultado_chat").html("Procesando, espere por favor...");
+                },
+                success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                    $("#resultado_chat").html(response);
                 }
-            </script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+            });
+        }
+
+        $(function() {
+            $('[data-toggle="tooltip"]').tooltip()
+        })
+
+        function click() {
+            $('#subir_archivo').click();
+        }
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 </body>

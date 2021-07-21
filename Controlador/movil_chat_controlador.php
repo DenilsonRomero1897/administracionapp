@@ -23,7 +23,7 @@ function chats()
             <img class='h-10 w-10 rounded-full object-cover' src='' alt='photo' />
                  <div class='w-full p-2'>
                      <div class='flex justify-between'>
-                         <span class='block ml-2 font-semibold text-base text-gray-600 '>$nombre_usuario</span>
+                         <span class='block ml-2 font-semibold text-base text-gray-600'>$nombre_usuario</span>
                          <span class='block ml-2 text-sm text-gray-600'>time fetch</span>
                     </div>
                          <span class='block ml-2 text-sm text-gray-600'>$mensaje</span>
@@ -114,10 +114,10 @@ function cerrar()
 
 $funcion = isset($_POST['funcion']) ? $_POST['funcion'] : '';
 if ($funcion == 'buscarUsuarios') {
-    NuevoChat();
+    getUser();
 }
 
-function NuevoChat()
+function getUser()
 {
     require '../clases/Conexion.php';
     //traer los datos de la base de datos
@@ -164,4 +164,18 @@ function NuevoChat()
      ";
     }
     echo '</div>';
+}
+
+$funcion = isset($_POST['funcion']) ? $_POST['funcion'] : '';
+if ($funcion == 'crearNuevoChat') {
+    CrearChat();
+}
+
+function CrearChat(){
+    require '../clases/Conexion.php';
+    //$sql = '';
+   // $mysqli->query($sql);
+    //conseguir el id de chat creado
+    //$sql = '';
+    mensajes(5);
 }
