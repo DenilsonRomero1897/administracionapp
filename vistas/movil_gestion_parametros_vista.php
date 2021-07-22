@@ -106,6 +106,7 @@ ob_end_flush();
 
 
 ?>
+
 <!DOCTYPE html>
 <html>
 
@@ -123,12 +124,13 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestión de Parametros</h1>
+            <h1>Gestión de Parámetros</h1>
           </div>
 
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
+              <li class="breadcrumb-item active"><a href="../vistas/movil_menu_gestion_vista.php">Gestión App</a></li>
             </ol>
           </div>
 
@@ -145,18 +147,17 @@ ob_end_flush();
 
     <div class="card card-default">
       <div class="card-header">
-      <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>   
-      <a class="btn btn-primary btn-xs float-right" href="../vistas/movil_crear_parametros_vista.php">Nuevo</a>
+        <div class="card-tools">
+          <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_parametros_vista.php">Nuevo</a>
+          <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
+        </div>
+        <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
       </div>
 
 
-
-        
-     
-
       <!-- /.card-header -->
       <div class="card-body">
-        <table id="tablaparamestros" class="table table-bordered table-striped">
+        <table id="tabla2" class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>ID</th>
@@ -268,96 +269,7 @@ ob_end_flush();
    </div>
            
   </form>
-
-
-  <script type="text/javascript">
-    $(function() {
-
-      $('#tabla').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-        "language": {
-      "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-    }
-      });
-    });
-    function ventana() {
-      window.open("../Controlador/movil_reporte_gestion_parametros.php", "REPORTE");
-    }
-  </script>
-</body>
-
-</html>
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
               
-              </div>
-            </div>
-          </div>
-
-          <!--Footer del modal-->
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" id="btn_modificar_segmento" name="btn_modificar_segmento">Guardar Cambios</button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-
-    <!-- /.  finaldel modal -->
-
-
-
-  </form>
-
-
   <script type="text/javascript">
     $(function() {
 
@@ -376,7 +288,7 @@ ob_end_flush();
     });
 
     function ventana() {
-      window.open("../Controlador/movil_reporte_gestion_segmentos.php", "REPORTE");
+      window.open("../Controlador/movil_reporte_parametros_controlador.php", "REPORTE");
     }
   </script>
 </body>
