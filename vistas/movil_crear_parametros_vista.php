@@ -121,7 +121,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item active"><a href="../vistas/movil_menu_gestion_vista.php">Gestión App</a></li>
+              <li class="breadcrumb-item active"><a href="../vistas/movil_gestion_parametros_vista.php">Gestión de Parámetros</a></li>
             </ol>
           </div>
 
@@ -140,22 +140,16 @@ ob_end_flush();
 
           <div class="card card-default">
             <div class="card-header">
-              <h3 class="card-title">Nuevo Parametro</h3>
+              <h3 class="card-title">Nuevo Parámetro</h3>
 
               <div class="card-tools">
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
               </div>
             </div>
-
-
             <tbody>
               <tr>
-
-
               </tr>
             </tbody>
-
-
             <!-- /.card-header -->
             <div class="card-body">
               <div class="row">
@@ -164,11 +158,7 @@ ob_end_flush();
                   <div class="form-group">
                     <label for="descripcion"> Nombre del Parámetro </label>
                     <input autofocus class="form-control" type="text" maxlength="60" id="parametro" name="parametro" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
-                  
-                
                   </div>
-
-
                   <div class="form-group">
                     <label for="ubicacion url">Descripción del Parámetro</label>
                     <input class="form-control" type="text" id="descripcion" name="descripcion" required style="text-transform: uppercase" onkeyup="Espacio(this, event)" onkeypress="return Letras(event)" onkeypress="return comprobar(this.value, event, this.id)" maxlength="30">
@@ -188,11 +178,7 @@ ob_end_flush();
                     <input class="form-control" type="datetime-local" id="fecha_modificacion" name="fecha_modificacion" required style="text-transform: uppercase" onkeyup="Espacio(this, event)" onkeypress="return Letras(event)" onkeypress="return comprobar(this.value, event, this.id)" maxlength="30">
                   </div>
 
-
-
               </div>
-
-              
 
               <br>
 
@@ -202,28 +188,15 @@ ob_end_flush();
             <button type="submit" class="btn btn-primary" id="btn_guardar_parametro" name="btn_guardar_parametro"><i class="zmdi zmdi-floppy"></i>Guardar</button>
           </p>
         </form>
-
-
         <!-- /.card-body -->
         <div class="card-footer">
 
         </div>
       </div>
-
-
-
       <div class="RespuestaAjax"></div>
       </form>
-
   </div>
   </section>
-
-
   </div>
-
-
-  
-
 </body>
-
 </html>

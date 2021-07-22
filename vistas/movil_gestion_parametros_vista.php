@@ -140,11 +140,7 @@ ob_end_flush();
       </div><!-- /.container-fluid -->
     </section>
 
-
     <!--Pantalla 2-->
-
-
-
     <div class="card card-default">
       <div class="card-header">
         <div class="card-tools">
@@ -152,9 +148,7 @@ ob_end_flush();
           <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
         </div>
         <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
-      </div>
-
-
+     
       <!-- /.card-header -->
       <div class="card-body">
         <table id="tabla2" class="table table-bordered table-striped">
@@ -186,33 +180,23 @@ ob_end_flush();
                 <td><?php echo $parametro['usuario_id']; ?></td>
 
                 <td style="text-align: center;">
-
                   <a href="../vistas/movil_gestion_parametros_vista.php?&id=<?php echo $parametro['id']; ?>" class="btn btn-primary btn-raised btn-xs">
                     <i class="far fa-edit"></i>
                   </a>
                 </td>
-
                 <td style="text-align: center;">
                   <form action="../Controlador/movil_guardar_parametro_controlador.php?id=<?php echo $parametro['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off" >
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
                   </form>
-                  
                 </td>
-
               </tr>
-
             <?php } ?>
-
           </tbody>
         </table>
       </div>
-     
-    </div>
-
-  </div>
-
+    
   <form action="../Controlador/movil_guardar_parametro_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
 
     <div class="modal fade" id="modal_modificar_parametros">
@@ -224,39 +208,26 @@ ob_end_flush();
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
-
           <!--Cuerpo del modal-->
           <div class="modal-body">
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12">
-
                   <div class="form-group">
                     <label>Parametro</label>
-
                     <input class="form-control" type="text" id="parametro" name="parametro" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtparametro']; ?>">
-
                   </div>
-
                   <div class="form-group">
                     <label>Descripcion</label>
-
                     <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtDescripcion']; ?>">
-
                   </div>
-
                   <div class="form-group">
                     <label>Valor</label>
-
                     <input class="form-control" type="text" id="valor" name="valor" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtvalor']; ?>">
-
                   </div>
                   </div>
               </div>
             </div>
-          
-
           <!--Footer del modal-->
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -272,7 +243,6 @@ ob_end_flush();
               
   <script type="text/javascript">
     $(function() {
-
       $('#tabla').DataTable({
         "paging": true,
         "lengthChange": true,
@@ -282,8 +252,8 @@ ob_end_flush();
         "autoWidth": true,
         "responsive": true,
         "language": {
-      "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-    }
+          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+        }
       });
     });
 

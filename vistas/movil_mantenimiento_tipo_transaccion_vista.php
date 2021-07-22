@@ -144,8 +144,6 @@ ob_end_flush();
         </div>
       </div><!-- /.container-fluid -->
     </section>
-
-
     <!--Pantalla 2-->
     <div class="card card-default">
       <div class="card-header">
@@ -228,7 +226,7 @@ ob_end_flush();
               <div class="row">
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label>Descripción del tipo Transaccion </label>
+                    <label>Descripción del tipo Transacción </label>
                     <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtdescripcion']; ?>">
                   </div>
                   <div class="form-group">

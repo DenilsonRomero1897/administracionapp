@@ -61,7 +61,7 @@ if ($visualizacion == 0) {
         <div class="row mb-2">
           <div class="col-sm-6">
 
-            <h1>Bitacora del Sistema Movil</h1>
+            <h1>Bitácora del Sistema Movil</h1>
           </div>
 
           <div class="col-sm-6">
