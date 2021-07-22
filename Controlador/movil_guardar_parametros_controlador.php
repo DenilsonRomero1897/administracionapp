@@ -43,17 +43,16 @@ if ($opcion == 'eliminar') {
   $id_parametro = isset($_GET["id"]) ? ($_GET["id"]) : "";
   $parametro = isset($_POST["parametro"]) ? strtoupper($_POST["parametro"]) : "";
   $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
-  $valor=isset($_POST["valor"]) ? ($_POST["valor"]) : "";
+  $valor=isset($_POST["valor"]) ? strtoupper($_POST["valor"]) : "";
   $sql="UPDATE tbl_movil_parametros  set parametro= '$parametro', descripcion= '$descripcion', valor ='$valor' WHERE id = $id_parametro";
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', 'EL PARAMETRO' . $parametro. '');
   $mysqli->query($sql);
-  header('location: ../vistas/movil_gestion_parametro_vista.php?msj=2');
+  header('location: ../vistas/movil_gestion_parametros_vista.php?msj=2');
 }else{
   $parametro = isset($_POST["parametro"]) ? strtoupper($_POST["parametro"]) : "";
   $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
-  $valor =isset($_POST["valor"]) ? ($_POST["valor"]) : "";
-  $modificadopor = isset($_SESSION['id_usuario']) ? ($_SESSION['id_usuario']) : "";
-  $usuario_id = isset($_SESSION['id_usuario']) ? ($_SESSION['id_usuario']) : "";
+  $valor =isset($_POST["valor"]) ? strtoupper($_POST["valor"]) : "";
+  
 
 
 ///Logica para el que se repite
@@ -69,7 +68,7 @@ if ($_POST['parametro']  ) {
   /* Condicion para que no se repita el rol*/
   if ($existe['parametro'] == 1) {
     //redireccion ya que el nombre segmento existe
- 	header('location: ../vistas/movil_gestion_parametro_vista.php?msj=1'); 
+ 	header('location: ../vistas/movil_gestion_parametros_vista.php?msj=1'); 
     
   } else {
 

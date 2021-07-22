@@ -28,10 +28,10 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("DEPARTAMENTO DE INFORMÁTICA "), 0, 0, 'C');
         $this->ln(10);
         $this->SetFont('times', 'B', 20);
-        $this->Cell(330, 10, utf8_decode("REPORTE PARÁMETROS"), 0, 0, 'C');
+        $this->Cell(330, 10, utf8_decode("REPORTE GESTIÓN DE PARÁMETROS"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(60, 10, utf8_decode(" PARÁMETROS EXISTENTES"), 0, 0, 'C');
+        $this->Cell(60, 10, utf8_decode(" PARÁMETROS "), 0, 0, 'C');
         $this->Cell(420, 10, "FECHA: " . $fecha, 0, 0, 'C');
         $this->ln();
     }
@@ -47,46 +47,33 @@ class myPDF extends FPDF
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
         $this->Cell(15, 7, "ID", 1, 0, 'C');
-        $this->Cell(140, 7, utf8_decode("PARÁMETROS "), 1, 0, 'C');
-        $this->Cell(140, 7, utf8_decode("DESCRIPCION"), 1, 0, 'C');
-        $this->Cell(140, 7, utf8_decode("VALOR"), 1, 0, 'C');
-        $this->Cell(140, 7, utf8_decode("FECHA_MODIFICACION"), 1, 0, 'C');
-        $this->Cell(140, 7, utf8_decode("MODIFICADO_POR"), 1, 0, 'C');
-        $this->Cell(140, 7, utf8_decode("USUARIO_ID"), 1, 0, 'C');
+        $this->Cell(55, 7, utf8_decode("PARÁMETROS "), 1, 0, 'C');
+        $this->Cell(70, 7, utf8_decode("DESCRIPCIÓN"), 1, 0, 'C');
+        $this->Cell(35, 7, utf8_decode("VALOR"), 1, 0, 'C');
+        $this->Cell(70, 7, utf8_decode("FECHA_MODIFICACIÓN"), 1, 0, 'C');
+        $this->Cell(65, 7, utf8_decode("MODIFICADO_POR"), 1, 0, 'C');
+        $this->Cell(35, 7, utf8_decode("USUARIO_ID"), 1, 0, 'C');
         $this->ln();
     }
     function viewTable()
     {
         global $instancia_conexion;
-        $sql = "
-        select
-            id,
-            parametro,
-            descripcion,
-            valor,
-            fecha_modificacion,
-            modificado por,
-            usuario_id
-            
-        FROM
-            tbl_movil_parametros";
+        $sql = "SELECT * FROM tbl_movil_parametros";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
-
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
-
             $this->SetFont('Times', '', 12);
-            $this->Cell(15, 10, $reg['id'], 1, 0, 'C');
-            $this->Cell(140, 10, utf8_decode($reg['parametro']), 1, 0, 'C');
-            $this->Cell(140, 10, utf8_decode($reg['descripcion']), 1, 0, 'C');
-            $this->Cell(140, 10, utf8_decode($reg['valor']), 1, 0, 'C');
-            $this->Cell(140, 10, utf8_decode($reg['fecha_modificacion']), 1, 0, 'C');
-            $this->Cell(140, 10, utf8_decode($reg['modificado por']), 1, 0, 'C');
-            $this->Cell(140, 10, utf8_decode($reg['usuario_id']), 1, 0, 'C');
+            $this->Cell(15, 7, $reg['id'], 1, 0, 'C');
+            $this->Cell(55, 7, $reg['parametro'], 1, 0, 'C');
+            $this->Cell(70, 7, $reg['descripcion'], 1, 0, 'C');
+            $this->Cell(35, 7, utf8_decode($reg['valor']), 1, 0, 'C');
+            $this->Cell(70, 7, utf8_decode($reg['fecha_modificacion']), 1, 0, 'C');
+            $this->Cell(65, 7, utf8_decode($reg['modificado por']), 1, 0, 'C');
+            $this->Cell(35, 7, $reg['usuario_id'], 1, 0, 'C');
             $this->ln();
         }
     }
 }
-
+ 
 
 $pdf = new myPDF();
 $pdf->AliasNbPages();

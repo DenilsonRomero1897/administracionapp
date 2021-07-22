@@ -185,7 +185,7 @@ ob_end_flush();
                   </a>
                 </td>
                 <td style="text-align: center;">
-                  <form action="../Controlador/movil_guardar_parametro_controlador.php?id=<?php echo $parametro['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off" >
+                  <form action="../Controlador/movil_guardar_parametros_controlador.php?id=<?php echo $parametro['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off" >
                     <button type="submit" class="btn btn-danger btn-raised btn-xs">
                       <i class="far fa-trash-alt"></i>
                     </button>
@@ -196,8 +196,9 @@ ob_end_flush();
           </tbody>
         </table>
       </div>
-    
-  <form action="../Controlador/movil_guardar_parametro_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
+    </div>
+  </div>
+  <form action="../Controlador/movil_guardar_parametros_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
 
     <div class="modal fade" id="modal_modificar_parametros">
       <div class="modal-dialog">
@@ -231,7 +232,7 @@ ob_end_flush();
           <!--Footer del modal-->
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" id="btn_modificar_parametro" name="btn_modificar_parametro">Guardar Cambios</button>
+            <button type="submit" class="btn btn-primary" id="btn_modificar_parametros" name="btn_modificar_parametros">Guardar Cambios</button>
           </div>
         </div>
        
