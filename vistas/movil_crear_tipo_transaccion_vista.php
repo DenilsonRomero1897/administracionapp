@@ -100,28 +100,20 @@ ob_end_flush();
   <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
   <script type="text/javascript">
   </script>
-
-
 </head>
-
 <body>
-
-
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Tipo de Transaccion</h1>
+            <h1>Nuevo Tipo de Transacción</h1>
           </div>
-
-
-
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item active"><a href="../vistas/movil_menu_mantenimiento_vista.php">Mantenimiento App</a></li>
+              <li class="breadcrumb-item active"><a href="../vistas/movil_mantenimiento_tipo_transaccion_vista.php">Mantenimiento Tipo Transacción</a></li>
             </ol>
           </div>
 
@@ -146,16 +138,10 @@ ob_end_flush();
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
               </div>
             </div>
-
-
             <tbody>
               <tr>
-
-
               </tr>
             </tbody>
-
-
             <!-- /.card-header -->
             <div class="card-body">
               <div class="row">
@@ -169,45 +155,24 @@ ob_end_flush();
                     <label for="descripcion"> External ID </label>
                     <input autofocus class="form-control" type="text" maxlength="60" id="external_id" name="external_id" required style="">
                   </div>
-
-                
-
                 </div>
-
               </div>
-
-              
-
               <br>
-
             </div>
           </div>
           <p class="text-center" style="margin-top: 20px;">
             <button type="submit" class="btn btn-primary" id="btn_guardar_tipotransaccion" name="btn_guardar_tipotransaccion"><i class="zmdi zmdi-floppy"></i>Guardar</button>
           </p>
         </form>
-
-
         <!-- /.card-body -->
         <div class="card-footer">
 
         </div>
       </div>
-
-
-
       <div class="RespuestaAjax"></div>
       </form>
-
   </div>
   </section>
-
-
   </div>
-
-
-  
-
 </body>
-
 </html>

@@ -279,10 +279,7 @@ ob_end_flush();
 
     <!-- /.  finaldel modal -->
 
-
-
   </form>
-
 
   <script type="text/javascript">
     $(function() {

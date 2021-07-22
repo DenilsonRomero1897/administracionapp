@@ -121,7 +121,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item active"><a href="../vistas/movil_menu_mantenimiento_vista.php">Mantenimiento App</a></li>
+              <li class="breadcrumb-item active"><a href="../vistas/movil_mantenimiento_tipo_recurso_vista.php">Mantenimiento Tipo Recurso</a></li>
             </ol>
           </div>
 
