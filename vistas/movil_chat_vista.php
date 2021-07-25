@@ -23,42 +23,31 @@ require_once('../Controlador/movil_chat_controlador.php');
         <div class="w-100 h-auto">
             <div class="grid grid-cols-3 min-w-full border rounded" style="min-height: 80vh;">
                 <!-- pagina chats -->
-                <div x-data="{
-        search: '',
-
-        items: [0,1,2,3,4,5,6,7,8,9,10],
-
-        get filteredItems() {
-            return this.items.filter(
-                i => i.startsWith(this.search)
-            )
-        }
-    }" 
-                      class="col-span-1" style="background-color: #343A40;">
-                    <div class="my-3 mx-3 border-b border-gray-300">
-                        <div class="relative text-gray-600 focus-within:text-gray-400">
+                <div class="col-span-1" style="background-color: #007BFF;">
+                    <div class="my-3 mx-3 h-1">
+                        <!-- <div class="relative text-white focus-within:text-gray-400">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                                 <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6 text-gray-500">
                                     <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
                             </span>
-                            <input x-model="search" aria-placeholder="Busca tus amigos o contacta nuevos" placeholder="Buscar Chat" class="py-2 pl-10 block w-full rounded bg-gray-100 outline-none focus:text-gray-700" type="search" name="search" required autocomplete="search" />
-                        </div>
+                            <input aria-placeholder="Busca tus amigos o contacta nuevos" placeholder="Buscar Chat" class="py-2 pl-10 block w-full rounded bg-gray-100 outline-none focus:text-gray-700" type="search" name="search" required autocomplete="search" />
+                        </div> -->
                     </div>
 
                     <span class="grid gap-1 grid-cols-3 overflow-auto">
                         <h2 class="ml-2 mb-2 mr-2 text-white text-lg my-1">Chats</h2>
-                        <span></span>
-                        <button class="ml-2 mb-2 mr-2 btn btn-primary" data-toggle="tooltip" data-placement="top" title="Nuevo Chat" onclick="getUser()">Nuevo</button>
+                        <button class="ml-2 mb-2 mr-2 btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Cerrar Chat" onclick="cerrar()" >Cerrar</button>
+                        <button class="ml-2 mb-2 mr-2 btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Nuevo Chat" onclick="getUser()">Nuevo</button>
                     </span>
-                    <ul class="overflow-auto bg-gray" style="height: 624px;">
+                    <ul class="overflow-auto" style="height: 615px; background-color:whitesmoke;">
                         <li>
                             <?php chats() ?>
                         </li>
                     </ul>
                 </div>
                 <!-- pagina mensajes -->
-                <div class="col-span-2" style="background-image: url(../archivos/movil/background_chat3.png); background-position:center; background-size:400px;">
+                <div class="col-span-2" style="background-color:whitesmoke; background-position:center; background-size:400px;">
                     <div id="resultado_chat" class="col-span-2 bg-transparent overflow-auto" style="height: 743px;">
 
                     </div>
@@ -136,10 +125,6 @@ require_once('../Controlador/movil_chat_controlador.php');
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
         })
-
-        function click() {
-            $('#subir_archivo').click();
-        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 </body>

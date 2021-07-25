@@ -19,7 +19,7 @@ function chats()
         $row += 1;
         //se muertran los chats en pantalla
         echo "
-    <a onclick='getChats($id)' class='hover:bg-gray-100 border-b border-gray-300 px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out'>
+    <a onclick='getChats($id)' class='hover:bg-gray-200 border-b border-gray-300 px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out'>
             <img class='h-10 w-10 rounded-full object-cover' src='' alt='photo' />
                  <div class='w-full p-2'>
                      <div class='flex justify-between'>
@@ -39,18 +39,16 @@ $id_chat = isset($_POST['id_chat']) ? (int)$_POST['id_chat'] : '';
 if ($resultado == 'true') {
     mensajes($id_chat);
 }
-//var_dump($_POST);
 
 function mensajes($id_chat)
 {
     //se carga la pantalla de chat
     echo '<div class="w-full">
-    <div class="flex items-center border-b border-gray-300 pl-3 py-3">
+    <div class="flex items-center border-b border-gray-300 pl-3 py-3" style="background-color:#007BFF;">
         <img class="h-10 w-10 rounded-full object-cover" src="https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="username" />
         <span class="w-80 block mr-10 ml-2 font-bold text-base text-white">' . $id_chat . '</span>
-        <button onclick="cerrar()" hidden class="ml-10 btn btn-danger btn-xs">Cerrar</button>
     </div>
-    <div id="chat" class="w-full overflow-y-auto p-1 relative" style="height: 585px;" ref="toolbarChat">
+    <div id="chat" class="w-full overflow-y-auto p-1 relative" style="height: 599px;" ref="toolbarChat">
         <ul>
             <li class="clearfix2">';
     mensaje();
@@ -58,7 +56,7 @@ function mensajes($id_chat)
         </ul>
     </div>
     <form action="../controlador/movil_chat_mensajeria_controlador.php">
-    <div class="w-full py-3 px-3 flex items-center justify-between border-t border-gray-300">
+    <div class="w-full py-3 px-3 flex items-center justify-between border-t border-gray-300" style="background-color:#007BFF;">
         <button class="outline-none focus:outline-none ml-1" onclick="click()">
             <svg class="text-gray-400 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />
@@ -172,10 +170,28 @@ if ($funcion == 'crearNuevoChat') {
 }
 
 function CrearChat(){
-    require '../clases/Conexion.php';
+    require_once '../clases/Conexion.php';
     //$sql = '';
    // $mysqli->query($sql);
     //conseguir el id de chat creado
     //$sql = '';
     mensajes(5);
 }
+
+function buscarUsuarios(){
+    require_once '../clases/Conexion.php';
+    $sql = "SELECT id,nombre FROM tbl_usuarios";
+    $resultado = $mysqli->query($sql);
+    echo '<div class="form-group">';
+       echo' <select class="form-control" name="buscar_usuario" id="buscar_usuario" onchange="buscar_usuario()">';
+                  while ($row = $resultado->fetch_array(MYSQLI_ASSOC)) { 
+                      $id = $row['id'];
+                      $nombre = $row['nombre'];
+                    echo "<option value='$id'>$nombre</option>";
+                    } 
+             echo "</select>";
+             echo "</div>";
+    
+}
+
+?>
