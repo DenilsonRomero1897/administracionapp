@@ -388,20 +388,7 @@ if (permiso_ver('89') == '1') {
 
             <div class="clearfix hidden-md-up"></div>
 
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-primary">
-                <div class="inner">
-                  <h4>Inscribir usuarios a Segmento  </h4>
-                  <p><?php echo $_SESSION['mantenimiento_categorias_docente_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-edit"></i>
-                </div>
-
-                <a href="../vistas/movil_llenar_segmento_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
+            
               <!-- /.info-box -->
             </div>
             <!-- /.row -->

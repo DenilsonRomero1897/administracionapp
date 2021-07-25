@@ -235,7 +235,6 @@ ob_end_flush();
         }
       });
     }
-
     function toggle(source) {
       checkboxes = document.getElementsByName('persona');
       for (var i = 0, n = checkboxes.length; i < n; i++) {

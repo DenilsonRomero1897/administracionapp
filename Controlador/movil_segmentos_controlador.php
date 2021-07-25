@@ -14,7 +14,7 @@ if ($opcion == 'editar') {
   $sql="UPDATE tbl_movil_segmentos set nombre = '$nombre', descripcion = '$descripcion' WHERE id = $id_segmento";
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'MODIFICO', strtoupper("$sql"));
   $mysqli->query($sql);
-  header('location: ../vistas/movil_gestion_segmentos_vista.php?msj=2');
+  header('location: ../vistas/movil_gestion_segmento_vista.php?msj=2');
 
 } else { // insertar datos
   $nombre = isset($_POST["nombre"]) ? (strtoupper($_POST["nombre"])) : "";
@@ -41,7 +41,7 @@ if ($_POST['nombre']  <> ' ' and  $_POST['descripcion'] <> '') {
     $resultado = $mysqli->query($sql);
     if ($resultado == true) {
       bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto,'inserto', strtoupper("$sql"));
-      header('location: ../vistas/movil_gestion_segmentos_vista.php?msj=2');
+      header('location: ../vistas/movil_llenar_segmento_vista.php?msj=2');
     } else {
       echo "Error: " . $sql;
     }
