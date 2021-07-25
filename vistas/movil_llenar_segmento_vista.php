@@ -172,8 +172,44 @@ ob_end_flush();
                 </tbody>
               </table>
             </div>
+
             <p class="text-center" style="margin-top: 20px;">
-              <button type="submit" class="btn btn-primary" id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
+            <button type="submit" class="btn btn-primary" id="btn_agregar_usuarios" name="btn_agregar_usuarios"><i class="zmdi zmdi-floppy"></i>Agregar</button>
+            </p>
+            <div class="card-body">
+              <table id="listausuarios" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th hidden>ID</th>
+                    <th>NOMBRE</th>
+                    <th>APELLIDO</th>
+                    <th>ELIMINAR</th>
+                  </tr>
+                </thead>
+                <tbody id="resultadousuarios">
+                  
+                </tbody>
+              </table>
+              <script>
+                $('#btn_agregar_usuarios').click(function(){
+
+                });
+                function listar(){
+                  $('resultado tr').each(function){
+                    let check=$(this).find('#marcar_todos').is(':checked');// true o false
+                    let Nombre=$(this).find('td').eq(1).text();
+                    let Apellido=$(this).find('td').eq(1).text();
+                    if (check){
+                      var filalistar="<tr></td>"+Nombre+"<tr></td>"+Apellido+"</td></tr>";
+                      $('#resultadousuarios').append(filalistar)
+                    }
+                    
+                  });
+                }
+                </script>
+            </div>
+            <p class="text-center" style="margin-top: 20px;">
+             <button type="submit" class="btn btn-primary" id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
             </p>
         </form>
       </div>

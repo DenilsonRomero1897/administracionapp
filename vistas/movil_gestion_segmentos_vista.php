@@ -133,6 +133,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
+              <li class="breadcrumb-item"><a href="../vistas/movil_menu_gestion_vista.php">Gestión App</a></li>
             </ol>
           </div>
 

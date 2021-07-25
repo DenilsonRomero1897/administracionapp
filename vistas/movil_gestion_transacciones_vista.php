@@ -172,7 +172,7 @@ ob_end_flush();
                 $resultado_transacciones = $mysqli->query($sql_transacciones);
                 while ($transacciones= $resultado_transacciones->fetch_array(MYSQLI_ASSOC)) { ?>
                   <tr>
-                    <td><?php echo $transacciones['id']; ?></td>
+                     <td><?php echo $transacciones['id']; ?></td> 
                     <td><?php echo $transacciones['fecha_envio']; ?></td>
                     <td><?php echo $transacciones['request_envio']; ?></td>
                     <td><?php echo $transacciones[' response']; ?></td>

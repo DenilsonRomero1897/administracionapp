@@ -108,7 +108,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item active"><a href="../vistas/movil_menu_segmentos_vista.php">Segmentos</a></li>
+              <li class="breadcrumb-item active"><a href="../vistas/movil_gestion_segmentos_vista.php">Gestión Segmentos</a></li>
             </ol>
           </div>
           <div class="RespuestaAjax"></div>
@@ -144,7 +144,7 @@ ob_end_flush();
             </div>
             <!-- /.card-header -->
             <p class="text-center" style="margin-top: 20px;">
-              <button type="submit" class="btn btn-primary" id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
+              <button type="submit" class="btn btn-primary"  id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
             </p>
         </form>
       </div>
