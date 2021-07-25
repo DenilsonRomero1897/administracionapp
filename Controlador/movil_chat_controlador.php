@@ -127,10 +127,9 @@ function getUser()
 
     //    while ($row = $resultado->fetch_array(MYSQLI_ASSOC)) { 
     $row = 0;
-    echo '<div class="col-span-1" style="background-color: #343A40;">
-      <div class="row" style="background-color:blue; color:white;">
+    echo '<div class="col-span-1 bg-gray-500">
+      <div class="row" style="background-color:#007BFF; color:white;">
       <h2 class="col-11">Seleccione al Usuario para chatear</h2>
-      <a class="col btn btn-danger btn-xs" onclick="cerrar()">x</a>
         </div>
         
                     <div class="my-3 mx-3 border-b border-gray-300">
