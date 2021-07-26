@@ -167,15 +167,22 @@ ob_end_flush();
                 </div>
 
                 <div class="form-group">
-                    <label for="ubicacion url">Valor del Parámetro</label>
+                    <label for="txt_valorparametro">Valor del Parámetro</label>
                     <input class="form-control" type="text" id="valor" name="valor" required style="text-transform: uppercase"  maxlength="30">
                   </div>
 
                 </div>
 
                 <div class="form-group">
-                    <label for="ubicacion url">Fecha Modificación</label>
-                    <input class="form-control" type="datetime-local" id="fecha_modificacion" name="fecha_modificacion" required style="text-transform: uppercase" onkeyup="Espacio(this, event)" onkeypress="return Letras(event)" onkeypress="return comprobar(this.value, event, this.id)" maxlength="30">
+                    <label for="txt_fecha_modificacion">Fecha Modificación</label>
+                    <?php 
+                
+                $fe=date("Y-m-d\TH:i");
+                //echo "HOra serfver: ".$fe;
+                 ?>
+                <!--<input class="form-control" type="datetime-local" id="txt_fecha_modificacion" name="txt_fecha_modificacion" required onkeydown="return false" min="<?php $fecha_n?>" max="<?php $f_despues?>">-->
+                <input class="form-control" value="<?php $fe=date("Y-m-d\TH:i");?>" type="datetime-local" id="txt_fecha_modificacion" name="txt_fecha_modificacion" min="<?php echo date("Y-m-d\TH:i",strtotime($fe."-10 hour"));?>"  max="<?php echo date("Y-m-d\TH:i",strtotime($fe."+ 5 month"));?>" required >
+                
                   </div>
 
               </div>

@@ -113,7 +113,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Nuevo Transaccion</h1>
+            <h1>Nueva Transacción</h1>
           </div>
 
 
@@ -152,19 +152,26 @@ ob_end_flush();
 
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="descripcion"> Fecha de Envio </label>
-                    <input autofocus class="form-control" type="datetime-local" maxlength="60" id="fecha_envio" name="fecha_envio" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <label for="txt_fecha_envio"> Fecha de Envio </label>
+                    <?php 
+                
+                $fe=date("Y-m-d\TH:i");
+                //echo "HOra serfver: ".$fe;
+                 ?>
+                <!--<input class="form-control" type="datetime-local" id="txt_fecha_modificacion" name="txt_fecha_modificacion" required onkeydown="return false" min="<?php $fecha_n?>" max="<?php $f_despues?>">-->
+                <input class="form-control" value="<?php $fe=date("Y-m-d\TH:i");?>" type="datetime-local" id="txt_fecha_envio" name="txt_fecha_envio" min="<?php echo date("Y-m-d\TH:i",strtotime($fe."-10 hour"));?>"  max="<?php echo date("Y-m-d\TH:i",strtotime($fe."+ 5 month"));?>" required >
+               
                   </div>
                   <div class="form-group">
-                    <label for="descripcion"> Request De Envio </label>
+                    <label for="txt_requestenvio"> Request De Envio </label>
                     <input autofocus class="form-control" type="text" maxlength="60" id="request_envio" name="request_envio" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
-                    <label for="descripcion"> Response</label>
+                    <label for="txt_response"> Response</label>
                     <input autofocus class="form-control" type="text" maxlength="60" id="response" name="response" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
-                    <label for="descripcion"> Estado</label>
+                    <label for="txt_estado"> Estado</label>
                     <input autofocus class="form-control" type="text" maxlength="60" id="estado" name="estado" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
 

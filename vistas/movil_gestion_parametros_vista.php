@@ -151,18 +151,18 @@ ob_end_flush();
      
       <!-- /.card-header -->
       <div class="card-body">
-        <table id="tabla2" class="table table-bordered table-striped">
+        <table id="tabla" class="table table-bordered table-striped">
           <thead>
             <tr>
               <th>ID</th>
-              <th>PARAMETRO</th>
+              <th>PARÁMETRO</th>
               <th>DESCRIPCIÓN</th>
               <th>VALOR</th>
-              <th>FECHA DE MODIFICACION</th>
-              <th>MODIFICADO POR</th>
+              <th>FECHA_MOD</th>
+              <th>MOD_POR</th>
               <th>USUARIO ID</th>
               <th>EDITAR</th>
-              <th>ELIMINAR</th>
+              <th>BORRAR</th>
             </tr>
           </thead>
           <tbody>
