@@ -12,7 +12,7 @@ require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
 ////////////////declaracion de variables para la busqueda//////////
 
-$Id_objeto = 125;
+$Id_objeto = 15;
 
 bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'Ingreso', 'A Crear Segmentos');
 
