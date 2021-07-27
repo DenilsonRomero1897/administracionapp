@@ -1,11 +1,13 @@
-<?php
+(<?php
 session_start();
 
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
-require_once "../Modelos/movil_noticia_modelo.php";
-    
+require_once ("../Modelos/movil_noticia_modelo.php");
+require_once ("movil_api_controlador.php");
 
+$url ='http://localhost/apiAppInformatica/modulos/envioNotificaciones.php';
+$datos = [];
 switch ($_GET['op']) {
     
     case 'insert':
@@ -26,9 +28,22 @@ switch ($_GET['op']) {
                     $i += 1;
                 }
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
+                
+                //Llenado del arreglo
+                array_push($datos, ["id"=>$id]);
+                array_push($datos, ["titulo"=>$titulo]);
+                array_push($datos, ["contenido"=>$contenido]);
+                array_push($datos, ["segmento_id"=>$segmento]);
+                array_push($datos, ["fecha"=>$fecha_publicacion]);
+                array_push($datos, ["fecha_vencimiento"=>$fecha_vencimiento]);
+                array_push($datos, ["url"=>$url]);
+                consumoApi($url, $datos);
+                
                 header('location: ../vistas/movil_gestion_noticia_vista.php?msj=2');
+                
+            
             }
-        break;
+          break;
         
     case 'editar':
         $id = $_GET['id'];
@@ -46,7 +61,6 @@ switch ($_GET['op']) {
         break;
     
 }
-
 
 function subirDocumentos($i){
 
