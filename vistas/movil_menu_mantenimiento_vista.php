@@ -5,195 +5,80 @@ require_once('../clases/funcion_visualizar.php');
 
 
 
-if (permiso_ver('56') == '1') {
+if (permiso_ver('126') == '1') {
 
-  $_SESSION['mantenimiento_jornada_docente_vista'] = "...";
+  $_SESSION['movil_crear_tipo_recurso_vista'] = "...";
 } else {
-  $_SESSION['mantenimiento_jornada_docente_vista'] = "No 
+  $_SESSION['movil_crear_tipo_recurso_vista'] = "No 
+  tiene permisos para visualizar";
+}
+if (permiso_ver('127') == '1') {
+
+  $_SESSION['movil_mantenimiento_tipo_recurso_vista'] = "...";
+} else {
+  $_SESSION['movil_mantenimiento_tipo_recurso_vista'] = "No 
   tiene permisos para visualizar";
 }
 
 
-if (permiso_ver('57') == '1') {
+if (permiso_ver('128') == '1') {
 
-  $_SESSION['mantenimiento_comisiones_docente_vista'] = "...";
+  $_SESSION['movil_crear_tipo_notificacion_vista'] = "...";
 } else {
-  $_SESSION['mantenimiento_comisiones_docente_vista'] = "No 
+  $_SESSION['movil_crear_tipo_notificacion_vista'] = "No 
   tiene permisos para visualizar";
 }
-if (permiso_ver('59') == '1') {
+if (permiso_ver('2') == '1') {
 
-  $_SESSION['mantenimiento_categorias_docente_vista'] = "...";
+  $_SESSION['movil_mantenimiento_tipo_notificacion_vista'] = "...";
 } else {
-  $_SESSION['mantenimiento_categorias_docente_vista'] = "No 
+  $_SESSION['movil_mantenimiento_tipo_notificacion_vista'] = "No 
   tiene permisos para visualizar";
 }
+if (permiso_ver('3') == '1') {
 
-if (permiso_ver('60') == '1') {
-
-  $_SESSION['mantenimiento_grados_academicos_vista'] = "...";
+  $_SESSION['movil_crear_tipo_mensaje_vista'] = "...";
 } else {
-  $_SESSION['mantenimiento_grados_academicos_vista'] = "No 
+  $_SESSION['movil_crear_tipo_mensaje_vista'] = "No 
   tiene permisos para visualizar";
 }
-if (permiso_ver('62') == '1') {
+if (permiso_ver('4') == '1') {
 
-  $_SESSION['mantenimiento_estado_civil_vista'] = "...";
+  $_SESSION['movil_mantenimiento_tipo_mensaje_vista'] = "...";
 } else {
-  $_SESSION['mantenimiento_estado_civil_vista'] = "No 
-  tiene permisos para visualizar";
-}
-
-
-if (permiso_ver('64') == '1') {
-
-  $_SESSION['mantenimiento_crear_comisiones_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_crear_comisiones_vista'] = "No 
+  $_SESSION['movil_mantenimiento_tipo_mensaje_vista'] = "No 
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('65') == '1') {
+if (permiso_ver('7') == '1') {
 
-  $_SESSION['mantenimiento_crear_grados_academicos_vista'] = "...";
+  $_SESSION['movil_crear_tipo_transaccion_vista'] = "...";
 } else {
-  $_SESSION['mantenimiento_crear_grados_academicos_vista'] = "No 
+  $_SESSION['movil_crear_tipo_transaccion_vista'] = "No 
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('66') == '1') {
+if (permiso_ver('8') == '1') {
 
-  $_SESSION['mantenimiento_crear_categoria_vista'] = "...";
+  $_SESSION['movil_mantenimiento_tipo_transaccion'] = "...";
 } else {
-  $_SESSION['mantenimiento_crear_categoria_vista'] = "No 
+  $_SESSION['movil_mantenimiento_tipo_transaccion'] = "No 
   tiene permisos para visualizar";
 }
-if (permiso_ver('67') == '1') {
+if (permiso_ver('9') == '1') {
 
-  $_SESSION['mantenimiento_crear_jornada_vista'] = "...";
+  $_SESSION['movil_crear_ubicacion_recurso_vista'] = "...";
 } else {
-  $_SESSION['mantenimiento_crear_jornada_vista'] = "No 
+  $_SESSION['movil_crear_ubicacion_recurso_vista'] = "No 
   tiene permisos para visualizar";
 }
-if (permiso_ver('68') == '1') {
+if (permiso_ver('10') == '1') {
 
-  $_SESSION['mantenimiento_crear_estado_civil_vista'] = "...";
+  $_SESSION['movil_mantenimiento_ubicacionrecurso_vista'] = "...";
 } else {
-  $_SESSION['mantenimiento_crear_estado_civil_vista'] = "No 
+  $_SESSION['movil_mantenimiento_ubicacionrecurso_vista'] = "No 
   tiene permisos para visualizar";
 }
-
-if (permiso_ver('84') == '1') {
-
-  $_SESSION['mantenimiento_genero_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_genero_vista'] = "No 
-  tiene permisos para visualizar";
-}
-if (permiso_ver('73') == '1') {
-
-  $_SESSION['mantenimiento_crear_genero_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_crear_genero_vista'] = "No 
-  tiene permisos para visualizar";
-}
-if (permiso_ver('90') == '1') {
-
-  $_SESSION['mantenimiento_nacionalidad_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_nacionalidad_vista'] = "No 
-  tiene permisos para visualizar";
-}
-if (permiso_ver('91') == '1') {
-
-  $_SESSION['mantenimiento_crear_nacionalidad_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_crear_nacionalidad_vista'] = "No 
-  tiene permisos para visualizar";
-}
-
-if (permiso_ver('80') == '1') {
-
-  $_SESSION['mantenimiento_atributos_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_atributos_vista'] = "No 
-  tiene permisos para visualizar";
-}
-
-if (permiso_ver('81') == '1') {
-
-  $_SESSION['mantenimiento_crear_atributo_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_crear_atributo_vista'] = "No 
-  tiene permisos para visualizar";
-}
-
-if (permiso_ver('74') == '1') {
-
-  $_SESSION['mantenimiento_actividades_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_actividades_vista'] = "No 
-  tiene permisos para visualizar";
-}
-
-
-if (permiso_ver('75') == '1') {
-
-  $_SESSION['mantenimiento_crear_actividades_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_crear_actividades_vista'] = "No 
-  tiene permisos para visualizar";
-}
-
-if (permiso_ver('76') == '1') {
-
-  $_SESSION['mantenimiento_crear_departamento_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_crear_departamento_vista'] = "No 
-  tiene permisos para visualizar";
-}
-
-if (permiso_ver('77') == '1') {
-
-  $_SESSION['mantenimiento_departamento_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_departamento_vista'] = "No 
-  tiene permisos para visualizar";
-}
-if (permiso_ver('78') == '1') {
-
-  $_SESSION['mantenimiento_crear_municipio_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_crear_municipio_vista'] = "No 
-  tiene permisos para visualizar";
-}
-
-if (permiso_ver('79') == '1') {
-
-  $_SESSION['mantenimiento_municipio_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_municipio_vista'] = "No 
-  tiene permisos para visualizar";
-}
-if (permiso_ver('88') == '1') {
-
-  $_SESSION['mantenimiento_crear_carrera_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_crear_carrera_vista'] = "No 
-  tiene permisos para visualizar";
-}
-
-if (permiso_ver('89') == '1') {
-
-  $_SESSION['mantenimiento_carrera_vista'] = "...";
-} else {
-  $_SESSION['mantenimiento_carrera_vista'] = "No 
-  tiene permisos para visualizar";
-}
-
-
-
-
 
 ?> 
 <!DOCTYPE html>
@@ -260,7 +145,7 @@ if (permiso_ver('89') == '1') {
               <div class="small-box bg-light">
                 <div class="inner">
                   <h4>Crear Nuevo Recurso  </h4>
-                  <p><?php echo $_SESSION['mantenimiento_crear_comisiones_vista']; ?></p>
+                  <p><?php echo $_SESSION['movil_crear_tipo_recurso_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-plus-square"></i>
@@ -279,7 +164,7 @@ if (permiso_ver('89') == '1') {
               <div class="small-box bg-primary">
                 <div class="inner">
                   <h4>Mantenimiento Tipo Recurso</h4>
-                  <p><?php echo $_SESSION['mantenimiento_comisiones_docente_vista']; ?></p>
+                  <p><?php echo $_SESSION['movil_mantenimiento_tipo_recurso_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-edit"></i>
@@ -308,7 +193,7 @@ if (permiso_ver('89') == '1') {
               <div class="small-box bg-light">
                 <div class="inner">
                   <h4>Crear Tipo Notificación </h4>
-                  <p><?php echo $_SESSION['mantenimiento_crear_grados_academicos_vista']; ?></p>
+                  <p><?php echo $_SESSION['movil_crear_tipo_notificacion_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-plus-square"></i>
@@ -327,7 +212,7 @@ if (permiso_ver('89') == '1') {
               <div class="small-box bg-primary">
                 <div class="inner">
                   <h4>Mantenimiento Tipo Notificación</h4>
-                  <p><?php echo $_SESSION['mantenimiento_grados_academicos_vista']; ?></p>
+                  <p><?php echo $_SESSION['movil_mantenimiento_tipo_notificacion_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-edit"></i>
@@ -356,7 +241,7 @@ if (permiso_ver('89') == '1') {
               <div class="small-box bg-light">
                 <div class="inner">
                   <h4>Crear Tipo Mensaje</h4>
-                  <p><?php echo $_SESSION['mantenimiento_crear_categoria_vista']; ?></p>
+                  <p><?php echo $_SESSION['movil_crear_tipo_mensaje_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-plus-square"></i>
@@ -375,7 +260,7 @@ if (permiso_ver('89') == '1') {
               <div class="small-box bg-primary">
                 <div class="inner">
                   <h4>Mantenimiento Tipo Mensaje </h4>
-                  <p><?php echo $_SESSION['mantenimiento_categorias_docente_vista']; ?></p>
+                  <p><?php echo $_SESSION['movil_mantenimiento_tipo_mensaje_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-edit"></i>
@@ -404,7 +289,7 @@ if (permiso_ver('89') == '1') {
               <div class="small-box bg-light">
                 <div class="inner">
                   <h4>Crear Tipo Transacción</h4>
-                  <p><?php echo $_SESSION['mantenimiento_crear_jornada_vista']; ?></p>
+                  <p><?php echo $_SESSION['movil_crear_tipo_transaccion_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-plus-square"></i>
@@ -423,7 +308,7 @@ if (permiso_ver('89') == '1') {
               <div class="small-box bg-primary">
                 <div class="inner">
                   <h4>Mantenimiento Tipo Transacción </h4>
-                  <p><?php echo $_SESSION['mantenimiento_jornada_docente_vista']; ?></p>
+                  <p><?php echo $_SESSION['movil_mantenimiento_tipo_transaccion_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-edit"></i>
@@ -452,7 +337,7 @@ if (permiso_ver('89') == '1') {
               <div class="small-box bg-light">
                 <div class="inner">
                   <h4>Crear Ubicación de Recursos </h4>
-                  <p><?php echo $_SESSION['mantenimiento_crear_estado_civil_vista']; ?></p>
+                  <p><?php echo $_SESSION['movil_crear_ubicacion_recurso_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-plus-square"></i>
@@ -471,7 +356,7 @@ if (permiso_ver('89') == '1') {
               <div class="small-box bg-primary">
                 <div class="inner">
                   <h4>Mantenimiento Ubicación de Recurso </h4>
-                  <p><?php echo $_SESSION['mantenimiento_estado_civil_vista']; ?></p>
+                  <p><?php echo $_SESSION['movil_mantenimiento_ubicacionrecurso_vista']; ?></p>
                 </div>
                 <div class="icon">
                   <i class="fas fa-edit"></i>

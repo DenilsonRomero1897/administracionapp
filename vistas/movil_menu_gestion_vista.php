@@ -5,14 +5,14 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 require_once('../clases/funcion_bitacora_movil.php');
 
-if (permiso_ver('128') == '1') {
+if (permiso_ver('1') == '1') {
 
   $_SESSION['crear_parametro_vista'] = "...";
 } else {
   $_SESSION['crear_parametro_vista'] = "No 
   tiene permisos para visualizar";
 }
-if (permiso_ver('128') == '1') {
+if (permiso_ver('1') == '1') {
 
   $_SESSION['gestion_parametros_vista'] = "...";
 } else {

@@ -13,7 +13,7 @@ require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
 
 
-$Id_objeto = 128;
+$Id_objeto = 7;
 
 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto, 'Ingreso', 'A Crear Tipo Transaccion');
 
