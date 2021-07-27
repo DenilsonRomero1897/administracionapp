@@ -12,16 +12,16 @@
 //curl_close($ch);
 
 //peticion post
-
+function consumoApi($url, $datos){
 $ch = curl_init();
-$array = [ 'idLote' => 1,
-           'titulo' => 'Title Prueba desde Postman',
-            'contenido' => 'Body Prueba desde Postman',
-            'urlRecurso' => 'null' ,
-             'segmento' => 1,
-                     ]; 
-$data = http_build_query($array);
-curl_setopt($ch,CURLOPT_URL,' http://localhost/apiAppInformatica/modulos/envioNotificaciones.php');
+// $array = ['idLote' =>1,
+//           'titulo' =>'Title Prueba desde Postman',
+//            'contenido' =>'Body Prueba desde Postman',
+//             'urlRecurso' =>'null',
+//             'segmento' =>1,]; 
+                     
+$data = json_encode($datos);
+curl_setopt($ch,CURLOPT_URL,$datos);
 curl_setopt($ch,CURLOPT_POST,true);
 curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
@@ -29,11 +29,9 @@ $response = curl_exec($ch);
 if (curl_errno($ch)) echo curl_error($ch);
 else $decoded = json_decode($response, true);
 
-foreach($decoded as $index => $value){
-    echo "$index: $value";
-}
-
 curl_close($ch);
+
+return $decoded;}
 
 
 
