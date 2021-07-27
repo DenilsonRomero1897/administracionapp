@@ -21,7 +21,7 @@ $ch = curl_init();
 //             'segmento' =>1,]; 
                      
 $data = json_encode($datos);
-curl_setopt($ch,CURLOPT_URL,$datos);
+curl_setopt($ch,CURLOPT_URL,$url);
 curl_setopt($ch,CURLOPT_POST,true);
 curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
 curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
@@ -31,7 +31,9 @@ else $decoded = json_decode($response, true);
 
 curl_close($ch);
 
-return $decoded;}
+return $decoded;
+
+}
 
 
 
