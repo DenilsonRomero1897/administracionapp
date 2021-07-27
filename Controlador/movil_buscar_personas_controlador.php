@@ -16,7 +16,7 @@ while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) {
     <td> $nombre </td>
     <td> $apellidos </td>
     <td style='text-align: center;'>
-      <input type='checkbox' class='personas-check' name='persona[]' value='$id'><br>
+      <input type='checkbox' class='personas-check' name='persona[]' value='$id' onchange='validar(this)'><br>
       </a>
     </td>";
    } 

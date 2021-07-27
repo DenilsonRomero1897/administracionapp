@@ -131,16 +131,16 @@ ob_end_flush();
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12">
-                <label>Segmento: </label>
-                <select class="form-control" name="Segmento" id="Segmento" required>
-                  <option value="">Seleccione un segmento:</option>
-                  <?php 
-                  $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";
-                  $resultado_segmentos = $mysqli->query($sql_segmentos);
-                  while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
-                        <option value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
-                  <?php } ?>
-                </select>
+                  <label>Segmento: </label>
+                  <select class="form-control" name="Segmento" id="Segmento" required>
+                    <option value="">Seleccione un segmento:</option>
+                    <?php
+                    $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";
+                    $resultado_segmentos = $mysqli->query($sql_segmentos);
+                    while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
+                      <option value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
+                    <?php } ?>
+                  </select>
                 </div>
               </div>
               <div class="form-group">
@@ -168,50 +168,33 @@ ob_end_flush();
                   </tr>
                 </thead>
                 <tbody id="resultado">
-                  
+
                 </tbody>
               </table>
             </div>
 
-            <p class="text-center" style="margin-top: 20px;">
-            <button type="submit" class="btn btn-primary" id="btn_agregar_usuarios" name="btn_agregar_usuarios"><i class="zmdi zmdi-floppy"></i>Agregar</button>
-            </p>
-            <div class="card-body">
-              <table id="listausuarios" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th hidden>ID</th>
-                    <th>NOMBRE</th>
-                    <th>APELLIDO</th>
-                    <th>ELIMINAR</th>
-                  </tr>
-                </thead>
-                <tbody id="resultadousuarios">
-                  
-                </tbody>
-              </table>
-              <script>
-                $('#btn_agregar_usuarios').click(function(){
-
-                });
-                function listar(){
-                  $('resultado tr').each(function){
-                    let check=$(this).find('#marcar_todos').is(':checked');// true o false
-                    let Nombre=$(this).find('td').eq(1).text();
-                    let Apellido=$(this).find('td').eq(1).text();
-                    if (check){
-                      var filalistar="<tr></td>"+Nombre+"<tr></td>"+Apellido+"</td></tr>";
-                      $('#resultadousuarios').append(filalistar)
-                    }
-                    
-                  });
-                }
-                </script>
-            </div>
-            <p class="text-center" style="margin-top: 20px;">
-             <button type="submit" class="btn btn-primary" id="btn_guardar_segmentos" name="btn_guardar_segmentos"><i class="zmdi zmdi-floppy"></i>Guardar</button>
+            <p class="text-center text-white" style="margin-top: 20px;">
+              <a class="btn btn-primary" id="btn_agregar_usuarios" name="btn_agregar_usuarios"><i class="zmdi zmdi-floppy"></i>Agregar</a>
             </p>
         </form>
+      
+        <div class="card-body" id="resultadoSegmentoUsuarios" style="background-color: blue; color:white;">
+          <!-- <table id="listausuarios" class="table table-bordered table-striped">
+            <thead>
+              <tr>
+                <th hidden>ID</th>
+                <th>NOMBRE</th>
+                <th>APELLIDO</th>
+                <th>ELIMINAR</th>
+              </tr>
+            </thead>
+            <tbody id="resultadousuarios">
+
+            </tbody>
+          </table> -->
+
+        </div>
+       
       </div>
     </section>
 
@@ -235,13 +218,41 @@ ob_end_flush();
         }
       });
     }
+
     function toggle(source) {
-      checkboxes = document.getElementsByName('persona');
+      checkboxes = document.getElementsByName('persona[]');
       for (var i = 0, n = checkboxes.length; i < n; i++) {
         checkboxes[i].checked = source.checked;
       }
-
+   
     }
+    function validar(checkbox){
+      if(checkbox.checked){
+        var segmento = document.getElementById('Segmento').value;
+        var parametros = {
+          'Segmento': segmento,
+          'persona': checkbox.value
+        }
+        console.log(parametros['Segmento'],parametros['persona']);
+        $.ajax({
+        data: parametros, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_segmento_persona_controlador.php', //archivo que recibe la peticion
+        type: 'post', //método de envio
+        beforeSend: function() {
+          $('#resultadoSegmentoUsuarios').html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          if(response){
+            readProducts();
+          }
+          
+        }
+      });
+      }else{
+        $('#resultadoSegmentoUsuarios').html('');
+      }
+    }
+
     $(function() {
       $('#tabla').DataTable({
         "paging": true,
@@ -256,7 +267,10 @@ ob_end_flush();
         }
       });
     });
-   
+
+    function readProducts(){
+		$('#resultadoSegmentoUsuarios').load('../vistas/movil_listar_segmento_usuarios.php');	
+	}
   </script>
 
 </body>
