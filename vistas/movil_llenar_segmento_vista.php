@@ -119,7 +119,7 @@ ob_end_flush();
     <section class="content">
       <div class="container-fluid">
         <!-- pantalla 1 -->
-        <form action="../Controlador/movil_segmento_persona_controlador.php" method="POST">
+        
           <div class="card card-default">
             <div class="card-header">
               <h3 class="card-title">Registro Segmento</h3>
@@ -132,7 +132,7 @@ ob_end_flush();
               <div class="row">
                 <div class="col-md-12">
                   <label>Segmento: </label>
-                  <select class="form-control" name="Segmento" id="Segmento" required>
+                  <select class="form-control" name="Segmento" id="Segmento" onchange="readProducts(this.value)" required>
                     <option value="">Seleccione un segmento:</option>
                     <?php
                     $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";
@@ -172,27 +172,12 @@ ob_end_flush();
                 </tbody>
               </table>
             </div>
-
-            <p class="text-center text-white" style="margin-top: 20px;">
-              <a class="btn btn-primary" id="btn_agregar_usuarios" name="btn_agregar_usuarios"><i class="zmdi zmdi-floppy"></i>Agregar</a>
-            </p>
-        </form>
-      
-        <div class="card-body" id="resultadoSegmentoUsuarios" style="background-color: blue; color:white;">
-          <!-- <table id="listausuarios" class="table table-bordered table-striped">
-            <thead>
-              <tr>
-                <th hidden>ID</th>
-                <th>NOMBRE</th>
-                <th>APELLIDO</th>
-                <th>ELIMINAR</th>
-              </tr>
-            </thead>
-            <tbody id="resultadousuarios">
-
-            </tbody>
-          </table> -->
-
+            
+             <hr>
+       <p class="text-center font-weight-bold">Listado de personas que pertenecen al segmento</p>
+        <div class="card-body" id="resultadoSegmentoUsuarios">
+          
+          
         </div>
        
       </div>
@@ -218,38 +203,37 @@ ob_end_flush();
         }
       });
     }
-
+   //funcion para marcar todos los checkbox
     function toggle(source) {
+      console.log(source.checked);
       checkboxes = document.getElementsByName('persona[]');
       for (var i = 0, n = checkboxes.length; i < n; i++) {
         checkboxes[i].checked = source.checked;
       }
    
     }
+    //-------------------------------------------
+
+    //funcion que envia los datos de usuario y segmento al controldaor para realizar el sql correspondiente
     function validar(checkbox){
       if(checkbox.checked){
         var segmento = document.getElementById('Segmento').value;
-        var parametros = {
-          'Segmento': segmento,
-          'persona': checkbox.value
-        }
-        console.log(parametros['Segmento'],parametros['persona']);
+        var parametros = {'funcion':'insertar','Segmento': segmento,'persona': checkbox.value }
         $.ajax({
         data: parametros, //datos que se envian a traves de ajax
         url: '../Controlador/movil_segmento_persona_controlador.php', //archivo que recibe la peticion
-        type: 'post', //método de envio
+        type: 'POST', //método de envio
         beforeSend: function() {
           $('#resultadoSegmentoUsuarios').html("Procesando, espere por favor...");
         },
-        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-          if(response){
-            readProducts();
+        success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          if(data == 'hola mundo'){
+          readProducts(segmento);
+          }else{
+            alert('no se pudo guardar!!');
           }
-          
         }
       });
-      }else{
-        $('#resultadoSegmentoUsuarios').html('');
       }
     }
 
@@ -268,9 +252,40 @@ ob_end_flush();
       });
     });
 
-    function readProducts(){
-		$('#resultadoSegmentoUsuarios').load('../vistas/movil_listar_segmento_usuarios.php');	
+    function readProducts(segmento){
+      var parametro = {'segmento':segmento}
+      $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_listar_segmento_usuarios_controlador.php', //archivo que recibe la peticion
+        type: 'POST', //método de envio
+        beforeSend: function() {
+          $('#resultadoSegmentoUsuarios').html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          $('#resultadoSegmentoUsuarios').html(response);
+        }
+      });
 	}
+
+  function eliminar(id_usuario,segmento){
+    var parametro = {'funcion':'eliminar','id_usuario':id_usuario}
+      $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_segmento_persona_controlador.php', //archivo que recibe la peticion
+        type: 'POST', //método de envio
+        beforeSend: function() {
+          $('#resultadoSegmentoUsuarios').html("Procesando, espere por favor...");
+        },
+        success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          console.log(data);
+          if(data == 'hola mundo'){
+          readProducts(segmento);
+          }else{
+          alert('no se pudo eliminar!!');
+          }
+        }
+      });
+  }
   </script>
 
 </body>
