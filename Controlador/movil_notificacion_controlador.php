@@ -5,6 +5,7 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../Controlador/movil_api_controlador.php');
 
+
 $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
 $datos = [];
 $Id_objeto = 130;
@@ -28,13 +29,13 @@ switch ($_GET['op']) {
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
                 
                  //Llenado del arreglo
-                 array_push($datos, ["idLote"=>$id]);
+                 array_push($datos, ["idLote"=>(int)$id]);
                  array_push($datos, ["titulo"=>$titulo]);
                  array_push($datos, ["contenido"=>$contenido]);
-                 array_push($datos, ["urlRecurso"=> null]);
-                 array_push($datos, ["segmento"=>$segmento]);
+                 array_push($datos, ["urlRecurso"=>0]);
+                 array_push($datos, ["segmento"=>(int)$segmento]);
                  //var_dump($datos);
-                // die;
+                 //die;
                  $response = consumoApi($url, $datos);
                  var_dump($response);
                  die;
@@ -81,5 +82,28 @@ switch ($_GET['op']) {
     
 }
 
+function crearNotificacion($url,$tipo_notificacion,$Id_objeto,$id,$titulo,$contenido,$segmento){
+    require_once('../clases/Conexion.php');
+    require_once('../clases/funcion_bitacora_movil.php');
+    require_once('../Controlador/movil_api_controlador.php');
+    $sql_id_notificacion = "SELECT id FROM tbl_movil_tipo_notificaciones WHERE descripcion = '$tipo_notificacion'";
+    $resul = $mysqli->query($sql_id_notificacion);
+    $id_tipo_notificacion = $resul->fetch_assoc();
+    $tipo_notificacion = (int)$id_tipo_notificacion['id'];
+    //
+    $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,0)";
+    $resultado = $mysqli->query($sql);
+        if($resultado === TRUE){
+            bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
 
-?>
+    array_push($datos, ["idLote"=>(int)$id]);
+    array_push($datos, ["titulo"=>$titulo]);
+    array_push($datos, ["contenido"=>$contenido]);
+    array_push($datos, ["urlRecurso"=>0]);
+    array_push($datos, ["segmento"=>(int)$segmento]);
+    $response = consumoApi($url, $datos);
+        }else{
+            echo 'no se pudo realizar la operacion';
+        }
+        
+}
