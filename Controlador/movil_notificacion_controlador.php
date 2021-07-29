@@ -5,8 +5,8 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../Controlador/movil_api_controlador.php');
 
-
-$url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
+if (isset($_GET['op'])) {
+    $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
 $datos = [];
 $Id_objeto = 130;
 $id = 4;
@@ -44,26 +44,6 @@ switch ($_GET['op']) {
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }
         break;
-
-    case 'delete':
-        $id = $_GET['id'];
-        $sql = "DELETE from tbl_movil_notificaciones WHERE id = $id";
-        $resultado = $mysqli->query($sql);
-            if($resultado === TRUE){
-                bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'ELIMINO',strtoupper("$sql"));
-                echo '<script type="text/javascript">
-                swal({
-                     title:"",
-                     text:"Los datos  se eliminaron correctamente",
-                     type: "success",
-                     showConfirmButton: false,
-                     timer: 3000
-                  });
-                  $(".FormularioAjax")[0].reset();
-                                 window.location = "../vistas/movil_gestion_notificaciones_vista.php";
-              </script>';
-            }
-        break; 
         
     case 'editar':
         $id = $_GET['id'];
@@ -81,6 +61,22 @@ switch ($_GET['op']) {
         break;
     
 }
+}
+
+if (isset($_POST['funcion'])) {
+    if ($_POST['funcion']=='eliminar') {
+        $id = (int)$_POST['id'];
+                //se ejecuta el sql respectivo
+                $sql = "DELETE FROM tbl_movil_notificaciones where id = $id";
+                $resultado = $mysqli->query($sql);
+                if ($resultado) {
+                    echo 'hola mundo';
+                }else{
+                    echo '';
+                }
+    }
+}
+
 
 function crearNotificacion($url,$tipo_notificacion,$Id_objeto,$id,$titulo,$contenido,$segmento){
     require_once('../clases/Conexion.php');
@@ -90,18 +86,17 @@ function crearNotificacion($url,$tipo_notificacion,$Id_objeto,$id,$titulo,$conte
     $resul = $mysqli->query($sql_id_notificacion);
     $id_tipo_notificacion = $resul->fetch_assoc();
     $tipo_notificacion = (int)$id_tipo_notificacion['id'];
-    //
     $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,0)";
     $resultado = $mysqli->query($sql);
-        if($resultado === TRUE){
-            bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
-
+    if($resultado === TRUE){
+    bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
     array_push($datos, ["idLote"=>(int)$id]);
     array_push($datos, ["titulo"=>$titulo]);
     array_push($datos, ["contenido"=>$contenido]);
     array_push($datos, ["urlRecurso"=>0]);
     array_push($datos, ["segmento"=>(int)$segmento]);
     $response = consumoApi($url, $datos);
+
         }else{
             echo 'no se pudo realizar la operacion';
         }

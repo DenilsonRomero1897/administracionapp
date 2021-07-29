@@ -118,7 +118,7 @@ ob_end_flush();
 </head>
 
 
-<body>
+<body onload="readProducts();">
 
 
   <div class="content-wrapper">
@@ -144,81 +144,27 @@ ob_end_flush();
       </div><!-- /.container-fluid -->
     </section>
 
-
-    <!--Pantalla 2-->
-
-
-
     <div class="card card-default">
       <div class="card-header">
-      <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>   
-      <a class="btn btn-primary btn-xs float-right" href="../vistas/movil_crear_segmento_vista.php">Nuevo</a>
+        <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
+        <a class="btn btn-primary btn-xs float-right" href="../vistas/movil_crear_segmento_vista.php">Nuevo</a>
       </div>
-     
+
       <!-- /.card-header -->
-      <div class="card-body">
-        <table id="tablaSegmento" class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>NOMBRE</th>
-              <th>DESCRIPCIÓN</th>
-              <th>CREADO POR</th>
-              <th>FECHA DE CREACIÓN</th>
-              <th>EDITAR</th>
-              <th>ELIMINAR</th>
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            $sql_segmentos = "select * from tbl_movil_segmentos";
-            $resultado_segmentos = $mysqli->query($sql_segmentos);
-            while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
-              <tr>
-                <td><?php echo $segmento['id']; ?></td>
-                <td><?php echo $segmento['nombre']; ?></td>
-                <td><?php echo $segmento['descripcion']; ?></td>
-                <td><?php echo $segmento['creado_por']; ?></td>
-                <td><?php echo $segmento['fecha_creacion']; ?></td>
+      <div class="card-body" id="Segmentos">
 
-                <td style="text-align: center;">
-
-                  <a href="../vistas/movil_gestion_segmentos_vista.php?&id=<?php echo $segmento['id']; ?>" class="btn btn-primary btn-raised btn-xs">
-                    <i class="far fa-edit"></i>
-                  </a>
-                </td>
-
-                <td style="text-align: center;">
-                  <form action="../Controlador/movil_eliminar_segmento_controlador.php?id=<?php echo $segmento['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off" >
-                    <button type="submit" class="btn btn-danger btn-raised btn-xs">
-                      <i class="far fa-trash-alt"></i>
-                    </button>
-                  </form>
-                  <div class="RespuestaAjax"></div>
-                </td>
-
-              </tr>
-
-            <?php } ?>
-
-          </tbody>
-        </table>
       </div>
       <!-- /.card-body -->
     </div>
 
-  </div>
+  
 
-  </div>
-
-
+ 
 
 
 
-  </section>
 
-  </div>
-
+  <!-- modal inicio -->
   <form action="../Controlador/movil_segmentos_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
 
     <div class="modal fade" id="modal_modificar_segmento">
@@ -230,7 +176,6 @@ ob_end_flush();
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
 
           <!--Cuerpo del modal-->
           <div class="modal-body">
@@ -251,68 +196,34 @@ ob_end_flush();
                     <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtDescripcion']; ?>">
 
                   </div>
-
-                  <div class="form-group">
-                <label>Tipo de Persona: </label>
-                <select class="form-control" name="buscar_tipo_persona" id="buscar_tipo_persona" onchange="realizaProceso()">
-                  <option value="">Seleccione una opción :</option>
-                  <?php
-                  $sql_tipo_persona = "SELECT id_tipo_persona,tipo_persona FROM tbl_tipos_persona";
-                  $resultado_tipo_persona = $mysqli->query($sql_tipo_persona);
-                  while ($tipo_persona = $resultado_tipo_persona->fetch_array(MYSQLI_ASSOC)) { ?>
-                    <option value="<?php echo $tipo_persona['id_tipo_persona'] ?>"><?php echo $tipo_persona['tipo_persona'] ?></option>
-                  <?php } ?>
-                </select>
-              </div>
                 </div>
 
-                 <!-- /.card-header -->
-            <div class="card-body">
-              <table id="tablaSegmento" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th hidden>ID</th>
-                    <th>NOMBRE</th>
-                    <th>APELLIDOS</th>
-                    <th>SELECCIONAR <input type="checkbox" class="ml-2" name="marcar_todos" id="marcar_todos" onclick="toggle(this)"></th>
-                  </tr>
-                </thead>
-                <tbody id="resultado">
-                  <?php
-                  $sql_segmentos = "SELECT id_persona,nombres,apellidos FROM tbl_personas";
-                  $resultado_segmentos = $mysqli->query($sql_segmentos);
-                  while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
-                    <tr>
-                      <td hidden><?php echo $segmento['id_persona']; ?></td>
-                      <td><?php echo $segmento['nombres']; ?></td>
-                      <td><?php echo $segmento['apellidos']; ?></td>
-                      <td style="text-align: center;">
-                        <input type="checkbox" class="" name="persona" value="<?php echo $segmento['id_persona']; ?>"><br>
-                        </a>
-                      </td>
+                <!-- /.card-header -->
 
-                    <?php } ?>
-                </tbody>
-              </table>
+              </div>
             </div>
-            <script>
-    function realizaProceso() {
-      var tipo_persona = document.getElementById('buscar_tipo_persona').value;
-      var parametros = {
-        "tipoPersona": tipo_persona
-      }
-      $.ajax({
-        data: parametros, //datos que se envian a traves de ajax
-        url: '../Controlador/movil_buscar_personas_controlador.php', //archivo que recibe la peticion
-        type: 'post', //método de envio
-        beforeSend: function() {
-          $("#resultado").html("Procesando, espere por favor...");
-        },
-        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-          $("#resultado").html(response);
-        }
-      });
-    }
+          </div>
+
+          <!--Footer del modal-->
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+            <button type="submit" class="btn btn-primary" id="btn_modificar_segmento" name="btn_modificar_segmento">Guardar Cambios</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+
+    <!-- /.  finaldel modal -->
+  </form>
+
+  </div><!-- fin content wrapper -->
+
+  <script>
+    function ventana() {
+      window.open("../Controlador/movil_reporte_gestion_segmentos.php", "REPORTE");
+    } 
 
     function toggle(source) {
       checkboxes = document.getElementsByName('persona[]');
@@ -335,92 +246,56 @@ ob_end_flush();
         }
       });
     });
-   
-  </script>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-              
-              </div>
-            </div>
-          </div>
-
-          <!--Footer del modal-->
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" id="btn_modificar_segmento" name="btn_modificar_segmento">Guardar Cambios</button>
-          </div>
-        </div>
-        <!-- /.modal-content -->
-      </div>
-      <!-- /.modal-dialog -->
-    </div>
-
-    <!-- /.  finaldel modal -->
-
-
-
-  </form>
-
-
-  <script type="text/javascript">
-    $(function() {
-
-      $('#tabla').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-        "language": {
-      "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-    }
+    function readProducts() {
+      var parametro;
+      $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_listar_segmento_controlador.php', //archivo que recibe la peticion
+        type: 'POST', //método de envio
+        beforeSend: function() {
+          $('#Segmentos').html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          $('#Segmentos').html(response);
+        }
       });
-    });
-
-    function ventana() {
-      window.open("../Controlador/movil_reporte_gestion_segmentos.php", "REPORTE");
     }
+
+    function eliminar(id) {
+      var parametro = {
+        'funcion': 'eliminar',
+        'id': id
+      }
+      var confirmacion = confirm('esta seguro de eliminar');
+      if (confirmacion) {
+        $.ajax({
+          data: parametro, //datos que se envian a traves de ajax
+          url: '../Controlador/movil_eliminar_segmento_controlador.php', //archivo que recibe la peticion
+          type: 'POST', //método de envio
+          success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+            console.log(data);
+            if (data != '') {
+              readProducts();
+              datoseliminados();
+            } else {
+              alert('no se pudo eliminar!!');
+            }
+          }
+        });
+      } else {
+        console.log('decidio no eliminar');
+      }
+    }
+    function datoseliminados(){
+                    swal({
+                       title:"",
+                       text:"los datos se eliminaron correctamente.",
+                       type: "success",
+                       showConfirmButton: true,
+                       timer: 3000
+                    });
+                  }
   </script>
 </body>
 

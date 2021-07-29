@@ -111,7 +111,7 @@ if (isset($_REQUEST['msj'])) {
   <title></title>
 </head>
 
-<body>
+<body onload="readProducts()">
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -143,50 +143,8 @@ if (isset($_REQUEST['msj'])) {
         </div>
         <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
       <div >
-      <div class="card-body">
-        <table id="tabla" class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>TITULO</th>
-              <th>CONTENIDO</th>
-              <th>FECHA Y HORA DE PUBLICACIÓN</th>
-              <th>FECHA Y HORA DE VENCIMIENTO</th>
-              <th>SEGMENTO</th>
-              <th>EDITAR</th>
-              <th>BORRAR</th>
-            </tr>
-          </thead>
-          <tbody>
-          <?php
-            $sql = "SELECT * FROM tbl_movil_noticias";
-            $resultado_noticias = $mysqli->query($sql);
-            while ($fila = $resultado_noticias->fetch_array(MYSQLI_ASSOC)) { ?>
-              <tr>
-                <td><?php echo $fila['id']; ?></td>
-                <td><?php echo $fila['titulo']; ?></td>
-                <td><?php echo $fila['descripcion']; ?></td>
-                <td><?php echo $fila['fecha']; ?></td>
-                <td><?php echo $fila['fecha_vencimiento']; ?></td>
-                <td><?php echo $fila['segmento_id']; ?></td>
-
-                <td style="text-align: center;">
-                  <a href="../vistas/movil_gestion_noticia_vista.php?&id=<?php echo $fila['id']; ?>" class="btn btn-primary btn-raised btn-xs">
-                    <i class="far fa-edit"></i>
-                  </a>
-                </td>
-
-                <td style="text-align: center;">
-                  <form action="../Controlador/movil_noticia_controlador.php?op=delete&id=<?php echo $fila['id'] ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
-                    <button type="submit" class="btn btn-danger btn-raised btn-xs">
-                      <i class="far fa-trash-alt"></i>
-                    </button>
-                  </form>
-                </td>
-              </tr>
-            <?php } ?>
-          </tbody>
-        </table>
+      <div class="card-body" id="Noticias">
+        
       </div><!-- /.card-body -->
     </div>
   </div>
@@ -287,6 +245,59 @@ if (isset($_REQUEST['msj'])) {
     function ventana() {
       window.open("../Controlador/movil_reporte_gestion_noticia.php", "REPORTE");
     }
+
+    function readProducts() {
+      var parametro;
+      $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_listar_noticias_controlador.php', //archivo que recibe la peticion
+        type: 'POST', //método de envio
+        beforeSend: function() {
+          $('#Noticias').html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          $('#Noticias').html(response);
+        }
+      });
+    }
+
+    function eliminar(id) {
+      var parametro = {
+        'funcion': 'eliminar',
+        'id': id
+      }
+      var confirmacion = confirm('esta seguro de eliminar');
+      if (confirmacion) {
+        $.ajax({
+          data: parametro, //datos que se envian a traves de ajax
+          url: '../Controlador/movil_noticia_controlador.php', //archivo que recibe la peticion
+          type: 'POST', //método de envio
+          success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+            console.log(data);
+            if (data != '') {
+              readProducts();
+              datoseliminados();
+            } else {
+              alert('no se pudo eliminar!!');
+            }
+            
+          }
+        });
+      } else {
+        console.log('decidio no eliminar');
+      }
+    }
+
+    function datoseliminados(){
+                    swal({
+                       title:"",
+                       text:"los datos se eliminaron correctamente.",
+                       type: "error",
+                       showConfirmButton: true,
+                       timer: 3000
+                    });
+                  }
+
   </script>
 
 </body>

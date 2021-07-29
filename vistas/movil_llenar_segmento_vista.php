@@ -108,7 +108,7 @@ ob_end_flush();
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item active"><a href="../vistas/movil_menu_segmentos_vista.php">Segmentos</a></li>
+              <li class="breadcrumb-item active"><a href="../vistas/movil_gestion_segmentos_vista.php">Gestion Segmentos</a></li>
             </ol>
           </div>
           <div class="RespuestaAjax"></div>
@@ -179,9 +179,11 @@ ob_end_flush();
           
           
         </div>
-       
+        <a class="btn btn-primary m-4" href="../vistas/movil_gestion_segmentos_vista.php">Volver</a> 
       </div>
+      
     </section>
+   
 
 
   </div>
