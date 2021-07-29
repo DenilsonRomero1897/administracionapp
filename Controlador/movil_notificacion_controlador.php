@@ -3,7 +3,7 @@ session_start();
 
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
-//require_once('../Modelos/movil_notificaiones_modelo.php');
+require_once('../Controlador/movil_api_controlador.php');
 
 $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
 $datos = [];
@@ -35,7 +35,7 @@ switch ($_GET['op']) {
                  array_push($datos, ["segmento"=>$segmento]);
                  //var_dump($datos);
                 // die;
-                 $response =consumoApi($url, $datos);
+                 $response = consumoApi($url, $datos);
                  var_dump($response);
                  die;
 
