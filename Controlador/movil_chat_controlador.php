@@ -84,7 +84,7 @@ function mensaje()
     // if(validarinteraccion del mensaje){}
     echo '
          <div class="w-full flex justify-start">
-             <div class="bg-gray-100 rounded px-5 py-2 my-2 ml-4 text-gray-700 relative" style="max-width: 300px;">
+             <div class="bg-gray-200 rounded px-5 py-2 my-2 ml-4 text-gray-700 relative" style="max-width: 300px;">
                  <span class="block">Hello</span>
                  <span class="block text-xs text-right">10:30pm</span>
              </div>
