@@ -30,7 +30,8 @@ if (curl_errno($ch)) echo curl_error($ch);
 else $decoded = json_decode($response, true);
 
 curl_close($ch);
-
+var_dump($decoded);
+die;
 return $decoded;
 
 }

@@ -8,6 +8,7 @@ require_once ("movil_api_controlador.php");
 
 $url ='http://localhost/apiAppInformatica/modulos/envioNotificaciones.php';
 $datos = [];
+
 switch ($_GET['op']) {
     
     case 'insert':
@@ -37,7 +38,8 @@ switch ($_GET['op']) {
                 array_push($datos, ["fecha"=>$fecha_publicacion]);
                 array_push($datos, ["fecha_vencimiento"=>$fecha_vencimiento]);
                 array_push($datos, ["url"=>$url]);
-                consumoApi($url, $datos);
+
+                $response =consumoApi($url, $datos);
                 
                 header('location: ../vistas/movil_gestion_noticia_vista.php?msj=2');
                 

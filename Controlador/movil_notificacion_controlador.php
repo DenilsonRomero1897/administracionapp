@@ -5,8 +5,10 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 //require_once('../Modelos/movil_notificaiones_modelo.php');
 
-
-
+$url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
+$datos = [];
+$Id_objeto = 130;
+$id = 4;
 switch ($_GET['op']) {
     case 'insert':
         $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
@@ -24,6 +26,20 @@ switch ($_GET['op']) {
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
+                
+                 //Llenado del arreglo
+                 array_push($datos, ["idLote"=>$id]);
+                 array_push($datos, ["titulo"=>$titulo]);
+                 array_push($datos, ["contenido"=>$contenido]);
+                 array_push($datos, ["urlRecurso"=> null]);
+                 array_push($datos, ["segmento"=>$segmento]);
+                 //var_dump($datos);
+                // die;
+                 $response =consumoApi($url, $datos);
+                 var_dump($response);
+                 die;
+
+                
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }
         break;
