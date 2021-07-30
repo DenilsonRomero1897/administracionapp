@@ -22,25 +22,26 @@ if (isset($_GET['op'])) {
             $sql = "INSERT into tbl_movil_noticias (titulo,descripcion,fecha,fecha_vencimiento,remitente,segmento_id) VALUES ('$titulo','$contenido','$fecha_publicacion','$fecha_vencimiento','ADMIN',$segmento)";
             $resultado = $mysqli->query($sql);
                 if($resultado === TRUE){
-                    $idNoticia = $modelo->buscar_id_noticia($titulo,$fecha_publicacion);
-                    $i = 0;
-                    foreach ($_FILES['txt_documentos'] as $item){
-                        $idRecurso = subirDocumentos($i);
-                        $modelo->insert_noticia_recurso((int)$idNoticia['id'],(int)$idRecurso['id']); 
-                        $i += 1;
-                    }
+                   // $idNoticia = $modelo->buscar_id_noticia($titulo,$fecha_publicacion);
+                  //  $i = 0;
+                    
+                   // foreach ($_FILES['txt_documentos'] as $item){
+                        //$idRecurso = subirDocumentos($i);
+                        //$modelo->insert_noticia_recurso((int)$idNoticia['id'],(int)$idRecurso['id']); 
+                       // $i += 1;
+                   // }
                     bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
                     
                     //Llenado del arreglo
-                    array_push($datos, ["id"=>$id]);
-                    array_push($datos, ["titulo"=>$titulo]);
-                    array_push($datos, ["contenido"=>$contenido]);
-                    array_push($datos, ["segmento_id"=>$segmento]);
-                    array_push($datos, ["fecha"=>$fecha_publicacion]);
-                    array_push($datos, ["fecha_vencimiento"=>$fecha_vencimiento]);
-                    array_push($datos, ["url"=>$url]);
+                    //array_push($datos, ["id"=>$id]);
+                    //array_push($datos, ["titulo"=>$titulo]);
+                   // array_push($datos, ["contenido"=>$contenido]);
+                   // array_push($datos, ["segmento_id"=>$segmento]);
+                    //array_push($datos, ["fecha"=>$fecha_publicacion]);
+                    //array_push($datos, ["fecha_vencimiento"=>$fecha_vencimiento]);
+                    //array_push($datos, ["url"=>$url]);
     
-                    $response =consumoApi($url, $datos);
+                    //$response =consumoApi($url, $datos);
                     
                     header('location: ../vistas/movil_gestion_noticia_vista.php?msj=2');
                     

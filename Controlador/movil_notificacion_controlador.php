@@ -29,17 +29,15 @@ switch ($_GET['op']) {
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
                 
                  //Llenado del arreglo
-                 array_push($datos, ["idLote"=>(int)$id]);
-                 array_push($datos, ["titulo"=>$titulo]);
-                 array_push($datos, ["contenido"=>$contenido]);
-                 array_push($datos, ["urlRecurso"=>0]);
-                 array_push($datos, ["segmento"=>(int)$segmento]);
+                // array_push($datos, ["idLote"=>(int)$id]);
+                // array_push($datos, ["titulo"=>$titulo]);
+                 //array_push($datos, ["contenido"=>$contenido]);
+                 //array_push($datos, ["urlRecurso"=>0]);
+                 //array_push($datos, ["segmento"=>(int)$segmento]);
                  //var_dump($datos);
                  //die;
-                 $response = consumoApi($url, $datos);
-                 var_dump($response);
-                 die;
-
+                // $response = consumoApi($url, $datos);
+            
                 
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }
