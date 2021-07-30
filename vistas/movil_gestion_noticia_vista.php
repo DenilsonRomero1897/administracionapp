@@ -292,7 +292,7 @@ if (isset($_REQUEST['msj'])) {
                     swal({
                        title:"",
                        text:"los datos se eliminaron correctamente.",
-                       type: "error",
+                       type: "success",
                        showConfirmButton: true,
                        timer: 3000
                     });

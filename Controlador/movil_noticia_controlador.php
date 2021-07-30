@@ -22,14 +22,16 @@ if (isset($_GET['op'])) {
             $sql = "INSERT into tbl_movil_noticias (titulo,descripcion,fecha,fecha_vencimiento,remitente,segmento_id) VALUES ('$titulo','$contenido','$fecha_publicacion','$fecha_vencimiento','ADMIN',$segmento)";
             $resultado = $mysqli->query($sql);
                 if($resultado === TRUE){
-                   // $idNoticia = $modelo->buscar_id_noticia($titulo,$fecha_publicacion);
-                  //  $i = 0;
+                   $idNoticia = $modelo->buscar_id_noticia($titulo,$fecha_publicacion);
+                   $i = 0;
                     
-                   // foreach ($_FILES['txt_documentos'] as $item){
-                        //$idRecurso = subirDocumentos($i);
-                        //$modelo->insert_noticia_recurso((int)$idNoticia['id'],(int)$idRecurso['id']); 
-                       // $i += 1;
-                   // }
+                   foreach ($_FILES['txt_documentos'] as $item){
+                       
+                        $idRecurso = subirDocumentos($i);
+                       
+                        $modelo->insert_noticia_recurso((int)$idNoticia['id'],(int)$idRecurso['id']); 
+                       $i += 1;
+                   }
                     bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
                     
                     //Llenado del arreglo
@@ -66,25 +68,7 @@ if (isset($_GET['op'])) {
         
     }
     
-    function subirDocumentos($i){
     
-        $MP = new modelo_registro_noticia();
-        //$nombrearchivo = htmlspecialchars($_POST['txt_documentos']['name']['0'],ENT_QUOTES,'UTF-8');
-        $tmp_name = $_FILES['txt_documentos']['tmp_name']["$i"];
-        $name = $_FILES['txt_documentos']['name']["$i"];
-        if(is_array($_FILES) && count($_FILES)>0){
-            if(move_uploaded_file($tmp_name,"../archivos/movil/".$name)){
-              $nombrearchivo= '../archivos/movil/'.$name;
-              $MP->Registrar_foto($nombrearchivo);  
-              $idRecurso = $MP->buscar_id_recurso($nombrearchivo);
-              return $idRecurso;
-            }else{
-                echo 0;
-            }
-        }else{
-            echo 0;
-        }
-    }
 }
 
 
@@ -102,4 +86,26 @@ if (isset($_POST['funcion'])) {
     }
 }
 
+
+function subirDocumentos($i){
+    
+    $MP = new modelo_registro_noticia();
+    //$nombrearchivo = htmlspecialchars($_POST['txt_documentos']['name']['0'],ENT_QUOTES,'UTF-8');
+    $tmp_name = $_FILES['txt_documentos']['tmp_name']["$i"];
+    $name = $_FILES['txt_documentos']['name']["$i"];
+    if(is_array($_FILES) && count($_FILES)>0){
+        if(move_uploaded_file($tmp_name,"../archivos/movil/".$name)){
+          $nombrearchivo= '../archivos/movil/'.$name;
+          $MP->Registrar_foto($nombrearchivo);  
+          $idRecurso = $MP->buscar_id_recurso($nombrearchivo);
+          return $idRecurso;
+          var_dump($idRecurso);
+          die;
+        }else{
+            echo 0;
+        }
+    }else{
+        echo 0;
+    }
+}
 ?>

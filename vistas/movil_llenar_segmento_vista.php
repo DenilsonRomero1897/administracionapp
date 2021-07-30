@@ -229,7 +229,7 @@ ob_end_flush();
           $('#resultadoSegmentoUsuarios').html("Procesando, espere por favor...");
         },
         success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-          if(data == 'hola mundo'){
+          if(data != ''){
           readProducts(segmento);
           }else{
             alert('no se pudo guardar!!');
@@ -280,7 +280,7 @@ ob_end_flush();
         },
         success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
           console.log(data);
-          if(data == 'hola mundo'){
+          if(data != ''){
           readProducts(segmento);
           }else{
           alert('no se pudo eliminar!!');
