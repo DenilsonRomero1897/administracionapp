@@ -190,8 +190,10 @@ ob_end_flush();
   <script>
     function realizaProceso() {
       var tipo_persona = document.getElementById('buscar_tipo_persona').value;
+      var segmento = document.getElementById('Segmento').value;
       var parametros = {
-        "tipoPersona": tipo_persona
+        "tipoPersona": tipo_persona,
+        "segmento" : segmento
       }
       $.ajax({
         data: parametros, //datos que se envian a traves de ajax

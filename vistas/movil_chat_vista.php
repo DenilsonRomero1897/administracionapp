@@ -25,24 +25,16 @@ require_once('../Controlador/movil_chat_controlador.php');
                 <!-- pagina chats -->
                 <div class="col-span-1" style="background-color: #007BFF;">
                     <div class="my-3 mx-3 h-1">
-                        <!-- <div class="relative text-white focus-within:text-gray-400">
-                            <span class="absolute inset-y-0 left-0 flex items-center pl-2">
-                                <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewBox="0 0 24 24" class="w-6 h-6 text-gray-500">
-                                    <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
-                                </svg>
-                            </span>
-                            <input aria-placeholder="Busca tus amigos o contacta nuevos" placeholder="Buscar Chat" class="py-2 pl-10 block w-full rounded bg-gray-100 outline-none focus:text-gray-700" type="search" name="search" required autocomplete="search" />
-                        </div> -->
                     </div>
 
                     <span class="grid gap-1 grid-cols-3 overflow-auto">
                         <h2 class="ml-2 mb-2 mr-2 text-white text-lg my-1">Chats</h2>
-                        <button class="ml-2 mb-2 mr-2 btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Cerrar Chat" onclick="cerrar()" >Cerrar</button>
+                        <button class="ml-2 mb-2 mr-2 btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Cerrar Chat" onclick="cerrar()">Cerrar</button>
                         <button class="ml-2 mb-2 mr-2 btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Nuevo Chat" onclick="getUser()">Nuevo</button>
                     </span>
                     <ul class="overflow-auto" style="height: 615px; background-color:whitesmoke;">
-                        <li>
-                            <?php chats() ?>
+                        <li id="chats">
+
                         </li>
                     </ul>
                 </div>
@@ -55,7 +47,13 @@ require_once('../Controlador/movil_chat_controlador.php');
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+
     <script>
+        $(document).ready(function() {
+            $("#chats").load('../Controlador/movil_cargar_chats_controlador.php');
+        });
+
         function getChats(id_chat) {
             var parametros = {
                 "id_chat": id_chat,
@@ -90,19 +88,8 @@ require_once('../Controlador/movil_chat_controlador.php');
                 }
             });
         }
-
-        function cerrar() {
-            var parametros = {
-                "funcion": 'cerrar'
-            }
-            $.ajax({
-                data: parametros, //datos que se envian a traves de ajax
-                url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
-                type: 'post', //método de envio
-                success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                    $("#resultado_chat").html(response);
-                }
-            });
+        function cerrar(){
+            $("#resultado_chat").empty();
         }
 
         function getid() {
@@ -126,5 +113,4 @@ require_once('../Controlador/movil_chat_controlador.php');
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 </body>

@@ -2,6 +2,7 @@
  require_once '../clases/Conexion.php';
 
 $valor = $_POST['tipoPersona'];
+$segmento = $_POST['segmento'];
 if ($valor > 0) {
     $sql_segmentos = "SELECT u.Id_usuario,p.nombres,p.apellidos FROM tbl_personas p
     inner JOIN tbl_usuarios u on u.id_persona=p.id_persona and p.id_tipo_persona = $valor";
@@ -11,6 +12,10 @@ while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) {
     $id = $segmento['Id_usuario'];
     $nombre = $segmento['nombres'];
     $apellidos = $segmento['apellidos'];
+
+    // $sql_exist = "select count(su.usuario_id) from tbl_movil_segmento_usuario where segmento_id = $segmento and usuario_id = $id";
+    // $resultado = $mysqli->query($sql_exist);
+    // echo var_dump($resultado);
     echo"
   <tr>
     <td hidden> $id</td>
