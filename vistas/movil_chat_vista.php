@@ -21,29 +21,28 @@ require_once('../Controlador/movil_chat_controlador.php');
     <div class="content-wrapper">
         <!-- This is an example component -->
         <div class="w-100 h-auto">
-            <div class="grid grid-cols-3 min-w-full border rounded" style="min-height: 80vh;">
+            <div class="grid grid-cols-3 min-w-full border rounded" >
                 <!-- pagina chats -->
                 <div class="col-span-1" style="background-color: #007BFF;">
-                    <div class="my-3 mx-3 h-1">
+                    <div class="my-3 mx-3">
                     </div>
-
                     <span class="grid gap-1 grid-cols-3 overflow-auto">
                         <h2 class="ml-2 mb-2 mr-2 text-white text-lg my-1">Chats</h2>
                         <button class="ml-2 mb-2 mr-2 btn btn-danger btn-xs" data-toggle="tooltip" data-placement="top" title="Cerrar Chat" onclick="cerrar()">Cerrar</button>
                         <button class="ml-2 mb-2 mr-2 btn btn-warning btn-xs" data-toggle="tooltip" data-placement="top" title="Nuevo Chat" onclick="getUser()">Nuevo</button>
                     </span>
-                    <ul class="overflow-auto" style="height: 615px; background-color:whitesmoke;">
+                    <ul class="overflow-auto" style="height: 601px; background-color:whitesmoke;">
                         <li id="chats">
 
                         </li>
                     </ul>
                 </div>
                 <!-- pagina mensajes -->
-                <div class="col-span-2" style="background-color:whitesmoke; background-position:center; background-size:400px;">
-                    <div id="resultado_chat" class="col-span-2 bg-transparent overflow-auto" style="height: 743px;">
+                <!--<div class="col-span-2" style="background-color:whitesmoke; background-position:center; background-size:400px;">-->
+                    <div id="resultado_chat" class="col-span-2 bg-transparent overflow-auto" style="height: 713px;">
 
                     </div>
-                </div>
+                <!--</div>-->
             </div>
         </div>
     </div>

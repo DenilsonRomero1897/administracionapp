@@ -10,7 +10,7 @@ function mensajes($id_chat)
 {
     //se carga la pantalla de chat
     echo '<div class="w-full">
-    <div class="flex items-center border-b border-gray-300 pl-3 py-3" style="background-color:#007BFF;">
+    <div class="flex items-center border-b border-gray-300 pl-2 py-2" style="background-color:#007BFF;">
         <img class="h-10 w-10 rounded-full object-cover" src="https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="username" />
         <span class="w-80 block mr-10 ml-2 font-bold text-base text-white">' . $id_chat . '</span>
     </div>
@@ -22,7 +22,7 @@ function mensajes($id_chat)
         </ul>
     </div>
     <form action="../controlador/movil_envio_info_chat_controlador.php" method="POST">
-    <div class="w-full py-3 px-3 flex items-center justify-between border-t border-gray-300" style="background-color:#007BFF;">
+    <div class="w-full py-2 px-2 flex items-center justify-between border-t border-gray-300" style="background-color:#007BFF;">
         <label for="subir_archivo" class="outline-none focus:outline-none ml-1">
             <svg class="text-gray-400 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13" />

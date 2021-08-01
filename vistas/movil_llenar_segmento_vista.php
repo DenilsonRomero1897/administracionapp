@@ -203,7 +203,7 @@ ob_end_flush();
           $("#resultado").html("Procesando, espere por favor...");
         },
         success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-          $("#resultado").html(response);
+         $("#resultado").html(response);
         }
       });
     }
@@ -241,20 +241,6 @@ ob_end_flush();
       }
     }
 
-    $(function() {
-      $('#tabla').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-        }
-      });
-    });
 
     function readProducts(segmento){
       var parametro = {'segmento':segmento}
