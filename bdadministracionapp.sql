@@ -30831,7 +30831,7 @@ INSERT INTO `tbl_modalidades_proyecto` (`Id_modalidad`, `modalidad`, `Fecha_crea
 --
 
 CREATE TABLE `tbl_movil_bitacoras` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `usuario_id` bigint(20) NOT NULL,
   `objeto_id` bigint(20) NOT NULL,
   `accion` varchar(45) NOT NULL,
@@ -30856,7 +30856,7 @@ DELIMITER ;
 --
 
 CREATE TABLE `tbl_movil_bitacoras_deleted` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `usuario_id` bigint(20) DEFAULT NULL,
   `objeto_id` bigint(20) DEFAULT NULL,
   `accion` varchar(45) DEFAULT NULL,
@@ -30873,7 +30873,7 @@ CREATE TABLE `tbl_movil_bitacoras_deleted` (
 --
 
 CREATE TABLE `tbl_movil_chats` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `descripcion` varchar(45) DEFAULT NULL,
   `fecha_hora` datetime DEFAULT NULL,
   `interaccion` varchar(45) DEFAULT NULL,
@@ -30889,44 +30889,16 @@ CREATE TABLE `tbl_movil_chats` (
 --
 
 CREATE TABLE `tbl_movil_noticias` (
-  `id` int(11) NOT NULL,
-  `titulo` varchar(45) NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `titulo` varchar(90) NOT NULL,
+  `subtitulo` varchar(90) NOT NULL,
   `descripcion` longtext NOT NULL,
   `fecha` datetime NOT NULL,
   `fecha_vencimiento` datetime NOT NULL,
   `remitente` varchar(45) NOT NULL,
-  `segmento_id` int(11) NOT NULL
+  `segmento_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Volcado de datos para la tabla `tbl_movil_noticias`
---
-
-INSERT INTO `tbl_movil_noticias` (`id`, `titulo`, `descripcion`, `fecha`, `fecha_vencimiento`, `remitente`, `segmento_id`) VALUES
-(23, 'PRUEBA INFORMATICA', 'HOLA MUNDO', '2021-07-23 04:01:00', '2021-07-24 05:02:00', 'ADMIN', 1),
-(24, 'HOLA', 'MUNDO', '2021-07-28 04:03:00', '2021-07-29 05:04:00', 'ADMIN', 1),
-(25, 'HOLA', 'MUNDO', '2021-07-28 04:03:00', '2021-07-29 05:04:00', 'ADMIN', 1),
-(26, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
-(27, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
-(28, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
-(29, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
-(30, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
-(31, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
-(32, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
-(33, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
-(34, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
-(35, 'NUEVA NOTIFICACION DOS', 'ASD', '2021-07-22 04:04:00', '2021-07-30 05:05:00', 'ADMIN', 1),
-(36, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
-(37, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
-(38, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
-(39, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
-(40, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
-(41, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
-(42, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
-(43, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
-(44, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
-(45, 'DENTREX', 'QWE', '2021-07-23 04:10:00', '2021-07-28 05:11:00', 'ADMIN', 1),
-(46, 'NUEVA NOTIFICACION', 'FASD', '2021-07-23 04:30:00', '2021-07-30 06:32:00', 'ADMIN', 1);
 
 -- --------------------------------------------------------
 
@@ -30935,18 +30907,9 @@ INSERT INTO `tbl_movil_noticias` (`id`, `titulo`, `descripcion`, `fecha`, `fecha
 --
 
 CREATE TABLE `tbl_movil_noticia_recurso` (
-  `noticia_id` int(11) NOT NULL,
-  `recurso_id` int(11) NOT NULL
+  `noticia_id` bigint(20) NOT NULL,
+  `recurso_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `tbl_movil_noticia_recurso`
---
-
-INSERT INTO `tbl_movil_noticia_recurso` (`noticia_id`, `recurso_id`) VALUES
-(36, 1),
-(46, 5),
-(46, 6);
 
 -- --------------------------------------------------------
 
@@ -30955,47 +30918,36 @@ INSERT INTO `tbl_movil_noticia_recurso` (`noticia_id`, `recurso_id`) VALUES
 --
 
 CREATE TABLE `tbl_movil_notificaciones` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `titulo` varchar(45) NOT NULL,
   `descripcion` varchar(255) NOT NULL,
   `fecha` datetime NOT NULL,
   `remitente` varchar(45) DEFAULT NULL,
-  `segmento_id` int(11) NOT NULL,
-  `tipo_notificacion_id` int(11) NOT NULL,
-  `image_enable` int(11) NOT NULL
+  `segmento_id` bigint(20) NOT NULL,
+  `tipo_notificacion_id` bigint(20) NOT NULL,
+  `image_enable` int(2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `tbl_movil_notificaciones`
---
-
-INSERT INTO `tbl_movil_notificaciones` (`id`, `titulo`, `descripcion`, `fecha`, `remitente`, `segmento_id`, `tipo_notificacion_id`, `image_enable`) VALUES
-(1, 'PRUEBA INFORMATICA', 'QWEW', '2021-07-15 19:54:00', 'ADMIN', 1, 1, 0);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tbl_movil_parametros`
 --
 
 CREATE TABLE `tbl_movil_parametros` (
-  `id` int(11) NOT NULL,
-  `parametro` varchar(45) NOT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
+  `id` bigint(20) NOT NULL,
+  `parametro` varchar(200) NOT NULL,
+  `descripcion` varchar(200) DEFAULT NULL,
   `valor` varchar(45) NOT NULL,
   `fecha_modificacion` datetime NOT NULL,
   `modificado por` varchar(45) NOT NULL,
   `usuario_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
 --
 -- Estructura de tabla para la tabla `tbl_movil_segmentos`
 --
 
 CREATE TABLE `tbl_movil_segmentos` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `nombre` varchar(45) NOT NULL,
   `descripcion` varchar(200) DEFAULT NULL,
   `creado_por` varchar(45) NOT NULL,
@@ -31003,33 +30955,13 @@ CREATE TABLE `tbl_movil_segmentos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Volcado de datos para la tabla `tbl_movil_segmentos`
---
-
-INSERT INTO `tbl_movil_segmentos` (`id`, `nombre`, `descripcion`, `creado_por`, `fecha_creacion`) VALUES
-(1, 'excelencia academica', 'estudiantes de la carrera con un indice de excelencia ', 'admin', '2021-07-13 10:12:12'),
-(21, 'ASDASD', 'CATEGORIA NUEVA', '75', '2021-07-14 05:05:48');
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tbl_movil_segmento_usuario`
 --
 
 CREATE TABLE `tbl_movil_segmento_usuario` (
   `usuario_id` bigint(20) NOT NULL,
-  `segmento_id` int(11) NOT NULL
+  `segmento_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `tbl_movil_segmento_usuario`
---
-
-INSERT INTO `tbl_movil_segmento_usuario` (`usuario_id`, `segmento_id`) VALUES
-(51, 1),
-(75, 1);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tbl_movil_tipo_mensajes`
@@ -31064,8 +30996,9 @@ CREATE TABLE `tbl_movil_tipo_notificaciones` (
 --
 
 INSERT INTO `tbl_movil_tipo_notificaciones` (`id`, `descripcion`) VALUES
-(1, 'NOTIFICACION NORMAL');
-
+(1, 'NOTIFICACION NORMAL'),
+(2, 'NOTIFICACION NOTICIA'),
+(3, 'NOTIFICACION CHAT');
 -- --------------------------------------------------------
 
 --
@@ -31074,23 +31007,9 @@ INSERT INTO `tbl_movil_tipo_notificaciones` (`id`, `descripcion`) VALUES
 
 CREATE TABLE `tbl_movil_tipo_recursos` (
   `id` int(11) NOT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
+  `descripcion` varchar(90) DEFAULT NULL,
   `url` varchar(200) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `tbl_movil_tipo_recursos`
---
-
-INSERT INTO `tbl_movil_tipo_recursos` (`id`, `descripcion`, `url`) VALUES
-(1, 'archivo subido desde crear noticia', '../archivos/movil/IMG7.jpeg'),
-(2, 'archivo subido desde crear noticia', '../archivos/movil/IMG7.jpeg'),
-(3, 'archivo subido desde crear noticia', '../archivos/movil/IMG7.jpeg'),
-(4, 'archivo subido desde crear noticia', '../archivos/movil/IMG7.jpeg'),
-(5, 'archivo subido desde crear noticia', '../archivos/movil/IMG1.jpeg'),
-(6, 'archivo subido desde crear noticia', '../archivos/movil/IMG5.jpeg');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tbl_movil_tipo_transacciones`
@@ -31099,24 +31018,15 @@ INSERT INTO `tbl_movil_tipo_recursos` (`id`, `descripcion`, `url`) VALUES
 CREATE TABLE `tbl_movil_tipo_transacciones` (
   `id` int(11) NOT NULL,
   `descripcion` varchar(90) DEFAULT NULL,
-  `external_id` int(11) NOT NULL
+  `external_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Volcado de datos para la tabla `tbl_movil_tipo_transacciones`
---
-
-INSERT INTO `tbl_movil_tipo_transacciones` (`id`, `descripcion`, `external_id`) VALUES
-(1, 'SADASD', 1);
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tbl_movil_transacciones`
 --
 
 CREATE TABLE `tbl_movil_transacciones` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `fecha_envio` datetime DEFAULT NULL,
   `request_envio` varchar(45) DEFAULT NULL,
   `response` varchar(45) DEFAULT NULL,
@@ -31811,8 +31721,6 @@ INSERT INTO `tbl_objetos` (`Id_objeto`, `objeto`, `descripcion`) VALUES
 (126, 'crear_segmento_vista', 'creacion de nuevos segmentos'),
 (127, 'gestion_segmentos_vista', 'gestionar segmentos existentes'),
 (128, 'movil_bitacora_vista', 'bitacora movil');
-
--- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tbl_parametros`
@@ -33650,7 +33558,6 @@ ALTER TABLE `tbl_movil_segmentos`
 -- Indices de la tabla `tbl_movil_segmento_usuario`
 --
 ALTER TABLE `tbl_movil_segmento_usuario`
-  ADD UNIQUE KEY `usuario_id` (`usuario_id`),
   ADD KEY `fk_tbl_movil_segmento_usuario_tbl_usuarios1_idx` (`usuario_id`),
   ADD KEY `fk_tbl_movil_segmento_usuario_tbl_movil_segmentos1_idx` (`segmento_id`);
 
@@ -34210,37 +34117,37 @@ ALTER TABLE `tbl_modalidades_proyecto`
 -- AUTO_INCREMENT de la tabla `tbl_movil_bitacoras`
 --
 ALTER TABLE `tbl_movil_bitacoras`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_chats`
 --
 ALTER TABLE `tbl_movil_chats`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_noticias`
 --
 ALTER TABLE `tbl_movil_noticias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_notificaciones`
 --
 ALTER TABLE `tbl_movil_notificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_parametros`
 --
 ALTER TABLE `tbl_movil_parametros`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_segmentos`
 --
 ALTER TABLE `tbl_movil_segmentos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_tipo_mensajes`
@@ -34252,19 +34159,19 @@ ALTER TABLE `tbl_movil_tipo_mensajes`
 -- AUTO_INCREMENT de la tabla `tbl_movil_tipo_notificaciones`
 --
 ALTER TABLE `tbl_movil_tipo_notificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_tipo_recursos`
 --
 ALTER TABLE `tbl_movil_tipo_recursos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_tipo_transacciones`
 --
 ALTER TABLE `tbl_movil_tipo_transacciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_transacciones`
