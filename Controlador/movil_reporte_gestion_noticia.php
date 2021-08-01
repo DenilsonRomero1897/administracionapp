@@ -45,7 +45,7 @@ class myPDF extends FPDF
     {
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
-        $this->Cell(10, 7, "N°", 1, 0, 'C');
+        $this->Cell(10, 7, utf8_decode("N°"), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("TITULO"), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("DESCRIPCIÓN"), 1, 0, 'C');
         $this->Cell(50, 7, "FECHA Y HORA ", 1, 0, 'C');
