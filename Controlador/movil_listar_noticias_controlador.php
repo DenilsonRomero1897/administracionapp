@@ -1,4 +1,7 @@
-<?php require_once('../clases/Conexion.php'); ?>
+<?php require_once('../clases/Conexion.php');
+require_once('../clases/conexion_mantenimientos.php');
+
+$instancia_conexion = new conexion();  ?>
 
 <table id="tabla" class="table table-bordered table-striped">
           <thead>
@@ -15,8 +18,11 @@
           </thead>
           <tbody>
           <?php
-            $sql = "SELECT * FROM tbl_movil_noticias";
-            $resultado_noticias = $mysqli->query($sql);
+            $sql = "SELECT n.id, n.titulo, n.subtitulo, n.descripcion, n.fecha, n.fecha_vencimiento, n.remitente,
+                            s.nombre
+                            FROM tbl_movil_noticias n
+                            INNER JOIN tbl_movil_segmentos s ON n.segmento_id = s.id";
+            $resultado_noticias = $instancia_conexion->ejecutarConsulta($sql);
             while ($fila = $resultado_noticias->fetch_array(MYSQLI_ASSOC)) { ?>
               <tr>
                 <td><?php echo $fila['id']; ?></td>
@@ -24,7 +30,7 @@
                 <td><?php echo $fila['descripcion']; ?></td>
                 <td><?php echo $fila['fecha']; ?></td>
                 <td><?php echo $fila['fecha_vencimiento']; ?></td>
-                <td><?php echo $fila['segmento_id']; ?></td>
+                <td><?php echo $fila['nombre']; ?></td>
 
                 <td style="text-align: center;">
                   <a href="../vistas/movil_gestion_noticia_vista.php?&id=<?php echo $fila['id']; ?>" class="btn btn-primary btn-raised btn-xs">
