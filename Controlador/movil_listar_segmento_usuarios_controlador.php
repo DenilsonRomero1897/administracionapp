@@ -5,7 +5,7 @@
 
 ?>
 
-<table id="tabla" class="table table-bordered table-striped">
+<table id="tabla" class="table table-bordered table-striped" style="width:100%">
     <thead>
         <tr>
             <th hidden>ID</th>

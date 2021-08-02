@@ -4,7 +4,7 @@ require_once('../clases/conexion_mantenimientos.php');
 $instancia_conexion = new conexion(); ?>
 
 
-<table id="tablaSegmento" class="table table-bordered table-striped">
+<table id="tablaSegmento" class="table table-bordered table-striped" style="width:100%">
     <thead>
         <tr>
             <th>ID</th>
