@@ -132,7 +132,7 @@ ob_end_flush();
               <div class="row">
                 <div class="col-md-12">
                   <label>Segmento: </label>
-                  <select class="form-control" name="Segmento" id="Segmento" onchange="readProducts(this.value)" required>
+                  <select class="form-control" name="Segmento" id="Segmento" onchange="readProducts(this.value),realizaProceso() " required>
                     <option value="">Seleccione un segmento:</option>
                     <?php
                     $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";
@@ -270,6 +270,7 @@ ob_end_flush();
           console.log(data);
           if(data != ''){
           readProducts(segmento);
+          realizaProceso();
           }else{
           alert('no se pudo eliminar!!');
           }

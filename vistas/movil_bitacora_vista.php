@@ -182,8 +182,8 @@ if ($visualizacion == 0) {
             <tr>
               <th>USUARIO</th>
               <th>OBJETO</th>
-              <th>ACCION</th>
-              <th>DESCRIPCION</th>
+              <th>ACCIÓN</th>
+              <th>DESCRIPCIÓN</th>
               <th>FECHA y HORA</th>
             </tr>
           </thead>
