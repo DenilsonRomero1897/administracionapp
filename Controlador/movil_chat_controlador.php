@@ -2,6 +2,7 @@
 
 $resultado = isset($_POST['llamando_chats']) ? $_POST['llamando_chats'] : false;
 $id_chat = isset($_POST['id_chat']) ? (int)$_POST['id_chat'] : '';
+
 if ($resultado == 'true') {
     mensajes($id_chat);
 }
@@ -17,7 +18,7 @@ function mensajes($id_chat)
     <div id="chat" class="w-full overflow-y-auto p-1 relative" style="height: 599px;" ref="toolbarChat">
         <ul>
             <li class="clearfix2">';
-    mensaje();
+                mensaje($id_chat);
     echo   '</li>
         </ul>
     </div>
@@ -42,30 +43,35 @@ function mensajes($id_chat)
 </div>';
 }
 
-function mensaje()
+function mensaje($id_chat)
 {
+    require_once('../clases/Conexion.php');
     //traer los datos del mensaje segun id
-
+    $sql = "SELECT descripcion,interaccion from tbl_movil_chats where id = $id_chat";
+    $resultado = $mysqli->query($sql);
     //validar el mensaje si es recibido o enviado
-    // if(validarinteraccion del mensaje){}
-    echo '
-         <div class="w-full flex justify-start">
-             <div class="bg-gray-200 rounded px-5 py-2 my-2 ml-4 text-gray-700 relative" style="max-width: 300px;">
-                 <span class="block">Hello</span>
-                 <span class="block text-xs text-right">10:30pm</span>
+    while ($row = $resultado->fetch_array(MYSQLI_ASSOC)) { 
+        $mensaje = $row['descripcion'];
+     if($row['interaccion']=='recibido'){
+    echo "
+         <div class='w-full flex justify-start'>
+             <div class='bg-gray-200 rounded px-5 py-2 my-2 ml-4 text-gray-700 relative' style='max-width: 300px;'>
+                 <span class='block'>$mensaje</span>
+                 <!--<span class='block text-xs text-right'>10:30pm</span>-->
              </div>
          </div>
-     ';
-    //}else{
-    echo '
-         <div class="w-full flex justify-end">
-             <div class="bg-blue-500 rounded px-5 py-2 my-2 mr-4 text-white relative" style="max-width: 300px;">
-                 <span class="block">Hi</span>
-                 <span class="block text-xs text-right">10:31pm</span>
+     ";
+    }elseif ($row['interaccion']=='enviado') {
+    echo "
+         <div class='w-full flex justify-end'>
+             <div class='bg-blue-500 rounded px-5 py-2 my-2 mr-4 text-white relative' style='max-width: 300px;'>
+                 <span class='block'>$mensaje</span>
+                 <!--<span class='block text-xs text-right'>10:30pm</span>-->
              </div>
          </div>
-     ';
-    //}
+     ";
+    }
+}
 }
 
 $funcion = isset($_POST['funcion']) ? $_POST['funcion'] : '';
@@ -122,5 +128,5 @@ function CrearChat(){
    // $mysqli->query($sql);
     //conseguir el id de chat creado
     //$sql = '';
-    mensajes(5);
+    //mensajes();
 }

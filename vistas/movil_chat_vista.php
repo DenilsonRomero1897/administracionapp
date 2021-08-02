@@ -58,6 +58,7 @@ require_once('../Controlador/movil_chat_controlador.php');
                 "id_chat": id_chat,
                 "llamando_chats": 'true'
             }
+            console.log(parametros);
             $.ajax({
                 data: parametros, //datos que se envian a traves de ajax
                 url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion

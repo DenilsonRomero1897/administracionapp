@@ -2,7 +2,10 @@
 require_once('../clases/Conexion.php');
 
 
-var_dump($_POST);
-die;
+if (isset($_POST)) {
+    if ( !empty($_POST['message']) and empty($_POST['subir_archivos'])) {
+        $sql = "INSERT INTO ";
+    }
+}
 
 ?>
