@@ -30938,8 +30938,8 @@ CREATE TABLE `tbl_movil_parametros` (
   `descripcion` varchar(200) DEFAULT NULL,
   `valor` varchar(45) NOT NULL,
   `fecha_modificacion` datetime NOT NULL,
-  `modificado por` varchar(45) NOT NULL,
-  `usuario_id` bigint(20) NOT NULL
+  `creado_por` varchar(90) NOT NULL,
+  `modificado_por` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -33546,7 +33546,7 @@ ALTER TABLE `tbl_movil_notificaciones`
 --
 ALTER TABLE `tbl_movil_parametros`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tbl_movil_parametros_tbl_usuarios1_idx` (`usuario_id`);
+  ADD KEY `fk_tbl_movil_parametros_tbl_usuarios1_idx` (`modificado_por`);
 
 --
 -- Indices de la tabla `tbl_movil_segmentos`
@@ -34567,7 +34567,7 @@ ALTER TABLE `tbl_movil_notificaciones`
 -- Filtros para la tabla `tbl_movil_parametros`
 --
 ALTER TABLE `tbl_movil_parametros`
-  ADD CONSTRAINT `fk_tbl_movil_parametros_tbl_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_tbl_movil_parametros_tbl_usuarios1` FOREIGN KEY (`modificado_por`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tbl_movil_segmento_usuario`

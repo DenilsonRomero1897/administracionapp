@@ -17,7 +17,6 @@ while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) {
 
      $resultado = $mysqli->query($sql_exist);
      $row = $resultado->fetch_assoc();
-     var_dump($row['exist']);
      if($row['exist']!=1){
       echo"
       <tr>

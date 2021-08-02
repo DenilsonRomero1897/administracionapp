@@ -60,9 +60,9 @@ if (permiso_ver('7') == '1') {
 
 if (permiso_ver('8') == '1') {
 
-  $_SESSION['movil_mantenimiento_tipo_transaccion'] = "...";
+  $_SESSION['movil_mantenimiento_tipo_transaccion_vista'] = "...";
 } else {
-  $_SESSION['movil_mantenimiento_tipo_transaccion'] = "No 
+  $_SESSION['movil_mantenimiento_tipo_transaccion_vista'] = "No 
   tiene permisos para visualizar";
 }
 if (permiso_ver('9') == '1') {

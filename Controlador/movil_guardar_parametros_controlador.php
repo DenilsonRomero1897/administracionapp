@@ -45,7 +45,8 @@ if ($opcion == 'eliminar') {
  // $parametro= isset($_POST["parametro"]) ? strtoupper($_POST["parametro"]) : "";
  //$descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
   $valor = isset($_POST["valor"]) ? strtoupper($_POST["valor"]) : "";
-  $sql = "UPDATE tbl_movil_parametros set  valor= '$valor' WHERE id = $id_parametros";
+  $usuario_mod = $_SESSION['id_usuario'];
+  $sql = "UPDATE tbl_movil_parametros set  valor= '$valor', fecha_modificacion = sysdate(), modificado_por = '$usuario_mod' WHERE id = $id_parametros";
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', 'EL PARAMETRO' . $id_parametros. '');
   $mysqli->query($sql);
   header('location: ../vistas/movil_gestion_parametros_vista.php?msj=2');
@@ -54,14 +55,17 @@ if ($opcion == 'eliminar') {
   $parametro = isset($_POST["parametro"]) ? strtoupper($_POST["parametro"]) : "";
   $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
   $valor = isset($_POST["valor"]) ? strtoupper($_POST["valor"]) : "";
-  $fecha_modificacion= isset($_POST["txt_fecha_modificacion"]) ? $_POST["txt_fecha_modificacion"] : "";
-  $modificadopor = isset($_SESSION['id_usuario']) ? ($_SESSION['id_usuario']) : "";
   $usuario_id = isset($_SESSION['id_usuario']) ? ($_SESSION['id_usuario']) : "";
   
 /* Logica para que no acepte campos vacios */
 if ($_POST['parametro'] <>  ' ' and  $_POST['descripcion'] <>' 'and  $_POST['valor'] <> '' ) {
     /* Query para que haga el insert*/
-    $sql = "INSERT into tbl_movil_parametros  VALUES (null,'$parametro', '$descripcion', '$valor','$fecha_modificacion' , '$modificadopor', '$usuario_id' )";
+    //query para traer el nombre del usuario que creo el parametro
+    $nombreUser ="SELECT Usuario FROm tbl_usuarios where Id_usuario = $usuario_id";
+    $resultado_nombre = $mysqli->query($nombreUser);
+    $nombre = $resultado_nombre->fetch_assoc();
+    $user = $nombre['Usuario'];
+    $sql = "INSERT into tbl_movil_parametros (parametro,descripcion,valor,fecha_modificacion,creado_por) VALUES ('$parametro', '$descripcion', '$valor',sysdate(),'$user')";
     
     $resultado = $mysqli->query($sql);
  

@@ -159,8 +159,8 @@ ob_end_flush();
               <th>DESCRIPCIÓN</th>
               <th>VALOR</th>
               <th>FECHA_MOD</th>
+              <th>CREADO_POR</th>
               <th>MOD_POR</th>
-              <th>USUARIOID</th>
               <th>EDITAR</th>
               <th>BORRAR</th>
             </tr>
@@ -176,8 +176,8 @@ ob_end_flush();
                 <td><?php echo $parametro['descripcion']; ?></td>
                 <td><?php echo $parametro['valor']; ?></td>
                 <td><?php echo $parametro['fecha_modificacion']; ?></td>
+                <td><?php echo $parametro['creado_por']; ?></td>
                 <td><?php echo $parametro['modificado_por']; ?></td>
-                <td><?php echo $parametro['usuario_id']; ?></td>
 
                 <td style="text-align: center;">
                   <a href="../vistas/movil_gestion_parametros_vista.php?&id=<?php echo $parametro['id']; ?>" class="btn btn-primary btn-raised btn-xs">
