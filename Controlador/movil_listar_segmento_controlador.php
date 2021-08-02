@@ -1,4 +1,9 @@
-<?php require_once('../clases/Conexion.php'); ?>
+<?php require_once('../clases/Conexion.php');
+require_once('../clases/conexion_mantenimientos.php');
+
+$instancia_conexion = new conexion(); ?>
+
+
 <table id="tablaSegmento" class="table table-bordered table-striped">
     <thead>
         <tr>
@@ -13,14 +18,17 @@
     </thead>
     <tbody>
         <?php
-        $sql_segmentos = "select * from tbl_movil_segmentos";
-        $resultado_segmentos = $mysqli->query($sql_segmentos);
+        $sql_segmentos = "SELECT s.id, s.nombre, s.descripcion, s.fecha_creacion,
+                                   u.Usuario
+                                   FROM tbl_movil_segmentos s 
+                                   INNER JOIN  tbl_usuarios u ON s.creado_por = u.Id_usuario";
+        $resultado_segmentos = $instancia_conexion->ejecutarConsulta($sql_segmentos);
         while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
             <tr>
                 <td><?php echo $segmento['id']; ?></td>
                 <td><?php echo $segmento['nombre']; ?></td>
                 <td><?php echo $segmento['descripcion']; ?></td>
-                <td><?php echo $segmento['creado_por']; ?></td>
+                <td><?php echo $segmento['Usuario']; ?></td>
                 <td><?php echo $segmento['fecha_creacion']; ?></td>
 
                 <td style="text-align: center;">

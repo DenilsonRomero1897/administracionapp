@@ -6,7 +6,7 @@ require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
-
+$instancia_conexion = new conexion();
 
 $Id_objeto = 14;
 $visualizacion = permiso_ver($Id_objeto);
@@ -44,7 +44,7 @@ if (isset($_GET['id'])) {
   $id = $row['id'];
   $_SESSION['txtfecha_envio'] = $row['fecha_envio'];
   $_SESSION['txtrequest_envio'] = $row['request_envio'];
-  $_SESSION['txtresponse'] = $row[' response'];
+  $_SESSION['txtresponse'] = $row['response'];
   $_SESSION['txtestado'] = $row['estado'];
   $_SESSION['txtTipotransaccion'] = $row['tipo_transaccion_id'];
 
@@ -157,7 +157,7 @@ ob_end_flush();
               <thead>
                 <tr>
                 <th>ID</th>
-              <th>FECHA DE ENVIO</th>
+              <th>FECHA ENVIO</th>
               <th>REQUEST ENVIO</th>
               <th>RESPONSE</th>
               <th>ESTADO</th>
@@ -168,16 +168,20 @@ ob_end_flush();
               </thead>
               <tbody>
                 <?php
-                $sql_transacciones= "select * from  tbl_movil_transacciones";
-                $resultado_transacciones = $mysqli->query($sql_transacciones);
-                while ($transacciones= $resultado_transacciones->fetch_array(MYSQLI_ASSOC)) { ?>
+                      
+                $sql_transacciones=" SELECT t.id, t.fecha_envio, t.request_envio, t.response, t.estado,
+                                             tra.descripcion
+                                             FROM tbl_movil_transacciones t
+                                             INNER JOIN tbl_movil_tipo_transacciones tra ON t.tipo_transaccion_id = tra.id ";
+               $resultado_transacciones=$instancia_conexion->ejecutarConsulta($sql_transacciones);
+                while ($transacciones = $resultado_transacciones->fetch_array(MYSQLI_ASSOC)) { ?>
                   <tr>
                      <td><?php echo $transacciones['id']; ?></td> 
                     <td><?php echo $transacciones['fecha_envio']; ?></td>
                     <td><?php echo $transacciones['request_envio']; ?></td>
-                    <td><?php echo $transacciones[' response']; ?></td>
+                    <td><?php echo $transacciones['response']; ?></td> 
                     <td><?php echo $transacciones['estado']; ?></td>
-                    <td><?php echo $transacciones['tipo_transaccion_id']; ?></td>
+                    <td><?php echo $transacciones['descripcion']; ?></td>
                   
                   
                     <td style="text-align: center;">
