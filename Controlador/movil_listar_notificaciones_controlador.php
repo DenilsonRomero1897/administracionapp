@@ -16,7 +16,18 @@
           </thead>
           <tbody>
             <?php
-            $sql = "SELECT * FROM tbl_movil_notificaciones";
+            $sql = "
+            select
+                n.id,
+                n.titulo,
+                n.descripcion,
+                n.fecha,
+                s.nombre,
+                p.descripcion,
+                n.image_enable
+            FROM
+                tbl_movil_notificaciones n inner join tbl_movil_segmentos s on n.segmento_id=s.id 
+                inner join  tbl_movil_tipo_notificaciones p on n.tipo_notificacion_id=p.id";
             $resultado_notificaciones = $mysqli->query($sql);
             while ($fila = $resultado_notificaciones->fetch_array(MYSQLI_ASSOC)) { ?>
               <tr>
@@ -24,9 +35,8 @@
                 <td><?php echo $fila['titulo']; ?></td>
                 <td><?php echo $fila['descripcion']; ?></td>
                 <td><?php echo $fila['fecha']; ?></td>
-                <td><?php echo $fila['segmento_id']; ?></td>
-                <td><?php echo $fila['tipo_notificacion_id']; ?></td>
-                
+                <td><?php echo $fila['nombre']; ?></td>
+                <td><?php echo $fila['descripcion']; ?></td>
                 <td><?php if($fila['image_enable']=='1'){
                   echo 'SI';
                 }else{
