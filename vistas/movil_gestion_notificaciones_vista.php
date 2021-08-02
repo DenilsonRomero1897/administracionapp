@@ -268,7 +268,7 @@ if (isset($_REQUEST['msj'])) {
     });
     
     function ventana() {
-      window.open("../Controlador/reporte_gestion_notificaciones.php", "REPORTE");
+      window.open("../Controlador/movil_reporte_notificaciones.php", "REPORTE");
     }
 
     function readProducts() {

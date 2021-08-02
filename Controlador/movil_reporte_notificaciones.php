@@ -65,25 +65,23 @@ class myPDF extends FPDF
             n.descripcion,
             n.fecha,
             n.remitente,
-            s.nombre,
-            p.descripcion
+            (s.nombre) as segmento,
+            (p.descripcion) as tipo_notificacion
            
         FROM
             tbl_movil_notificaciones n inner join tbl_movil_segmentos s on n.segmento_id=s.id 
             inner join  tbl_movil_tipo_notificaciones p on n.tipo_notificacion_id=p.id";
-            
+        
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
- 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
-
             $this->SetFont('Times', '', 12);
             $this->Cell(10, 7, $reg['id'], 1, 0, 'C');
             $this->Cell(70, 7, utf8_decode($reg['titulo']), 1, 0, 'C');
             $this->Cell(70, 7, utf8_decode($reg['descripcion']), 1, 0, 'C');
             $this->Cell(50, 7, $reg['fecha'], 1, 0, 'C');
             $this->Cell(40, 7, $reg['remitente'], 1, 0, 'C');
-            $this->Cell(40, 7, $reg['nombre'], 1, 0, 'C');
-            $this->Cell(50, 7, $reg['descripcion'], 1, 0, 'C');
+            $this->Cell(40, 7, $reg['segmento'], 1, 0, 'C');
+            $this->Cell(50, 7, $reg['tipo_notificacion'], 1, 0, 'C');
 
             $this->ln();
         }
