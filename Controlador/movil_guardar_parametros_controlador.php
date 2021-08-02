@@ -5,8 +5,8 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 
 
-$Id_objeto = 128;
-$opcion = isset($_GET["op"]) ? ($_GET["op"]) : "";
+$Id_objeto = 12;
+$opcion = isset($_GET['op']) ? $_GET['op'] : '';
 
 
 if ($opcion == 'eliminar') {
@@ -42,10 +42,10 @@ if ($opcion == 'eliminar') {
 }elseif ($opcion == 'editar') {
   //funcionalidad para ejecutar el update
   $id_parametros= isset($_GET["id"]) ? ($_GET["id"]) : "";
-  $parametro= isset($_POST["parametro"]) ? strtoupper($_POST["parametro"]) : "";
-  $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
+ // $parametro= isset($_POST["parametro"]) ? strtoupper($_POST["parametro"]) : "";
+ //$descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
   $valor = isset($_POST["valor"]) ? strtoupper($_POST["valor"]) : "";
-  $sql="UPDATE tbl_movil_parametros set parametro= '$parametro', descripcion= '$descripcion', valor=  '$valor' , WHERE id = $id_parametros";
+  $sql = "UPDATE tbl_movil_parametros set  valor= '$valor' WHERE id = $id_parametros";
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', 'EL PARAMETRO' . $id_parametros. '');
   $mysqli->query($sql);
   header('location: ../vistas/movil_gestion_parametros_vista.php?msj=2');
@@ -61,7 +61,7 @@ if ($opcion == 'eliminar') {
 /* Logica para que no acepte campos vacios */
 if ($_POST['parametro'] <>  ' ' and  $_POST['descripcion'] <>' 'and  $_POST['valor'] <> '' ) {
     /* Query para que haga el insert*/
-    $sql = "INSERT into tbl_movil_parametros VALUES (null,'$parametro', '$descripcion', '$valor','$fecha_modificacion' , '$modificadopor', '$usuario_id' )";
+    $sql = "INSERT into tbl_movil_parametros  VALUES (null,'$parametro', '$descripcion', '$valor','$fecha_modificacion' , '$modificadopor', '$usuario_id' )";
     
     $resultado = $mysqli->query($sql);
  

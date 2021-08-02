@@ -34,12 +34,12 @@ if (isset($_GET['id'])) {
   //     /* Manda a llamar la fila */
   $row = $resultado->fetch_array(MYSQLI_ASSOC);
 
-  $id = $row['id'];
-  $_SESSION['txtparametro'] = $row['parametro'];
-  $_SESSION['txtDescripcion'] = $row['descripcion'];
-  $_SESSION['txtvalor'] = $row['valor'];
+    $id = $row['id'];
+ // $_SESSION['txtparametro'] = $row['parametro'];
+ // $_SESSION['txtDescripcion'] = $row['descripcion'];
+   $_SESSION['txtvalor'] = $row['valor'];
  
-  if (isset($_SESSION['txtparametro'])) {
+  if (isset($_SESSION['txtvalor'])) {
 
 ?>
     <script>
@@ -160,7 +160,7 @@ ob_end_flush();
               <th>VALOR</th>
               <th>FECHA_MOD</th>
               <th>MOD_POR</th>
-              <th>USUARIO ID</th>
+              <th>USUARIOID</th>
               <th>EDITAR</th>
               <th>BORRAR</th>
             </tr>
@@ -214,17 +214,17 @@ ob_end_flush();
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12">
-                  <div class="form-group">
+               <!--   <div class="form-group">
                     <label>Parametro</label>
                     <input class="form-control" type="text" id="parametro" name="parametro" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtparametro']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Descripcion</label>
                     <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtDescripcion']; ?>">
-                  </div>
+                  </div>  -->
                   <div class="form-group">
                     <label>Valor</label>
-                    <input class="form-control" type="text" id="valor" name="valor" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtvalor']; ?>">
+                    <input class="form-control" type="text" id="valor" name="valor" style="text-transform: uppercase"  onkeyup="DobleEspacio(this, event)" required="" maxlength="60" value="<?php echo $_SESSION['txtvalor']; ?>">
                   </div>
                   </div>
               </div>
