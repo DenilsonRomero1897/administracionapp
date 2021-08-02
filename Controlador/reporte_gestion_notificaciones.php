@@ -30,7 +30,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("REPORTE DE GESTIÓN DE NOTIFICACIONES"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(60, 10, utf8_decode(""), 0, 0, 'C');
+        $this->Cell(90, 10, utf8_decode(""), 0, 0, 'C');
         $this->Cell(420, 10, "FECHA: " . $fecha, 0, 0, 'C');
         $this->ln();
     }
@@ -45,7 +45,7 @@ class myPDF extends FPDF
     {
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
-        $this->Cell(10, 7, "ID", 1, 0, 'C');
+        $this->Cell(10, 7, utf8_decode("N°"), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("TITULO"), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("DESCRIPCIÓN"), 1, 0, 'C');
         $this->Cell(50, 7, "FECHA Y HORA", 1, 0, 'C');
@@ -60,17 +60,20 @@ class myPDF extends FPDF
         global $instancia_conexion;
         $sql = "
         select
-            id,
-            titulo,
-            descripcion,
-            fecha,
-            remitente,
-            segmento_id,
-            tipo_notificacion_id
+            n.id,
+            n.titulo,
+            n.descripcion,
+            n.fecha,
+            n.remitente,
+            s.nombre,
+            p.descripcion
+           
         FROM
-            tbl_movil_notificaciones";
+            tbl_movil_notificaciones n inner join tbl_movil_segmentos s on n.segmento_id=s.id 
+            inner join  tbl_movil_tipo_notificaciones p on n.tipo_notificacion_id=p.id";
+            
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
-
+ 
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
@@ -79,8 +82,8 @@ class myPDF extends FPDF
             $this->Cell(70, 7, utf8_decode($reg['descripcion']), 1, 0, 'C');
             $this->Cell(50, 7, $reg['fecha'], 1, 0, 'C');
             $this->Cell(40, 7, $reg['remitente'], 1, 0, 'C');
-            $this->Cell(40, 7, $reg['segmento_id'], 1, 0, 'C');
-            $this->Cell(50, 7, $reg['tipo_notificacion_id'], 1, 0, 'C');
+            $this->Cell(40, 7, $reg['nombre'], 1, 0, 'C');
+            $this->Cell(50, 7, $reg['descripcion'], 1, 0, 'C');
 
             $this->ln();
         }

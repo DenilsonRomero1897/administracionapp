@@ -37,7 +37,7 @@ if (isset($_GET['id'])) {
   $_SESSION['txtFecha'] = strtotime($row['fecha']);
   $_SESSION['txtFecha_vencimiento'] = strtotime($row['fecha_vencimiento']);
   $_SESSION['txtSegmento_id'] = $row['segmento_id'];
-
+  
 
   if (isset($_SESSION['txtTitulo'])) {
 

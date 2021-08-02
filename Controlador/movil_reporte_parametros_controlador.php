@@ -1,7 +1,6 @@
 <?php
 session_start();
 require_once('../clases/conexion_mantenimientos.php');
-require_once "../Modelos/reporte_docentes_modelo.php";
 require_once('../Reporte/pdf/fpdf.php');
 $instancia_conexion = new conexion();
 
@@ -31,7 +30,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("REPORTE GESTIÓN DE PARÁMETROS"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(60, 10, utf8_decode(" PARÁMETROS "), 0, 0, 'C');
+        $this->Cell(100, 10, utf8_decode("  "), 0, 0, 'C');
         $this->Cell(420, 10, "FECHA: " . $fecha, 0, 0, 'C');
         $this->ln();
     }
@@ -46,30 +45,42 @@ class myPDF extends FPDF
     {
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
-        $this->Cell(15, 7, "ID", 1, 0, 'C');
+        $this->Cell(15, 7, utf8_decode("N°"), 1, 0, 'C');
         $this->Cell(55, 7, utf8_decode("PARÁMETROS "), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("DESCRIPCIÓN"), 1, 0, 'C');
         $this->Cell(35, 7, utf8_decode("VALOR"), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("FECHA_MODIFICACIÓN"), 1, 0, 'C');
         $this->Cell(65, 7, utf8_decode("MODIFICADO_POR"), 1, 0, 'C');
-        $this->Cell(35, 7, utf8_decode("USUARIO_ID"), 1, 0, 'C');
+        $this->Cell(35, 7, utf8_decode("CREADO_POR"), 1, 0, 'C');
         $this->ln();
     }
     function viewTable()
-    {
-        global $instancia_conexion;
-        $sql = "SELECT * FROM tbl_movil_parametros";
-        $stmt = $instancia_conexion->ejecutarConsulta($sql);
+     {
+         global $instancia_conexion;
+         $sql = "
+         select
+            n.id,
+             n.parametro,
+             n.descripcion,
+             n.valor,
+             n.fecha_modificacion,
+             n.creado_por,
+             s.Usuario
+         FROM
+             tbl_movil_parametros n inner join tbl_usuarios s on n.modificado_por=s.Id_usuario ";
+          $stmt = $instancia_conexion->ejecutarConsulta($sql);
+          $serial=1;
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
             $this->SetFont('Times', '', 12);
-            $this->Cell(15, 7, $reg['id'], 1, 0, 'C');
+            $this->Cell(15, 7, $serial[''], 1, 0, 'C');
             $this->Cell(55, 7, $reg['parametro'], 1, 0, 'C');
             $this->Cell(70, 7, $reg['descripcion'], 1, 0, 'C');
             $this->Cell(35, 7, utf8_decode($reg['valor']), 1, 0, 'C');
             $this->Cell(70, 7, utf8_decode($reg['fecha_modificacion']), 1, 0, 'C');
-            $this->Cell(65, 7, utf8_decode($reg['modificado por']), 1, 0, 'C');
-            $this->Cell(35, 7, $reg['usuario_id'], 1, 0, 'C');
+            $this->Cell(65, 7, utf8_decode($reg['creado_por']), 1, 0, 'C');
+            $this->Cell(35, 7, $reg['Usuario'], 1, 0, 'C');
             $this->ln();
+            $serial+=1
         }
     }
 }

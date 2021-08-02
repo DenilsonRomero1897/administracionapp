@@ -176,7 +176,7 @@ ob_end_flush();
                 <td><?php echo $parametro['descripcion']; ?></td>
                 <td><?php echo $parametro['valor']; ?></td>
                 <td><?php echo $parametro['fecha_modificacion']; ?></td>
-                <td><?php echo $parametro['modificado por']; ?></td>
+                <td><?php echo $parametro['modificado_por']; ?></td>
                 <td><?php echo $parametro['usuario_id']; ?></td>
 
                 <td style="text-align: center;">

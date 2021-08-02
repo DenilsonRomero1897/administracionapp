@@ -51,8 +51,6 @@ class myPDF extends FPDF
         $this->Cell(50, 7, "FECHA Y HORA ", 1, 0, 'C');
         $this->Cell(40, 7, "REMITENTE", 1, 0, 'C');
         $this->Cell(40, 7, "SEGMENTO", 1, 0, 'C');
-       ;
-
         $this->ln();
     }
     function viewTable()
@@ -61,7 +59,7 @@ class myPDF extends FPDF
         $sql = "
         select
             n.id,
-           n.titulo,
+            n.titulo,
             n.descripcion,
             n.fecha,
             n.remitente,
