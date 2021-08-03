@@ -31,7 +31,7 @@ class myPDF extends FPDF
         $this->Cell(330, 10, utf8_decode("REPORTE DE MANTENIMIENTO  TIPO TRANSACCION"), 0, 0, 'C');
         $this->ln(17);
         $this->SetFont('Arial', '', 12);
-        $this->Cell(60, 10, utf8_decode(" TRANSACCIONES EXISTENTES"), 0, 0, 'C');
+        $this->Cell(60, 10, utf8_decode(" "), 0, 0, 'C');
         $this->Cell(420, 10, "FECHA: " . $fecha, 0, 0, 'C');
         $this->ln();
     }
@@ -46,7 +46,7 @@ class myPDF extends FPDF
     {
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
-        $this->Cell(15, 7, "ID", 1, 0, 'C');
+        $this->Cell(15, 7, utf8_decode("N°"), 1, 0, 'C');
         $this->Cell(140, 7, utf8_decode("DESCRIPCIÓN "), 1, 0, 'C');
         $this->Cell(140, 7, utf8_decode("EXTERNAL_ID"), 1, 0, 'C');
         $this->ln();
@@ -63,14 +63,14 @@ class myPDF extends FPDF
         FROM
             tbl_movil_tipo_transacciones";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
-
+        $serial=1;
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
 
             $this->SetFont('Times', '', 12);
-            $this->Cell(15, 7, $reg['id'], 1, 0, 'C');
+            $this->Cell(15, 7, $serial, 1, 0, 'C');
             $this->Cell(140, 7, utf8_decode($reg['descripcion']), 1, 0, 'C');
             $this->Cell(140, 7, utf8_decode($reg['external_id']), 1, 0, 'C');
-            
+            $serial+=1;
 
             $this->ln();
         }

@@ -155,8 +155,8 @@ ob_end_flush();
                 <tr>
                 <th>ID</th>
               <th>TITULO</th>
-              <th>DESCRIPCIÓN</th>
-              <th>FECHA Y HORA</th>
+              <th>EDITAR</th>
+              <th>BORRAR</th>
               
                 </tr>
               </thead>
