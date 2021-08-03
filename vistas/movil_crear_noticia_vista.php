@@ -81,16 +81,16 @@ ob_end_flush();
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="titulo"> Título </label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="titulo" name="titulo" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <input autofocus class="form-control" type="text" maxlength="60" id="titulo" name="titulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
                     <label for="subtitulo">  Subtítulo </label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="subtitulo" name="subtitulo" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <input autofocus class="form-control" type="text" maxlength="60" id="subtitulo" name="subtitulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
                 <label for="Contenido">Contenido:</label>
                 <br>
-                <textarea name="Contenido" id="Contenido" cols="150" rows="5" maxlength="1000" requires></textarea>
+                <textarea name="Contenido" id="Contenido" cols="150" rows="5" maxlength="1000"  requires></textarea>
               </div>
               
               <div class="form-group">
