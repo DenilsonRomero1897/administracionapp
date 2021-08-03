@@ -7,7 +7,8 @@ $instancia_conexion = new conexion();  ?>
           <thead>
             <tr>
               <th>ID</th>
-              <th>TITULO</th>
+              <th>TÍTULO</th>
+              <th>SUBTÍTULO</th>
               <th>CONTENIDO</th>
               <th>FECHA Y HORA DE PUBLICACIÓN</th>
               <th>FECHA Y HORA DE VENCIMIENTO</th>
@@ -27,6 +28,7 @@ $instancia_conexion = new conexion();  ?>
               <tr>
                 <td><?php echo $fila['id']; ?></td>
                 <td><?php echo $fila['titulo']; ?></td>
+                <td><?php echo $fila['subtitulo']; ?></td>
                 <td><?php echo $fila['descripcion']; ?></td>
                 <td><?php echo $fila['fecha']; ?></td>
                 <td><?php echo $fila['fecha_vencimiento']; ?></td>

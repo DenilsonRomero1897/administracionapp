@@ -33,6 +33,7 @@ if (isset($_GET['id'])) {
 
   $id = $row['id'];
   $_SESSION['txtTitulo'] = $row['titulo'];
+  $_SESSION['txtSubtitulo'] = $row['subtitulo'];
   $_SESSION['txtDescripcion'] = $row['descripcion'];
   $_SESSION['txtFecha'] = strtotime($row['fecha']);
   $_SESSION['txtFecha_vencimiento'] = strtotime($row['fecha_vencimiento']);
@@ -110,7 +111,6 @@ if (isset($_REQUEST['msj'])) {
 <head>
   <title></title>
 </head>
-
 <body onload="readProducts()">
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -168,6 +168,11 @@ if (isset($_REQUEST['msj'])) {
                   <div class="form-group">
                     <label for="titulo"> Título:</label>
                     <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="45" id="titulo" name="titulo" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="subtitulo"> Subtítulo:</label>
+                    <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtSubtitulo'] ?>" maxlength="45" id="subtitulo" name="subtitulo" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
 
                   <div class="form-group">

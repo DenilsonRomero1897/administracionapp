@@ -46,7 +46,8 @@ class myPDF extends FPDF
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
         $this->Cell(10, 7, utf8_decode("N°"), 1, 0, 'C');
-        $this->Cell(70, 7, utf8_decode("TITULO"), 1, 0, 'C');
+        $this->Cell(70, 7, utf8_decode("TÍTULO"), 1, 0, 'C');
+        $this->Cell(70, 7, utf8_decode("SUBTÍTULO"), 1, 0, 'C');
         $this->Cell(70, 7, utf8_decode("DESCRIPCIÓN"), 1, 0, 'C');
         $this->Cell(50, 7, "FECHA Y HORA ", 1, 0, 'C');
         $this->Cell(40, 7, "REMITENTE", 1, 0, 'C');
@@ -60,6 +61,7 @@ class myPDF extends FPDF
         select
             n.id,
             n.titulo,
+            n.subtitulo,
             n.descripcion,
             n.fecha,
             n.remitente,
@@ -75,6 +77,7 @@ class myPDF extends FPDF
             $this->SetFont('Times', '', 12);
             $this->Cell(10, 7, $serial, 1, 0, 'C');
             $this->Cell(70, 7, utf8_decode($reg['titulo']), 1, 0, 'C');
+            $this->Cell(70, 7, utf8_decode($reg['subtitulo']), 1, 0, 'C');
             $this->Cell(70, 7, utf8_decode($reg['descripcion']), 1, 0, 'C');
             $this->Cell(50, 7, $reg['fecha'], 1, 0, 'C');
             $this->Cell(40, 7, $reg['remitente'], 1, 0, 'C');

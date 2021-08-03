@@ -15,11 +15,12 @@ if (isset($_GET['op'])) {
         case 'insert':
             $modelo = new modelo_registro_noticia();
             $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
-            $contenido = isset($_POST['Contenido']) ? strtoupper($_POST['Contenido']) : '';
+            $subtitulo = isset($_POST['subtitulo']) ? strtoupper($_POST['subtitulo']) : '';
+            $contenido = isset($_POST['Contenido']) ? ($_POST['Contenido']) : '';
             $segmento = isset($_POST['Segmentos']) ? $_POST['Segmentos'] : '';
             $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
             $fecha_vencimiento= date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_vencimiento']));
-            $sql = "INSERT into tbl_movil_noticias (titulo,descripcion,fecha,fecha_vencimiento,remitente,segmento_id) VALUES ('$titulo','$contenido','$fecha_publicacion','$fecha_vencimiento','ADMIN',$segmento)";
+            $sql = "INSERT into tbl_movil_noticias (titulo,subtitulo,descripcion,fecha,fecha_vencimiento,remitente,segmento_id) VALUES ('$titulo','$subtitulo','$contenido','$fecha_publicacion','$fecha_vencimiento','ADMIN',$segmento)";
             $resultado = $mysqli->query($sql);
                 if($resultado === TRUE){
                    $idNoticia = $modelo->buscar_id_noticia($titulo,$fecha_publicacion);
@@ -54,11 +55,12 @@ if (isset($_GET['op'])) {
         case 'editar':
             $id = $_GET['id'];
             $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
+            $subtitulo = isset($_POST['subtitulo']) ? $_POST['subtitulo'] : '';
             $contenido = isset($_POST['Contenido']) ? $_POST['Contenido'] : '';
             $segmento = $_POST['Segmentos'];
             $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
             $fecha_vencimiento = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_vencimiento']));
-            $sql = "UPDATE tbl_movil_noticias SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion',fecha_vencimiento = '$fecha_vencimiento', remitente = 'ADMIN', segmento_id = $segmento where id = $id";
+            $sql = "UPDATE tbl_movil_noticias SET titulo = '$titulo', subtitulo = '$subtitulo', descripcion = '$contenido', fecha = '$fecha_publicacion',fecha_vencimiento = '$fecha_vencimiento', remitente = 'ADMIN', segmento_id = $segmento where id = $id";
             $resultado = $mysqli->query($sql);
                 if($resultado === TRUE){
                     bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));
