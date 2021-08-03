@@ -163,7 +163,7 @@ ob_end_flush();
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="descripcion"> Tipo de Mensaje a Enviar </label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="tipo_mensaje" name="tipo_mensaje" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <input autofocus class="form-control" type="text" maxlength="60" id="tipo_mensaje" name="tipo_mensaje" required style="text-transform: uppercase" onpaste="return false"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
 
 

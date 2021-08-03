@@ -149,11 +149,11 @@ ob_end_flush();
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="descripcion"> Descripción de la Transacción </label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="descripcion" name="descripcion" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <input autofocus class="form-control" type="text" maxlength="60" id="descripcion" name="descripcion" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
                     <label for="descripcion"> External ID </label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="external_id" name="external_id" required style="">
+                    <input autofocus class="form-control" type="text" maxlength="60" id="external_id" name="external_id" required style="" onpaste="return false" >
                   </div>
                 </div>
               </div>

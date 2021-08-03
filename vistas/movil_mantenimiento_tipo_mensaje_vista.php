@@ -249,7 +249,7 @@ ob_end_flush();
                   <div class="form-group">
                     <label>Tipo de Mensaje</label>
 
-                    <input class="form-control" type="text" id="tipo_mensaje" name="tipo_mensaje" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txttipo_mensaje']; ?>">
+                    <input class="form-control" type="text" id="tipo_mensaje" name="tipo_mensaje" style="text-transform: uppercase" onpaste="return false"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txttipo_mensaje']; ?>">
 
                   </div>
 

@@ -126,7 +126,7 @@ ob_end_flush();
 </head>
 
 
-<body>
+<body >
 
 
   <div class="content-wrapper">
@@ -230,7 +230,7 @@ ob_end_flush();
 
   <form action="../Controlador/movil_guardar_tiporecurso_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
 
-    <div class="modal fade" id="modal_modificar_tiporecurso">
+    <div class="modal fade" id="modal_modificar_tiporecurso"  >
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -250,14 +250,14 @@ ob_end_flush();
                   <div class="form-group">
                     <label>Descripción</label>
 
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtdescripcion']; ?>">
+                    <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtdescripcion']; ?>">
 
                   </div>
 
                   <div class="form-group">
                     <label>URL</label>
 
-                    <input class="form-control" type="text" id="url" name="url" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txturl']; ?>">
+                    <input class="form-control" type="text" id="url" name="url" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txturl']; ?>">
 
                   </div>
 
