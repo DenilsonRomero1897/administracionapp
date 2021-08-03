@@ -133,11 +133,11 @@ ob_end_flush();
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="nombre"> Nombre del segmento</label>
-                    <input autofocus class="form-control" type="text" maxlength="45" id="nombre" name="nombre" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <input autofocus class="form-control" type="text" maxlength="45" id="nombre" name="nombre" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
                     <label for="descripcion">Descripción</label>
-                    <input class="form-control" type="text" maxlength="200" id="descripcion" name="descripcion" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <input class="form-control" type="text" maxlength="200" id="descripcion" name="descripcion" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                 </div>
               </div>

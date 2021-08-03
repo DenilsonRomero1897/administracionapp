@@ -224,7 +224,7 @@ ob_end_flush();
                   </div>  -->
                   <div class="form-group">
                     <label>Valor</label>
-                    <input class="form-control" type="text" id="valor" name="valor" style="text-transform: uppercase"  onkeyup="DobleEspacio(this, event)" required="" maxlength="60" value="<?php echo $_SESSION['txtvalor']; ?>">
+                    <input class="form-control" type="text" id="valor" name="valor" style="text-transform: uppercase" onpaste="return false" onkeyup="DobleEspacio(this, event)" required="" maxlength="60" value="<?php echo $_SESSION['txtvalor']; ?>">
                   </div>
                   </div>
               </div>

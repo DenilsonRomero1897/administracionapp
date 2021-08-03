@@ -224,15 +224,15 @@ ob_end_flush();
                   </div>
                   <div class="form-group">
                     <label>Request de Envio: </label>
-                    <input class="form-control" type="text" id="request_envio" name="request_envio" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtrequest_envio']; ?>">
+                    <input class="form-control" type="text" id="request_envio" name="request_envio" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtrequest_envio']; ?>">
                   </div>
                   <div class="form-group">
                     <label>Response: </label>
-                    <input class="form-control" type="text" id="response" name="response" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtresponse']; ?>">
+                    <input class="form-control" type="text" id="response" name="response" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtresponse']; ?>">
                   </div>
                   <div class="form-group">
                     <label> Estado: </label>
-                    <input class="form-control" type="text" id="estado" name="estado" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtestado']; ?>">
+                    <input class="form-control" type="text" id="estado" name="estado" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtestado']; ?>">
                   </div>
         
                   <div class="form-group">

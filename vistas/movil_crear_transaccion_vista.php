@@ -164,15 +164,15 @@ ob_end_flush();
                   </div>
                   <div class="form-group">
                     <label for="txt_requestenvio"> Request De Envio </label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="request_envio" name="request_envio" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <input autofocus class="form-control" type="text" maxlength="60" id="request_envio" name="request_envio" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
                     <label for="txt_response"> Response</label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="response" name="response" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <input autofocus class="form-control" type="text" maxlength="60" id="response" name="response" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
                     <label for="txt_estado"> Estado</label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="estado" name="estado" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <input autofocus class="form-control" type="text" maxlength="60" id="estado" name="estado" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
 
                   <div class="form-group">
