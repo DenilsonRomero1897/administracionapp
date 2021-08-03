@@ -7,7 +7,7 @@ require_once('../Controlador/movil_api_controlador.php');
 
 if (isset($_GET['op'])) {
     $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
-$datos = [];
+$datos = array();
 $Id_objeto = 130;
 $id = 4;
 switch ($_GET['op']) {
@@ -29,17 +29,23 @@ switch ($_GET['op']) {
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
                 
                  //Llenado del arreglo
-                array_push($datos, ["idLote"=>(int)$id]);
-                array_push($datos, ["titulo"=>$titulo]);
-                array_push($datos, ["Usuario"=>$usuario]);
-                array_push($datos, ["Contrasena"=>$contrasena]);
-                array_push($datos, ["contenido"=>$contenido]);
-                array_push($datos, ["urlRecurso"=>0]);
-                array_push($datos, ["segmento"=>(int)$segmento]);
-                var_dump($datos);
-                 die;
+                 $id_usuario = $_SESSION['id_usuario'];
+                $sql = "SELECT Usuario,contrasena FROM tbl_usuarios WHERE Id_usuario = $id_usuario";
+                $resultado = $mysqli->query($sql)->fetch_assoc();
+                $usuario = $resultado['Usuario'];
+                $password = $resultado['contrasena'];
+
+                $datos = array("idLote" => $id,
+                                 "usuario" => $usuario,
+                                 "password" => $password,
+                                 "titulo" => $titulo,
+                                 "contenido" => $contenido,
+                                 "urlRecurso" => 0,
+                                 "segmento" => $segmento
+                );
                 $response = consumoApi($url, $datos);
-            
+                var_dump($response);
+                die;
                 
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }

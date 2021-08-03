@@ -14,13 +14,10 @@
 //peticion post
 function consumoApi($url, $datos){
 $ch = curl_init();
-// $array = ['idLote' =>1,
-//           'titulo' =>'Title Prueba desde Postman',
-//            'contenido' =>'Body Prueba desde Postman',
-//             'urlRecurso' =>'null',
-//             'segmento' =>1,]; 
-                     
+                   
 $data = json_encode($datos);
+// echo $data;
+// die;
 curl_setopt($ch,CURLOPT_URL,$url);
 curl_setopt($ch,CURLOPT_POST,true);
 curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
