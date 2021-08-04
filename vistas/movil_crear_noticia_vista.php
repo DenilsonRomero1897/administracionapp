@@ -12,7 +12,7 @@ require_once('../clases/funcion_permisos.php');
 
 $Id_objeto = 128;
 
-bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto, 'Ingreso', 'A CREAR NOTICIA');
+bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'Ingreso', 'A CREAR NOTICIA');
 
 ob_end_flush();
 
@@ -65,7 +65,7 @@ ob_end_flush();
         <!-- pantalla 1 -->
 
         <form action="../Controlador/movil_noticia_controlador.php?op=insert" method="POST" enctype="multipart/form-data">
-     
+
           <div class="card card-default">
             <div class="card-header">
               <h3 class="card-title"></h3>
@@ -74,7 +74,6 @@ ob_end_flush();
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
               </div>
             </div>
-            <tbody>
             <!-- /.card-header -->
             <div class="card-body">
               <div class="row">
@@ -84,75 +83,73 @@ ob_end_flush();
                     <input autofocus class="form-control" type="text" maxlength="60" id="titulo" name="titulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
-                    <label for="subtitulo">  Subtítulo </label>
+                    <label for="subtitulo"> Subtítulo </label>
                     <input autofocus class="form-control" type="text" maxlength="60" id="subtitulo" name="subtitulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
                   <div class="form-group">
-                <label for="Contenido">Contenido:</label>
-                <br>
-                <textarea name="Contenido" id="Contenido" cols="150" rows="5" maxlength="1000"  requires></textarea>
-              </div>
-              
-              <div class="form-group">
-                <label>Segmentos: </label>
-                <select class="form-control" name="Segmentos" id="Segmentos">
-                  <option value="">Seleccione una opción :</option>
-                  <?php 
-                  $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";
-                  $resultado_segmentos = $mysqli->query($sql_segmentos);
-                  while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
-                        <option value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
-                  <?php } ?>
-                </select>
-              </div>
-              <div class="col-sm-12">
+                    <label for="Contenido">Contenido:</label>
+                    <br>
+                    <textarea name="Contenido" id="Contenido" cols="150" rows="5" maxlength="1000" required></textarea>
+                  </div>
+
                   <div class="form-group">
-                  <label> Adjuntar Archivos</label>
+                    <label>Segmentos: </label>
+                    <select class="form-control" name="Segmentos" id="Segmentos">
+                      <option value="">Seleccione una opción :</option>
+                      <?php
+                      $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";
+                      $resultado_segmentos = $mysqli->query($sql_segmentos);
+                      while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
+                        <option value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
+                      <?php } ?>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label> Adjuntar Archivos</label>
                     <input class="form-control" type="file" class="form-control" id="txt_documentos" name="txt_documentos[]" multiple>
+                  </div>
+
+                  <div class="form-group">
+                    <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
+                    <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
+                    <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" min="<?php echo date("Y-m-d\TH:i"); ?>" required>
+                  </div>
+
+                  <div class="form-group">
+                    <!-- FECHA DE VENCIMIENTO txt_fecha_Publicacion -->
+                    <label for="txt_fecha_Publicacion">Fecha y Hora de Vencimiento:</label>
+                    <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" min="" max="" required>
+                  </div>
                 </div>
-                 </div>
-            <div class="form-group">
-                <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
-                <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
-                <?php 
-                
-                $fe=date("Y-m-d\TH:i");
-                //echo "HOra serfver: ".$fe;
-                 ?>
-                <!--<input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false" min="<?php $fecha_n?>" max="<?php $f_despues?>">-->
-                <input class="form-control" value="<?php $fe=date("Y-m-d\TH:i");?>" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion"  min="<?php echo date("Y-m-d\TH:i",strtotime($fe."+1 hour"));?>" max="<?php echo date("Y-m-d\TH:i",strtotime($fe."+ 5 month"));?>" required >
-            <div class="form-group">
-                <!-- FECHA DE VENCIMIENTO txt_fecha_Publicacion -->
-                <label for="txt_fecha_Publicacion">Fecha y Hora de Vencimiento:</label>
-                <?php 
-                
-                //echo "HOra serfver: ".$fe;
-                 ?>
-                <!--<input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false" min="<?php $fecha_n?>" max="<?php $f_despues?>">-->
-                <input class="form-control" value="<?php $fe=date("Y-m-d\TH:i");?>" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento"  min="<?php echo date("Y-m-d\TH:i",strtotime($fe."+1 hour"));?>" max="<?php echo date("Y-m-d\TH:i",strtotime($fe."+ 5 month"));?>" required >
-         </div>
-              <p class="text-center" style="margin-top: 20px;">
-                <button type="submit" class="btn btn-primary" id="btn_guardar" name="btn_guardar"><i class="zmdi zmdi-floppy"></i>Guardar</button>
-              </p>
+                <p class="text-center" style="margin-top: 20px;">
+                  <button type="submit" class="btn btn-primary" id="btn_guardar" name="btn_guardar"><i class="zmdi zmdi-floppy"></i>Guardar</button>
+                </p>
+              </div>
             </div>
           </div>
         </form>
       </div>
-  
-  </section>
-</div>
-<script>
-function check(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
 
-    //Tecla de retroceso para borrar, siempre la permite
-    if (tecla == 8) {
-        return true;
+    </section>
+  </div>
+  <script>
+    function sumarDias(fecha) {
+      fecha.setDate(fecha.getDate() + dias);
+      return fecha;
     }
-    // Patron de entrada, en este caso solo acepta numeros y letras
-    patron = /[A-Za-z0-9 ]/;
-    tecla_final = String.fromCharCode(tecla);
-    return patron.test(tecla_final);
-}
-</script>
+
+    function check(e) {
+      tecla = (document.all) ? e.keyCode : e.which;
+
+      //Tecla de retroceso para borrar, siempre la permite
+      if (tecla == 8) {
+        return true;
+      }
+      // Patron de entrada, en este caso solo acepta numeros y letras
+      patron = /[A-Za-z0-9 ]/;
+      tecla_final = String.fromCharCode(tecla);
+      return patron.test(tecla_final);
+    }
+  </script>
 </body>
