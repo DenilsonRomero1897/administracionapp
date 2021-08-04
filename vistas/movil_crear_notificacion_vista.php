@@ -86,7 +86,7 @@ ob_end_flush();
               <div class="form-group">
                 <label for="Contenido">Contenido:</label>
                 <input class="form-control" type="text" maxlength="255" id="Contenido" name="Contenido" style="text-transform: uppercase" onpaste="return false" required onkeypress="return check(event)" >
-              </div>
+                 </div>
 
               <div class="form-group">
                 <label>Segmentos: </label>
@@ -100,8 +100,21 @@ ob_end_flush();
                   <?php } ?>
                 </select>
               </div>
+              
+<form>
+<div>
+  <label for="correo">Adjuntar Archivos</label>
+  </div>
+<input type="radio" name="rad" onclick="pepe.disabled = true" /> NO </input>
+<input type="radio" name="rad" onclick="pepe.disabled = false" />SI </input>
+<input type="file" name="pepe" disabled="disabled" />
+</form>
 
-              <div class="form-group">
+
+
+
+
+  <div class="form-group">
                 <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                 <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
                 <?php 
