@@ -105,9 +105,9 @@ ob_end_flush();
 <div>
   <label for="correo">Adjuntar Archivos</label>
   </div>
-<input type="radio" name="rad" onclick="pepe.disabled = true" /> NO </input>
-<input type="radio" name="rad" onclick="pepe.disabled = false" />SI </input>
-<input type="file" name="pepe" disabled="disabled" />
+<input type="radio" name="rad" onclick="buscar.disabled = true" /> NO </input>
+<input type="radio" name="rad" onclick="buscar.disabled = false" />SI </input>
+<input type="file" name="buscar" disabled="disabled" />
 </form>
 
 
