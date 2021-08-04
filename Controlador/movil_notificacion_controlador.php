@@ -9,7 +9,6 @@ if (isset($_GET['op'])) {
     $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
 $datos = array();
 $Id_objeto = 130;
-$id = 4;
 switch ($_GET['op']) {
     case 'insert':
         $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
@@ -34,7 +33,10 @@ switch ($_GET['op']) {
                 $resultado = $mysqli->query($sql)->fetch_assoc();
                 $usuario = $resultado['Usuario'];
                 $password = $resultado['contrasena'];
-
+                //traer id de notificacion
+                $sql2 = "SELECT id FROM tbl_movil_notificaciones WHERE titulo = $titulo";
+                $resultado2 = $mysqli->query($sql2)->fetch_assoc();
+                $id = $resultado2['id'];
                 $datos = array("idLote" => $id,
                                  "usuario" => $usuario,
                                  "password" => $password,

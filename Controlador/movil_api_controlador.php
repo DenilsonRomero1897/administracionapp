@@ -16,8 +16,6 @@ function consumoApi($url, $datos){
 $ch = curl_init();
                    
 $data = json_encode($datos);
-// echo $data;
-// die;
 curl_setopt($ch,CURLOPT_URL,$url);
 curl_setopt($ch,CURLOPT_POST,true);
 curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
