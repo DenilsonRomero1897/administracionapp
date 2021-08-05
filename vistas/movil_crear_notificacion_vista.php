@@ -79,13 +79,13 @@ ob_end_flush();
 
               <div class="form-group">
                 <label for="titulo"> Título:</label>
-                <input autofocus class="form-control" type="text" maxlength="90" id="titulo" name="titulo" style="text-transform: uppercase" onpaste="return false" onkeypress="return check(event)" required>
+                <input autofocus class="form-control" type="text" maxlength="90" id="titulo" name="titulo" style="text-transform: uppercase" onpaste="return false" onkeyup="DobleEspacio(this, event)" onkeypress="return check(event)" required>
                 <!--<input class="tf w-input" id="txtCurp" name="txtCurp" maxlength="256" onkeypress="return check(event)" placeholder="No. de CURP" type="text">-->
               </div>
 
               <div class="form-group">
                 <label for="Contenido">Contenido:</label>
-                <input class="form-control" type="text" maxlength="255" id="Contenido" name="Contenido" style="text-transform: uppercase" onpaste="return false" required onkeypress="return check(event)" >
+                <input class="form-control" type="text" maxlength="255" id="Contenido" name="Contenido" style="text-transform: uppercase" onpaste="return false" onkeyup="DobleEspacio(this, event)" required onkeypress="return check(event)" >
                  </div>
 
               <div class="form-group">

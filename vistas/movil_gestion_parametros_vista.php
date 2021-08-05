@@ -162,7 +162,6 @@ ob_end_flush();
               <th>CREADO_POR</th>
               <th>MOD_POR</th>
               <th>EDITAR</th>
-              <th>BORRAR</th>
             </tr>
           </thead>
           <tbody>
@@ -184,13 +183,7 @@ ob_end_flush();
                     <i class="far fa-edit"></i>
                   </a>
                 </td>
-                <td style="text-align: center;">
-                  <form action="../Controlador/movil_guardar_parametros_controlador.php?id=<?php echo $parametro['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off" >
-                    <button type="submit" class="btn btn-danger btn-raised btn-xs">
-                      <i class="far fa-trash-alt"></i>
-                    </button>
-                  </form>
-                </td>
+                
               </tr>
             <?php } ?>
           </tbody>

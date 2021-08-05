@@ -165,7 +165,7 @@ ob_end_flush();
                   </div>
                   <div class="form-group">
                     <label for="txt_valorparametro">Valor del Parámetro</label>
-                    <input class="form-control" type="text" id="valor" name="valor" required style="text-transform: uppercase" onpaste="return false"  maxlength="30">
+                    <input class="form-control" type="text" id="valor" name="valor" required style="text-transform: uppercase" onpaste="return false"  maxlength="30"  onkeyup="DobleEspacio(this, event)">
                   </div>
 
                 </div>
