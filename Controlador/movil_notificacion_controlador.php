@@ -37,10 +37,7 @@ switch ($_GET['op']) {
                 $password = $resultado['contrasena'];
                 //traer id de notificacion
                 $sql2 = "SELECT id FROM tbl_movil_notificaciones WHERE titulo = '$titulo'";
-             
                 $resultado2 = $mysqli->query($sql2)->fetch_assoc();
-                var_dump($resultado2);
-                die;
                 $id = $resultado2['id'];
                 $datos = array("idLote" => $id,
                                  "usuario" => $usuario,
@@ -51,8 +48,6 @@ switch ($_GET['op']) {
                                  "segmento" => $segmento
                 );
                 $response = consumoApi($url, $datos);
-              
-                
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }
         break;
