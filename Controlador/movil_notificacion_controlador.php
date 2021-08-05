@@ -2,6 +2,7 @@
 session_start();
 
 require_once('../clases/Conexion.php');
+require_once('../clases/conexion_mantenimientos.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../Controlador/movil_api_controlador.php');
 
@@ -34,9 +35,9 @@ switch ($_GET['op']) {
                 $usuario = $resultado['Usuario'];
                 $password = $resultado['contrasena'];
                 //traer id de notificacion
-                $sql2 = "SELECT id FROM tbl_movil_notificaciones WHERE titulo = $titulo";
-                $resultado2 = $mysqli->query($sql2)->fetch_assoc();
-                $id = $resultado2['id'];
+                 $sql2 = "SELECT id FROM tbl_movil_notificaciones WHERE titulo = '$titulo'";
+                 $resultado2 = $mysqli->query($sql2)->fetch_assoc();
+                 $id = $resultado2['id'];
                 $datos = array("idLote" => $id,
                                  "usuario" => $usuario,
                                  "password" => $password,
@@ -46,10 +47,8 @@ switch ($_GET['op']) {
                                  "segmento" => $segmento
                 );
                 $response = consumoApi($url, $datos);
-                var_dump($response);
-                die;
-                
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
+                
             }
         break;
         
@@ -98,13 +97,7 @@ function crearNotificacion($url,$tipo_notificacion,$Id_objeto,$id,$titulo,$conte
     $resultado = $mysqli->query($sql);
     if($resultado === TRUE){
     bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
-    array_push($datos, ["idLote"=>(int)$id]);
-    array_push($datos, ["titulo"=>$titulo]);
-    array_push($datos, ["contenido"=>$contenido]);
-    array_push($datos, ["urlRecurso"=>0]);
-    array_push($datos, ["segmento"=>(int)$segmento]);
-    $response = consumoApi($url, $datos);
-
+  
         }else{
             echo 'no se pudo realizar la operacion';
         }
