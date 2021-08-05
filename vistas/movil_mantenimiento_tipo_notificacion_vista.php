@@ -121,7 +121,7 @@ ob_end_flush();
   <title></title>
 </head>
 
-<body>
+<body onload="readProducts()">
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -149,44 +149,10 @@ ob_end_flush();
         </div>
         <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
       </div>
-        <div class="card-body">
-            <table id="tabla" class="table table-bordered table-striped">
-              <thead>
-                <tr>
-                <th>ID</th>
-              <th>TITULO</th>
-              <th>EDITAR</th>
-              <th>BORRAR</th>
-              
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                $sql_tiponotificacion = "select * from  tbl_movil_tipo_notificaciones";
-                $resultado_tiponotificacion = $mysqli->query($sql_tiponotificacion);
-                while ($notificacion = $resultado_tiponotificacion->fetch_array(MYSQLI_ASSOC)) { ?>
-                  <tr>
-                    <td><?php echo $notificacion['id']; ?></td>
-                    <td><?php echo $notificacion['descripcion']; ?></td>
-                    <td style="text-align: center;">
-                      <a href="../vistas/movil_mantenimiento_tipo_notificacion_vista.php?&id=<?php echo $notificacion['id']; ?>" class="btn btn-primary btn-raised btn-xs">
-                        <i class="far fa-edit"></i>
-                      </a>
-                    </td>
-                    <td style="text-align: center;">
-                      <form action="../Controlador/movil_guardar_tiponotificacion_controlador.php?op=eliminar&id=<?php echo $notificacion['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
-                        <button type="submit" class="btn btn-danger btn-raised btn-xs">
-                          <i class="far fa-trash-alt"></i>
-                        </button>
-                      </form>
-                    </td>
-                  </tr>
-                <?php } ?>
-              </tbody>
-            </table>
-          </div><!-- /.card-body -->
-    </div>
-  </div>
+        <div class="card-body" id="tipo_notificacion">
+
+        </div>
+
   <form action="../Controlador/movil_guardar_tiponotificacion_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
     <div class="modal fade" id="modal_modificar_tiponotificacion">
       <div class="modal-dialog">
@@ -222,6 +188,7 @@ ob_end_flush();
     </div>
     <!-- /.  finaldel modal -->
   </form>
+
   <script type="text/javascript">
     $(function() {
       $('#tabla').DataTable({
@@ -237,10 +204,66 @@ ob_end_flush();
         }
       });
     });
+    
     function ventana() {
       window.open("../Controlador/movil_reporte_tipo_notificacion_controlador.php", "REPORTE");
     }
+
+    function readProducts() {
+      var parametro;
+      $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_listar_tipo_notificacion_controlador.php', //archivo que recibe la peticion
+        type: 'POST', //método de envio
+        beforeSend: function() {
+          $('#tipo_notificacion').html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          $('#tipo_notificacion').html(response);
+        }
+      });
+    }
+
+    function eliminar(id) {
+      var parametro = {
+        'funcion': 'eliminar',
+        'id': id
+      }
+      var confirmacion = confirm('esta seguro de eliminar');
+      if (confirmacion) {
+        $.ajax({
+          data: parametro, //datos que se envian a traves de ajax
+          url: '../Controlador/movil_guardar_tiponotificacion_controlador.php', //archivo que recibe la peticion
+          type: 'POST', //método de envio
+          success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+            console.log(data);
+            if (data != '') {
+              readProducts();
+              datoseliminados();
+            } else {
+              alert('no se pudo eliminar!!');
+            }
+            
+          }
+        });
+      } else {
+        console.log('decidio no eliminar');
+      }
+    }
+
+    function datoseliminados(){
+                    swal({
+                       title:"",
+                       text:"los datos se eliminaron correctamente.",
+                       type: "success",
+                       showConfirmButton: true,
+                       timer: 3000
+                    });
+                  }
+
   </script>
+
+
 </body>
 
 </html>

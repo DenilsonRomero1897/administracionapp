@@ -125,9 +125,7 @@ ob_end_flush();
 </head>
 
 
-<body>
-
-
+<body onload="readProducts()">
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -162,70 +160,9 @@ ob_end_flush();
       </div>
       <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
       <!-- /.card-header -->
-      <div class="card-body">
-        <table id="tabla" class="table table-bordered table-striped">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>TIPO MENSAJE</th>
-              <th>EDITAR</th>
-              <th>BORRAR</th>
-              
-            </tr>
-          </thead>
-          <tbody>
-            <?php
-            $sql_tipomensaje = "select * from tbl_movil_tipo_mensajes";
-            $resultado_tipomensaje = $mysqli->query($sql_tipomensaje);
-            while ($tipomensaje = $resultado_tipomensaje->fetch_array(MYSQLI_ASSOC)) { ?>
-              <tr>
-                <td><?php echo $tipomensaje['id']; ?></td>
-                <td><?php echo $tipomensaje['tipo_mensaje']; ?></td>
-                
-                
-
-                <td style="text-align: center;">
-
-                  <a href="../vistas/movil_mantenimiento_tipo_mensaje_vista.php?&id=<?php echo $tipomensaje['id']; ?>" class="btn btn-primary btn-raised btn-xs">
-                    <i class="far fa-edit"></i>
-                  </a>
-                </td>
-
-                <td style="text-align: center;">
-                  <form action="../Controlador/movil_guardar_tipomensaje_controlador.php?op=eliminar&id=<?php echo $tipomensaje['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
-                    <button type="submit" class="btn btn-danger btn-raised btn-xs">
-                      <i class="far fa-trash-alt"></i>
-                    </button>
-                    <div class="RespuestaAjax"></div>
-                  </form>
-                </td>
-
-              </tr>
-
-            <?php } ?>
-
-          </tbody>
-        </table>
-      </div>
-      <!-- /.card-body -->
-    </div>
-
-
-    <!-- /.card-body -->
-    <div class="card-footer">
-
-    </div>
-  </div>
-
-  </div>
-
-
-
-
-
-  </section>
-
-  </div>
+      <div class="card-body" id="tipo_mensaje">
+       </div>
+       
 
   <form action="../Controlador/movil_guardar_tipomensaje_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
 
@@ -253,8 +190,7 @@ ob_end_flush();
 
                   </div>
 
-                  
-
+              
                 </div>
               </div>
             </div>
@@ -272,15 +208,9 @@ ob_end_flush();
     </div>
 
     <!-- /.  finaldel modal -->
-
-
-
   </form>
-
-
   <script type="text/javascript">
     $(function() {
-
       $('#tabla').DataTable({
         "paging": true,
         "lengthChange": true,
@@ -290,14 +220,73 @@ ob_end_flush();
         "autoWidth": true,
         "responsive": true,
         "language": {
-      "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-    }
+          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+        }
       });
     });
+    
     function ventana() {
       window.open("../Controlador/movil_reporte_tipo_mensaje_controlador.php", "REPORTE");
     }
+
+    function readProducts() {
+      var parametro;
+      $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_listar_tipo_mensaje_controlador.php', //archivo que recibe la peticion
+        type: 'POST', //método de envio
+        beforeSend: function() {
+          $('#tipo_mensaje').html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          $('#tipo_mensaje').html(response);
+        }
+      });
+    }
+
+    function eliminar(id) {
+      var parametro = {
+        'funcion': 'eliminar',
+        'id': id
+      }
+      var confirmacion = confirm('esta seguro de eliminar');
+      if (confirmacion) {
+        $.ajax({
+          data: parametro, //datos que se envian a traves de ajax
+          url: '../Controlador/movil_guardar_tipomensaje_controlador.php', //archivo que recibe la peticion
+          type: 'POST', //método de envio
+          success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+            console.log(data);
+            if (data != '') {
+              readProducts();
+              datoseliminados();
+            } else {
+              alert('no se pudo eliminar!!');
+            }
+            
+          }
+        });
+      } else {
+        console.log('decidio no eliminar');
+      }
+    }
+
+    function datoseliminados(){
+                    swal({
+                       title:"",
+                       text:"los datos se eliminaron correctamente.",
+                       type: "success",
+                       showConfirmButton: true,
+                       timer: 3000
+                    });
+                  }
+
   </script>
+
+  
+
+
+
 </body>
 
 </html>

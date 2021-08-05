@@ -8,6 +8,20 @@ require_once('../clases/funcion_bitacora_movil.php');
 $Id_objeto = 128;
 $opcion = $_GET['op'];
 
+if (isset($_POST['funcion'])) {
+  if ($_POST['funcion']=='eliminar') {
+      $id = (int)$_POST['id'];
+              //se ejecuta el sql respectivo
+              $sql = "DELETE FROM tbl_movil_tipo_transacciones where id = $id";
+              $resultado = $mysqli->query($sql);
+              if ($resultado) {
+                  echo 'hola mundo';
+              }else{
+                  echo '';
+              }
+  }
+}
+
 
 if ($opcion == 'eliminar') {
   $id_tipotransaccion= isset($_GET["id"]) ? ($_GET["id"]) : "";
