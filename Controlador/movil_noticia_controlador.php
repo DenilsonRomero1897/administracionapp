@@ -34,18 +34,6 @@ if (isset($_GET['op'])) {
                        $i += 1;
                    }
                     bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
-                    
-                    //Llenado del arreglo
-                    //array_push($datos, ["id"=>$id]);
-                    //array_push($datos, ["titulo"=>$titulo]);
-                   // array_push($datos, ["contenido"=>$contenido]);
-                   // array_push($datos, ["segmento_id"=>$segmento]);
-                    //array_push($datos, ["fecha"=>$fecha_publicacion]);
-                    //array_push($datos, ["fecha_vencimiento"=>$fecha_vencimiento]);
-                    //array_push($datos, ["url"=>$url]);
-    
-                    //$response =consumoApi($url, $datos);
-                    
                     header('location: ../vistas/movil_gestion_noticia_vista.php?msj=2');
                     
                 
