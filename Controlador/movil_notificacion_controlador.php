@@ -29,13 +29,18 @@ switch ($_GET['op']) {
                 
                  //Llenado del arreglo
                  $id_usuario = $_SESSION['id_usuario'];
+                 echo 'hola mundo';
                 $sql = "SELECT Usuario,contrasena FROM tbl_usuarios WHERE Id_usuario = $id_usuario";
                 $resultado = $mysqli->query($sql)->fetch_assoc();
+                
                 $usuario = $resultado['Usuario'];
                 $password = $resultado['contrasena'];
                 //traer id de notificacion
-                $sql2 = "SELECT id FROM tbl_movil_notificaciones WHERE titulo = $titulo";
+                $sql2 = "SELECT id FROM tbl_movil_notificaciones WHERE titulo = '$titulo'";
+             
                 $resultado2 = $mysqli->query($sql2)->fetch_assoc();
+                var_dump($resultado2);
+                die;
                 $id = $resultado2['id'];
                 $datos = array("idLote" => $id,
                                  "usuario" => $usuario,
@@ -46,8 +51,7 @@ switch ($_GET['op']) {
                                  "segmento" => $segmento
                 );
                 $response = consumoApi($url, $datos);
-                var_dump($response);
-                die;
+              
                 
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }
