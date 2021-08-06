@@ -4,6 +4,7 @@ session_start();
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../Controlador/movil_api_controlador.php');
+require_once('../Controlador/movil_transacciones_controlador.php');
 
 if (isset($_GET['op'])) {
     $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
@@ -29,7 +30,6 @@ switch ($_GET['op']) {
                 
                  //Llenado del arreglo
                  $id_usuario = $_SESSION['id_usuario'];
-                 echo 'hola mundo';
                 $sql = "SELECT Usuario,contrasena FROM tbl_usuarios WHERE Id_usuario = $id_usuario";
                 $resultado = $mysqli->query($sql)->fetch_assoc();
                 
@@ -48,6 +48,10 @@ switch ($_GET['op']) {
                                  "segmento" => $segmento
                 );
                 $response = consumoApi($url, $datos);
+                $response_mensaje = $response['mensaje'];
+                $sql = "INSERT INTO tbl_movil_transacciones values (null,sysdate(),'envio de notificaciones','$response2','completada',1)";
+              
+                $resultado = $mysqli->query($sql);
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }
         break;

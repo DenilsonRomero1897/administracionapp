@@ -92,9 +92,10 @@ require_once('../Controlador/movil_chat_controlador.php');
             $("#resultado_chat").empty();
         }
 
-        function getid() {
+        function getid(id) {
             var parametros = {
-                "funcion": 'crearNuevoChat'
+                "funcion": 'crearNuevoChat',
+                 "id": id
             }
             $.ajax({
                 data: parametros, //datos que se envian a traves de ajax

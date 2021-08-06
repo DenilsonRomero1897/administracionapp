@@ -4,7 +4,7 @@ require_once('../clases/conexion_mantenimientos.php');
 $instancia_conexion = new conexion(); 
 ?>
 
-<table id="tabla" class="table table-bordered table-striped" style="width:100%">
+<table id="tabla-noticias" class="table table-bordered table-striped" style="width:100%">
           <thead>
             <tr>
               <th>ID</th>
@@ -53,7 +53,7 @@ $instancia_conexion = new conexion();
 
 <script>
     $(function() {
-      $('#tabla').DataTable({
+      $('#tabla-noticias').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,

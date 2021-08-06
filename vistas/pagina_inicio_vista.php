@@ -56,6 +56,8 @@ if (session_status() === PHP_SESSION_NONE) {
   <link rel="stylesheet" type="text/css" href="../plugins/sweetalert2/sweetalert2.min.css">
   <link rel="stylesheet" href="../dist/css/sweetalert2.css">
   <script src="../js/funciones.js"></script>
+  <script src="../dist//js/jspdf.min.js"></script>
+  <script src="../dist//js/jspdf.plugin.autotable.min.js"></script>
 
 
 </head>
