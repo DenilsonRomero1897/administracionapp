@@ -157,7 +157,7 @@ if (isset($_REQUEST['msj'])) {
           <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_noticia_vista.php">Nuevo</a>
           <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
         </div>
-        <div class="dt-buttons btn-group"><button id="GenerarMysql" class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
+        <div class="dt-buttons btn-group"><button onclick = "ventana()" class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
         <div>
           <div class="card-body" id="Noticias">
 
@@ -248,6 +248,10 @@ if (isset($_REQUEST['msj'])) {
       </form>
 
       <script>
+
+         function ventana() {
+         window.open("../Controlador/movil_reporte_gestion_noticia.php", "REPORTE");
+        }
         function readProducts() {
           var parametro;
           $.ajax({
