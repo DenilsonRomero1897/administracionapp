@@ -184,9 +184,6 @@ if (permiso_ver('16') == '1') {
             </div>
 
             <div class="clearfix hidden-md-up"></div>
-              <!-- /.info-box -->
-            </div>
-            <!-- /.row -->
           </div>
           <!--/. container-fluid -->
         </div>
@@ -197,12 +194,10 @@ if (permiso_ver('16') == '1') {
           <div class="row" style="  display: flex;
     align-items: center;
     justify-content: center;">
-            <div class="col-18 col-sm-18 col-md-16">
-          
+            <div class="col-6 col-sm-6 col-md-4">
               <div class="small-box bg-primary">
                 <div class="inner">
                 <h4>Gestión de Transacciones</h4>
-                
                   <p><?php echo $_SESSION['movil_gestion_transacciones_vista']; ?></p>
                 </div>
                 <div class="icon">

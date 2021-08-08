@@ -50,10 +50,6 @@ if (permiso_ver('4') == '1') {
   tiene permisos para visualizar";
 }
 
-
-
-
-
 ?> 
 <!DOCTYPE html>
 <html>
@@ -62,9 +58,6 @@ if (permiso_ver('4') == '1') {
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
-
-
-
 </head>
 
 <body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
@@ -88,8 +81,6 @@ if (permiso_ver('4') == '1') {
         </div><!-- /.container-fluid -->
       </div>
       <!-- /.content-header -->
-
-
       <div class="card card-default">
           <div class="card-header">
           
@@ -104,52 +95,6 @@ if (permiso_ver('4') == '1') {
           <div class="card-body">
             <div class="row">
             <div class="col-md-12">
-              
-     
-        
-
-      <!-- /.info-box -->
-      <section class="content">
-        <div class="container-fluid">
-          <!-- Info boxes -->
-          <div class="row" style="  display: flex;
-    align-items: center;
-    justify-content: center;">
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-light">
-                <div class="inner">
-                  <h4>Crear Nuevo Recurso  </h4>
-                  <p><?php echo $_SESSION['movil_crear_tipo_recurso_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-plus-square"></i>
-                </div>
-
-                <a href="../vistas/movil_crear_tipo_recurso_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-
-            </div>
-            <!-- fix for small devices only -->
-            <div class="clearfix hidden-md-up"></div>
-            <!-- /.info-box -->
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-primary">
-                <div class="inner">
-                  <h4>Mantenimiento Tipo Recurso</h4>
-                  <p><?php echo $_SESSION['movil_mantenimiento_tipo_recurso_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-edit"></i>
-                </div>
-
-                <a href="../vistas/movil_mantenimiento_tipo_recurso_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-
-            </div>
             <!-- /.row -->
           </div>
           <!--/. container-fluid -->
@@ -242,6 +187,33 @@ if (permiso_ver('4') == '1') {
 
                 <a href="../vistas/movil_mantenimiento_tipo_mensaje_vista.php" class="small-box-footer">
                   Ir <i class="fas fa-arrow-circle-right"></i>
+                </div>
+              <!-- /.info-box -->
+            </div>
+            <!-- /.row -->
+          
+            <div class="clearfix hidden-md-up"></div>
+          </div>
+          <!--/. container-fluid -->
+        </div>
+      </section>
+      <section class="content">
+      <div class="container-fluid">
+          <!-- Info boxes -->
+          <div class="row" style="  display: flex;
+    align-items: center;
+    justify-content: center;">
+            <div class="col-6 col-sm-6 col-md-4">
+              <div class="small-box bg-primary">
+                <div class="inner">
+                <h4>Mantenimiento Tipo Recurso</h4>
+                  <p><?php echo $_SESSION['movil_mantenimiento_tipo_recurso_vista']; ?></p>
+                </div>
+                <div class="icon">
+                  <i class="fas fa-edit"></i>
+                </div>
+                <a href="../vistas/movil_mantenimiento_tipo_recurso_vista.php" class="small-box-footer">
+                  Ir <i class="fas fa-arrow-circle-right"></i>
                 </a>
               </div>
               <!-- /.info-box -->
@@ -251,31 +223,14 @@ if (permiso_ver('4') == '1') {
           <!--/. container-fluid -->
         </div>
       </section>
-
-      
-      
- <!-- /.content -->
- 
-              <!-- /.info-box -->
-            </div>
-           
-
-                
-              </div>
-
-
-     
-
-     
-
-
-              
-
-
-
   </div>
 
   </div>
+      
+
+      
+      
+
 
 </body>
 

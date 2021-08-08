@@ -106,11 +106,6 @@ ob_end_flush();
                   </div>
 
                   <div class="form-group">
-                    <label> Adjuntar Archivos</label>
-                    <input class="form-control" type="file" class="form-control" id="txt_documentos" name="txt_documentos[]" multiple>
-                  </div>
-
-                  <div class="form-group">
                     <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                     <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
                     <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" min="<?php echo date("Y-m-d\TH:i"); ?>" required>
@@ -120,6 +115,12 @@ ob_end_flush();
                     <!-- FECHA DE VENCIMIENTO txt_fecha_Publicacion -->
                     <label for="txt_fecha_Publicacion">Fecha y Hora de Vencimiento:</label>
                     <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" min="" max="" required>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label> Adjuntar Archivos</label>
+                  <input class="form-control" type="file" class="form-control" id="txt_documentos" name="txt_documentos[]" multiple>
                   </div>
                 </div>
                 <p class="text-center" style="margin-top: 20px;">
