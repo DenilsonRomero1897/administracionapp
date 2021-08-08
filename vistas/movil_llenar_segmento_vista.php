@@ -213,6 +213,8 @@ ob_end_flush();
       checkboxes = document.getElementsByName('persona[]');
       for (var i = 0, n = checkboxes.length; i < n; i++) {
         checkboxes[i].checked = source.checked;
+        validar(checkboxes[i]);
+        checkboxes[i].disabled = true;
       }
    
     }

@@ -24,7 +24,7 @@ class modelo_registro_notificacion
     function buscar_id_recurso($url)
     {
         global $instancia_conexion;
-        $sql = "SELECT id FROM tbl_movil_tipo_recursos WHERE url = '$url'";
+        $sql = "SELECT id,url FROM tbl_movil_tipo_recursos WHERE url = '$url'";
         return $instancia_conexion->ejecutarConsultaSimpleFila($sql);
     }
 

@@ -5,7 +5,7 @@
 
 ?>
 
-<table id="tabla" class="table table-bordered table-striped" style="width:100%">
+<table id="tabla-segmento-usuario" class="table table-bordered table-striped" style="width:100%">
     <thead>
         <tr>
             <th hidden>ID</th>
@@ -34,3 +34,21 @@
         <?php } ?>
     </tbody>
 </table>
+
+<script>
+ $(function() {
+      $('#tabla-segmento-usuario').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+        }
+      });
+    });
+
+</script>

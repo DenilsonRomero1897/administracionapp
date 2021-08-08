@@ -43,7 +43,7 @@ switch ($_GET['op']) {
                 $resultado2 = $mysqli->query($sql2)->fetch_assoc();
                 $id_notificacion = $resultado2['id'];
                 //subir imagen de la notificacion
-                $idRecurso = subirDocumentos($i);
+                $idRecurso = subirDocumentos();
                 $modelo->insert_notificacion_recurso((int)$id_notificaion,(int)$idRecurso['id']); 
                 $datos = array("idLote" => $id_notificacion,
                                  "usuario" => $usuario,
@@ -125,7 +125,6 @@ function crearNotificacion($url,$tipo_notificacion,$Id_objeto,$id,$titulo,$conte
 function subirDocumentos(){
     
     $MP = new modelo_registro_notificacion();
-    //$nombrearchivo = htmlspecialchars($_POST['txt_documentos']['name']['0'],ENT_QUOTES,'UTF-8');
     $tmp_name = $_FILES['subir_archivo']['tmp_name'][0];
     $name = $_FILES['subir_archivo']['name'][ 0 ];
     if(is_array($_FILES) && count($_FILES) > 0){
