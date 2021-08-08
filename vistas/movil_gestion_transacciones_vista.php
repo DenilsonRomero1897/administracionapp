@@ -147,11 +147,26 @@ ob_end_flush();
     <div class="card card-default">
       <div class="card-header">
         <div class="card-tools">
-          <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_transaccion_vista.php">Nuevo</a>
+         
           <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
         </div>
         <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
-     
+        
+        <div class="col-md-3"></div>
+      <form class="form-inline" method="POST" action="">
+      <label> Fecha Desde: </label>
+      <input type="date" class="form-control" placeholder="Start"  name="date1"/>
+      <label> Hasta:  </label>
+      <input type="date" class="form-control" placeholder="End"  name="date2"/>
+      <button class="btn btn-primary" name="search" ><span class="glyphicon .glyphicon-search"></span></button> <a href="index.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span></a>
+    </form>
+
+
+
+
+
+
+
         <div class="card-body">
             <table id="tabla" class="table table-bordered table-striped">
               <thead>
@@ -161,19 +176,14 @@ ob_end_flush();
               <th>REQUEST ENVIO</th>
               <th>RESPONSE</th>
               <th>ESTADO</th>
-              <th>TIPO DE TRANSACCION </th>
-              <th>EDITAR </th>
-              <th>BORRAR </th>
+            
                 </tr>
               </thead>
               <tbody>
                 <?php
                       
-                $sql_transacciones=" SELECT t.id, t.fecha_envio, t.request_envio, t.response, t.estado,
-                                             tra.descripcion
-                                             FROM tbl_movil_transacciones t
-                                             INNER JOIN tbl_movil_tipo_transacciones tra ON t.tipo_transaccion_id = tra.id ";
-               $resultado_transacciones=$instancia_conexion->ejecutarConsulta($sql_transacciones);
+                $sql_transacciones= "select * from tbl_movil_transacciones";
+               $resultado_transacciones= $mysqli->query($sql_transacciones);
                 while ($transacciones = $resultado_transacciones->fetch_array(MYSQLI_ASSOC)) { ?>
                   <tr>
                      <td><?php echo $transacciones['id']; ?></td> 
@@ -181,21 +191,6 @@ ob_end_flush();
                     <td><?php echo $transacciones['request_envio']; ?></td>
                     <td><?php echo $transacciones['response']; ?></td> 
                     <td><?php echo $transacciones['estado']; ?></td>
-                    <td><?php echo $transacciones['descripcion']; ?></td>
-                  
-                  
-                    <td style="text-align: center;">
-                      <a href="../vistas/movil_gestion_transacciones_vista.php?&id=<?php echo $transacciones['id']; ?>" class="btn btn-primary btn-raised btn-xs">
-                        <i class="far fa-edit"></i>
-                      </a>
-                    </td>
-                    <td style="text-align: center;">
-                      <form action="../Controlador/movil_guardar_transacciones_controlador.php?op=eliminar&id=<?php echo $transacciones['id']; ?>" method="POST" class="FormularioAjax" data-form="delete" autocomplete="off">
-                        <button type="submit" class="btn btn-danger btn-raised btn-xs">
-                          <i class="far fa-trash-alt"></i>
-                        </button>
-                      </form>
-                    </td>
                   </tr>
                 <?php } ?>
               </tbody>
@@ -203,69 +198,6 @@ ob_end_flush();
           </div><!-- /.card-body -->
     </div>
   </div>
-  <form action="../Controlador/movil_guardar_transacciones_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
-    <div class="modal fade" id="modal_modificar_transacciones">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Modificar La transacción </h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <!--Cuerpo del modal-->
-          <div class="modal-body">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="form-group">
-                    <label>Fecha de Envio: </label>
-                    <input class="form-control" type="datetime-local" id="fecha_envio" name="fecha_envio" style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtfecha_envio']; ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Request de Envio: </label>
-                    <input class="form-control" type="text" id="request_envio" name="request_envio" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtrequest_envio']; ?>">
-                  </div>
-                  <div class="form-group">
-                    <label>Response: </label>
-                    <input class="form-control" type="text" id="response" name="response" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtresponse']; ?>">
-                  </div>
-                  <div class="form-group">
-                    <label> Estado: </label>
-                    <input class="form-control" type="text" id="estado" name="estado" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtestado']; ?>">
-                  </div>
-        
-                  <div class="form-group">
-                    <label>Tipo Transacción: </label>
-                    <select class="form-control" name="tipo_transaccion_id" id="tipo_transaccion_id">
-                      <option value="">Seleccione una opción :</option>
-                      <?php
-                      $sql_transacciones = "SELECT id,descripcion FROM tbl_movil_tipo_transacciones";
-                      $resultado_transacciones = $mysqli->query($sql_transacciones);
-                      while ($transacciones= $resultado_transacciones->fetch_array(MYSQLI_ASSOC)) { ?>
-                        <?php if ($transacciones['id'] == $_SESSION['txtTipotransaccion']) { ?>
-                          <option selected value="<?php echo $transacciones['id'] ?>"><?php echo $transacciones['descripcion'] ?></option>
-                        <?php } else { ?>
-                          <option value="<?php echo $transacciones['id'] ?>"><?php echo $transacciones['descripcion'] ?></option>
-                      <?php }
-                      }
-                      ?>
-                    </select>
-                    </div>
-            </div>
-          </div>
-       </div>
-
-          <!--Footer del modal-->
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" id="btn_modificar_transacciones" name="btn_modificar_transacciones">Guardar Cambios</button>
-          </div>
-    </div>
-    </div>
-    </div>
-   
-  </form>
 
 
   <script type="text/javascript">

@@ -50,35 +50,9 @@ if (permiso_ver('4') == '1') {
   tiene permisos para visualizar";
 }
 
-if (permiso_ver('7') == '1') {
 
-  $_SESSION['movil_crear_tipo_transaccion_vista'] = "...";
-} else {
-  $_SESSION['movil_crear_tipo_transaccion_vista'] = "No 
-  tiene permisos para visualizar";
-}
 
-if (permiso_ver('8') == '1') {
 
-  $_SESSION['movil_mantenimiento_tipo_transaccion_vista'] = "...";
-} else {
-  $_SESSION['movil_mantenimiento_tipo_transaccion_vista'] = "No 
-  tiene permisos para visualizar";
-}
-if (permiso_ver('9') == '1') {
-
-  $_SESSION['movil_crear_ubicacion_recurso_vista'] = "...";
-} else {
-  $_SESSION['movil_crear_ubicacion_recurso_vista'] = "No 
-  tiene permisos para visualizar";
-}
-if (permiso_ver('10') == '1') {
-
-  $_SESSION['movil_mantenimiento_ubicacionrecurso_vista'] = "...";
-} else {
-  $_SESSION['movil_mantenimiento_ubicacionrecurso_vista'] = "No 
-  tiene permisos para visualizar";
-}
 
 ?> 
 <!DOCTYPE html>
@@ -278,54 +252,7 @@ if (permiso_ver('10') == '1') {
         </div>
       </section>
 
-      <section class="content">
-        <div class="container-fluid">
-          <!-- Info boxes -->
-          <div class="row" style="  display: flex;
-    align-items: center;
-    justify-content: center;">
-
-            <div class="col-6 col-sm-6 col-md-4">
-              <div class="small-box bg-light">
-                <div class="inner">
-                  <h4>Crear Tipo Transacción</h4>
-                  <p><?php echo $_SESSION['movil_crear_tipo_transaccion_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-plus-square"></i>
-                </div>
-
-                <a href="../vistas/movil_crear_tipo_transaccion_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-              <!-- /.info-box -->
-            </div>
-            <!-- fix for small devices only -->
-            <div class="clearfix hidden-md-up"></div>
-
-            <div class="col-12 col-sm-6 col-md-4">
-              <div class="small-box bg-primary">
-                <div class="inner">
-                  <h4>Mantenimiento Tipo Transacción </h4>
-                  <p><?php echo $_SESSION['movil_mantenimiento_tipo_transaccion_vista']; ?></p>
-                </div>
-                <div class="icon">
-                  <i class="fas fa-edit"></i>
-                </div>
-
-                <a href="../vistas/movil_mantenimiento_tipo_transaccion_vista.php" class="small-box-footer">
-                  Ir <i class="fas fa-arrow-circle-right"></i>
-                </a>
-              </div>
-
-            </div>
-
-            <!-- /.row -->
-          </div>
-          <!--/. container-fluid -->
-        </div>
-      </section>
+      
       
  <!-- /.content -->
  
