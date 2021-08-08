@@ -83,39 +83,41 @@ ob_end_flush();
 
               <div class="form-group">
                 <label for="Contenido">Contenido:</label>
-                <input class="form-control" type="text" maxlength="255" id="Contenido" name="Contenido" style="text-transform: uppercase" onpaste="return false" onkeyup="DobleEspacio(this, event)" required onkeypress="return check(event)" >
-                 </div>
+                <input class="form-control" type="text" maxlength="255" id="Contenido" name="Contenido" style="text-transform: uppercase" onpaste="return false" onkeyup="DobleEspacio(this, event)" required onkeypress="return check(event)">
+              </div>
 
               <div class="form-group">
                 <label>Segmentos: </label>
                 <select class="form-control" name="Segmentos" id="Segmentos" required>
                   <option value="">Seleccione una opción :</option>
-                  <?php 
+                  <?php
                   $sql_segmentos = "SELECT id,nombre FROM tbl_movil_segmentos";
                   $resultado_segmentos = $mysqli->query($sql_segmentos);
                   while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
-                        <option value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
+                    <option value="<?php echo $segmento['id'] ?>"><?php echo $segmento['nombre'] ?></option>
                   <?php } ?>
                 </select>
               </div>
-              
-<form>
-<div>
-  <label for="correo">Adjuntar Archivos</label>
-  </div>
-<input type="radio" name="rad" onclick="buscar.disabled = true" /> NO </input>
-<input type="radio" name="rad" onclick="buscar.disabled = false" />SI </input>
-<input type="file" name="buscar" disabled="disabled" />
-</form>
+
+          
+                <div>
+                  <label for="correo">Adjuntar Archivos</label>
+                </div>
+                <input type="radio" name="rad" onclick="buscar.disabled = true" /> NO </input>
+                <label for="subir_archivo">
+                  <input type="radio" name="rad" onclick="buscar.disabled = false" />SI </input>
+                </label>
+                <input type="file" hidden name="subir_archivo" disabled="disabled" />
+             
 
 
 
 
 
-  <div class="form-group">
+              <div class="form-group">
                 <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                 <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
-                <?php 
+                <?php
                 /*$ahora =date('d-m-Y H:i');
                 $fecha_n = strtotime ('+1 hour' , strtotime($ahora));
                 $fecha_n = date ('d-m-Y H:i' , $fecha_n);
@@ -123,12 +125,12 @@ ob_end_flush();
                 $despues = date('d-m-Y H:i');
                 $f_despues = strtotime ('+100 days' , strtotime($despues));
                 $f_despues = date ('d-m-Y H:i' , $f_despues);*/
-                $fe=date("Y-m-d H:i");
+                $fe = date("Y-m-d H:i");
                 //echo "HOra serfver: ".$fe;
-                 ?>
-                <!--<input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false" min="<?php $fecha_n?>" max="<?php $f_despues?>">-->
+                ?>
+                <!--<input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false" min="<?php $fecha_n ?>" max="<?php $f_despues ?>">-->
 
-                <input class="form-control" value="<?php $fe ;?>" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion"  min="<?php echo date("Y-m-d\TH:i",strtotime($fe."+1 hour"));?>" max="<?php echo date("Y-m-d\TH:i",strtotime($fe."+ 5 month"));?>" required >
+                <input class="form-control" value="<?php $fe; ?>" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" min="<?php echo date("Y-m-d\TH:i", strtotime($fe . "+1 hour")); ?>" max="<?php echo date("Y-m-d\TH:i", strtotime($fe . "+ 5 month")); ?>" required>
               </div>
 
               <p class="text-center" style="margin-top: 20px;">
@@ -138,22 +140,22 @@ ob_end_flush();
           </div>
         </form>
       </div>
-  
-  </section>
-</div>
-<script>
-function check(e) {
-    tecla = (document.all) ? e.keyCode : e.which;
 
-    //Tecla de retroceso para borrar, siempre la permite
-    if (tecla == 8) {
+    </section>
+  </div>
+  <script>
+    function check(e) {
+      tecla = (document.all) ? e.keyCode : e.which;
+
+      //Tecla de retroceso para borrar, siempre la permite
+      if (tecla == 8) {
         return true;
-    }
+      }
 
-    // Patron de entrada, en este caso solo acepta numeros y letras
-    patron = /[A-Za-z0-9 ]/;
-    tecla_final = String.fromCharCode(tecla);
-    return patron.test(tecla_final);
-}
-</script>
+      // Patron de entrada, en este caso solo acepta numeros y letras
+      patron = /[A-Za-z0-9 ]/;
+      tecla_final = String.fromCharCode(tecla);
+      return patron.test(tecla_final);
+    }
+  </script>
 </body>

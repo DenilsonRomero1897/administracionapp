@@ -31006,19 +31006,9 @@ INSERT INTO `tbl_movil_tipo_notificaciones` (`id`, `descripcion`) VALUES
 --
 
 CREATE TABLE `tbl_movil_tipo_recursos` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `descripcion` varchar(90) DEFAULT NULL,
   `url` varchar(200) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Estructura de tabla para la tabla `tbl_movil_tipo_transacciones`
---
-
-CREATE TABLE `tbl_movil_tipo_transacciones` (
-  `id` int(11) NOT NULL,
-  `descripcion` varchar(90) DEFAULT NULL,
-  `external_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -31030,8 +31020,7 @@ CREATE TABLE `tbl_movil_transacciones` (
   `fecha_envio` datetime DEFAULT NULL,
   `request_envio` varchar(45) DEFAULT NULL,
   `response` varchar(45) DEFAULT NULL,
-  `estado` varchar(45) DEFAULT NULL,
-  `tipo_transaccion_id` int(11) NOT NULL
+  `estado` varchar(45) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -31792,7 +31781,7 @@ INSERT INTO `tbl_periodo` (`id_periodo`, `num_periodo`, `num_anno`, `fecha_inici
 (3, 1, 2021, '2021-03-20', '2021-04-20', '2021-03-12', 'ADMIN', '0000-00-00', '0000-00-00', 1, '2021-03-30', '2021-02-12'),
 (4, 2, 2021, '2021-05-03', '2021-06-30', '2021-05-01', 'ADMIN', '2021-05-01', 'ADMIN', 1, '2021-05-19', '2021-06-01');
 
--- --------------------------------------------------------
+----------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tbl_periodo_plan`
@@ -33580,17 +33569,10 @@ ALTER TABLE `tbl_movil_tipo_recursos`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `tbl_movil_tipo_transacciones`
---
-ALTER TABLE `tbl_movil_tipo_transacciones`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indices de la tabla `tbl_movil_transacciones`
 --
 ALTER TABLE `tbl_movil_transacciones`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tbl_movil_transacciones_tbl_movil_tipo_transacciones1_idx` (`tipo_transaccion_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indices de la tabla `tbl_municipios_hn`
@@ -34165,13 +34147,7 @@ ALTER TABLE `tbl_movil_tipo_notificaciones`
 -- AUTO_INCREMENT de la tabla `tbl_movil_tipo_recursos`
 --
 ALTER TABLE `tbl_movil_tipo_recursos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de la tabla `tbl_movil_tipo_transacciones`
---
-ALTER TABLE `tbl_movil_tipo_transacciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_transacciones`
@@ -34575,12 +34551,6 @@ ALTER TABLE `tbl_movil_parametros`
 ALTER TABLE `tbl_movil_segmento_usuario`
   ADD CONSTRAINT `fk_tbl_movil_segmento_usuario_tbl_movil_segmentos1` FOREIGN KEY (`segmento_id`) REFERENCES `tbl_movil_segmentos` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tbl_movil_segmento_usuario_tbl_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
--- Filtros para la tabla `tbl_movil_transacciones`
---
-ALTER TABLE `tbl_movil_transacciones`
-  ADD CONSTRAINT `fk_tbl_movil_transacciones_tbl_movil_tipo_transacciones1` FOREIGN KEY (`tipo_transaccion_id`) REFERENCES `tbl_movil_tipo_transacciones` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tbl_municipios_hn`

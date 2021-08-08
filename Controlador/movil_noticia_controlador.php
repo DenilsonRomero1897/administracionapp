@@ -89,8 +89,6 @@ function subirDocumentos($i){
           $MP->Registrar_foto($nombrearchivo);  
           $idRecurso = $MP->buscar_id_recurso($nombrearchivo);
           return $idRecurso;
-          var_dump($idRecurso);
-          die;
         }else{
             echo 0;
         }
