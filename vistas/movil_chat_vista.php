@@ -5,7 +5,6 @@ require_once('../clases/funcion_bitacora_movil.php');
 
 require_once('../vistas/pagina_inicio_vista.php');
 
-require_once('../Controlador/movil_chat_controlador.php');
 ?>
 
 <head>
@@ -39,7 +38,7 @@ require_once('../Controlador/movil_chat_controlador.php');
                 </div>
                 <!-- pagina mensajes -->
                 <!--<div class="col-span-2" style="background-color:whitesmoke; background-position:center; background-size:400px;">-->
-                    <div id="resultado_chat" class="col-span-2 bg-transparent overflow-auto" style="height: 713px;">
+                    <div id="resultado_chat" class="col-span-2 bg-gray-500 overflow-auto" style="height: 713px;">
 
                     </div>
                 <!--</div>-->
@@ -53,23 +52,12 @@ require_once('../Controlador/movil_chat_controlador.php');
             $("#chats").load('../Controlador/movil_cargar_chats_controlador.php');
         });
 
-        function getChats(id_chat) {
-            var parametros = {
-                "id_chat": id_chat,
-                "llamando_chats": 'true'
-            }
-            console.log(parametros);
-            $.ajax({
-                data: parametros, //datos que se envian a traves de ajax
-                url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
-                type: 'post', //método de envio
-                beforeSend: function() {
-                    $("#resultado_chat").html("Procesando, espere por favor...");
-                },
-                success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                    $("#resultado_chat").html(response);
-                }
+        function getChats(id_chat,id_usuario) {
+            $("#resultado_chat").load('../Controlador/movil_mostrar_chat_controlador.php',{
+                "id_chat": id_chat, "id_usuario":id_usuario//,
+             
             });
+            
         }
 
         function getUser() {
@@ -114,4 +102,5 @@ require_once('../Controlador/movil_chat_controlador.php');
             $('[data-toggle="tooltip"]').tooltip()
         })
     </script>
+
 </body>
