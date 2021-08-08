@@ -37,11 +37,11 @@ require_once('../vistas/pagina_inicio_vista.php');
                     </ul>
                 </div>
                 <!-- pagina mensajes -->
-                <!--<div class="col-span-2" style="background-color:whitesmoke; background-position:center; background-size:400px;">-->
+
                     <div id="resultado_chat" class="col-span-2 bg-gray-500 overflow-auto" style="height: 713px;">
 
                     </div>
-                <!--</div>-->
+             
             </div>
         </div>
     </div>

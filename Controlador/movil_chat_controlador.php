@@ -44,17 +44,11 @@ function getUser()
 }
 
 $funcion = isset($_POST['funcion']) ? $_POST['funcion'] : '';
-
+$id = isset($_POST['id']) ? $_POST['id'] : '';
 if ($funcion == 'crearNuevoChat') {
-    CrearChat();
+    CrearChat($id);
 }
 
-function CrearChat(){
-    require_once '../clases/Conexion.php';
-    //$id_usuario = isset($_POST['id']) ? $_POST['id'] : '';
-    //$sql = "INSERT INTO tbl_movil_chats values()";
-    //$mysqli->query($sql);
-    //conseguir el id de chat creado
-    //$sql = '';
-    //mensajes();
+function CrearChat($id){
+    
 }
