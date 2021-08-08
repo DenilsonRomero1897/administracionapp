@@ -106,21 +106,13 @@ ob_end_flush();
 
 
 ?>
-
-
-
-
 <!DOCTYPE html>
 <html>
 
 <head>
   <title></title>
 </head>
-
-
 <body onload="readProducts();">
-
-
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -134,7 +126,7 @@ ob_end_flush();
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
               <li class="breadcrumb-item"><a href="../vistas/movil_menu_gestion_vista.php">Gestión App</a></li>
-              <li class="breadcrumb-item"><a href="../vistas/movil_llenar_segmento_vista.php">Llenar Usuarios</a></li>
+              <li class="breadcrumb-item"><a href="../vistas/movil_llenar_segmento_vista.php">Llenar Segmentos</a></li>
             </ol>
           </div>
 
@@ -156,13 +148,6 @@ ob_end_flush();
       </div>
       <!-- /.card-body -->
     </div>
-
-  
-
- 
-
-
-
 
   <!-- modal inicio -->
   <form action="../Controlador/movil_segmentos_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">

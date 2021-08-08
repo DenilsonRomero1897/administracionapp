@@ -70,7 +70,7 @@ if (permiso_ver('16') == '1') {
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col-sm-6">
-              <h1 class="m-0 text-dark">GESTIÓ APP</h1>
+              <h1 class="m-0 text-dark">GESTIÓN APP</h1>
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
@@ -169,7 +169,7 @@ if (permiso_ver('16') == '1') {
             <div class="col-6 col-sm-6 col-md-4">
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h4>Gestion de Segmentos </h4>
+                  <h4>Gestión de Segmentos </h4>
                   <p><?php echo $_SESSION['movil_gestion_segmentos_vista']; ?></p>
                 </div>
                 <div class="icon">

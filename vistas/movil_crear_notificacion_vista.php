@@ -45,12 +45,10 @@ ob_end_flush();
           <div class="col-sm-6">
             <h1>Nueva Notificación</h1>
           </div>
-
-
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="../vistas/pagina_principal_vista.php">Inicio</a></li>
-              <li class="breadcrumb-item active"><a href="../vistas/movil_menu_notificaciones_vista.php">Menu Notificaciones</a></li>
+              <li class="breadcrumb-item active"><a href="../vistas/movil_gestion_notificaciones_vista.php">Gestión de Notificaciones</a></li>
             </ol>
           </div>
 
@@ -79,7 +77,7 @@ ob_end_flush();
 
               <div class="form-group">
                 <label for="titulo"> Título:</label>
-                <input autofocus class="form-control" type="text" maxlength="90" id="titulo" name="titulo" style="text-transform: uppercase" onpaste="return false" onkeyup="DobleEspacio(this, event)" onkeypress="return check(event)" required>
+                <input autofocus class="form-control" type="text" maxlength="90" id="titulo" name="titulo" style="text-transform: uppercase" onpaste="return false" onkeyup="DobleEspacio(this, event)" onkeypress="return check(event)" >
                 <!--<input class="tf w-input" id="txtCurp" name="txtCurp" maxlength="256" onkeypress="return check(event)" placeholder="No. de CURP" type="text">-->
               </div>
 
