@@ -46,10 +46,16 @@ if ($opcion == 'eliminar') {
  //$descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
   $valor = isset($_POST["valor"]) ? strtoupper($_POST["valor"]) : "";
   $usuario_mod = $_SESSION['id_usuario'];
-  $sql = "UPDATE tbl_movil_parametros set  valor= '$valor', fecha_modificacion = sysdate(), modificado_por = '$usuario_mod' WHERE id = $id_parametros";
+  if (!empty($valor) and $valor != 0 ) {
+    $sql = "UPDATE tbl_movil_parametros set  valor= '$valor', fecha_modificacion = sysdate(), modificado_por = '$usuario_mod' WHERE id = $id_parametros";
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', 'EL PARAMETRO' . $id_parametros. '');
   $mysqli->query($sql);
   header('location: ../vistas/movil_gestion_parametros_vista.php?msj=2');
+  }else{
+    header('location: ../vistas/movil_gestion_parametros_vista.php?msj=5');
+  }
+
+  
 }else{
   //se almacenan los valores para realizar el insert
   $parametro = isset($_POST["parametro"]) ? strtoupper($_POST["parametro"]) : "";

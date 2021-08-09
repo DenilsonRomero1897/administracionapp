@@ -54,6 +54,17 @@ if (isset($_REQUEST['msj'])) {
                     });
                 </script>';
   }
+  if ($msj == 5) {
+    echo '<script type="text/javascript">
+                    swal({
+                       title:"",
+                       text:"El campo valor no puede ser cero o vacio.",
+                       type: "error",
+                       showConfirmButton: false,
+                       timer: 3000
+                    });
+                </script>';
+  }
 }
 // if ($visualizacion == 0) {
 //   echo '<script type="text/javascript">
