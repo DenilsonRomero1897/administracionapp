@@ -157,6 +157,116 @@ ob_end_flush();
               </div>
             </div>
             <!-- /.card-header -->
+           
+            
+
+
+    <span class="initialbarlabel mr-2">Nombre</span>
+
+    <div class="initialbargroups d-flex flex-wrap justify-content-center justify-content-md-start">
+        <ul class="pagination pagination-sm">
+            <li class="initialbarall page-item active">
+                <a class="page-link">Todos</a>
+            </li>
+        </ul>
+            <ul class="pagination pagination-sm">
+                        <li class="page-item A"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=A">A</a></li>
+                        <li class="page-item B"><a class="page-link" href="action=grading&amp;id=18106&amp;tifirst=B">B</a></li>
+                        <li class="page-item C"><a class="page-link" href="action=grading&amp;id=18106&amp;tifirst=C">C</a></li>
+                        <li class="page-item D"><a class="page-link" href="action=grading&amp;id=18106&amp;tifirst=D">D</a></li>
+                        <li class="page-item E"><a class="page-link" href="=grading&amp;id=18106&amp;tifirst=E">E</a></li>
+                        <li class="page-item F"><a class="page-link" href="=grading&amp;id=18106&amp;tifirst=F">F</a></li>
+                        <li class="page-item G"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=G">G</a></li>
+                        <li class="page-item H"><a class="page-link" href= ?action=grading&amp;id=18106&amp;tifirst=H">H</a></li>
+                        <li class="page-item I"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=I">I</a></li>
+                        <li class="page-item J"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=J">J</a></li>
+                        <li class="page-item K"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=K">K</a></li>
+                        <li class="page-item L"><a class="page-link" href="action=grading&amp;id=18106&amp;tifirst=L">L</a></li>
+                        <li class="page-item M"><a class="page-link" href="action=grading&amp;id=18106&amp;tifirst=M">M</a></li>
+                        <li class="page-item N"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=N">N</a></li>
+            </ul>
+            <ul class="pagination pagination-sm">
+                        <li class="page-item Ñ"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=%C3%91">Ñ</a></li>
+                        <li class="page-item O"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=O">O</a></li>
+                        <li class="page-item P"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=P">P</a></li>
+                        <li class="page-item Q"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=Q">Q</a></li>
+                        <li class="page-item R"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=R">R</a></li>
+                        <li class="page-item S"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=S">S</a></li>
+                        <li class="page-item T"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=T">T</a></li>
+                        <li class="page-item U"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=U">U</a></li>
+                        <li class="page-item V"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=V">V</a></li>
+                        <li class="page-item W"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=W">W</a></li>
+                        <li class="page-item X"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=X">X</a></li>
+                        <li class="page-item Y"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=Y">Y</a></li>
+                        <li class="page-item Z"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=Z">Z</a></li>
+            </ul>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="card-body">
               <table id="tabla" class="table table-bordered table-striped">
                 <thead>
@@ -280,6 +390,20 @@ ob_end_flush();
       });
   }
   </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 </body>
 
