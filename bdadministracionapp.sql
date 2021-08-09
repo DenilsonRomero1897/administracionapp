@@ -30869,22 +30869,6 @@ CREATE TABLE `tbl_movil_bitacoras_deleted` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_movil_chats`
---
-
-CREATE TABLE `tbl_movil_chats` (
-  `id` bigint(20) NOT NULL,
-  `descripcion` varchar(45) DEFAULT NULL,
-  `fecha_hora` datetime DEFAULT NULL,
-  `interaccion` varchar(45) DEFAULT NULL,
-  `tipo_mensaje_id` int(11) NOT NULL,
-  `usuario_emisor_id` bigint(20) NOT NULL,
-  `usuario_receptor_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
 -- Estructura de tabla para la tabla `tbl_movil_noticias`
 --
 
@@ -30924,10 +30908,11 @@ CREATE TABLE `tbl_movil_notificaciones` (
   `fecha` datetime NOT NULL,
   `remitente` varchar(45) DEFAULT NULL,
   `segmento_id` bigint(20) NOT NULL,
-  `tipo_notificacion_id` bigint(20) NOT NULL,
-  `image_enable` int(2) NOT NULL
+  `tipo_notificacion_id` int(11) NOT NULL,
+  `image_url` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+-- --------------------------------------------------------
 --
 -- Estructura de tabla para la tabla `tbl_movil_parametros`
 --
@@ -30941,7 +30926,7 @@ CREATE TABLE `tbl_movil_parametros` (
   `creado_por` varchar(90) NOT NULL,
   `modificado_por` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+-- --------------------------------------------------------
 --
 -- Estructura de tabla para la tabla `tbl_movil_segmentos`
 --
@@ -30953,7 +30938,7 @@ CREATE TABLE `tbl_movil_segmentos` (
   `creado_por` varchar(45) NOT NULL,
   `fecha_creacion` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+-- --------------------------------------------------------
 --
 -- Estructura de tabla para la tabla `tbl_movil_segmento_usuario`
 --
@@ -30962,7 +30947,7 @@ CREATE TABLE `tbl_movil_segmento_usuario` (
   `usuario_id` bigint(20) NOT NULL,
   `segmento_id` bigint(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+-- --------------------------------------------------------
 --
 -- Estructura de tabla para la tabla `tbl_movil_tipo_mensajes`
 --
@@ -31008,7 +30993,7 @@ INSERT INTO `tbl_movil_tipo_notificaciones` (`id`, `descripcion`) VALUES
 CREATE TABLE `tbl_movil_tipo_recursos` (
   `id` bigint(20) NOT NULL,
   `descripcion` varchar(90) DEFAULT NULL,
-  `url` varchar(200) DEFAULT NULL
+  `url` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -31021,6 +31006,34 @@ CREATE TABLE `tbl_movil_transacciones` (
   `request_envio` varchar(45) DEFAULT NULL,
   `response` varchar(45) DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_movil_session_chats`
+--
+
+CREATE TABLE `tbl_movil_session_chats` (
+  `id_session_chat` bigint(20) NOT NULL,
+  `id_usuario1` bigint(20) NOT NULL,
+  `id_usuario2` bigint(20) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `tbl_movil_mensajes_chat`
+--
+
+CREATE TABLE `tbl_movil_mensajes_chat` (
+  `id_mensaje` bigint(20) NOT NULL,
+  `id_session_chat` bigint(20) NOT NULL,
+  `id_usuario` bigint(20) NOT NULL,
+  `mensaje` varchar(255) NOT NULL,
+  `flag_lectura` int(1) NOT NULL,
+  `tipo_mensaje` int(11) NOT NULL,
+  `fecha` DATETIME not null
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -31781,7 +31794,7 @@ INSERT INTO `tbl_periodo` (`id_periodo`, `num_periodo`, `num_anno`, `fecha_inici
 (3, 1, 2021, '2021-03-20', '2021-04-20', '2021-03-12', 'ADMIN', '0000-00-00', '0000-00-00', 1, '2021-03-30', '2021-02-12'),
 (4, 2, 2021, '2021-05-03', '2021-06-30', '2021-05-01', 'ADMIN', '2021-05-01', 'ADMIN', 1, '2021-05-19', '2021-06-01');
 
-----------------------------------------------------------
+-- --------------------------------------------------------
 
 --
 -- Estructura de tabla para la tabla `tbl_periodo_plan`
@@ -33500,15 +33513,6 @@ ALTER TABLE `tbl_movil_bitacoras_deleted`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `tbl_movil_chats`
---
-ALTER TABLE `tbl_movil_chats`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `fk_tbl_movil_chats_tbl_movil_tipo_mensajes1_idx` (`tipo_mensaje_id`),
-  ADD KEY `fk_tbl_movil_chats_tbl_usuarios1_idx` (`usuario_emisor_id`),
-  ADD KEY `fk_tbl_movil_chats_tbl_usuarios2_idx` (`usuario_receptor_id`);
-
---
 -- Indices de la tabla `tbl_movil_noticias`
 --
 ALTER TABLE `tbl_movil_noticias`
@@ -33573,6 +33577,23 @@ ALTER TABLE `tbl_movil_tipo_recursos`
 --
 ALTER TABLE `tbl_movil_transacciones`
   ADD PRIMARY KEY (`id`);
+  
+  --
+-- Indices de la tabla `tbl_movil_session_chats`
+--
+ALTER TABLE `tbl_movil_session_chats`
+  ADD PRIMARY KEY (`id_session_chat`),
+  ADD KEY `fk_tbl_movil_session_chats_tbl_usuarios1_idx` (`id_usuario1`),
+  ADD KEY `fk_tbl_movil_session_chats_tbl_usuarios2_idx` (`id_usuario2`);
+
+  --
+-- Indices de la tabla `tbl_movil_mensajes_chat`
+--
+ALTER TABLE `tbl_movil_mensajes_chat`
+  ADD PRIMARY KEY (`id_mensaje`),
+  ADD KEY `fk_tbl_movil_mensajes_chat_tbl_movil_session_chats_idx` (`id_session_chat`),
+  ADD KEY `fk_tbl_movil_mensajes_chat_tbl_movil_tipo_mensajes_idx` (`tipo_mensaje`);
+
 
 --
 -- Indices de la tabla `tbl_municipios_hn`
@@ -34102,12 +34123,6 @@ ALTER TABLE `tbl_movil_bitacoras`
   MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `tbl_movil_chats`
---
-ALTER TABLE `tbl_movil_chats`
-  MODIFY `id` bigint(20) NOT NULL;
-
---
 -- AUTO_INCREMENT de la tabla `tbl_movil_noticias`
 --
 ALTER TABLE `tbl_movil_noticias`
@@ -34154,6 +34169,19 @@ ALTER TABLE `tbl_movil_tipo_recursos`
 --
 ALTER TABLE `tbl_movil_transacciones`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  
+ --
+-- AUTO_INCREMENT de la tabla `tbl_movil_session_chats`
+--
+ALTER TABLE `tbl_movil_session_chats`
+  MODIFY `id_session_chat` bigint(20) NOT NULL AUTO_INCREMENT;
+ 
+ --
+-- AUTO_INCREMENT de la tabla `tbl_movil_mensajes_chat`
+--
+ALTER TABLE `tbl_movil_mensajes_chat`
+  MODIFY `id_mensaje` bigint(20) NOT NULL AUTO_INCREMENT;
+ 
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_municipios_hn`
@@ -34512,14 +34540,6 @@ ALTER TABLE `tbl_movil_bitacoras`
   ADD CONSTRAINT `fk_tbl_movil_bitacoras_tbl_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `tbl_movil_chats`
---
-ALTER TABLE `tbl_movil_chats`
-  ADD CONSTRAINT `fk_tbl_movil_chats_tbl_movil_tipo_mensajes1` FOREIGN KEY (`tipo_mensaje_id`) REFERENCES `tbl_movil_tipo_mensajes` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tbl_movil_chats_tbl_usuarios1` FOREIGN KEY (`usuario_emisor_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_tbl_movil_chats_tbl_usuarios2` FOREIGN KEY (`usuario_receptor_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
-
---
 -- Filtros para la tabla `tbl_movil_noticias`
 --
 ALTER TABLE `tbl_movil_noticias`
@@ -34535,7 +34555,7 @@ ALTER TABLE `tbl_movil_noticia_recurso`
 --
 -- Filtros para la tabla `tbl_movil_notificaciones`
 --
-ALTER TABLE `tbl_movil_notificaciones`
+ALTER TABLE `tbl_movil_notificaciones` 
   ADD CONSTRAINT `fk_tbl_movil_notificaciones_tbl_movil_segmentos1` FOREIGN KEY (`segmento_id`) REFERENCES `tbl_movil_segmentos` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tbl_movil_notificaciones_tbl_movil_tipo_notificaciones1` FOREIGN KEY (`tipo_notificacion_id`) REFERENCES `tbl_movil_tipo_notificaciones` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE;
 
@@ -34551,6 +34571,21 @@ ALTER TABLE `tbl_movil_parametros`
 ALTER TABLE `tbl_movil_segmento_usuario`
   ADD CONSTRAINT `fk_tbl_movil_segmento_usuario_tbl_movil_segmentos1` FOREIGN KEY (`segmento_id`) REFERENCES `tbl_movil_segmentos` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_tbl_movil_segmento_usuario_tbl_usuarios1` FOREIGN KEY (`usuario_id`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tbl_movil_session_chats`
+--
+ALTER TABLE `tbl_movil_session_chats`
+  ADD CONSTRAINT `fk_tbl_movil_session_chats_tbl_usuarios1` FOREIGN KEY (`id_usuario1`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_movil_session_chats_tbl_usuarios2` FOREIGN KEY (`id_usuario2`) REFERENCES `tbl_usuarios` (`Id_usuario`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `tbl_movil_mensajes_chat`
+--
+ALTER TABLE `tbl_movil_mensajes_chat`
+  ADD CONSTRAINT `fk_tbl_movil_mensajes_chat_tbl_movil_tipo_mensajes1` FOREIGN KEY (`tipo_mensaje`) REFERENCES `tbl_movil_tipo_mensajes` (`id`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  ADD CONSTRAINT `fk_tbl_movil_mensajes_chat_tbl_movil_session_chats1` FOREIGN KEY (`id_session_chat`) REFERENCES `tbl_movil_session_chats` (`id_session_chat`) ON DELETE NO ACTION ON UPDATE CASCADE;
+
 
 --
 -- Filtros para la tabla `tbl_municipios_hn`

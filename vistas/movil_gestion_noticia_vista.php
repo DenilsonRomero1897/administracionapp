@@ -124,7 +124,7 @@ if (isset($_REQUEST['msj'])) {
 
 <head>
   <title></title>
- 
+
 </head>
 
 <body onload="readProducts()">
@@ -157,7 +157,7 @@ if (isset($_REQUEST['msj'])) {
           <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_noticia_vista.php">Nuevo</a>
           <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
         </div>
-        <div class="dt-buttons btn-group"><button onclick = "ventana()" class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
+        <div class="dt-buttons btn-group"><button id="GenerarReporte" class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
         <div>
           <div class="card-body" id="Noticias">
 
@@ -224,8 +224,16 @@ if (isset($_REQUEST['msj'])) {
                         <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                         <label for="txt_fecha_vencimiento">Fecha y Hora de Vencimiento:</label>
                         <?php echo date("Y-m-d\ H:i", $_SESSION['txtFecha_vencimiento']) ?>
-                        <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" value="<?php echo date("Y-m-d\ H:i", $_SESSION['txtFecha_vencimiento']) ?> " onkeydown="return false">
+                        <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" value="<?php echo $_SESSION['txtFecha_vencimiento'] ?> " onkeydown="return false">
                       </div>
+                      <div class="form-group">
+                        <!-- archivos adjuntos -->
+                        <label for="archivos_subidos">Archivos Adjuntos:</label>
+                        <div id="table-archivos-adjuntos">
+
+                        </div>
+                      </div>
+
                     </div>
                   </div>
                 </div>
@@ -248,10 +256,10 @@ if (isset($_REQUEST['msj'])) {
       </form>
 
       <script>
-
-         function ventana() {
-         window.open("../Controlador/movil_reporte_gestion_noticia.php", "REPORTE");
+        function ventana() {
+          window.open("../Controlador/movil_reporte_gestion_noticia.php", "REPORTE");
         }
+
         function readProducts() {
           var parametro;
           $.ajax({
@@ -303,8 +311,35 @@ if (isset($_REQUEST['msj'])) {
             timer: 3000
           });
         }
+        var arrayJS = <?php echo json_encode($clientes) ?>;
+        $("#GenerarReporte").click(function() {
+          var pdf = new jsPDF('landscape');
+          var logo = new Image();
+          logo.src = '../dist/img/logo_ia.jpg';
+          pdf.addImage(logo, 15, 10, 30, 30);
+          pdf.setFont('Arial',);
+          pdf.setFontSize(12);
+          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
+          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
+          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
+          pdf.setFont('Arial','B');
+          pdf.setFontSize(14);
+          pdf.text(115, 38, "REPORTE DE NOTICIAS");
+          var columns = ["#", "Titulo", "Subtitulo", "Contenido", "Fecha de Publicacion", "Fecha de Vencimiento", "Remitente", "Segmento"];
+          var data = [];
+          for (var i = 0; i < arrayJS.length; i++) {
+            data.push([i + 1, arrayJS[i]['titulo'], arrayJS[i]['subtitulo'], arrayJS[i]['descripcion'], arrayJS[i]['fecha'], arrayJS[i]['fecha_vencimiento'], arrayJS[i]['remitente'], arrayJS[i]['nombre']]);
+          }
+
+          pdf.autoTable(columns, data, {
+            margin: {
+              top: 45
+            }
+          });
        
-        
+          pdf.save('ReporteNoticia.pdf');
+
+        });
       </script>
 
 </body>
