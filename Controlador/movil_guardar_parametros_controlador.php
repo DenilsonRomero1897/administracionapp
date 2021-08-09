@@ -64,7 +64,7 @@ if ($opcion == 'eliminar') {
   $usuario_id = isset($_SESSION['id_usuario']) ? ($_SESSION['id_usuario']) : "";
   
 /* Logica para que no acepte campos vacios */
-if ($_POST['parametro'] <>  ' ' and  $_POST['descripcion'] <>' 'and  $_POST['valor'] <> '' ) {
+if ($_POST['parametro'] <>  ' ' and  $_POST['descripcion'] <>' 'and  !empty($_POST['valor'] and $_POST['valor'] != 0) ) {
     /* Query para que haga el insert*/
     //query para traer el nombre del usuario que creo el parametro
     $nombreUser ="SELECT Usuario FROm tbl_usuarios where Id_usuario = $usuario_id";
