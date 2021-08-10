@@ -47,6 +47,7 @@ require_once('../vistas/pagina_inicio_vista.php');
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 
+    
     <script>
         $(document).ready(function() {
             $("#chats").load('../Controlador/movil_cargar_chats_controlador.php');

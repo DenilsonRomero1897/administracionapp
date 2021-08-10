@@ -16,7 +16,7 @@ if (isset($_GET['op'])) {
             $modelo = new modelo_registro_noticia();
             $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
             $subtitulo = isset($_POST['subtitulo']) ? strtoupper($_POST['subtitulo']) : '';
-            $contenido = isset($_POST['Contenido']) ? ($_POST['Contenido']) : '';
+            $contenido = isset($_POST['Contenido']) ? mysqli_real_escape_string($mysqli,$_POST['Contenido']) : '';
             $segmento = isset($_POST['Segmentos']) ? $_POST['Segmentos'] : '';
             $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
             $fecha_vencimiento= date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_vencimiento']));
@@ -35,7 +35,6 @@ if (isset($_GET['op'])) {
                    }
                     bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
                     header('location: ../vistas/movil_gestion_noticia_vista.php?msj=2');
-                    
                 
                 }
               break;

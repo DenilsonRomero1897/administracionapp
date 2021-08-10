@@ -38,20 +38,24 @@ if ($visualizacion == 0) {
 }
 
 if (isset($_GET['id'])) {
-  $id = $_GET['id'];
+  $id = (int)$_GET['id'];
 
   $sql = "SELECT * FROM tbl_movil_noticias WHERE id = '$id'";
   $resultado = $mysqli->query($sql);
   //     /* Manda a llamar la fila */
   $row = $resultado->fetch_array(MYSQLI_ASSOC);
 
-  $id = $row['id'];
+  $_SESSION['id_noticia'] = $row['id'];
+  $id_noticia = $_SESSION['id_noticia'];
   $_SESSION['txtTitulo'] = $row['titulo'];
   $_SESSION['txtSubtitulo'] = $row['subtitulo'];
   $_SESSION['txtDescripcion'] = $row['descripcion'];
   $_SESSION['txtFecha'] = strtotime($row['fecha']);
   $_SESSION['txtFecha_vencimiento'] = strtotime($row['fecha_vencimiento']);
   $_SESSION['txtSegmento_id'] = $row['segmento_id'];
+  $sql_archivos = "SELECT r.id,r.url FROM `tbl_movil_tipo_recursos` r INNER JOIN tbl_movil_noticia_recurso nr
+  INNER JOIN tbl_movil_noticias n on r.id=nr.recurso_id and n.id=nr.noticia_id and n.id = $id_noticia";
+  $rspta = $mysqli->query($sql_archivos);
 
 
   if (isset($_SESSION['txtTitulo'])) {
@@ -164,7 +168,7 @@ if (isset($_REQUEST['msj'])) {
           </div><!-- /.card-body -->
         </div>
       </div>
-      <form action="../Controlador/movil_noticia_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
+      <form action="../Controlador/movil_noticia_controlador.php?op=editar&id=<?php echo isset($id_noticia) ? $id_noticia : ''; ?>" method="post" data-form="update" autocomplete="off">
 
         <div class="modal fade" id="modal_modificar_noticia">
           <div class="modal-dialog">
@@ -183,7 +187,7 @@ if (isset($_REQUEST['msj'])) {
 
                       <div class="form-group">
                         <label for="titulo"> Título:</label>
-                        <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="45" id="titulo" name="titulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                        <input autofocus class="form-control" onchange="mostrar_archivo(<?php echo isset($id_noticia) ? $id_noticia : ''; ?>)" type="text" value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="45" id="titulo" name="titulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                       </div>
 
                       <div class="form-group">
@@ -228,28 +232,50 @@ if (isset($_REQUEST['msj'])) {
                       </div>
                       <div class="form-group">
                         <!-- archivos adjuntos -->
-                        <label for="archivos_subidos">Archivos Adjuntos:</label>
-                        <div id="table-archivos-adjuntos">
+                        <label>Archivos Adjuntos:</label>
+                        <div id="tabla_archivos">
+                          <table id="tabla" class="table table-bordered table-striped">
+                            <thead>
+                              <tr>
+                                <th>URL</th>
+                                <th>ELIMINAR</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <?php while ($row = $rspta->fetch_array(MYSQLI_ASSOC)) { ?>
+                                <tr>
+                                  <td><?php echo $row['url']; ?></td>
+                                  <td><a onclick="eliminar_archivos(<?php echo $id_noticia ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
 
+                                </tr>
+                              <?php } ?>
+
+                            </tbody>
+                          </table>
                         </div>
                       </div>
-
+                      <div class="form-group">
+                        <label> Nuevos Archivos:</label>
+                        <input class="form-control" type="file" class="form-control" id="txt_documentos" name="txt_documentos[]" multiple>
+                      </div>
                     </div>
+
                   </div>
                 </div>
-
-                <!--Footer del modal-->
-                <div class="modal-footer justify-content-between">
-                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                  <button type="submit" class="btn btn-primary" id="btn_modificar_segmento" name="btn_modificar_segmento">Guardar Cambios</button>
-                </div>
               </div>
-              <!-- /.modal-content -->
-            </div>
-            <!-- /.modal-dialog -->
-          </div>
 
-          <!-- /.  finaldel modal -->
+              <!--Footer del modal-->
+              <div class="modal-footer justify-content-between">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                <button type="submit" class="btn btn-primary" id="btn_modificar_segmento" name="btn_modificar_segmento">Guardar Cambios</button>
+              </div>
+            </div>
+            <!-- /.modal-content -->
+          </div>
+          <!-- /.modal-dialog -->
+        </div>
+
+        <!-- /.  finaldel modal -->
 
 
 
@@ -259,6 +285,19 @@ if (isset($_REQUEST['msj'])) {
         function ventana() {
           window.open("../Controlador/movil_reporte_gestion_noticia.php", "REPORTE");
         }
+        // function tabla_archivos(id) {
+
+        //   var parametro= { 'id':id};
+        //   console.log(parametro);
+        //   $.ajax({
+        //     data: parametro, //datos que se envian a traves de ajax
+        //     url: '../Controlador/movil_tabla_archivos_noticia_controlador.php', //archivo que recibe la peticion
+        //     type: 'POST', //método de envio
+        //     success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+        //       $('#tabla_archivos').html(response);
+        //     }
+        //   });
+        // }
 
         function readProducts() {
           var parametro;
@@ -287,7 +326,7 @@ if (isset($_REQUEST['msj'])) {
               url: '../Controlador/movil_noticia_controlador.php', //archivo que recibe la peticion
               type: 'POST', //método de envio
               success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                console.log(data);
+
                 if (data != '') {
                   readProducts();
                   datoseliminados();
@@ -311,21 +350,58 @@ if (isset($_REQUEST['msj'])) {
             timer: 3000
           });
         }
+
+        function mostrar_archivo(id) {
+         
+          $("#tabla_archivos").load("../Controlador/movil_tabla_archivos_noticia_controlador.php", {
+            'id': id
+          });
+        }
+
+        function eliminar_archivos(id) {
+     
+          var parametro = {
+            'funcion': 'eliminar',
+            'id': id
+          }
+          var confirmacion = confirm('esta seguro de eliminar');
+          if (confirmacion) {
+            $.ajax({
+              data: parametro, //datos que se envian a traves de ajax
+              url: '../Controlador/movil_tabla_archivos_noticia_controlador.php', //archivo que recibe la peticion
+              type: 'POST', //método de envio
+              success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+                if (data != '') {
+                  console.log(data);
+                  mostrar_archivo(id);
+                } else {
+                  alert('no se pudo eliminar!!');
+                }
+
+              }
+            });
+          } else {
+            console.log('decidio no eliminar');
+          }
+        }
+
+
+
         var arrayJS = <?php echo json_encode($clientes) ?>;
         $("#GenerarReporte").click(function() {
           var pdf = new jsPDF('landscape');
           var logo = new Image();
           logo.src = '../dist/img/logo_ia.jpg';
           pdf.addImage(logo, 15, 10, 30, 30);
-          pdf.setFont('Arial',);
+          pdf.setFont('Arial', 'I');
           pdf.setFontSize(12);
           pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
           pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
           pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
-          pdf.setFont('Arial','B');
+          pdf.setFont('Arial', 'B');
           pdf.setFontSize(14);
           pdf.text(115, 38, "REPORTE DE NOTICIAS");
-          var columns = ["#", "Titulo", "Subtitulo", "Contenido", "Fecha de Publicacion", "Fecha de Vencimiento", "Remitente", "Segmento"];
+          var columns = ["#", "Titulo", "Subtitulo", "Contenido", "Fecha de Publicación", "Fecha de Vencimiento", "Remitente", "Segmento"];
           var data = [];
           for (var i = 0; i < arrayJS.length; i++) {
             data.push([i + 1, arrayJS[i]['titulo'], arrayJS[i]['subtitulo'], arrayJS[i]['descripcion'], arrayJS[i]['fecha'], arrayJS[i]['fecha_vencimiento'], arrayJS[i]['remitente'], arrayJS[i]['nombre']]);
@@ -336,7 +412,7 @@ if (isset($_REQUEST['msj'])) {
               top: 45
             }
           });
-       
+
           pdf.save('ReporteNoticia.pdf');
 
         });
