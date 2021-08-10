@@ -52,11 +52,11 @@ if ($opcion == 'eliminar') {
   $mysqli->query($sql);
   header('location: ../vistas/movil_gestion_parametros_vista.php?msj=2');
   }else{
-    header('location: ../vistas/movil_gestion_parametros_vista.php?msj=5');
+    header("location: ../vistas/movil_gestion_parametros_vista.php?id=$id_parametros&msj=5");
   }
 
   
-}else{
+}else{//inicio else
   //se almacenan los valores para realizar el insert
   $parametro = isset($_POST["parametro"]) ? strtoupper($_POST["parametro"]) : "";
   $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
@@ -64,27 +64,30 @@ if ($opcion == 'eliminar') {
   $usuario_id = isset($_SESSION['id_usuario']) ? ($_SESSION['id_usuario']) : "";
   
 /* Logica para que no acepte campos vacios */
-if ($_POST['parametro'] <>  ' ' and  $_POST['descripcion'] <>' 'and  !empty($_POST['valor'] and $_POST['valor'] != 0) ) {
-    /* Query para que haga el insert*/
-    //query para traer el nombre del usuario que creo el parametro
-    $nombreUser ="SELECT Usuario FROm tbl_usuarios where Id_usuario = $usuario_id";
-    $resultado_nombre = $mysqli->query($nombreUser);
-    $nombre = $resultado_nombre->fetch_assoc();
-    $user = $nombre['Usuario'];
-    $sql = "INSERT into tbl_movil_parametros (parametro,descripcion,valor,fecha_modificacion,creado_por) VALUES ('$parametro', '$descripcion', '$valor',sysdate(),'$user')";
+    if( !empty($_POST['valor']) and $_POST['valor'] != 0){
+      if ($_POST['parametro'] <>  ' ' and  $_POST['descripcion'] <>' ') {
     
-    $resultado = $mysqli->query($sql);
- 
-    if ($resultado) {
-      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'inserto',strtoupper("$sql"));
+        /* Query para que haga el insert*/
+        //query para traer el nombre del usuario que creo el parametro
+        $nombreUser ="SELECT Usuario FROm tbl_usuarios where Id_usuario = $usuario_id";
+        $resultado_nombre = $mysqli->query($nombreUser);
+        $nombre = $resultado_nombre->fetch_assoc();
+        $user = $nombre['Usuario'];
+        $sql = "INSERT into tbl_movil_parametros (parametro,descripcion,valor,fecha_modificacion,creado_por) VALUES ('$parametro', '$descripcion', '$valor',sysdate(),'$user')";
+        $resultado = $mysqli->query($sql);
+    
+        if ($resultado) {//-----------------------
+          bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'inserto',strtoupper("$sql"));
 
-      header('location: ../vistas/movil_gestion_parametros_vista.php?msj=2');
-    } else {
-      echo "Error: " . $sql;
+          header('location: ../vistas/movil_gestion_parametros_vista.php?msj=2');
+        } else {
+          echo "Error: " . $sql;
+        }//-------------------------------
+
+      } else {
+      header('location: ../vistas/movil_gestion_parametros_vista.php?msj=3');
+      }
+    }else{
+      header('location: ../vistas/movil_crear_parametros_vista.php?msj=5');
     }
-  
-} else {
-  header('location: ../vistas/movil_gestion_parametros_vista.php?msj=3');
-}
-
-}
+}//fin else

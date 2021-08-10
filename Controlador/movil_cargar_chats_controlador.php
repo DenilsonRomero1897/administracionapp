@@ -3,17 +3,13 @@
     //traer el ultimo mensaje para mostrar en la bandeja
     //verificar que mensajes si estan sin leer
        session_start();
-       $sql = "SELECT * FROM tbl_movil_chats";
+       $sql = "SELECT u.Usuario,mc.mensaje,mc.fecha FROM tbl_movil_session_chats sc 
+       INNER JOIN tbl_movil_mensajes_chat mc on sc.id_session_chat = mc.id_session_chat
+       INNER JOIN tbl_usuarios u on mc.id_usuario = u.Id_usuario";
        $resultado = $mysqli->query($sql);
 
    while ($row = $resultado->fetch_array(MYSQLI_ASSOC)) { 
-        $id = $row['id'];
-        $id_usuario = $row['usuario_emisor_id'];
-        $sql = "select p.nombres,p.apellidos from tbl_usuarios u INNER JOIN tbl_personas p ON u.id_persona = p.id_persona and u.Id_usuario = $id_usuario";
-        $row2 = $mysqli->query($sql)->fetch_assoc();
-        $nombre_usuario = $row2['nombres'].'-'.$row2['apellidos'];
-        $fecha = date('d-m-Y h:i');
-        $mensaje = $row['descripcion'];
+         
         echo "
     <a onclick='getChats($id,$id_usuario)' class='hover:bg-gray-200 border-b border-gray-300 px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out'>
             <!--<img class='h-10 w-10 rounded-full object-cover' src='' alt='photo' />-->

@@ -50,5 +50,7 @@ if ($funcion == 'crearNuevoChat') {
 }
 
 function CrearChat($id){
-    
+    require '../clases/Conexion.php';
+    $sql = "INSERT INTO tbl_movil_session_chats VALUES (null,1,$id)";
+    $rspta = $mysqli->query($sql);
 }

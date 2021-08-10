@@ -8,7 +8,7 @@ require_once('../Controlador/movil_transacciones_controlador.php');
 require_once("../Modelos/movil_notificaciones_modelo.php");
 
 if (isset($_GET['op'])) {
-    $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
+$url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
 $datos = array();
 $Id_objeto = 130;
 switch ($_GET['op']) {
@@ -25,8 +25,12 @@ switch ($_GET['op']) {
         $resul = $mysqli->query($sql_id_notificacion);
         $id_tipo_notificacion = $resul->fetch_assoc();
         $tipo_notificacion = (int)$id_tipo_notificacion['id'];
+        $url = subirDocumentos();
+        
+
+
         //
-        $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,0)";
+        $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$url')";
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
@@ -35,22 +39,16 @@ switch ($_GET['op']) {
                  $id_usuario = $_SESSION['id_usuario'];
                 $sql = "SELECT Usuario,contrasena FROM tbl_usuarios WHERE Id_usuario = $id_usuario";
                 $resultado = $mysqli->query($sql)->fetch_assoc();
-                
                 $usuario = $resultado['Usuario'];
                 $password = $resultado['contrasena'];
-                //traer id de notificacion
-                $sql2 = "SELECT id FROM tbl_movil_notificaciones WHERE titulo = '$titulo'";
-                $resultado2 = $mysqli->query($sql2)->fetch_assoc();
-                $id_notificacion = $resultado2['id'];
-                //subir imagen de la notificacion
-                $idRecurso = subirDocumentos();
-                $modelo->insert_notificacion_recurso((int)$id_notificaion,(int)$idRecurso['id']); 
+                
+                //subir imagen de la notificacion 
                 $datos = array("idLote" => $id_notificacion,
                                  "usuario" => $usuario,
                                  "password" => $password,
                                  "titulo" => $titulo,
                                  "contenido" => $contenido,
-                                 "urlRecurso" => 0,
+                                 "urlRecurso" => $url,
                                  "segmento" => $segmento);
 
                 $response = consumoApi($url, $datos);
@@ -97,46 +95,17 @@ if (isset($_POST['funcion'])) {
 }
 
 
-function crearNotificacion($url,$tipo_notificacion,$Id_objeto,$id,$titulo,$contenido,$segmento){
-    require_once('../clases/Conexion.php');
-    require_once('../clases/funcion_bitacora_movil.php');
-    require_once('../Controlador/movil_api_controlador.php');
-    $sql_id_notificacion = "SELECT id FROM tbl_movil_tipo_notificaciones WHERE descripcion = '$tipo_notificacion'";
-    $resul = $mysqli->query($sql_id_notificacion);
-    $id_tipo_notificacion = $resul->fetch_assoc();
-    $tipo_notificacion = (int)$id_tipo_notificacion['id'];
-    $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,0)";
-    $resultado = $mysqli->query($sql);
-    if($resultado === TRUE){
-    bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
-    array_push($datos, ["idLote"=>(int)$id]);
-    array_push($datos, ["titulo"=>$titulo]);
-    array_push($datos, ["contenido"=>$contenido]);
-    array_push($datos, ["urlRecurso"=>0]);
-    array_push($datos, ["segmento"=>(int)$segmento]);
-    $response = consumoApi($url, $datos);
-
-        }else{
-            echo 'no se pudo realizar la operacion';
-        }
-        
-}
-
 function subirDocumentos(){
-    
-    $MP = new modelo_registro_notificacion();
     $tmp_name = $_FILES['subir_archivo']['tmp_name'][0];
     $name = $_FILES['subir_archivo']['name'][ 0 ];
     if(is_array($_FILES) && count($_FILES) > 0){
         if(move_uploaded_file($tmp_name,"../archivos/movil/".$name)){
           $nombrearchivo= '../archivos/movil/'.$name;
-          $MP->Registrar_imagen($nombrearchivo);  
-          $idRecurso = $MP->buscar_id_recurso($nombrearchivo);
-          return $idRecurso;
+          return $nombrearchivo;
         }else{
             echo 0;
         }
     }else{
-        echo 0;
+        return $nombrearchivo = "NULL";
     }
 }

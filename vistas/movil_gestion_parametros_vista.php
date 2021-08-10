@@ -120,6 +120,17 @@ if (isset($_REQUEST['msj'])) {
                     });
                 </script>';
   }
+  if ($msj == 5) {
+    echo '<script type="text/javascript">
+                    swal({
+                       title:"",
+                       text:"el valor no puede quedar sin valor",
+                       type: "error",
+                       showConfirmButton: false,
+                       timer: 3000
+                    });
+                </script>';
+  }
 }
 ob_end_flush();
 

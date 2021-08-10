@@ -58,7 +58,7 @@ if (isset($_REQUEST['msj'])) {
     echo '<script type="text/javascript">
                     swal({
                        title:"",
-                       text:"El campo valor no puede ser cero o vacio.",
+                       text:"El campo valor no puede quedar sin valor.",
                        type: "error",
                        showConfirmButton: false,
                        timer: 3000

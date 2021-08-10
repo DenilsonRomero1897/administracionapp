@@ -45,8 +45,7 @@ if (isset($_GET['id'])) {
   //     /* Manda a llamar la fila */
   $row = $resultado->fetch_array(MYSQLI_ASSOC);
 
-  $_SESSION['id_noticia'] = $row['id'];
-  $id_noticia = $_SESSION['id_noticia'];
+  $id = $row['id'];
   $_SESSION['txtTitulo'] = $row['titulo'];
   $_SESSION['txtSubtitulo'] = $row['subtitulo'];
   $_SESSION['txtDescripcion'] = $row['descripcion'];
@@ -54,7 +53,7 @@ if (isset($_GET['id'])) {
   $_SESSION['txtFecha_vencimiento'] = strtotime($row['fecha_vencimiento']);
   $_SESSION['txtSegmento_id'] = $row['segmento_id'];
   $sql_archivos = "SELECT r.id,r.url FROM `tbl_movil_tipo_recursos` r INNER JOIN tbl_movil_noticia_recurso nr
-  INNER JOIN tbl_movil_noticias n on r.id=nr.recurso_id and n.id=nr.noticia_id and n.id = $id_noticia";
+  INNER JOIN tbl_movil_noticias n on r.id=nr.recurso_id and n.id=nr.noticia_id and n.id = $id";
   $rspta = $mysqli->query($sql_archivos);
 
 
@@ -128,7 +127,38 @@ if (isset($_REQUEST['msj'])) {
 
 <head>
   <title></title>
+<script>
+  var arrayJS = <?php echo json_encode($clientes) ?>;
+  function GenerarReporte(){
+    var pdf = new jsPDF('landscape');
+    var logo = new Image();
+    logo.src = '../dist/img/logo_ia.jpg';
+    pdf.addImage(logo, 'JPEG', 15, 10, 30, 30);
+    pdf.setFont('Arial', 'I');
+    pdf.setFontSize(12);
+    pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
+    pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
+    pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
+    pdf.setFont('Arial', 'B');
+    pdf.setFontSize(14);
+    pdf.text(115, 38, "REPORTE DE NOTICIAS");
+    var columns = ["#", "Titulo", "Subtitulo", "Contenido", "Fecha de Publicación", "Fecha de Vencimiento", "Remitente", "Segmento"];
+    var data = [];
+    for (var i = 0; i < arrayJS.length; i++) {
+      data.push([i + 1, arrayJS[i]['titulo'], arrayJS[i]['subtitulo'], arrayJS[i]['descripcion'], arrayJS[i]['fecha'], arrayJS[i]['fecha_vencimiento'], arrayJS[i]['remitente'], arrayJS[i]['nombre']]);
+    }
 
+    pdf.autoTable(columns, data, {
+      margin: {
+        top: 45
+      }
+    });
+
+    pdf.save('ReporteNoticia.pdf');
+  }
+  
+</script>
+<script src="../js/movil_gestion_noticias.js"></script>
 </head>
 
 <body onload="readProducts()">
@@ -161,14 +191,14 @@ if (isset($_REQUEST['msj'])) {
           <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_noticia_vista.php">Nuevo</a>
           <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
         </div>
-        <div class="dt-buttons btn-group"><button id="GenerarReporte" class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
+        <div class="dt-buttons btn-group"><button onclick="GenerarReporte();" class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
         <div>
           <div class="card-body" id="Noticias">
 
           </div><!-- /.card-body -->
         </div>
       </div>
-      <form action="../Controlador/movil_noticia_controlador.php?op=editar&id=<?php echo isset($id_noticia) ? $id_noticia : ''; ?>" method="post" data-form="update" autocomplete="off">
+      <form action="../Controlador/movil_noticia_controlador.php?op=editar&id=<?php $id ?>" method="post" data-form="update" autocomplete="off">
 
         <div class="modal fade" id="modal_modificar_noticia">
           <div class="modal-dialog">
@@ -187,7 +217,7 @@ if (isset($_REQUEST['msj'])) {
 
                       <div class="form-group">
                         <label for="titulo"> Título:</label>
-                        <input autofocus class="form-control" onchange="mostrar_archivo(<?php echo isset($id_noticia) ? $id_noticia : ''; ?>)" type="text" value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="45" id="titulo" name="titulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                        <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="45" id="titulo" name="titulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                       </div>
 
                       <div class="form-group">
@@ -245,8 +275,7 @@ if (isset($_REQUEST['msj'])) {
                               <?php while ($row = $rspta->fetch_array(MYSQLI_ASSOC)) { ?>
                                 <tr>
                                   <td><?php echo $row['url']; ?></td>
-                                  <td><a onclick="eliminar_archivos(<?php echo $id_noticia ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
-
+                                  <td><a onclick="eliminar_archivos(<?php echo $id ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                               <?php } ?>
 
@@ -281,142 +310,6 @@ if (isset($_REQUEST['msj'])) {
 
       </form>
 
-      <script>
-        function ventana() {
-          window.open("../Controlador/movil_reporte_gestion_noticia.php", "REPORTE");
-        }
-        // function tabla_archivos(id) {
-
-        //   var parametro= { 'id':id};
-        //   console.log(parametro);
-        //   $.ajax({
-        //     data: parametro, //datos que se envian a traves de ajax
-        //     url: '../Controlador/movil_tabla_archivos_noticia_controlador.php', //archivo que recibe la peticion
-        //     type: 'POST', //método de envio
-        //     success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-        //       $('#tabla_archivos').html(response);
-        //     }
-        //   });
-        // }
-
-        function readProducts() {
-          var parametro;
-          $.ajax({
-            data: parametro, //datos que se envian a traves de ajax
-            url: '../Controlador/movil_listar_noticias_controlador.php', //archivo que recibe la peticion
-            type: 'POST', //método de envio
-            beforeSend: function() {
-              $('#Noticias').html("Procesando, espere por favor...");
-            },
-            success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-              $('#Noticias').html(response);
-            }
-          });
-        }
-
-        function eliminar(id) {
-          var parametro = {
-            'funcion': 'eliminar',
-            'id': id
-          }
-          var confirmacion = confirm('esta seguro de eliminar');
-          if (confirmacion) {
-            $.ajax({
-              data: parametro, //datos que se envian a traves de ajax
-              url: '../Controlador/movil_noticia_controlador.php', //archivo que recibe la peticion
-              type: 'POST', //método de envio
-              success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-
-                if (data != '') {
-                  readProducts();
-                  datoseliminados();
-                } else {
-                  alert('no se pudo eliminar!!');
-                }
-
-              }
-            });
-          } else {
-            console.log('decidio no eliminar');
-          }
-        }
-
-        function datoseliminados() {
-          swal({
-            title: "",
-            text: "los datos se eliminaron correctamente.",
-            type: "success",
-            showConfirmButton: true,
-            timer: 3000
-          });
-        }
-
-        function mostrar_archivo(id) {
-         
-          $("#tabla_archivos").load("../Controlador/movil_tabla_archivos_noticia_controlador.php", {
-            'id': id
-          });
-        }
-
-        function eliminar_archivos(id) {
-     
-          var parametro = {
-            'funcion': 'eliminar',
-            'id': id
-          }
-          var confirmacion = confirm('esta seguro de eliminar');
-          if (confirmacion) {
-            $.ajax({
-              data: parametro, //datos que se envian a traves de ajax
-              url: '../Controlador/movil_tabla_archivos_noticia_controlador.php', //archivo que recibe la peticion
-              type: 'POST', //método de envio
-              success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                if (data != '') {
-                  console.log(data);
-                  mostrar_archivo(id);
-                } else {
-                  alert('no se pudo eliminar!!');
-                }
-
-              }
-            });
-          } else {
-            console.log('decidio no eliminar');
-          }
-        }
-
-
-
-        var arrayJS = <?php echo json_encode($clientes) ?>;
-        $("#GenerarReporte").click(function() {
-          var pdf = new jsPDF('landscape');
-          var logo = new Image();
-          logo.src = '../dist/img/logo_ia.jpg';
-          pdf.addImage(logo, 15, 10, 30, 30);
-          pdf.setFont('Arial', 'I');
-          pdf.setFontSize(12);
-          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
-          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
-          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
-          pdf.setFont('Arial', 'B');
-          pdf.setFontSize(14);
-          pdf.text(115, 38, "REPORTE DE NOTICIAS");
-          var columns = ["#", "Titulo", "Subtitulo", "Contenido", "Fecha de Publicación", "Fecha de Vencimiento", "Remitente", "Segmento"];
-          var data = [];
-          for (var i = 0; i < arrayJS.length; i++) {
-            data.push([i + 1, arrayJS[i]['titulo'], arrayJS[i]['subtitulo'], arrayJS[i]['descripcion'], arrayJS[i]['fecha'], arrayJS[i]['fecha_vencimiento'], arrayJS[i]['remitente'], arrayJS[i]['nombre']]);
-          }
-
-          pdf.autoTable(columns, data, {
-            margin: {
-              top: 45
-            }
-          });
-
-          pdf.save('ReporteNoticia.pdf');
-
-        });
-      </script>
 
 </body>
 

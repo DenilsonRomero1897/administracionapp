@@ -64,7 +64,7 @@ ob_end_flush();
 
         <!--PANTALLA -->
 
-        <form action="../Controlador/movil_notificacion_controlador.php?op=insert" method="POST">
+        <form action="../Controlador/movil_notificacion_controlador.php?op=insert" method="POST" enctype="multipart/form-data">
 
           <div class="card card-default">
             <div class="card-header">
@@ -100,31 +100,17 @@ ob_end_flush();
               </div>
 
           
-                <div>
-                  <label for="correo">Adjuntar Archivos</label>
+                <div class="form-group">
+                  <label for="subir_archivo">Adjuntar Archivos</label><br>
+                  <input type="file" name="subir_archivo" accept="image/*"/>
                 </div>
-                <input type="radio" name="rad" onclick="buscar.disabled = true" /> NO </input>
-                <label for="subir_archivo">
-                  <input type="radio" name="rad" onclick="buscar.disabled = false" />SI </input>
-                </label>
-                <input type="file" hidden name="subir_archivo" disabled="disabled" />
-             
-
-
-
-
+                
+    
 
               <div class="form-group">
                 <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                 <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
                 <?php
-                /*$ahora =date('d-m-Y H:i');
-                $fecha_n = strtotime ('+1 hour' , strtotime($ahora));
-                $fecha_n = date ('d-m-Y H:i' , $fecha_n);
-                //Agregando el valor maximo para la fecha
-                $despues = date('d-m-Y H:i');
-                $f_despues = strtotime ('+100 days' , strtotime($despues));
-                $f_despues = date ('d-m-Y H:i' , $f_despues);*/
                 $fe = date("Y-m-d H:i");
                 //echo "HOra serfver: ".$fe;
                 ?>
@@ -157,5 +143,13 @@ ob_end_flush();
       tecla_final = String.fromCharCode(tecla);
       return patron.test(tecla_final);
     }
+
+    function subir(){
+      var file = document.getElementsByName('subir_archivo');
+      var radio = document.getElementsByName('imagen');
+      
+    }
+
+
   </script>
 </body>
