@@ -181,7 +181,7 @@ ob_end_flush();
   if(ISSET($_POST['search'])){
     $date1 = date("Y-m-d", strtotime($_POST['date1']));
     $date2 = date("Y-m-d", strtotime($_POST['date2']));
-    $query=mysqli_query($mysqli, "SELECT * FROM `tbl_movil_transacciones` WHERE `id` BETWEEN '$date1' AND '$date2'") or die(mysqli_error());
+    $query=mysqli_query($mysqli, "SELECT * FROM `tbl_movil_transacciones` WHERE `fecha_envio` BETWEEN '$date1' AND '$date2'") or die(mysqli_error());
     $row=mysqli_num_rows($query);
     if($row>0){
       while($fetch=mysqli_fetch_array($query)){
