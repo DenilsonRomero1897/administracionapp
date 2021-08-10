@@ -158,7 +158,7 @@ ob_end_flush();
       <input type="date" class="form-control" placeholder="Start"  name="date1"/>
       <label> Hasta:  </label>
       <input type="date" class="form-control" placeholder="End"  name="date2"/>
-      <button class="btn btn-primary" name="search" ><span class="glyphicon .glyphicon-search"></span></button> <a href="../vistas/movil_gestion_transacciones_vista.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span></a>
+      <button class="btn btn-primary" name="search" ><span class="glyphicon .glyphicon-search"></span>buscar</button> <a href="../vistas/movil_gestion_transacciones_vista.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span>actualizar</a>
     </form>
     
 
