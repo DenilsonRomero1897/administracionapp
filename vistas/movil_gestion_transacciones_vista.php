@@ -158,14 +158,9 @@ ob_end_flush();
       <input type="date" class="form-control" placeholder="Start"  name="date1"/>
       <label> Hasta:  </label>
       <input type="date" class="form-control" placeholder="End"  name="date2"/>
-      <button class="btn btn-primary" name="search" ><span class="glyphicon .glyphicon-search"></span></button> <a href="index.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span></a>
+      <button class="btn btn-primary" name="search" ><span class="glyphicon .glyphicon-search"></span></button> <a href="../vistas/movil_gestion_transacciones_vista.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span></a>
     </form>
-
-
-
-
-
-
+    
 
         <div class="card-body">
             <table id="tabla" class="table table-bordered table-striped">
@@ -180,25 +175,52 @@ ob_end_flush();
                 </tr>
               </thead>
               <tbody>
-                <?php
-                      
-                $sql_transacciones= "select * from tbl_movil_transacciones";
-               $resultado_transacciones= $mysqli->query($sql_transacciones);
-                while ($transacciones = $resultado_transacciones->fetch_array(MYSQLI_ASSOC)) { ?>
-                  <tr>
-                     <td><?php echo $transacciones['id']; ?></td> 
-                    <td><?php echo $transacciones['fecha_envio']; ?></td>
-                    <td><?php echo $transacciones['request_envio']; ?></td>
-                    <td><?php echo $transacciones['response']; ?></td> 
-                    <td><?php echo $transacciones['estado']; ?></td>
-                  </tr>
-                <?php } ?>
-              </tbody>
+              <?php
+             
+  
+  if(ISSET($_POST['search'])){
+    $date1 = date("Y-m-d", strtotime($_POST['date1']));
+    $date2 = date("Y-m-d", strtotime($_POST['date2']));
+    $query=mysqli_query($mysqli, "SELECT * FROM `tbl_movil_transacciones` WHERE `id` BETWEEN '$date1' AND '$date2'") or die(mysqli_error());
+    $row=mysqli_num_rows($query);
+    if($row>0){
+      while($fetch=mysqli_fetch_array($query)){
+?>
+  <tr>
+    <td><?php echo $fetch['id']?></td>
+    <td><?php echo $fetch['fecha_envio']?></td>
+    <td><?php echo $fetch['request_envio']?></td>
+    <td><?php echo $fetch['response']?></td>
+    <td><?php echo $fetch['estado']?></td>
+  </tr>
+<?php
+      }
+    }else{
+      echo'
+      <tr>
+        <td colspan = "4"><center>Registros no Existen</center></td>
+      </tr>';
+    }
+  }else{
+    $query=mysqli_query($mysqli,"SELECT * FROM `tbl_movil_transacciones`") or die(mysqli_error());
+    while($fetch=mysqli_fetch_array($query)){
+?>
+  <tr>
+    <td><?php echo $fetch['id']?></td>
+    <td><?php echo $fetch['fecha_envio']?></td>
+    <td><?php echo $fetch['request_envio']?></td>
+    <td><?php echo $fetch['response']?></td>
+    <td><?php echo $fetch['estado']?></td>
+  </tr>
+<?php
+    }
+  }
+?>
+   </tbody>
             </table>
           </div><!-- /.card-body -->
     </div>
   </div>
-
 
   <script type="text/javascript">
     $(function() {
