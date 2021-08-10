@@ -325,7 +325,7 @@ if (isset($_REQUEST['msj'])) {
           pdf.setFont('Arial','B');
           pdf.setFontSize(14);
           pdf.text(115, 38, "REPORTE DE NOTICIAS");
-          var columns = ["#", "Titulo", "Subtitulo", "Contenido", "Fecha de Publicacion", "Fecha de Vencimiento", "Remitente", "Segmento"];
+          var columns = ["#", "Titulo", "Subtitulo", "Contenido", "Fecha de Publicación", "Fecha de Vencimiento", "Remitente", "Segmento"];
           var data = [];
           for (var i = 0; i < arrayJS.length; i++) {
             data.push([i + 1, arrayJS[i]['titulo'], arrayJS[i]['subtitulo'], arrayJS[i]['descripcion'], arrayJS[i]['fecha'], arrayJS[i]['fecha_vencimiento'], arrayJS[i]['remitente'], arrayJS[i]['nombre']]);

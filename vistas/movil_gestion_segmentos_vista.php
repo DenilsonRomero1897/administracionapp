@@ -7,6 +7,23 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 //require_once('../Modelos/movil_segmentos_modelo.php');
 
+
+//DATOS PARA EL PDF
+$sql2 = "select
+s.nombre,
+s.descripcion,
+u.Usuario,
+s.fecha_creacion
+
+FROM tbl_movil_segmentos s inner join tbl_usuarios u on s.creado_por = u.Id_usuario ";
+$query = $mysqli->query($sql2);
+$clientes = array();
+$cont = 0;
+while ($r = $query->fetch_object()) {
+  $clientes[] = $r;
+  $cont++;
+}
+
 $Id_objeto = 16;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
@@ -138,7 +155,7 @@ ob_end_flush();
 
     <div class="card card-default">
       <div class="card-header">
-        <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
+        <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" id= "GenerarReporte" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
         <a class="btn btn-primary btn-xs float-right" href="../vistas/movil_crear_segmento_vista.php">Nuevo</a>
       </div>
 
@@ -281,6 +298,37 @@ ob_end_flush();
                        timer: 3000
                     });
                   }
+
+        var arrayJS = <?php echo json_encode($clientes) ?>;
+        $("#GenerarReporte").click(function() {
+          var pdf = new jsPDF('landscape');
+          var logo = new Image();
+          logo.src = '../dist/img/logo_ia.jpg';
+          pdf.addImage(logo, 15, 10, 30, 30);
+          pdf.setFont('Arial',);
+          pdf.setFontSize(12);
+          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
+          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
+          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
+          pdf.setFont('Arial','B');
+          pdf.setFontSize(14);
+          pdf.text(115, 38, "REPORTE DE SEGMENTOS");
+          var columns = ["#", "Nombre","Descripción","Creado Por","Fecha de Creación"];
+          var data = [];
+          for (var i = 0; i < arrayJS.length; i++) {
+            data.push([i + 1, arrayJS[i]['nombre'],arrayJS[i]['descripcion'],arrayJS[i]['Usuario'], arrayJS[i]['fecha_creacion']]);
+          }
+
+          pdf.autoTable(columns, data, {
+            margin: {
+              top: 45
+            }
+          });
+       
+          pdf.save('ReporteSegmentos.pdf');
+
+        });
+
   </script>
 </body>
 
