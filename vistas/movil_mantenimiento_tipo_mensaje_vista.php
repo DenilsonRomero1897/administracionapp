@@ -7,6 +7,22 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
 
+//DATOS PARA EL PDF
+$sql2 = "
+select
+    id,
+    tipo_mensaje
+
+FROM
+    tbl_movil_tipo_mensajes";
+
+$query = $mysqli->query($sql2);
+$clientes = array();
+$cont = 0;
+while ($r = $query->fetch_object()) {
+  $clientes[] = $r;
+  $cont++;
+}
 
 $Id_objeto = 128;
 $visualizacion = permiso_ver($Id_objeto);
@@ -158,7 +174,7 @@ ob_end_flush();
       <div class="card-tools">
           <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_tipo_mensaje_vista.php">Nuevo</a>
       </div>
-      <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
+      <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" id= "GenerarReporte"  title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
       <!-- /.card-header -->
       <div class="card-body" id="tipo_mensaje">
        </div>
@@ -281,12 +297,42 @@ ob_end_flush();
                     });
                   }
 
+        var arrayJS = <?php echo json_encode($clientes) ?>;
+        $("#GenerarReporte").click(function() {
+          var pdf = new jsPDF('landscape');
+          var logo = new Image();
+          logo.src = '../dist/img/logo_ia.jpg';
+          pdf.addImage(logo, 15, 10, 30, 30);
+          pdf.setFont('Arial',);
+          pdf.setFontSize(12);
+          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
+          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
+          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
+          pdf.setFont('Arial','B');
+          pdf.setFontSize(14);
+          pdf.text(110,38,"REPORTE TIPO MENSAJE");
+          var columns = ["#", "Tipo Mensaje"];
+          var data = [];
+          for (var i = 0; i < arrayJS.length; i++) {
+            data.push([i + 1, arrayJS[i]['tipo_mensaje']]);
+          }
+
+          pdf.autoTable(columns, data, {
+            margin: {
+              top: 45
+            }
+          });
+       
+          pdf.save('ReporteTipoMensaje.pdf');
+
+        });
+
+
+
+
+
+
   </script>
-
-  
-
-
-
 </body>
 
 </html>

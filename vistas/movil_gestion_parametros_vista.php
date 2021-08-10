@@ -7,6 +7,25 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 //require_once('../Modelos/movil_segmentos_modelo.php');
 
+//DATOS PARA EL PDF
+$sql2 = "
+select
+    n.parametro,
+    n.descripcion,
+    n.valor,
+    n.fecha_modificacion,
+    n.creado_por,
+    s.Usuario
+FROM
+    tbl_movil_parametros n inner join tbl_usuarios s on n.modificado_por=s.Id_usuario or n.creado_por = s.Usuario";
+$query = $mysqli->query($sql2);
+$clientes = array();
+$cont = 0;
+while ($r = $query->fetch_object()) {
+  $clientes[] = $r;
+  $cont++;
+}
+
 $Id_objeto = 12;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
@@ -147,7 +166,7 @@ ob_end_flush();
           <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_parametros_vista.php">Nuevo</a>
           <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
         </div>
-        <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" onclick="ventana()" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
+        <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" id= "GenerarReporte"  title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
      
       <!-- /.card-header -->
       <div class="card-body">
@@ -197,7 +216,7 @@ ob_end_flush();
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h4 class="modal-title">Modificar Parametro</h4>
+            <h4 class="modal-title">Modificar Parámetro</h4>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -254,6 +273,37 @@ ob_end_flush();
     function ventana() {
       window.open("../Controlador/movil_reporte_parametros_controlador.php", "REPORTE");
     }
+
+    var arrayJS = <?php echo json_encode($clientes) ?>;
+        $("#GenerarReporte").click(function() {
+          var pdf = new jsPDF('landscape');
+          var logo = new Image();
+          logo.src = '../dist/img/logo_ia.jpg';
+          pdf.addImage(logo, 15, 10, 30, 30);
+          pdf.setFont('Arial',);
+          pdf.setFontSize(12);
+          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
+          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
+          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
+          pdf.setFont('Arial','B');
+          pdf.setFontSize(14);
+          pdf.text(110,38,"REPORTE DE PARÁMETROS");
+          var columns = ["#", "Parámetros","Descripción","Valor","Fecha de Modificación","Modificado Por","Creado Por"];
+          var data = [];
+          for (var i = 0; i < arrayJS.length; i++) {
+            data.push([i + 1, arrayJS[i]['parametro'],arrayJS[i]['descripcion'],arrayJS[i]['valor'],arrayJS[i]['fecha_modificacion'],arrayJS[i]['creado_por'],arrayJS[i]['Usuario']]);
+          }
+
+          pdf.autoTable(columns, data, {
+            margin: {
+              top: 45
+            }
+          });
+       
+          pdf.save('ReporteParametros.pdf');
+
+        });
+
   </script>
 </body>
 

@@ -47,11 +47,10 @@ class myPDF extends FPDF
         $this->SetFont('Times', 'B', 12);
         $this->SetLineWidth(0.3);
         $this->Cell(15, 7, utf8_decode("N°"), 1, 0, 'C');
-        $this->Cell(80, 7, utf8_decode("FECHA DE ENVIOS "), 1, 0, 'C');
+        $this->Cell(80, 7, utf8_decode("FECHA DE ENVIO "), 1, 0, 'C');
         $this->Cell(90, 7, utf8_decode("REQUEST DE ENVIO"), 1, 0, 'C');
         $this->Cell(40, 7, utf8_decode("RESPONSE"), 1, 0, 'C');
         $this->Cell(90, 7, utf8_decode("ESTADO"), 1, 0, 'C');
-        $this->Cell(20, 7, utf8_decode("TIPO"), 1, 0, 'C');
         $this->ln();
     }
     function viewTable()
@@ -60,13 +59,13 @@ class myPDF extends FPDF
       
         $sql ="
         SELECT
-                 tra.fecha_envio,
-                 tra.request_envio,
-                 tra.response,
-                 tra.estado,
-                 t.descripcion
+                 fecha_envio,
+                 request_envio,
+                 response,
+                 estado
+                 
           FROM 
-          tbl_movil_transacciones tra INNER JOIN tbl_movil_tipo_transacciones t on tra.tipo_transaccion_id=t.id";
+          tbl_movil_transacciones ";
         $stmt = $instancia_conexion->ejecutarConsulta($sql);
         $serial=1;
         while ($reg = $stmt->fetch_array(MYSQLI_ASSOC)) {
@@ -76,7 +75,6 @@ class myPDF extends FPDF
             $this->Cell(90, 7, $reg['request_envio'], 1, 0, 'C');
             $this->Cell(40, 7, utf8_decode($reg['response']), 1, 0, 'C');
             $this->Cell(90, 7, utf8_decode($reg['estado']), 1, 0, 'C');
-            $this->Cell(20, 7, $reg['descripcion'], 1, 0, 'C');
             $serial+=1;
             $this->ln();
         }

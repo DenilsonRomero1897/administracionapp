@@ -312,7 +312,7 @@ ob_end_flush();
           pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
           pdf.setFont('Arial','B');
           pdf.setFontSize(14);
-          pdf.text(115, 38, "REPORTE DE SEGMENTOS");
+          pdf.text(110,38,"REPORTE DE SEGMENTOS");
           var columns = ["#", "Nombre","Descripción","Creado Por","Fecha de Creación"];
           var data = [];
           for (var i = 0; i < arrayJS.length; i++) {

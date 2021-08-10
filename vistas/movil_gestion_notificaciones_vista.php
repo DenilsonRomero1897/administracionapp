@@ -165,9 +165,6 @@ if (isset($_REQUEST['msj'])) {
 
 
     <!--Pantalla 2-->
-
-
-
     <div class="card card-default">
       <div class="card-header">
         <div class="card-tools">
