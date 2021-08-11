@@ -53,7 +53,7 @@ function readProducts() {
 
     var parametro = {
       'funcion': 'eliminar',
-      'id_noticia': id_noticia,
+      'id_noticia':id_noticia,
       'id_recurso':id_recurso
     }
     console.log(parametro);
