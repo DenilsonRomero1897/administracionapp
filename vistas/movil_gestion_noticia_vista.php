@@ -52,9 +52,10 @@ if (isset($_GET['id'])) {
   $_SESSION['txtFecha'] = strtotime($row['fecha']);
   $_SESSION['txtFecha_vencimiento'] = strtotime($row['fecha_vencimiento']);
   $_SESSION['txtSegmento_id'] = $row['segmento_id'];
-  $sql_archivos = "SELECT r.id,r.url FROM `tbl_movil_tipo_recursos` r INNER JOIN tbl_movil_noticia_recurso nr
+  $sql_archivos = "SELECT n.id as noticia,r.id as recurso,r.url FROM `tbl_movil_tipo_recursos` r INNER JOIN tbl_movil_noticia_recurso nr
   INNER JOIN tbl_movil_noticias n on r.id=nr.recurso_id and n.id=nr.noticia_id and n.id = $id";
   $rspta = $mysqli->query($sql_archivos);
+  
 
 
   if (isset($_SESSION['txtTitulo'])) {
@@ -275,7 +276,7 @@ if (isset($_REQUEST['msj'])) {
                               <?php while ($row = $rspta->fetch_array(MYSQLI_ASSOC)) { ?>
                                 <tr>
                                   <td><?php echo $row['url']; ?></td>
-                                  <td><a onclick="eliminar_archivos(<?php echo $id ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
+                                  <td><a onclick="eliminar_archivos(<?php echo $row['noticia'] ?>,<?php echo $row['recurso'] ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                               <?php } ?>
 

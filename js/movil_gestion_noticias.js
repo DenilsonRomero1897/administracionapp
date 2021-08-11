@@ -49,11 +49,12 @@ function readProducts() {
     });
   }
 
-  function eliminar_archivos(id) {
+  function eliminar_archivos(id_noticia,id_recurso) {
 
     var parametro = {
       'funcion': 'eliminar',
-      'id': id
+      'id_noticia': id_noticia,
+      'id_recurso':id_recurso
     }
     console.log(parametro);
     var confirmacion = confirm('esta seguro de eliminar');
@@ -64,10 +65,8 @@ function readProducts() {
         type: 'POST', //método de envio
         success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
          console.log(data);
-          if (data != '') {
+          if (data == '') {
             location.reload(true);
-          } else {
-            alert('no se pudo eliminar!!');
           }
 
         }

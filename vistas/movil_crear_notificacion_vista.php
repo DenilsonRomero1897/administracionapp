@@ -144,12 +144,5 @@ ob_end_flush();
       return patron.test(tecla_final);
     }
 
-    function subir(){
-      var file = document.getElementsByName('subir_archivo');
-      var radio = document.getElementsByName('imagen');
-      
-    }
-
-
   </script>
 </body>

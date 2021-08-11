@@ -8,9 +8,10 @@ if (isset($_POST['funcion'])) {
     }
 }
 function eliminar(){
-    $id = (int)$_POST['id'];
+    $id_noticia = (int)$_POST['id_noticia'];
+    $id_recurso = (int)$_POST['id_recurso'];
     global $mysqli;
-  $sql = "DELETE FROM tbl_movil_noticia_recurso WHERE recurso_id = $id";
+  $sql = "DELETE FROM tbl_movil_noticia_recurso WHERE recurso_id = $id_recurso and noticia_id = $id_noticia";
   $resultado = $mysqli->query($sql);
   if ($resultado) {
       return 'hola_mundo';

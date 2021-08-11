@@ -15,12 +15,13 @@ echo '<div class="w-full">
     <div id="chat" class="w-full overflow-y-auto p-1 relative" style="height: 599px;" ref="toolbarChat">
         <ul>
             <li class="clearfix2">';
-            $sql_mensajes = "SELECT descripcion,interaccion from tbl_movil_chats where id = $id_chat";
+            $sql_mensajes = "SELECT mc.id_usuario,mc.mensaje,mc.flag_lectura,mc.fecha from tbl_movil_mensajes_chat mc 
+            INNER JOIN tbl_movil_session_chats sc on sc.id_session_chat = mc.id_session_chat and mc.id_session_chat = $id_chat";
             $resultado = $mysqli->query($sql_mensajes);
             //validar el mensaje si es recibido o enviado
             while ($row_msj = $resultado->fetch_array(MYSQLI_ASSOC)) { 
-                $mensaje = $row_msj['descripcion'];
-             if($row_msj['interaccion']=='recibido'){
+                $mensaje = $row_msj['mensaje'];
+             if($row_msj['id_usuario'] != 1){
             echo "
                  <div class='w-full flex justify-start'>
                      <div class='bg-gray-200 rounded px-5 py-2 my-2 ml-4 text-gray-700 relative' style='max-width: 300px;'>
@@ -29,7 +30,7 @@ echo '<div class="w-full">
                      </div>
                  </div>
              ";
-            }elseif ($row_msj['interaccion']=='enviado') {
+            }elseif ($row_msj['id_usuario'] == 1) {
             echo "
                  <div class='w-full flex justify-end'>
                      <div class='bg-blue-500 rounded px-5 py-2 my-2 mr-4 text-white relative' style='max-width: 300px;'>

@@ -14,7 +14,7 @@ $Id_objeto = 130;
 switch ($_GET['op']) {
     
     case 'insert':
-        $modelo = new modelo_registro_notificacion();
+       
         $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
         $contenido = isset($_POST['Contenido']) ? strtoupper($_POST['Contenido']) : '';
         $segmento = isset($_POST['Segmentos']) ? $_POST['Segmentos'] : '';
@@ -25,10 +25,8 @@ switch ($_GET['op']) {
         $resul = $mysqli->query($sql_id_notificacion);
         $id_tipo_notificacion = $resul->fetch_assoc();
         $tipo_notificacion = (int)$id_tipo_notificacion['id'];
-        $url = subirDocumentos();
+        $image = subirDocumentos();
         
-
-
         //
         $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$url')";
         $resultado = $mysqli->query($sql);
@@ -36,7 +34,7 @@ switch ($_GET['op']) {
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
                 
                  //Llenado del arreglo
-                 $id_usuario = $_SESSION['id_usuario'];
+                $id_usuario = $_SESSION['id_usuario'];
                 $sql = "SELECT Usuario,contrasena FROM tbl_usuarios WHERE Id_usuario = $id_usuario";
                 $resultado = $mysqli->query($sql)->fetch_assoc();
                 $usuario = $resultado['Usuario'];
@@ -48,7 +46,7 @@ switch ($_GET['op']) {
                                  "password" => $password,
                                  "titulo" => $titulo,
                                  "contenido" => $contenido,
-                                 "urlRecurso" => $url,
+                                 "urlRecurso" => $image,
                                  "segmento" => $segmento);
 
                 $response = consumoApi($url, $datos);
@@ -99,7 +97,7 @@ function subirDocumentos(){
     $tmp_name = $_FILES['subir_archivo']['tmp_name'][0];
     $name = $_FILES['subir_archivo']['name'][ 0 ];
     if(is_array($_FILES) && count($_FILES) > 0){
-        if(move_uploaded_file($tmp_name,"../archivos/movil/".$name)){
+        if(move_uploaded_file($tmp_name,"../archivos/movil/notificacion/".$name)){
           $nombrearchivo= '../archivos/movil/'.$name;
           return $nombrearchivo;
         }else{
