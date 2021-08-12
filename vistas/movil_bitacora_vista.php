@@ -223,15 +223,15 @@ if ($visualizacion == 0) {
                $query=mysqli_query($mysqli, "SELECT * FROM `tbl_movil_bitacoras` WHERE `fecha` BETWEEN '$date1' AND '$date2'") or die(mysqli_error());
                $row=mysqli_num_rows($query);
                if($row>0){
-                 while($fetch=mysqli_fetch_array($query)){
-           ?>
+                
+                while ($row = $resultadotabla_bitacora->fetch_array(MYSQLI_ASSOC)) { ?>
              <tr>
                
-               <td><?php echo $fetch['usuario_id']?></td>
-               <td><?php echo $fetch['objeto_id']?></td>
-               <td><?php echo $fetch['accion']?></td>
-               <td><?php echo $fetch['descripcion']?></td>
-               <td><?php echo $fetch['fecha']?></td>
+             <td><?php echo $row['Usuario']; ?></td>
+                <td><?php echo $row['objeto']; ?></td>
+                <td><?php echo strtoupper($row['accion']); ?></td>
+                <td><?php echo strtoupper($row['descripcion']); ?></td>
+                <td><?php echo $row['Fecha']; ?></td>
              </tr>
            <?php
                  }
@@ -243,14 +243,14 @@ if ($visualizacion == 0) {
                }
              }else{
                $query=mysqli_query($mysqli,"SELECT * FROM `tbl_movil_bitacoras`") or die(mysqli_error());
-               while($fetch=mysqli_fetch_array($query)){
-           ?>
+               while ($row = $resultadotabla_bitacora->fetch_array(MYSQLI_ASSOC)) { ?>
+           
              <tr>
-              <td><?php echo $fetch['usuario_id']?></td>
-               <td><?php echo $fetch['objeto_id']?></td>
-               <td><?php echo $fetch['accion']?></td>
-               <td><?php echo $fetch['descripcion']?></td>
-               <td><?php echo $fetch['fecha']?></td>
+             <td><?php echo $row['Usuario']; ?></td>
+                <td><?php echo $row['objeto']; ?></td>
+                <td><?php echo strtoupper($row['accion']); ?></td>
+                <td><?php echo strtoupper($row['descripcion']); ?></td>
+                <td><?php echo $row['Fecha']; ?></td>
              </tr>
            <?php
                }
