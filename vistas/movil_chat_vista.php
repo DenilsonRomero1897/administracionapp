@@ -55,7 +55,7 @@ require_once('../vistas/pagina_inicio_vista.php');
 
         function getChats(id_chat,id_usuario) {
             $("#resultado_chat").load('../Controlador/movil_mostrar_chat_controlador.php',{
-                "id_chat": id_chat, "id_usuario":id_usuario//,
+                "id_chat": id_chat, "id_usuario":id_usuario, 'funcion':'mostrar'//,
             });
         }
 
@@ -89,12 +89,7 @@ require_once('../vistas/pagina_inicio_vista.php');
                 url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
                 type: 'post', //método de envio
                 success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                    if (condition) {
-                        //abrir chat existente
-
-                    }else{
-                        //abrir chat nuevo
-                    }
+                    $("#resultado_chat").html(response);
                 }
             });
         }
@@ -107,13 +102,11 @@ require_once('../vistas/pagina_inicio_vista.php');
                 "id_usuario": id_usuario,
                  "message": message 
             }
-            console.log(parametros);
             $.ajax({
                 data: parametros, //datos que se envian a traves de ajax
                 url: '../Controlador/movil_envio_info_chat_controlador.php', //archivo que recibe la peticion
                 type: 'POST',
                 success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                    console.log(response);
                     getChats(id_chat,id_usuario);
                 }
             });

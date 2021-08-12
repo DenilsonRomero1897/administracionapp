@@ -15,8 +15,6 @@ function enviarDatos(){
     
     $sql = "INSERT INTO `tbl_movil_mensajes_chat` VALUES (NULL, $id_chat, 1, '$message', 0, 1, sysdate())";
     $resultado = $mysqli->query($sql);
-    var_dump($sql,$resultado);
-    die;
     if($resultado == true){
         return 'enviado';
     }else{

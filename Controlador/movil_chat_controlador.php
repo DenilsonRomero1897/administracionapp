@@ -51,18 +51,24 @@ if ($funcion == 'crearNuevoChat') {
 
 function CrearChat($id){
     require '../clases/Conexion.php';
+    require_once('../Controlador/movil_mostrar_chat_controlador.php');
+    $chat = new mostrarChat();
     //comprobamos si el chat ya existe
-    $sql_existe = "SELECT COUNT(`id_session_chat`) as existe,id_session_chat  FROM `tbl_movil_session_chats` WHERE `id_usuario1` = 1 and `id_usuario2` = $id";
-    $rspta['existe'] = $mysqli->query($sql_existe)->fetch_assoc();
-    
-    if($rspta['existe'] == 1){
+    $sql_existe = "SELECT COUNT(`id_session_chat`) as existe,id_session_chat,id_usuario2  FROM `tbl_movil_session_chats` WHERE `id_usuario1` = 1 and `id_usuario2` = $id";
+    $rspta = $mysqli->query($sql_existe)->fetch_assoc();
+    if($rspta['existe'] == '1'){
         //se abre el chat 
-        return 'existe';
+        $message = 'existe';
+        $id_chat = $rspta['id_session_chat'];
+        $chat->mostrarChat($id_chat,$id);
+       
 
-    }elseif($rspta['existe'] != 1){
+    }elseif($rspta['existe'] == '0'){
         //se crea la sesion del chat
-        $sql_crear_session = "";
-        $resul = $mysqli->query($sql_crear_session);
-        
+        $sql_crear_session = "INSERT INTO tbl_movil_session_chats VALUES (null,1,$id)";
+        $mysqli->query($sql_crear_session);
+        $sql_id = "SELECT id_session_chat FROM tbl_movil_session_chats WHERE id_usuario2 = $id";
+        $nuevo = $mysqli->query($sql_id)->fetch_assoc();
+        $chat->mostrarChat($nuevo['id_session_chat'],$id);
     }
 }

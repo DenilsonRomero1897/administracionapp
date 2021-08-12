@@ -1,28 +1,36 @@
-<?php 
-require_once('../clases/Conexion.php');
-$id_chat = isset($_POST['id_chat']) ? (int)$_POST['id_chat'] : '';
-$id_usuario = isset($_POST['id_usuario']) ? (int)$_POST['id_usuario'] : '';
-$sql = "select p.nombres,p.apellidos from tbl_usuarios u INNER JOIN tbl_personas p ON u.id_persona = p.id_persona and u.Id_usuario = $id_usuario";  
-$row2 = $mysqli->query($sql)->fetch_assoc();
-        $nombre_usuario = $row2['nombres'].'-'.$row2['apellidos'];
+<?php
+if ($_POST['funcion'] == 'mostrar') {
+    $id_chat = isset($_POST['id_chat']) ? (int)$_POST['id_chat'] : '';
+    $id_usuario = isset($_POST['id_usuario']) ? (int)$_POST['id_usuario'] : '';
+    $chat = new mostrarChat();
+    $chat->mostrarChat($id_chat,$id_usuario);
+}
+class mostrarChat
+{
+    function mostrarChat($id_chat, $id_usuario)
+    {
+        require('../clases/Conexion.php');
+        $sql = "select p.nombres,p.apellidos from tbl_usuarios u INNER JOIN tbl_personas p ON u.id_persona = p.id_persona and u.Id_usuario = $id_usuario";
+        $row2 = $mysqli->query($sql)->fetch_assoc();
+        $nombre_usuario = $row2['nombres'] . '-' . $row2['apellidos'];
 
 
-echo '<div class="w-full">
+        echo '<div class="w-full">
     <div class="flex items-center border-b border-gray-300 pl-2 py-2" style="background-color:#007BFF;">
         <img class="h-10 w-10 rounded-full object-cover" src="https://images.pexels.com/photos/3777931/pexels-photo-3777931.jpeg?auto=compress&cs=tinysrgb&h=750&w=1260" alt="username" />
-        <span class="w-80 block mr-10 ml-2 font-bold text-base text-white">'.$nombre_usuario.' </span>
+        <span class="w-80 block mr-10 ml-2 font-bold text-base text-white">' . $nombre_usuario . ' </span>
     </div>
     <div id="chat" class="w-full overflow-y-auto p-1 relative" style="height: 599px;" ref="toolbarChat">
         <ul>
             <li class="clearfix2">';
-            $sql_mensajes = "SELECT mc.id_usuario,mc.mensaje,mc.flag_lectura,mc.fecha from tbl_movil_mensajes_chat mc 
+        $sql_mensajes = "SELECT mc.id_usuario,mc.mensaje,mc.flag_lectura,mc.fecha from tbl_movil_mensajes_chat mc 
             INNER JOIN tbl_movil_session_chats sc on sc.id_session_chat = mc.id_session_chat and mc.id_session_chat = $id_chat";
-            $resultado = $mysqli->query($sql_mensajes);
-            //validar el mensaje si es recibido o enviado
-            while ($row_msj = $resultado->fetch_array(MYSQLI_ASSOC)) { 
-                $mensaje = $row_msj['mensaje'];
-             if($row_msj['id_usuario'] != 1){
-            echo "
+        $resultado = $mysqli->query($sql_mensajes);
+        //validar el mensaje si es recibido o enviado
+        while ($row_msj = $resultado->fetch_array(MYSQLI_ASSOC)) {
+            $mensaje = $row_msj['mensaje'];
+            if ($row_msj['id_usuario'] != 1) {
+                echo "
                  <div class='w-full flex justify-start'>
                      <div class='bg-gray-200 rounded px-5 py-2 my-2 ml-4 text-gray-700 relative' style='max-width: 300px;'>
                          <span class='block'>$mensaje</span>
@@ -30,8 +38,8 @@ echo '<div class="w-full">
                      </div>
                  </div>
              ";
-            }elseif ($row_msj['id_usuario'] == 1) {
-            echo "
+            } elseif ($row_msj['id_usuario'] == 1) {
+                echo "
                  <div class='w-full flex justify-end'>
                      <div class='bg-blue-500 rounded px-5 py-2 my-2 mr-4 text-white relative' style='max-width: 300px;'>
                          <span class='block'>$mensaje</span>
@@ -41,7 +49,7 @@ echo '<div class="w-full">
              ";
             }
         }
-    echo   "</li>
+        echo   "</li>
         </ul>
     </div>
     
@@ -63,5 +71,5 @@ echo '<div class="w-full">
     </div>
    
 </div>";
-
-?>
+    }
+}
