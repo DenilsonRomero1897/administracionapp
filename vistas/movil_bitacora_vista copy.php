@@ -195,7 +195,7 @@ if ($visualizacion == 0) {
       <input type="date" class="form-control" placeholder="Start"  name="date1"/>
       <label> Hasta:  </label>
       <input type="date" class="form-control" placeholder="End"  name="date2"/>
-      <button class="btn btn-primary" name="search" ><span class="glyphicon .glyphicon-search"></span>buscar</button> <a href="../vistas/movil_bitacora_vista.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span>actualizar</a>
+      <button class="btn btn-primary" name="search" ><span class="glyphicon .glyphicon-search"></span>buscar</button> <a href="../vistas/movil_gestion_transacciones_vista.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span>actualizar</a>
     </form>
 
 
@@ -214,61 +214,15 @@ if ($visualizacion == 0) {
             </tr>
           </thead>
           <tbody>
-          <?php
-             
-  
-             if(ISSET($_POST['search'])){
-               $date1 = date("Y-m-d", strtotime($_POST['date1']));
-               $date2 = date("Y-m-d", strtotime($_POST['date2']));
-               $query=mysqli_query($mysqli, "SELECT * FROM `tbl_movil_bitacoras` WHERE `fecha` BETWEEN '$date1' AND '$date2'") or die(mysqli_error());
-               $row=mysqli_num_rows($query);
-               if($row>0){
-                 while($fetch=mysqli_fetch_array($query)){
-           ?>
-             <tr>
-               
-               <td><?php echo $fetch['usuario_id']?></td>
-               <td><?php echo $fetch['objeto_id']?></td>
-               <td><?php echo $fetch['accion']?></td>
-               <td><?php echo $fetch['descripcion']?></td>
-               <td><?php echo $fetch['fecha']?></td>
-             </tr>
-           <?php
-                 }
-               }else{
-                 echo'
-                 <tr>
-                   <td colspan = "4"><center>Registros no Existen</center></td>
-                 </tr>';
-               }
-             }else{
-               $query=mysqli_query($mysqli,"SELECT * FROM `tbl_movil_bitacoras`") or die(mysqli_error());
-               while($fetch=mysqli_fetch_array($query)){
-           ?>
-             <tr>
-              <td><?php echo $fetch['usuario_id']?></td>
-               <td><?php echo $fetch['objeto_id']?></td>
-               <td><?php echo $fetch['accion']?></td>
-               <td><?php echo $fetch['descripcion']?></td>
-               <td><?php echo $fetch['fecha']?></td>
-             </tr>
-           <?php
-               }
-             }
-           ?>
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <?php while ($row = $resultadotabla_bitacora->fetch_array(MYSQLI_ASSOC)) { ?>
+              <tr>
+                <td><?php echo $row['Usuario']; ?></td>
+                <td><?php echo $row['objeto']; ?></td>
+                <td><?php echo strtoupper($row['accion']); ?></td>
+                <td><?php echo strtoupper($row['descripcion']); ?></td>
+                <td><?php echo $row['Fecha']; ?></td>
+              </tr>
+            <?php } ?>
           </tbody>
         </table>
       </div>
