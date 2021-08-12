@@ -8,10 +8,20 @@ if (isset($_POST)) {
 }
 
 function enviarDatos(){
-   // $id_usuario;
-   // $id_chat;
-   // $message;
-
+    global $mysqli;
+    $id_usuario = isset($_POST['id_usuario']) ? $_POST['id_usuario'] : '';
+    $id_chat= isset($_POST['id_chat']) ? $_POST['id_chat'] : '';; 
+    $message= isset($_POST['message']) ? $_POST['message'] : '';;
+    
+    $sql = "INSERT INTO `tbl_movil_mensajes_chat` VALUES (NULL, $id_chat, 1, '$message', 0, 1, sysdate())";
+    $resultado = $mysqli->query($sql);
+    var_dump($sql,$resultado);
+    die;
+    if($resultado == true){
+        return 'enviado';
+    }else{
+        return 'no enviado';
+    }
 }
 
 

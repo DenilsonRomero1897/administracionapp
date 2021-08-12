@@ -51,6 +51,18 @@ if ($funcion == 'crearNuevoChat') {
 
 function CrearChat($id){
     require '../clases/Conexion.php';
-    $sql = "INSERT INTO tbl_movil_session_chats VALUES (null,1,$id)";
-    $rspta = $mysqli->query($sql);
+    //comprobamos si el chat ya existe
+    $sql_existe = "SELECT COUNT(`id_session_chat`) as existe,id_session_chat  FROM `tbl_movil_session_chats` WHERE `id_usuario1` = 1 and `id_usuario2` = $id";
+    $rspta['existe'] = $mysqli->query($sql_existe)->fetch_assoc();
+    
+    if($rspta['existe'] == 1){
+        //se abre el chat 
+        return 'existe';
+
+    }elseif($rspta['existe'] != 1){
+        //se crea la sesion del chat
+        $sql_crear_session = "";
+        $resul = $mysqli->query($sql_crear_session);
+        
+    }
 }

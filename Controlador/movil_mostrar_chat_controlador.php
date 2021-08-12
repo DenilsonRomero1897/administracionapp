@@ -44,7 +44,7 @@ echo '<div class="w-full">
     echo   "</li>
         </ul>
     </div>
-    <form action='../controlador/movil_envio_info_chat_controlador.php' method='POST'>
+    
     <div class='w-full py-2 px-2 flex items-center justify-between border-t border-gray-300' style='background-color:#007BFF;'>
         <label for='subir_archivo' class='outline-none focus:outline-none ml-1'>
             <svg class='text-gray-400 h-6 w-6' xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='currentColor'>
@@ -53,7 +53,7 @@ echo '<div class="w-full">
         </label>
         <input name='subir_archivos' id='subir_archivo' style='display:none;' type='file'/>
 
-        <input aria-placeholder='Escribe un mensaje aquí' placeholder='Escribe un mensaje aquí' class='py-2 mx-3 pl-5 block w-full rounded-full bg-gray-100 outline-none focus:text-gray-700' type='text' name='message' />
+        <input aria-placeholder='Escribe un mensaje aquí' placeholder='Escribe un mensaje aquí' class='py-2 mx-3 pl-5 block w-full rounded-full bg-gray-100 outline-none focus:text-gray-700' type='text' name='message' id='mensaje' />
 
         <button class='outline-none focus:outline-none' onclick='enviar($id_chat,$id_usuario);'>
             <svg class='text-gray-400 h-7 w-7 origin-center transform rotate-90' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='currentColor'>
@@ -61,7 +61,7 @@ echo '<div class="w-full">
             </svg>
         </button>
     </div>
-    </form>
+   
 </div>";
 
 ?>

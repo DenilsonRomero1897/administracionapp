@@ -88,29 +88,33 @@ require_once('../vistas/pagina_inicio_vista.php');
                 data: parametros, //datos que se envian a traves de ajax
                 url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
                 type: 'post', //método de envio
-                beforeSend: function() {
-                    $("#resultado_chat").html("Procesando, espere por favor...");
-                },
                 success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                    $("#resultado_chat").html(response);
+                    if (condition) {
+                        //abrir chat existente
+
+                    }else{
+                        //abrir chat nuevo
+                    }
                 }
             });
         }
 
         function enviar(id_chat,id_usuario){
-            var message = document.getElementsByName('message').value;
+            var message = document.getElementById('mensaje').value;
             var parametros = {
                 "funcion": 'enviarINFO',
                 "id_chat": id_chat,
                 "id_usuario": id_usuario,
                  "message": message 
             }
+            console.log(parametros);
             $.ajax({
                 data: parametros, //datos que se envian a traves de ajax
                 url: '../Controlador/movil_envio_info_chat_controlador.php', //archivo que recibe la peticion
                 type: 'POST',
                 success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-                    
+                    console.log(response);
+                    getChats(id_chat,id_usuario);
                 }
             });
         }
