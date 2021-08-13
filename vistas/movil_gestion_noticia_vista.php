@@ -252,14 +252,12 @@ if (isset($_REQUEST['msj'])) {
                       <div class="form-group">
                         <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                         <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
-                        <?php echo date("d-m-Y\ H:m", $_SESSION['txtFecha']) ?>
-                        <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" value="<?php echo date("Y-m-d H:i", $_SESSION['txtFecha']) ?>" onkeydown="return false">
+                        <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" value="<?php echo date("Y-m-d\TH:i",$_SESSION['txtFecha']);?>" onkeydown="return false">
                       </div>
                       <div class="form-group">
                         <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                         <label for="txt_fecha_vencimiento">Fecha y Hora de Vencimiento:</label>
-                        <?php echo date("Y-m-d\ H:i", $_SESSION['txtFecha_vencimiento']) ?>
-                        <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" value="<?php echo $_SESSION['txtFecha_vencimiento'] ?> " onkeydown="return false">
+                        <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" value="<?php echo date("Y-m-d\TH:i",$_SESSION['txtFecha_vencimiento']);?>" onkeydown="return false">
                       </div>
                       <div class="form-group">
                         <!-- archivos adjuntos -->

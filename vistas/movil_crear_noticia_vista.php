@@ -114,7 +114,7 @@ ob_end_flush();
                   <div class="form-group">
                     <!-- FECHA DE VENCIMIENTO txt_fecha_Publicacion -->
                     <label for="txt_fecha_Publicacion">Fecha y Hora de Vencimiento:</label>
-                    <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" min="" max="" required>
+                    <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" min="<?php echo date("Y-m-d\TH:i",strtotime(date("Y-m-d\TH:i")."+ 1 month"));?>" max="<?php echo date("Y-m-d\TH:i",strtotime(date("Y-m-d\TH:i")."+ 3 month"));?>" required>
                   </div>
                 </div>
 

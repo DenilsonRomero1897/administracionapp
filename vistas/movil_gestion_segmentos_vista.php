@@ -223,10 +223,6 @@ ob_end_flush();
   </div><!-- fin content wrapper -->
 
   <script>
-    function ventana() {
-      window.open("../Controlador/movil_reporte_gestion_segmentos.php", "REPORTE");
-    } 
-
     function toggle(source) {
       checkboxes = document.getElementsByName('persona[]');
       for (var i = 0, n = checkboxes.length; i < n; i++) {

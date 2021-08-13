@@ -110,13 +110,7 @@ ob_end_flush();
               <div class="form-group">
                 <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                 <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
-                <?php
-                $fe = date("Y-m-d H:i");
-                //echo "HOra serfver: ".$fe;
-                ?>
-                <!--<input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" required onkeydown="return false" min="<?php $fecha_n ?>" max="<?php $f_despues ?>">-->
-
-                <input class="form-control" value="<?php $fe; ?>" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" min="<?php echo date("Y-m-d\TH:i", strtotime($fe . "+1 hour")); ?>" max="<?php echo date("Y-m-d\TH:i", strtotime($fe . "+ 5 month")); ?>" required>
+                <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" min="<?php echo date("Y-m-d\TH:i",strtotime(date("Y-m-d\TH:i")."+ 1 hour"));?>" max="<?php echo date("Y-m-d\TH:i",strtotime(date("Y-m-d\TH:i")."+ 1 week"));?>" required>
               </div>
 
               <p class="text-center" style="margin-top: 20px;">

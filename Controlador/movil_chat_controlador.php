@@ -8,13 +8,10 @@ if ($funcion == 'buscarUsuarios') {
 function getUser()
 {
     require '../clases/Conexion.php';
-
         $sql = "SELECT u.Id_usuario,p.nombres,p.apellidos FROM tbl_usuarios u INNER JOIN
         tbl_personas p on u.id_persona = p.id_persona";
         $resultado = $mysqli->query($sql);
-   
     echo '<div class="col-span-1">
-  
          <div class="my-3 mx-3 border-b border-gray-300">
                         <div class="relative text-gray-600 focus-within:text-gray-400">
                             <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -50,7 +47,7 @@ if ($funcion == 'crearNuevoChat') {
 }
 
 function CrearChat($id){
-    require '../clases/Conexion.php';
+    require_once('../clases/Conexion.php');
     require_once('../Controlador/movil_mostrar_chat_controlador.php');
     $chat = new mostrarChat();
     //comprobamos si el chat ya existe
@@ -62,7 +59,6 @@ function CrearChat($id){
         $id_chat = $rspta['id_session_chat'];
         $chat->mostrarChat($id_chat,$id);
        
-
     }elseif($rspta['existe'] == '0'){
         //se crea la sesion del chat
         $sql_crear_session = "INSERT INTO tbl_movil_session_chats VALUES (null,1,$id)";
