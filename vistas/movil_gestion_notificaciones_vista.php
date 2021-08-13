@@ -6,29 +6,6 @@ require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 
-
-//DATOS PARA EL PDF
-$sql2 = "select
-n.id,
-n.titulo,
-n.descripcion,
-n.fecha,
-n.remitente,
-(s.nombre) as segmento,
-(p.descripcion) as tipo_notificacion,
-n.image_url
-FROM
-tbl_movil_notificaciones n inner join tbl_movil_segmentos s on n.segmento_id=s.id 
-inner join  tbl_movil_tipo_notificaciones p on n.tipo_notificacion_id=p.id";
-$query = $mysqli->query($sql2);
-$clientes = array();
-$cont = 0;
-while ($r = $query->fetch_object()) {
-  $clientes[] = $r;
-  $cont++;
-}
-
-
 $Id_objeto = 123;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
@@ -272,24 +249,6 @@ if (isset($_REQUEST['msj'])) {
   </form>
 
   <script type="text/javascript">
-    $(function() {
-      $('#tabla').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-        }
-      });
-    });
-    
-    function ventana() {
-      window.open("../Controlador/movil_reporte_notificaciones.php", "REPORTE");
-    }
 
     function readProducts() {
       var parametro;
@@ -342,36 +301,6 @@ if (isset($_REQUEST['msj'])) {
                        timer: 3000
                     });
                   }
-
-        var arrayJS = <?php echo json_encode($clientes) ?>;
-        $("#GenerarReporte").click(function() {
-          var pdf = new jsPDF('landscape');
-          var logo = new Image();
-          logo.src = '../dist/img/logo_ia.jpg';
-          pdf.addImage(logo, 15, 10, 30, 30);
-          pdf.setFont('Arial',);
-          pdf.setFontSize(12);
-          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
-          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
-          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
-          pdf.setFont('Arial','B');
-          pdf.setFontSize(14);
-          pdf.text(115, 38, "REPORTE DE NOTIFICACIONES");
-          var columns = ["#", "Titulo", "Descripción", "", "Fecha y Hora", "Remitente", "Segmento" ,"Tipo Notificación", "Imagen"];
-          var data = [];
-          for (var i = 0; i < arrayJS.length; i++) {
-            data.push([i + 1, arrayJS[i]['titulo'], arrayJS[i]['descripcion'], arrayJS[i]['fecha'], arrayJS[i]['remitente'], arrayJS[i]['segmento'], arrayJS[i]['tipo_notificacion'],arrayJS[i]['image_url']]);
-          }
-
-          pdf.autoTable(columns, data, {
-            margin: {
-              top: 45
-            }
-          });
-       
-          pdf.save('ReporteNotificacion.pdf');
-
-        });
 
   </script>
 

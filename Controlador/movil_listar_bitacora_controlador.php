@@ -58,6 +58,8 @@
     });
 
     var arrayJS = <?php echo json_encode($clientes) ?>;
+    <?php date_default_timezone_set("America/Tegucigalpa");
+        $fecha = date('d-m-Y h:i:s'); ?>
     $("#GenerarReporte").click(function() {
         var pdf = new jsPDF('landscape');
         var logo = new Image();
@@ -71,6 +73,8 @@
         pdf.setFont('Arial', 'B');
         pdf.setFontSize(14);
         pdf.text(120, 38, "REPORTE DE BITÁCORA");
+        pdf.setFontSize(11);
+        pdf.text(250,43,'<?php echo $fecha?>');
         var columns = ["#", "Usuario", "Objeto", "Acción", "Descripción", "Fecha"];
         var data = [];
         for (var i = 0; i < arrayJS.length; i++) {
@@ -96,7 +100,7 @@
         }
         addFooters(pdf);
       
-        pdf.output('datauri');
+        pdf.save('Reporte_Bitacora_'+ '<?php echo $fecha?>' +'.pdf');
 
     });
 </script>

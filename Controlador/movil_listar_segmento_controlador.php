@@ -23,7 +23,10 @@ $instancia_conexion = new conexion(); ?>
                                    FROM tbl_movil_segmentos s 
                                    INNER JOIN  tbl_usuarios u ON s.creado_por = u.Id_usuario";
         $resultado_segmentos = $instancia_conexion->ejecutarConsulta($sql_segmentos);
-        while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { ?>
+        $segmentos = array();
+        while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) { 
+            $segmentos[] = $segmento;
+            ?>
             <tr>
                 <td><?php echo $segmento['id']; ?></td>
                 <td><?php echo $segmento['nombre']; ?></td>
@@ -49,6 +52,7 @@ $instancia_conexion = new conexion(); ?>
 
         <?php } ?>
 
+
     </tbody>
 </table>
 <script>
@@ -56,7 +60,6 @@ $instancia_conexion = new conexion(); ?>
       $('#tablaSegmento').DataTable({
         "paging": true,
         "lengthChange": true,
-        "searching": true,
         "ordering": true,
         "info": true,
         "autoWidth": true,
@@ -66,4 +69,50 @@ $instancia_conexion = new conexion(); ?>
         }
       });
     });
+
+    var arrayJS = <?php echo json_encode($segmentos) ?>;
+    <?php date_default_timezone_set("America/Tegucigalpa");
+        $fecha = date('d-m-Y h:i:s'); ?>
+        $("#GenerarReporte").click(function() {
+          var pdf = new jsPDF('landscape');
+          var logo = new Image();
+          logo.src = '../dist/img/logo_ia.jpg';
+          pdf.addImage(logo, 15, 10, 30, 30);
+          pdf.setFont('Arial',);
+          pdf.setFontSize(12);
+          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
+          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
+          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
+          pdf.setFont('Arial','B');
+          pdf.setFontSize(14);
+          pdf.text(110,38,"REPORTE DE SEGMENTOS");
+          pdf.setFontSize(11);
+          pdf.text(250,43,'<?php echo $fecha?>');
+          var columns = ["#", "Nombre","Descripción","Creado Por","Fecha de Creación"];
+          var data = [];
+          for (var i = 0; i < arrayJS.length; i++) {
+            data.push([i + 1, arrayJS[i]['nombre'],arrayJS[i]['descripcion'],arrayJS[i]['Usuario'], arrayJS[i]['fecha_creacion']]);
+          }
+
+          pdf.autoTable(columns, data, {
+            margin: {
+              top: 45
+            }
+          });
+          const addFooters = pdf => {
+            const pageCount = pdf.internal.getNumberOfPages()
+
+            pdf.setFont('helvetica', 'italic')
+            pdf.setFontSize(9)
+            for (var i = 1; i <= pageCount; i++) {
+                pdf.setPage(i)
+                pdf.text('Pag. ' + String(i) + ' de ' + String(pageCount), pdf.internal.pageSize.width / 2, 200, {
+                    align: 'center'
+                })
+            }
+        }
+        addFooters(pdf);
+      
+        pdf.save('Reporte_Segmento_'+ '<?php echo $fecha?>' +'.pdf');
+        });
 </script>

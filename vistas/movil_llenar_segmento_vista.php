@@ -157,12 +157,7 @@ ob_end_flush();
               </div>
             </div>
             <!-- /.card-header -->
-           
-            
-
-
-    <span class="initialbarlabel mr-2">Nombre</span>
-
+      
     <div class="initialbargroups d-flex flex-wrap justify-content-center justify-content-md-start">
         <ul class="pagination pagination-sm">
             <li class="initialbarall page-item active">
@@ -204,69 +199,6 @@ ob_end_flush();
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <div class="card-body">
               <table id="tabla" class="table table-bordered table-striped">
                 <thead>
@@ -284,6 +216,7 @@ ob_end_flush();
             </div>
             
              <hr>
+             <div class="dt-buttons btn-group col-1"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" type="button" id="GenerarReporte_segmento_usuario" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
        <p class="text-center font-weight-bold">Listado de personas que pertenecen al segmento</p>
         <div class="card-body" id="resultadoSegmentoUsuarios">
           
@@ -389,6 +322,20 @@ ob_end_flush();
         }
       });
   }
+  $(function() {
+      $('#tabla').DataTable({
+        "paging": true,
+        "lengthChange": true,
+        "searching": true,
+        "ordering": true,
+        "info": true,
+        "autoWidth": true,
+        "responsive": true,
+        "language": {
+          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+        }
+      });
+    });
   </script>
 
 

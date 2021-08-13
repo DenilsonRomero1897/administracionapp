@@ -7,23 +7,6 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 //require_once('../Modelos/movil_segmentos_modelo.php');
 
-
-//DATOS PARA EL PDF
-$sql2 = "select
-s.nombre,
-s.descripcion,
-u.Usuario,
-s.fecha_creacion
-
-FROM tbl_movil_segmentos s inner join tbl_usuarios u on s.creado_por = u.Id_usuario ";
-$query = $mysqli->query($sql2);
-$clientes = array();
-$cont = 0;
-while ($r = $query->fetch_object()) {
-  $clientes[] = $r;
-  $cont++;
-}
-
 $Id_objeto = 16;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
@@ -129,6 +112,7 @@ ob_end_flush();
 <head>
   <title></title>
 </head>
+
 <body onload="readProducts();">
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -155,8 +139,12 @@ ob_end_flush();
 
     <div class="card card-default">
       <div class="card-header">
-        <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" id= "GenerarReporte" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
+        <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" id="GenerarReporte" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
         <a class="btn btn-primary btn-xs float-right" href="../vistas/movil_crear_segmento_vista.php">Nuevo</a>
+        <div class="float-center rounded">
+          <input class="form-control mt-2" placeholder="Buscar..." type="text" id="buscar" name="buscar" onpaste="return false" onkeypress="">
+
+        </div>
       </div>
 
       <!-- /.card-header -->
@@ -166,59 +154,59 @@ ob_end_flush();
       <!-- /.card-body -->
     </div>
 
-  <!-- modal inicio -->
-  <form action="../Controlador/movil_segmentos_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
+    <!-- modal inicio -->
+    <form action="../Controlador/movil_segmentos_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
 
-    <div class="modal fade" id="modal_modificar_segmento">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h4 class="modal-title">Modificar Segmento</h4>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
+      <div class="modal fade" id="modal_modificar_segmento">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Modificar Segmento</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
 
-          <!--Cuerpo del modal-->
-          <div class="modal-body">
-            <div class="card-body">
-              <div class="row">
-                <div class="col-md-12">
+            <!--Cuerpo del modal-->
+            <div class="modal-body">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-12">
 
-                  <div class="form-group">
-                    <label>Segmento</label>
+                    <div class="form-group">
+                      <label>Segmento</label>
 
-                    <input class="form-control" type="text" id="nombre" name="nombre" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtNombre']; ?>">
+                      <input class="form-control" type="text" id="nombre" name="nombre" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtNombre']; ?>">
 
+                    </div>
+
+                    <div class="form-group">
+                      <label>Descripcion</label>
+
+                      <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtDescripcion']; ?>">
+
+                    </div>
                   </div>
 
-                  <div class="form-group">
-                    <label>Descripcion</label>
+                  <!-- /.card-header -->
 
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtDescripcion']; ?>">
-
-                  </div>
                 </div>
-
-                <!-- /.card-header -->
-
               </div>
             </div>
-          </div>
 
-          <!--Footer del modal-->
-          <div class="modal-footer justify-content-between">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-            <button type="submit" class="btn btn-primary" id="btn_modificar_segmento" name="btn_modificar_segmento">Guardar Cambios</button>
+            <!--Footer del modal-->
+            <div class="modal-footer justify-content-between">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary" id="btn_modificar_segmento" name="btn_modificar_segmento">Guardar Cambios</button>
+            </div>
           </div>
+          <!-- /.modal-content -->
         </div>
-        <!-- /.modal-content -->
+        <!-- /.modal-dialog -->
       </div>
-      <!-- /.modal-dialog -->
-    </div>
 
-    <!-- /.  finaldel modal -->
-  </form>
+      <!-- /.  finaldel modal -->
+    </form>
 
   </div><!-- fin content wrapper -->
 
@@ -230,20 +218,6 @@ ob_end_flush();
       }
 
     }
-    $(function() {
-      $('#tablaSegmento').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-        }
-      });
-    });
 
     function readProducts() {
       var parametro;
@@ -285,46 +259,17 @@ ob_end_flush();
         console.log('decidio no eliminar');
       }
     }
-    function datoseliminados(){
-                    swal({
-                       title:"",
-                       text:"los datos se eliminaron correctamente.",
-                       type: "success",
-                       showConfirmButton: true,
-                       timer: 3000
-                    });
-                  }
 
-        var arrayJS = <?php echo json_encode($clientes) ?>;
-        $("#GenerarReporte").click(function() {
-          var pdf = new jsPDF('landscape');
-          var logo = new Image();
-          logo.src = '../dist/img/logo_ia.jpg';
-          pdf.addImage(logo, 15, 10, 30, 30);
-          pdf.setFont('Arial',);
-          pdf.setFontSize(12);
-          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
-          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
-          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
-          pdf.setFont('Arial','B');
-          pdf.setFontSize(14);
-          pdf.text(110,38,"REPORTE DE SEGMENTOS");
-          var columns = ["#", "Nombre","Descripción","Creado Por","Fecha de Creación"];
-          var data = [];
-          for (var i = 0; i < arrayJS.length; i++) {
-            data.push([i + 1, arrayJS[i]['nombre'],arrayJS[i]['descripcion'],arrayJS[i]['Usuario'], arrayJS[i]['fecha_creacion']]);
-          }
-
-          pdf.autoTable(columns, data, {
-            margin: {
-              top: 45
-            }
-          });
-       
-          pdf.save('ReporteSegmentos.pdf');
-
-        });
-
+    function datoseliminados() {
+      swal({
+        title: "",
+        text: "los datos se eliminaron correctamente.",
+        type: "success",
+        showConfirmButton: true,
+        timer: 3000
+      });
+    }
+    
   </script>
 </body>
 

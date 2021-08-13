@@ -9,18 +9,6 @@ require_once('../clases/funcion_permisos.php');
 $Id_objeto = 123;
 $visualizacion = permiso_ver($Id_objeto);
 
-//DATOS PARA EL PDF
-$sql2 = "SELECT n.id, n.titulo, n.subtitulo, n.descripcion, n.fecha, n.fecha_vencimiento, n.remitente,
-s.nombre FROM tbl_movil_noticias n
-INNER JOIN tbl_movil_segmentos s ON n.segmento_id = s.id";
-$query = $mysqli->query($sql2);
-$clientes = array();
-$cont = 0;
-while ($r = $query->fetch_object()) {
-  $clientes[] = $r;
-  $cont++;
-}
-
 
 if ($visualizacion == 0) {
   echo '<script type="text/javascript">
@@ -128,37 +116,6 @@ if (isset($_REQUEST['msj'])) {
 
 <head>
   <title></title>
-<script>
-  var arrayJS = <?php echo json_encode($clientes) ?>;
-  function GenerarReporte(){
-    var pdf = new jsPDF('landscape');
-    var logo = new Image();
-    logo.src = '../dist/img/logo_ia.jpg';
-    pdf.addImage(logo, 'JPEG', 15, 10, 30, 30);
-    pdf.setFont('Arial', 'I');
-    pdf.setFontSize(12);
-    pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
-    pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
-    pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
-    pdf.setFont('Arial', 'B');
-    pdf.setFontSize(14);
-    pdf.text(115, 38, "REPORTE DE NOTICIAS");
-    var columns = ["#", "Titulo", "Subtitulo", "Contenido", "Fecha de Publicación", "Fecha de Vencimiento", "Remitente", "Segmento"];
-    var data = [];
-    for (var i = 0; i < arrayJS.length; i++) {
-      data.push([i + 1, arrayJS[i]['titulo'], arrayJS[i]['subtitulo'], arrayJS[i]['descripcion'], arrayJS[i]['fecha'], arrayJS[i]['fecha_vencimiento'], arrayJS[i]['remitente'], arrayJS[i]['nombre']]);
-    }
-
-    pdf.autoTable(columns, data, {
-      margin: {
-        top: 45
-      }
-    });
-
-    pdf.save('ReporteNoticia.pdf');
-  }
-  
-</script>
 <script src="../js/movil_gestion_noticias.js"></script>
 </head>
 
