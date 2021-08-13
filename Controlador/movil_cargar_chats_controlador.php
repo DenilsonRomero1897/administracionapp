@@ -1,18 +1,15 @@
 <?php require '../clases/Conexion.php';
-    //traer los datos de la base de datos
-    //traer el ultimo mensaje para mostrar en la bandeja
-    //verificar que mensajes si estan sin leer
+    
        session_start();
-       //$sql = "SELECT u.Usuario,mc.mensaje,mc.fecha FROM tbl_movil_session_chats sc 
-       //INNER JOIN tbl_movil_mensajes_chat mc on sc.id_session_chat = mc.id_session_chat
-       //INNER JOIN tbl_usuarios u on mc.id_usuario = u.Id_usuario";
+       //traer los datos de la base de datos
+       //traer el ultimo mensaje para mostrar en la bandeja
        $resultado = $mysqli->query("SELECT mc.id_session_chat,mc.mensaje,sc.id_usuario2,u.Usuario FROM tbl_movil_mensajes_chat mc 
        INNER JOIN ( SELECT s2.id_session_chat,MAX(s2.fecha) AS fecha
               FROM tbl_movil_mensajes_chat s2
               GROUP BY id_session_chat ) ultimos
-      ON ultimos.fecha = mc.fecha
-      INNER JOIN tbl_movil_session_chats sc on sc.id_session_chat=mc.id_session_chat
-      INNER JOIN tbl_usuarios u on u.Id_usuario = sc.id_usuario2");
+        ON ultimos.fecha = mc.fecha
+        INNER JOIN tbl_movil_session_chats sc on sc.id_session_chat=mc.id_session_chat
+        INNER JOIN tbl_usuarios u on u.Id_usuario = sc.id_usuario2");
   
    while ($row = $resultado->fetch_array(MYSQLI_ASSOC)) { 
          $id = $row['id_session_chat'];
