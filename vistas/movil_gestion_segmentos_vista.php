@@ -141,12 +141,10 @@ ob_end_flush();
       <div class="card-header">
         <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" id="GenerarReporte" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
         <a class="btn btn-primary btn-xs float-right" href="../vistas/movil_crear_segmento_vista.php">Nuevo</a>
-        <div class="float-center rounded">
-          <input class="form-control mt-2" placeholder="Buscar..." type="text" id="buscar" name="buscar" onpaste="return false" onkeypress="">
-
-        </div>
       </div>
-
+      <div class="col-3 float-right mt-3">
+          <input class="form-control" placeholder="Buscar..." type="text" id="buscar" name="buscar" onpaste="return false" onkeypress="">
+        </div>
       <!-- /.card-header -->
       <div class="card-body" id="Segmentos">
 

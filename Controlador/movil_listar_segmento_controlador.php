@@ -60,6 +60,7 @@ $instancia_conexion = new conexion(); ?>
       $('#tablaSegmento').DataTable({
         "paging": true,
         "lengthChange": true,
+        "searching": false,
         "ordering": true,
         "info": true,
         "autoWidth": true,

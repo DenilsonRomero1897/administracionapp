@@ -30836,7 +30836,8 @@ CREATE TABLE `tbl_movil_bitacoras` (
   `objeto_id` bigint(20) NOT NULL,
   `accion` varchar(45) NOT NULL,
   `descripcion` varchar(255) DEFAULT NULL,
-  `fecha` datetime DEFAULT NULL
+  `fecha` datetime DEFAULT NULL,
+  `token` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -30845,7 +30846,7 @@ CREATE TABLE `tbl_movil_bitacoras` (
 DELIMITER $$
 CREATE TRIGGER `tgr_movil_bitacora_deleted` BEFORE DELETE ON `tbl_movil_bitacoras` FOR EACH ROW INSERT INTO tbl_movil_bitacoras_deleted                  (id,usuario_id,objeto_id,accion,descripcion,fecha,user_delete,fecha_eliminacion) 
         values 
-        (OLD.id,OLD.usuario_id,OLD.objeto_id,OLD.accion,OLD.descripcion,OLD.fecha,CURRENT_USER,NOW())
+        (OLD.id,OLD.usuario_id,OLD.objeto_id,OLD.accion,OLD.descripcion,OLD.fecha,OLD.token,CURRENT_USER,NOW())
 $$
 DELIMITER ;
 
@@ -30862,6 +30863,7 @@ CREATE TABLE `tbl_movil_bitacoras_deleted` (
   `accion` varchar(45) DEFAULT NULL,
   `descripcion` varchar(100) DEFAULT NULL,
   `fecha` datetime DEFAULT NULL,
+  `token` varchar(255) NOT NULL,
   `user_delete` varchar(100) DEFAULT NULL,
   `fecha_eliminacion` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
