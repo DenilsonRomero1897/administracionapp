@@ -141,10 +141,11 @@ ob_end_flush();
       <div class="card-header">
         <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" id="GenerarReporte" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
         <a class="btn btn-primary btn-xs float-right" href="../vistas/movil_crear_segmento_vista.php">Nuevo</a>
-      </div>
-      <div class="col-3 float-right mt-3">
-          <input class="form-control" placeholder="Buscar..." type="text" id="buscar" name="buscar" onpaste="return false" onkeypress="">
+        <div class="float-right mt-5 ml-5">
+          <input class="form-control" placeholder="Buscar..." type="text" id="buscartext" name="buscar" onpaste="return false" onkeyup="leer(this.value)">
         </div>
+      </div>
+     
       <!-- /.card-header -->
       <div class="card-body" id="Segmentos">
 
@@ -216,9 +217,26 @@ ob_end_flush();
       }
 
     }
+    function leer(buscar){
+      var buscar;
+      console.log(buscar);
+      var parametro = {"buscar":buscar}
+      console.log(parametro);
+      $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_listar_segmento_controlador.php', //archivo que recibe la peticion
+        type: 'POST', //método de envio
+        beforeSend: function() {
+          $('#Segmentos').html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          $('#Segmentos').html(response);
+        }
+      });
+    }
 
     function readProducts() {
-      var parametro;
+      var parametro; 
       $.ajax({
         data: parametro, //datos que se envian a traves de ajax
         url: '../Controlador/movil_listar_segmento_controlador.php', //archivo que recibe la peticion
