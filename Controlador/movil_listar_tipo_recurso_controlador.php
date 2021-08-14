@@ -15,6 +15,12 @@ $instancia_conexion = new conexion();  ?>
           <tbody>
             <?php
             $sql_tiporecurso = "select * from tbl_movil_tipo_recursos";
+            if (isset($_POST)) {
+              if (!empty($_POST['buscar'])) {
+                $dato = $_POST['buscar'];
+                $sql_tiporecurso .= " WHERE descripcion LIKE '%$dato%'";
+              }
+            }
             $resultado_tiporecurso = $mysqli->query($sql_tiporecurso);
             while ($tiporecurso = $resultado_tiporecurso->fetch_array(MYSQLI_ASSOC)) { ?>
               <tr>
@@ -48,7 +54,7 @@ $instancia_conexion = new conexion();  ?>
       $('#tabla').DataTable({
         "paging": true,
         "lengthChange": true,
-        "searching": true,
+        "searching": false,
         "ordering": true,
         "info": true,
         "autoWidth": true,

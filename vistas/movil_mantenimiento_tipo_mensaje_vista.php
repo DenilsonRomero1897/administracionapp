@@ -166,15 +166,14 @@ ob_end_flush();
 
 
     <!--Pantalla 2-->
-
-
-
     <div class="card card-default">
       <div class="card-header">
-      <div class="card-tools">
-          <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_tipo_mensaje_vista.php">Nuevo</a>
-      </div>
-      <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" id= "GenerarReporte"  title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
+      <div class="dt-buttons btn-group"><button class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" id="GenerarReporte" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
+      <a class="btn btn-primary btn-xs float-right" href="../vistas/movil_crear_tipo_mensaje_vista.php">Nuevo</a>
+      <!--buscador-->
+      <div class="float-right mt-5 ml-5">
+          <input class="form-control" placeholder="Buscar..." type="text" id="buscartext" name="buscar" onpaste="return false" onkeyup="leer(this.value)">
+        </div>
       <!-- /.card-header -->
       <div class="card-body" id="tipo_mensaje">
        </div>
@@ -230,7 +229,7 @@ ob_end_flush();
       $('#tabla').DataTable({
         "paging": true,
         "lengthChange": true,
-        "searching": true,
+        "searching": false,
         "ordering": true,
         "info": true,
         "autoWidth": true,
@@ -245,6 +244,21 @@ ob_end_flush();
       window.open("../Controlador/movil_reporte_tipo_mensaje_controlador.php", "REPORTE");
     }
 
+    function leer(buscar){
+      var buscar;
+      var parametro = {"buscar":buscar}
+      $.ajax({
+        data: parametro, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_listar_tipo_mensaje_controlador.php', //archivo que recibe la peticion
+        type: 'POST', //método de envio
+        beforeSend: function() {
+          $('#Segmentos').html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+          $('#Segmentos').html(response);
+        }
+      });
+    }
     function readProducts() {
       var parametro;
       $.ajax({
