@@ -158,7 +158,7 @@ ob_end_flush();
             </div>
             <!-- /.card-header -->
       
-    <div class="initialbargroups d-flex flex-wrap justify-content-center justify-content-md-start">
+    <div class="initialbargroups d-flex flex-wrap justify-content-center justify-content-md-start m-4">
         <ul class="pagination pagination-sm">
             <li class="initialbarall page-item active">
                 <a class="page-link">Todos</a>
@@ -172,7 +172,7 @@ ob_end_flush();
                         <li class="page-item E"><a class="page-link" href="=grading&amp;id=18106&amp;tifirst=E">E</a></li>
                         <li class="page-item F"><a class="page-link" href="=grading&amp;id=18106&amp;tifirst=F">F</a></li>
                         <li class="page-item G"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=G">G</a></li>
-                        <li class="page-item H"><a class="page-link" href= ?action=grading&amp;id=18106&amp;tifirst=H">H</a></li>
+                        <li class="page-item H"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=H">H</a></li>
                         <li class="page-item I"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=I">I</a></li>
                         <li class="page-item J"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=J">J</a></li>
                         <li class="page-item K"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=K">K</a></li>
