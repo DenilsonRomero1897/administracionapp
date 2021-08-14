@@ -12,6 +12,21 @@ function readProducts() {
       }
     });
   }
+  function leer(buscar){
+    var buscar;
+    var parametro = {"buscar":buscar}
+    $.ajax({
+      data: parametro, //datos que se envian a traves de ajax
+      url: '../Controlador/movil_listar_noticias_controlador.php', //archivo que recibe la peticion
+      type: 'POST', //método de envio
+      beforeSend: function() {
+        $('#Noticias').html("Procesando, espere por favor...");
+      },
+      success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+        $('#Noticias').html(response);
+      }
+    });
+  }
   function eliminar(id) {
     var parametro = {
       'funcion': 'eliminar',

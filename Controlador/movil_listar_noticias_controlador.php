@@ -24,6 +24,12 @@ $instancia_conexion = new conexion();
                             s.nombre
                             FROM tbl_movil_noticias n
                             INNER JOIN tbl_movil_segmentos s ON n.segmento_id = s.id";
+                             if (isset($_POST)) {
+                              if (!empty($_POST['buscar'])) {
+                                $dato = $_POST['buscar'];
+                                $sql_segmentos .= " WHERE n.titulo LIKE '%$dato%' or n.subtitulo LIKE '%$dato%' or n.descripcion LIKE '%$dato%' or n.fecha LIKE '%$dato%' or n.fecha_vencimiento LIKE '%$dato%' or n.remitente LIKE '%$dato%' or s.nombre LIKE '%$dato%'";
+                              }
+                            }
     $resultado_noticias = $instancia_conexion->ejecutarConsulta($sql);
     $noticias = array();
     while ($fila = $resultado_noticias->fetch_array(MYSQLI_ASSOC)) {
@@ -59,7 +65,7 @@ $instancia_conexion = new conexion();
     $('#tabla-noticias').DataTable({
       "paging": true,
       "lengthChange": true,
-      "searching": true,
+      "searching": false,
       "ordering": true,
       "info": true,
       "autoWidth": true,

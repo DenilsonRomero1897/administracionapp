@@ -150,12 +150,18 @@ if (isset($_REQUEST['msj'])) {
           <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
         </div>
         <div class="dt-buttons btn-group"><button onclick="GenerarReporte();" class="btn btn-secondary buttons-pdf buttons-html5 btn-danger" tabindex="0" aria-controls="tabla2" type="button" title="Exportar a PDF"><span><i class="fas fa-file-pdf"></i> </span> </button> </div>
-        <div>
+        <!--buscador-->
+        <div class="float-right mt-5 ml-5">
+          <input class="form-control" placeholder="Buscar..." type="text" id="buscartext" name="buscar" onpaste="return false" onkeyup="leer(this.value)">
+        </div>
           <div class="card-body" id="Noticias">
 
           </div><!-- /.card-body -->
-        </div>
       </div>
+
+    </div>
+
+      <!--modal editar noticias-->
       <form action="../Controlador/movil_noticia_controlador.php?op=editar&id=<?php $id ?>" method="post" data-form="update" autocomplete="off">
 
         <div class="modal fade" id="modal_modificar_noticia">
@@ -174,12 +180,12 @@ if (isset($_REQUEST['msj'])) {
                     <div class="col-md-12">
 
                       <div class="form-group">
-                        <label for="titulo"> Título:</label>
+                        <label for="titulo">Título:</label>
                         <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="45" id="titulo" name="titulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                       </div>
 
                       <div class="form-group">
-                        <label for="subtitulo"> Subtítulo:</label>
+                        <label for="subtitulo">Subtítulo:</label>
                         <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtSubtitulo'] ?>" maxlength="45" id="subtitulo" name="subtitulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                       </div>
 
@@ -234,7 +240,6 @@ if (isset($_REQUEST['msj'])) {
                                   <td><a onclick="eliminar_archivos(<?php echo $row['noticia'] ?>,<?php echo $row['recurso'] ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                               <?php } ?>
-
                             </tbody>
                           </table>
                         </div>
@@ -244,11 +249,9 @@ if (isset($_REQUEST['msj'])) {
                         <input class="form-control" type="file" class="form-control" id="txt_documentos" name="txt_documentos[]" multiple>
                       </div>
                     </div>
-
                   </div>
                 </div>
               </div>
-
               <!--Footer del modal-->
               <div class="modal-footer justify-content-between">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -259,14 +262,8 @@ if (isset($_REQUEST['msj'])) {
           </div>
           <!-- /.modal-dialog -->
         </div>
-
         <!-- /.  finaldel modal -->
-
-
-
       </form>
 
-
 </body>
-
 </html>
