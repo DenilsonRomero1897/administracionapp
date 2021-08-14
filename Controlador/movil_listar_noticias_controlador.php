@@ -27,7 +27,7 @@ $instancia_conexion = new conexion();
                              if (isset($_POST)) {
                               if (!empty($_POST['buscar'])) {
                                 $dato = $_POST['buscar'];
-                                $sql_segmentos .= " WHERE n.titulo LIKE '%$dato%' or n.subtitulo LIKE '%$dato%' or n.descripcion LIKE '%$dato%' or n.fecha LIKE '%$dato%' or n.fecha_vencimiento LIKE '%$dato%' or n.remitente LIKE '%$dato%' or s.nombre LIKE '%$dato%'";
+                                $sql .= " WHERE n.titulo LIKE '%$dato%' or n.subtitulo LIKE '%$dato%' or n.descripcion LIKE '%$dato%' or n.fecha LIKE '%$dato%' or n.fecha_vencimiento LIKE '%$dato%' or n.remitente LIKE '%$dato%' or s.nombre LIKE '%$dato%'";
                               }
                             }
     $resultado_noticias = $instancia_conexion->ejecutarConsulta($sql);

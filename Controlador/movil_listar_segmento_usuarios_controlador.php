@@ -101,6 +101,6 @@
         }
         addFooters(pdf);
       
-        pdf.save('Reporte_Segmentos_'+ '<?php echo $nombre_segmento?>' +'.pdf');
+        pdf.save('Reporte_Segmento_'+'<?php echo $nombre_segmento?>' +'.pdf');
         });
 </script>
