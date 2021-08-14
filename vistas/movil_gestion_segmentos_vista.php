@@ -219,9 +219,7 @@ ob_end_flush();
     }
     function leer(buscar){
       var buscar;
-      console.log(buscar);
       var parametro = {"buscar":buscar}
-      console.log(parametro);
       $.ajax({
         data: parametro, //datos que se envian a traves de ajax
         url: '../Controlador/movil_listar_segmento_controlador.php', //archivo que recibe la peticion
