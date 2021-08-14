@@ -145,8 +145,6 @@ ob_end_flush();
         <div class="float-right mt-5 ml-5">
           <input class="form-control" placeholder="Buscar..." type="text" id="buscartext" name="buscar" onpaste="return false" onkeyup="leer(this.value)">
         </div>
-      </div>
-     
       <!-- /.card-header -->
       <div class="card-body" id="Segmentos">
 
