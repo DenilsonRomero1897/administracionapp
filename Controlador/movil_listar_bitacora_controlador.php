@@ -1,8 +1,4 @@
-<?php require_once('../clases/Conexion.php');
-
-
-
-?>
+<?php require_once('../clases/Conexion.php');?>
 
 
 <table id="tabla_bitacora" class="table table-bordered table-striped" style="width: 100%;">
@@ -24,11 +20,16 @@
                 $final = $_POST['final'];
                 $sql_tabla_bitacora_movil .= " AND Fecha BETWEEN '$inicio' AND '$final'";
             }
+            if (!empty($_POST['buscar'])) {
+                $dato = $_POST['buscar'];
+                $sql_tabla_bitacora_movil .= " AND u.Usuario LIKE '%$dato%' or o.objeto LIKE '%$dato%' or b.accion LIKE '%$dato%'";
+              }
         }
-        $clientes = array();
+        var_dump($sql_tabla_bitacora_movil);
+        $bitacoras = array();
         $resultadotabla_bitacora = $mysqli->query($sql_tabla_bitacora_movil);
         while ($row = $resultadotabla_bitacora->fetch_array(MYSQLI_ASSOC)) {
-            $clientes[] = $row;
+            $bitacoras[] = $row;
         ?>
             <tr>
                 <td><?php echo $row['Usuario']; ?></td>
@@ -46,7 +47,7 @@
         $('#tabla_bitacora').DataTable({
             "paging": true,
             "lengthChange": true,
-            "searching": true,
+            "searching": false,
             "ordering": true,
             "info": true,
             "autoWidth": true,
@@ -57,7 +58,7 @@
         });
     });
 
-    var arrayJS = <?php echo json_encode($clientes) ?>;
+    var arrayJS = <?php echo json_encode($bitacoras) ?>;
     <?php date_default_timezone_set("America/Tegucigalpa");
         $fecha = date('d-m-Y h:i:s'); ?>
     $("#GenerarReporte").click(function() {

@@ -21,8 +21,11 @@ $instancia_conexion = new conexion();  ?>
                 $sql_tiporecurso .= " WHERE descripcion LIKE '%$dato%'";
               }
             }
+            $tipo_recursos = array();
             $resultado_tiporecurso = $mysqli->query($sql_tiporecurso);
-            while ($tiporecurso = $resultado_tiporecurso->fetch_array(MYSQLI_ASSOC)) { ?>
+            while ($tiporecurso = $resultado_tiporecurso->fetch_array(MYSQLI_ASSOC)) { 
+              $tipo_recursos[] = $tiporecurso;
+              ?>
               <tr>
                 <td><?php echo $tiporecurso['id']; ?></td>
                 <td><?php echo $tiporecurso['descripcion']; ?></td>
@@ -64,5 +67,54 @@ $instancia_conexion = new conexion();  ?>
         }
       });
     });
+
+    var arrayJS = <?php echo json_encode($tipo_recursos) ?>;
+    <?php date_default_timezone_set("America/Tegucigalpa");
+        $fecha = date('d-m-Y h:i:s'); ?>
+        $("#GenerarReporte").click(function() {
+          var pdf = new jsPDF('landscape');
+          var logo = new Image();
+          logo.src = '../dist/img/logo_ia.jpg';
+          pdf.addImage(logo, 15, 10, 30, 30);
+          pdf.setFont('Arial',);
+          pdf.setFontSize(12);
+          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
+          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
+          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
+          pdf.setFont('Arial','B');
+          pdf.setFontSize(14);
+          pdf.text(110,38,"REPORTE TIPO RECURSO");
+          var columns = ["#","Descripción","Url"];
+          var data = [];
+          for (var i = 0; i < arrayJS.length; i++) {
+            data.push([i + 1, arrayJS[i]['descripcion'],arrayJS[i]['url']]);
+          }
+
+          pdf.autoTable(columns, data, {
+            margin: {
+              top: 45
+            }
+          });
+       
+        
+          const addFooters = pdf => {
+            const pageCount = pdf.internal.getNumberOfPages()
+
+            pdf.setFont('helvetica', 'italic')
+            pdf.setFontSize(9)
+            for (var i = 1; i <= pageCount; i++) {
+                pdf.setPage(i)
+                pdf.text('Pag. ' + String(i) + ' de ' + String(pageCount), pdf.internal.pageSize.width / 2, 300, {
+                    align: 'center'
+                })
+            }
+        }
+        addFooters(pdf);
+      
+        pdf.save('Reporte_Tipo_Recurso_'+'<?php echo $fecha?>' +'.pdf');
+
+
+        });
+
 
 </script>

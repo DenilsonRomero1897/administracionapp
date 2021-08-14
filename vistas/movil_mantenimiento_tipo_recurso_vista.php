@@ -7,23 +7,6 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
 
-//DATOS PARA EL PDF
-$sql2 = "
-select
-    id,
-    descripcion,
-    url
-
-FROM
-    tbl_movil_tipo_recursos";
-$query = $mysqli->query($sql2);
-$clientes = array();
-$cont = 0;
-while ($r = $query->fetch_object()) {
-  $clientes[] = $r;
-  $cont++;
-}
-
 $Id_objeto = 127;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
@@ -234,24 +217,6 @@ ob_end_flush();
 
   </form>
   <script type="text/javascript">
-    $(function() {
-      $('#tabla').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-        }
-      });
-    });
-    
-    function ventana() {
-      window.open("../Controlador/movil_reporte_tipo_recurso_controlador.php", "REPORTE");
-    }
     function leer(buscar){
       var buscar;
       var parametro = {"buscar":buscar}
@@ -260,10 +225,10 @@ ob_end_flush();
         url: '../Controlador/movil_listar_tipo_recurso_controlador.php', //archivo que recibe la peticion
         type: 'POST', //método de envio
         beforeSend: function() {
-          $('#Segmentos').html("Procesando, espere por favor...");
+          $('#tipo_recurso').html("Procesando, espere por favor...");
         },
         success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-          $('#Segmentos').html(response);
+          $('#tipo_recurso').html(response);
         }
       });
     }
@@ -319,36 +284,7 @@ ob_end_flush();
                     });
                   }
 
-        var arrayJS = <?php echo json_encode($clientes) ?>;
-        $("#GenerarReporte").click(function() {
-          var pdf = new jsPDF('landscape');
-          var logo = new Image();
-          logo.src = '../dist/img/logo_ia.jpg';
-          pdf.addImage(logo, 15, 10, 30, 30);
-          pdf.setFont('Arial',);
-          pdf.setFontSize(12);
-          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
-          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
-          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
-          pdf.setFont('Arial','B');
-          pdf.setFontSize(14);
-          pdf.text(110,38,"REPORTE TIPO RECURSO");
-          var columns = ["#","Descripción","Url"];
-          var data = [];
-          for (var i = 0; i < arrayJS.length; i++) {
-            data.push([i + 1, arrayJS[i]['descripcion'],arrayJS[i]['url']]);
-          }
-
-          pdf.autoTable(columns, data, {
-            margin: {
-              top: 45
-            }
-          });
        
-          pdf.save('ReporteTipoRecurso.pdf');
-
-        });
-
   </script>
  
 </body>

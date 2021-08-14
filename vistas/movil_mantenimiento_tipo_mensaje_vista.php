@@ -7,23 +7,6 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
 
-//DATOS PARA EL PDF
-$sql2 = "
-select
-    id,
-    tipo_mensaje
-
-FROM
-    tbl_movil_tipo_mensajes";
-
-$query = $mysqli->query($sql2);
-$clientes = array();
-$cont = 0;
-while ($r = $query->fetch_object()) {
-  $clientes[] = $r;
-  $cont++;
-}
-
 $Id_objeto = 128;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
@@ -178,9 +161,8 @@ ob_end_flush();
       <div class="card-body" id="tipo_mensaje">
        </div>
        
-
+  <!-- inicio modal-->
   <form action="../Controlador/movil_guardar_tipomensaje_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
-
     <div class="modal fade" id="modal_modificar_tipomensaje">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -190,27 +172,19 @@ ob_end_flush();
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-
-
           <!--Cuerpo del modal-->
           <div class="modal-body">
             <div class="card-body">
               <div class="row">
                 <div class="col-md-12">
-
                   <div class="form-group">
                     <label>Tipo de Mensaje</label>
-
                     <input class="form-control" type="text" id="tipo_mensaje" name="tipo_mensaje" style="text-transform: uppercase" onpaste="return false"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txttipo_mensaje']; ?>">
-
                   </div>
-
-              
                 </div>
               </div>
             </div>
           </div>
-
           <!--Footer del modal-->
           <div class="modal-footer justify-content-between">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -221,29 +195,9 @@ ob_end_flush();
       </div>
       <!-- /.modal-dialog -->
     </div>
-
     <!-- /.  finaldel modal -->
   </form>
   <script type="text/javascript">
-    $(function() {
-      $('#tabla').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": false,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-        }
-      });
-    });
-    
-    function ventana() {
-      window.open("../Controlador/movil_reporte_tipo_mensaje_controlador.php", "REPORTE");
-    }
-
     function leer(buscar){
       var buscar;
       var parametro = {"buscar":buscar}
@@ -252,10 +206,10 @@ ob_end_flush();
         url: '../Controlador/movil_listar_tipo_mensaje_controlador.php', //archivo que recibe la peticion
         type: 'POST', //método de envio
         beforeSend: function() {
-          $('#Segmentos').html("Procesando, espere por favor...");
+          $('#tipo_mensaje').html("Procesando, espere por favor...");
         },
         success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-          $('#Segmentos').html(response);
+          $('#tipo_mensaje').html(response);
         }
       });
     }
@@ -310,42 +264,6 @@ ob_end_flush();
                        timer: 3000
                     });
                   }
-
-        var arrayJS = <?php echo json_encode($clientes) ?>;
-        $("#GenerarReporte").click(function() {
-          var pdf = new jsPDF('landscape');
-          var logo = new Image();
-          logo.src = '../dist/img/logo_ia.jpg';
-          pdf.addImage(logo, 15, 10, 30, 30);
-          pdf.setFont('Arial',);
-          pdf.setFontSize(12);
-          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
-          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
-          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
-          pdf.setFont('Arial','B');
-          pdf.setFontSize(14);
-          pdf.text(110,38,"REPORTE TIPO MENSAJE");
-          var columns = ["#", "Tipo Mensaje"];
-          var data = [];
-          for (var i = 0; i < arrayJS.length; i++) {
-            data.push([i + 1, arrayJS[i]['tipo_mensaje']]);
-          }
-
-          pdf.autoTable(columns, data, {
-            margin: {
-              top: 45
-            }
-          });
-       
-          pdf.save('ReporteTipoMensaje.pdf');
-
-        });
-
-
-
-
-
-
   </script>
 </body>
 

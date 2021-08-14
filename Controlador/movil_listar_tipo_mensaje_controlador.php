@@ -1,8 +1,4 @@
-<?php require_once('../clases/Conexion.php');
-require_once('../clases/conexion_mantenimientos.php');
-
-$instancia_conexion = new conexion();  ?>
-
+<?php require_once('../clases/Conexion.php'); ?>
 <table id="tabla" class="table table-bordered table-striped">
           <thead>
             <tr>
@@ -10,7 +6,6 @@ $instancia_conexion = new conexion();  ?>
               <th>TIPO MENSAJE</th>
               <th>EDITAR</th>
               <th>BORRAR</th>
-              
             </tr>
           </thead>
           <tbody>
@@ -19,16 +14,17 @@ $instancia_conexion = new conexion();  ?>
              if (isset($_POST)) {
               if (!empty($_POST['buscar'])) {
                 $dato = $_POST['buscar'];
-                $sql_tipomensaje .= " WHERE tipo_mensaje LIKE '%$dato%''";
+                $sql_tipomensaje .= " WHERE tipo_mensaje LIKE '%$dato%'";
               }
             }
+            $tipo_mensajes = array();
             $resultado_tipomensaje = $mysqli->query($sql_tipomensaje);
-            while ($tipomensaje = $resultado_tipomensaje->fetch_array(MYSQLI_ASSOC)) { ?>
+            while ($tipomensaje = $resultado_tipomensaje->fetch_array(MYSQLI_ASSOC)) { 
+              $tipo_mensajes[]=$tipomensaje;
+              ?>
               <tr>
                 <td><?php echo $tipomensaje['id']; ?></td>
                 <td><?php echo $tipomensaje['tipo_mensaje']; ?></td>
-                
-                
 
                 <td style="text-align: center;">
 
@@ -51,23 +47,7 @@ $instancia_conexion = new conexion();  ?>
 
           </tbody>
         </table>
-      </div>
-      <!-- /.card-body -->
-    </div>
-
-
-    <!-- /.card-body -->
-    <div class="card-footer">
-
-    </div>
-  </div>
-
-  </div>
-
-  </section>
-
-  </div>
-
+     
   <script>
 
     $(function() {
@@ -84,5 +64,52 @@ $instancia_conexion = new conexion();  ?>
         }
       });
     });
+    
+    var arrayJS = <?php echo json_encode($tipo_mensajes) ?>;
+    <?php date_default_timezone_set("America/Tegucigalpa");
+        $fecha = date('d-m-Y h:i:s'); ?>
+        $("#GenerarReporte").click(function() {
+          var pdf = new jsPDF('landscape');
+          var logo = new Image();
+          logo.src = '../dist/img/logo_ia.jpg';
+          pdf.addImage(logo, 15, 10, 30, 30);
+          pdf.setFont('Arial',);
+          pdf.setFontSize(12);
+          pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
+          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
+          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
+          pdf.setFont('Arial','B');
+          pdf.setFontSize(14);
+          pdf.text(110,38,"REPORTE TIPO MENSAJE");
+          var columns = ["#", "Tipo Mensaje"];
+          var data = [];
+          for (var i = 0; i < arrayJS.length; i++) {
+            data.push([i + 1, arrayJS[i]['tipo_mensaje']]);
+          }
+
+          pdf.autoTable(columns, data, {
+            margin: {
+              top: 45
+            }
+          });
+       
+          const addFooters = pdf => {
+            const pageCount = pdf.internal.getNumberOfPages()
+
+            pdf.setFont('helvetica', 'italic')
+            pdf.setFontSize(9)
+            for (var i = 1; i <= pageCount; i++) {
+                pdf.setPage(i)
+                pdf.text('Pag. ' + String(i) + ' de ' + String(pageCount), pdf.internal.pageSize.width / 2, 300, {
+                    align: 'center'
+                })
+            }
+        }
+        addFooters(pdf);
+      
+        pdf.save('Reporte_Tipo_Mensaje_'+'<?php echo $fecha?>' +'.pdf');
+
+        });
+
 
 </script>
