@@ -16,6 +16,12 @@ $instancia_conexion = new conexion();  ?>
               <tbody>
                 <?php
                 $sql_tiponotificacion = "select * from  tbl_movil_tipo_notificaciones";
+                if (isset($_POST)) {
+                  if (!empty($_POST['buscar'])) {
+                    $dato = $_POST['buscar'];
+                    $sql_tiponotificacion .= " WHERE descripcion LIKE '%$dato%'";
+                  }
+                }
                 $resultado_tiponotificacion = $mysqli->query($sql_tiponotificacion);
                 while ($notificacion = $resultado_tiponotificacion->fetch_array(MYSQLI_ASSOC)) { ?>
                   <tr>
@@ -46,7 +52,7 @@ $instancia_conexion = new conexion();  ?>
       $('#tabla').DataTable({
         "paging": true,
         "lengthChange": true,
-        "searching": true,
+        "searching": false,
         "ordering": true,
         "info": true,
         "autoWidth": true,

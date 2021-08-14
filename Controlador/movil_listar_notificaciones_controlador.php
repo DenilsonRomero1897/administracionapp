@@ -28,6 +28,13 @@
             FROM
                 tbl_movil_notificaciones n inner join tbl_movil_segmentos s on n.segmento_id=s.id 
                 inner join  tbl_movil_tipo_notificaciones p on n.tipo_notificacion_id=p.id";
+                if (isset($_POST)) {
+                  if (!empty($_POST['buscar'])) {
+                    $dato = $_POST['buscar'];
+                    $sql .= " WHERE n.titulo LIKE '%$dato%' or n.descripcion LIKE '%$dato%' or n.fecha LIKE '%$dato%' or s.nombre LIKE '%$dato%' or p.descripcion LIKE '%$dato%'";
+                  }
+                }
+    
             $resultado_notificaciones = $mysqli->query($sql);
             $notificaciones = array();
             while ($fila = $resultado_notificaciones->fetch_array(MYSQLI_ASSOC)) { 
@@ -64,7 +71,7 @@
       $('#tabla-notificaciones').DataTable({
         "paging": true,
         "lengthChange": true,
-        "searching": true,
+        "searching": false,
         "ordering": true,
         "info": true,
         "autoWidth": true,

@@ -16,6 +16,12 @@ $instancia_conexion = new conexion();  ?>
           <tbody>
             <?php
             $sql_tipomensaje = "select * from tbl_movil_tipo_mensajes";
+             if (isset($_POST)) {
+              if (!empty($_POST['buscar'])) {
+                $dato = $_POST['buscar'];
+                $sql_tipomensaje .= " WHERE tipo_mensaje LIKE '%$dato%''";
+              }
+            }
             $resultado_tipomensaje = $mysqli->query($sql_tipomensaje);
             while ($tipomensaje = $resultado_tipomensaje->fetch_array(MYSQLI_ASSOC)) { ?>
               <tr>
@@ -68,7 +74,7 @@ $instancia_conexion = new conexion();  ?>
       $('#tabla').DataTable({
         "paging": true,
         "lengthChange": true,
-        "searching": true,
+        "searching": false,
         "ordering": true,
         "info": true,
         "autoWidth": true,
