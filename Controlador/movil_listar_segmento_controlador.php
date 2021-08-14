@@ -28,7 +28,6 @@ $instancia_conexion = new conexion(); ?>
         $sql_segmentos .= " WHERE s.nombre LIKE '%$dato%' or s.descripcion LIKE '%$dato%' or s.fecha_creacion LIKE '%$dato%' or Usuario LIKE '%$dato%'";
       }
     }
-    var_dump($sql_segmentos);
         $resultado_segmentos = $instancia_conexion->ejecutarConsulta($sql_segmentos);
     $segmentos = array();
     while ($segmento = $resultado_segmentos->fetch_array(MYSQLI_ASSOC)) {
