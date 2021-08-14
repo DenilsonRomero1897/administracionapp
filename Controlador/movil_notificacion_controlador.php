@@ -25,10 +25,10 @@ switch ($_GET['op']) {
         $resul = $mysqli->query($sql_id_notificacion);
         $id_tipo_notificacion = $resul->fetch_assoc();
         $tipo_notificacion = (int)$id_tipo_notificacion['id'];
-        $image = subirImagen();
+        $image = subirDocumentos();
         
         //
-        $sql = "INSERT into tbl_movil_notificaciones VALUES (null,'$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$image')";
+        $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$url')";
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
@@ -92,17 +92,17 @@ if (isset($_POST['funcion'])) {
     }
 }
 
-function subirImagen(){
-    $tmp_name = $_FILES['subir_archivo']['tmp_name'];
-    $name = $_FILES['subir_archivo']['name'];
-    $resultado = move_uploaded_file($tmp_name,"../archivos/movil/notificacion/$name");
+
+function subirDocumentos(){
+    $tmp_name = $_FILES['subir_archivo']['tmp_name'][0];
+    $name = $_FILES['subir_archivo']['name'][ 0 ];
     if(is_array($_FILES) && count($_FILES) > 0){
-        if($resultado){
-         $nombrearchivo= '../archivos/movil/notificacion/'.$name;
-         return $nombrearchivo;
+        if(move_uploaded_file($tmp_name,"../archivos/movil/notificacion/".$name)){
+          $nombrearchivo= '../archivos/movil/'.$name;
+          return $nombrearchivo;
         }else{
-           echo 0; 
-       }
+            echo 0;
+        }
     }else{
         return $nombrearchivo = "NULL";
     }
