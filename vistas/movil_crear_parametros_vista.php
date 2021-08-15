@@ -168,11 +168,11 @@ ob_end_flush();
                 <div class="col-md-12">
                   <div class="form-group">
                     <label for="descripcion"> Nombre del Parámetro </label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="parametro" name="parametro" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <input autofocus class="form-control" type="text" maxlength="60" id="parametro" name="parametro" required style="text-transform: uppercase" onpaste="return false" onkeyup="DobleEspacio(this, event)" onkeypress="return check(event)">
                   </div>
-                  <div class="form-group">
                     <label for="ubicacion url">Descripción del Parámetro</label>
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" required style="text-transform: uppercase" onpaste="return false" onkeyup="Espacio(this, event)" onkeypress="return Letras(event)" onkeypress="return comprobar(this.value, event, this.id)" maxlength="30">
+                    <input class="form-control" type="text"  maxlength="60" id="descripcion" name="descripcion" required style="text-transform: uppercase" onpaste="return false" onkeyup="DobleEspacio(this, event)" onkeypress="return check(event)">
+                  </div> 
                   </div>
                   <div class="form-group">
                     <label for="txt_valorparametro">Valor del Parámetro</label>

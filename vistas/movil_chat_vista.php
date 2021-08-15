@@ -54,6 +54,7 @@ bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 
     <script>
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()
+            
         })
     </script>
 
