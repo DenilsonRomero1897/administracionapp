@@ -8,7 +8,7 @@
 
 ?>
 
-<table id="tabla_usuarios_segmento" class="table table-bordered table-striped" style="width:100%">
+<table id="tabla_segmento_usuario" class="table table-bordered table-striped" style="width:100%">
     <thead>
         <tr>
             <th hidden>ID</th>
@@ -43,7 +43,7 @@
 
 <script>
  $(function() {
-      $('#tabla_usuarios_segmento').DataTable({
+      $('#tabla_segmento_usuario').DataTable({
         "paging": true,
         "lengthChange": true,
         "searching": true,
@@ -56,7 +56,6 @@
         }
       });
     });
-
 
     var arrayJS = <?php echo json_encode($segmento_usuario) ?>;
     <?php date_default_timezone_set("America/Tegucigalpa");

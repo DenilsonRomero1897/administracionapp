@@ -9,6 +9,8 @@ function getChats(id_chat,id_usuario) {
 }
 
 function getUser() {
+    var busqueda = document.getElementById('search').value;
+    console.log(busqueda);
     var parametros = {
         "funcion": 'buscarUsuarios'
     }

@@ -57,12 +57,6 @@ class mostrarChat
     <button>
     <i class='fas fa-microphone' style='font-size: 1.3rem; color:antiquewhite'></i></i>
     </button>
-    <button>
-    <label for='archivos_chat'>
-    <i class='ml-2 fas fa-paperclip' style='font-size: 1.3rem; color:antiquewhite'></i>
-    </label>
-    </button>
-    <input type='file' name='archivos_chat' hidden />
     <input aria-placeholder='Escribe un mensaje aquí' placeholder='Escribe un mensaje aquí' class='py-2 mx-3 pl-5 block w-full rounded-full bg-gray-100 outline-none focus:text-gray-700' type='text' name='message' id='mensaje' />
 
     <button class='outline-none focus:outline-none' onclick='enviar($id_chat,$id_usuario);'>

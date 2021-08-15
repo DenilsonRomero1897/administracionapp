@@ -8,9 +8,7 @@ if ($funcion == 'buscarUsuarios') {
 function getUser()
 {
     require '../clases/Conexion.php';
-        $sql = "SELECT u.Id_usuario,p.nombres,p.apellidos FROM tbl_usuarios u INNER JOIN
-        tbl_personas p on u.id_persona = p.id_persona";
-        $resultado = $mysqli->query($sql);
+        
     echo '<div class="col-span-1">
          <div class="my-3 mx-3 border-b border-gray-300">
                         <div class="relative text-gray-600 focus-within:text-gray-400">
@@ -19,10 +17,13 @@ function getUser()
                                     <path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                                 </svg>
                             </span>
-                            <input aria-placeholder="Busca tus amigos o contacta nuevos" placeholder="Buscar Usuario" class="py-2 pl-10 block w-full rounded bg-gray-100 outline-none focus:text-gray-700" type="search" name="search" required autocomplete="search" />
+                            <input aria-placeholder="Busca tus amigos o contacta nuevos" placeholder="Buscar Usuario" class="py-2 pl-10 block w-full rounded bg-gray-100 outline-none focus:text-gray-700" type="search" name="search" id="search" required autocomplete="search" onkeypress="getUser();"/>
                         </div>
                     </div>
       ';
+      $sql = "SELECT u.Id_usuario,p.nombres,p.apellidos FROM tbl_usuarios u INNER JOIN
+        tbl_personas p on u.id_persona = p.id_persona";
+        $resultado = $mysqli->query($sql);
       while ($row = $resultado->fetch_array(MYSQLI_ASSOC)) {
         $id = $row['Id_usuario'];
         $nombre_usuario = $row['nombres'].' '.$row['apellidos'];

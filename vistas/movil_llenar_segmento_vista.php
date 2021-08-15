@@ -158,7 +158,7 @@ ob_end_flush();
             </div>
             <!-- /.card-header -->
       
-    <div class="initialbargroups d-flex flex-wrap justify-content-center justify-content-md-start m-4">
+    <!-- <div class="initialbargroups d-flex flex-wrap justify-content-center justify-content-md-start m-4">
         <ul class="pagination pagination-sm">
             <li class="initialbarall page-item active">
                 <a class="page-link">Todos</a>
@@ -195,24 +195,14 @@ ob_end_flush();
                         <li class="page-item Y"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=Y">Y</a></li>
                         <li class="page-item Z"><a class="page-link" href="?action=grading&amp;id=18106&amp;tifirst=Z">Z</a></li>
             </ul>
-    </div>
+    </div> -->
 
 
+    <p class="text-center font-weight-bold">Listado de personas que se pueden seleccionar</p>
+            <div class="card-body" id="resultado">
+              
 
-            <div class="card-body">
-              <table id="tabla" class="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th hidden>ID</th>
-                    <th>NOMBRE</th>
-                    <th>APELLIDOS</th>
-                    <th>SELECCIONAR <input type="checkbox" class="ml-2" name="marcar_todos" id="marcar_todos" onclick="toggle(this)"></th>
-                  </tr>
-                </thead>
-                <tbody id="resultado">
-
-                </tbody>
-              </table>
+                
             </div>
             
              <hr>
@@ -322,35 +312,8 @@ ob_end_flush();
         }
       });
   }
-  $(function() {
-      $('#tabla').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "searching": true,
-        "ordering": true,
-        "info": true,
-        "autoWidth": true,
-        "responsive": true,
-        "language": {
-          "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
-        }
-      });
-    });
+ 
   </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 </body>
 
