@@ -22,11 +22,10 @@ if (isset($_POST['funcion'])) {
   }
 }
 
-
 if ($opcion == 'eliminar') {
   $id_tiporecurso = isset($_GET["id"]) ? ($_GET["id"]) : "";
   $sql = "DELETE FROM tbl_movil_tipo_recursos WHERE id = $id_tiporecurso";
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', "$sql");
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'ELIMINO', "$sql");
   $resultado = $mysqli->query($sql);
   if($resultado === TRUE){
             echo '<script type="text/javascript">
@@ -58,7 +57,7 @@ if ($opcion == 'eliminar') {
   $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
   $url = isset($_POST["url"]) ? strtoupper($_POST["url"]) : "";
   $sql="UPDATE tbl_movil_tipo_recursos set descripcion= '$descripcion', url= '$url' WHERE id = $id_tiporecurso";
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', 'EL TIPO RECURSO ' . $descripcion . '');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'MODIFICO', 'EL TIPO RECURSO ' . $descripcion . '');
   $mysqli->query($sql);
   header('location: ../vistas/movil_mantenimiento_tipo_recurso_vista.php?msj=2');
 }else{
@@ -90,7 +89,7 @@ if ($_POST['descripcion']  <> ' ' and  $_POST['url'] <> '' ) {
 
 
     if ($resultado) {
-      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'inserto',strtoupper("$sql"));
+      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INSERTO',strtoupper("$sql"));
 
       header('location: ../vistas/movil_mantenimiento_tipo_recurso_vista.php?msj=2');
     } else {

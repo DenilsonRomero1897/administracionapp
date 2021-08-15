@@ -41,7 +41,7 @@ if ($visualizacion == 0) {
 
    </script>';
 } else {
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'GESTION DE TRANSACCIONES');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'GESTIÓN DE TRANSACCIONES');
 }
 
 // /* Esta condicion sirve para  verificar el valor que se esta enviando al momento de dar click en el icono modicar */
@@ -149,7 +149,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestion de Transacciones</h1>
+            <h1>Gestión de Transacciones</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">

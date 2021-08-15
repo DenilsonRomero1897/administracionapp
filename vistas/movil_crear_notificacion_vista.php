@@ -10,7 +10,7 @@ require_once('../clases/funcion_permisos.php');
 
 $Id_objeto = 128;
 
-bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'Ingreso', 'A Crear Notificacion');
+bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A CREAR NOTIFICACIÓN');
 
 
 

@@ -107,7 +107,7 @@ if (permiso_ver('16') == '1') {
             <div class="col-6 col-sm-6 col-md-4">
               <div class="small-box bg-light">
                 <div class="inner">
-                  <h4>Crear Nuevo Parametro </h4>
+                  <h4>Crear Nuevo Parámetro </h4>
                   <p><?php echo $_SESSION['movil_crear_parametros_vista']; ?></p>
                 </div>
                 <div class="icon">
@@ -124,7 +124,7 @@ if (permiso_ver('16') == '1') {
             <div class="col-6 col-sm-6 col-md-4">
               <div class="small-box bg-primary">
                 <div class="inner">
-                  <h4>Gestión de Parametros</h4>
+                  <h4>Gestión de Parámetros</h4>
                   <p><?php echo $_SESSION['movil_gestion_parametros_vista']; ?></p>
                 </div>
                 <div class="icon">

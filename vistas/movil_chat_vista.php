@@ -5,6 +5,9 @@ require_once('../clases/funcion_bitacora_movil.php');
 
 require_once('../vistas/pagina_inicio_vista.php');
 
+bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A LA VISTA DEL CHAT ');
+
+
 ?>
 
 <head>

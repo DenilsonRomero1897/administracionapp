@@ -12,7 +12,7 @@ $opcion = isset($_GET["op"]) ? ($_GET["op"]) : "";
 if ($opcion == 'eliminar') {
   $id_transacciones= isset($_GET["id"]) ? ($_GET["id"]) : "";
   $sql = "DELETE FROM tbl_movil_transacciones WHERE id = $id_transacciones";
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', "$sql");
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'ELIMINO', "$sql");
   $resultado = $mysqli->query($sql);
   if($resultado === TRUE){
             echo '<script type="text/javascript">
@@ -50,7 +50,7 @@ if ($opcion == 'eliminar') {
   
 
   $sql="UPDATE tbl_movil_transacciones set fecha_envio= '$fecha_envio', request_envio= '$request_envio', response=  '$response', estado=  '$estado' , tipo_transaccion_id=  '$tipo_transaccion_id' , WHERE id = $id_transacciones";
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', 'LA TRANSACCION' . $id_transacciones. '');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'MODIFICO', 'LA TRANSACCIÓN' . $id_transacciones. '');
   $mysqli->query($sql);
   header('location: ../vistas/movil_gestion_transacciones_vista.php?msj=2');
 }else{
@@ -68,7 +68,7 @@ if ($_POST['request_envio'] <>  ' ' and  $_POST['response'] <>' 'and  $_POST['es
     $resultado = $mysqli->query($sql);
  
     if ($resultado) {
-      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'inserto',strtoupper("$sql"));
+      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INSERTO',strtoupper("$sql"));
 
       header('location: ../vistas/movil_gestion_transacciones_vista.php?msj=2');
     } else {

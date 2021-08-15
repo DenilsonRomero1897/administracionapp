@@ -13,7 +13,7 @@ if ($visualizacion == 0) {
   header('location:  ../vistas/pagina_principal_vista.php');
 } else {
 
-  bitacora_movil::evento_bitacora($_SESSION["id_usuario"],$Id_objeto, "Ingreso", "A Bitacora del sistema movil");
+  bitacora_movil::evento_bitacora($_SESSION["id_usuario"],$Id_objeto, "INGRESO", "A BITÁCORA DEL SISTEMA MÓVIL");
 
 
   if (isset($_REQUEST['msj'])) {

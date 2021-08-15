@@ -24,18 +24,10 @@ if (isset($_POST['funcion'])) {
 }
 
 
-
-
-
-
-
-
-
-
 if ($opcion == 'eliminar') {
   $id_tipomensaje= isset($_GET["id"]) ? ($_GET["id"]) : "";
   $sql = "DELETE FROM tbl_movil_tipo_mensajes WHERE id = $id_tipomensaje";
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'elimino', "$sql");
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'ELIMINO', "$sql");
   $resultado = $mysqli->query($sql);
   if($resultado === TRUE){
             echo '<script type="text/javascript">
@@ -66,7 +58,7 @@ if ($opcion == 'eliminar') {
   $id_tipomensaje = isset($_GET["id"]) ? ($_GET["id"]) : "";
   $tipo_mensaje = isset($_POST["tipo_mensaje"]) ? strtoupper($_POST["tipo_mensaje"]) : "";
   $sql="UPDATE tbl_movil_tipo_mensajes set tipo_mensaje= '$tipo_mensaje' WHERE id = $id_tipomensaje";
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'modifico', 'EL TIPO MENSAJE' . $tipo_mensaje . '');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'MODIFICO', 'EL TIPO MENSAJE' . $tipo_mensaje . '');
   $mysqli->query($sql);
   header('location: ../vistas/movil_mantenimiento_tipo_mensaje_vista.php?msj=2');
 }else{
@@ -98,7 +90,7 @@ if ($_POST['tipo_mensaje']  ) {
 
 
     if ($resultado) {
-      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'inserto', "$sql");
+      bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INSERTO', "$sql");
 
       header('location: ../vistas/movil_mantenimiento_tipo_mensaje_vista.php?msj=2');
     } else {

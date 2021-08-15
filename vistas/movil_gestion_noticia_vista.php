@@ -22,7 +22,7 @@ if ($visualizacion == 0) {
   window.location = "../vistas/pagina_principal_vista.php";
    </script>';
 } else {
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A GESTION DE NOTICIAS ');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A GESTIÓN DE NOTICIAS ');
 }
 
 if (isset($_GET['id'])) {

@@ -22,7 +22,7 @@ if ($visualizacion == 0) {
 
    </script>';
 } else {
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A GESTION DE SEGMENTOS ');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A GESTIÓN DE SEGMENTOS ');
 }
 
 // /* Esta condicion sirve para  verificar el valor que se esta enviando al momento de dar click en el icono modicar */
