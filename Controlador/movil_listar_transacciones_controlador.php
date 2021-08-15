@@ -101,8 +101,7 @@ $(function() {
             }
         }
         addFooters(pdf);
-      
-        pdf.save('Reporte_Transacciones_'+ '<?php echo $fecha?>' +'.pdf');
+        window.open(pdf.output('bloburl'),'REPORTE');
 
     });
 

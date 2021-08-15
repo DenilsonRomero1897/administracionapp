@@ -118,7 +118,7 @@ $instancia_conexion = new conexion();
       }
     }
     addFooters(pdf);
-
-    pdf.save('ReporteNoticia_'+ '<?php echo $fecha?>' +'.pdf');
+    window.open(pdf.output('bloburl'),'REPORTE');
+    //pdf.save('ReporteNoticia_'+ '<?php echo $fecha?>' +'.pdf');
   }
 </script>

@@ -100,7 +100,7 @@
             }
         }
         addFooters(pdf);
-      
-        pdf.save('Reporte_Segmento_'+'<?php echo $nombre_segmento?>' +'.pdf');
+        window.open(pdf.output('bloburl'),'REPORTE');
+        //pdf.save('Reporte_Segmento_'+'<?php echo $nombre_segmento?>' +'.pdf');
         });
 </script>

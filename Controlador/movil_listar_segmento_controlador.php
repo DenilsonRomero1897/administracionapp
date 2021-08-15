@@ -120,7 +120,7 @@ $instancia_conexion = new conexion(); ?>
       }
     }
     addFooters(pdf);
-
-    pdf.save('Reporte_Segmento_' + '<?php echo $fecha ?>' + '.pdf');
+    window.open(pdf.output('bloburl'),'REPORTE');
+    //pdf.save('Reporte_Segmento_' + '<?php echo $fecha ?>' + '.pdf');
   });
 </script>
