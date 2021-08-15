@@ -12,7 +12,8 @@ $opcion = isset($_GET['op']) ? $_GET['op'] : '';
 if ($opcion == 'eliminar') {
   $id_parametros= isset($_GET["id"]) ? ($_GET["id"]) : "";
   $sql = "DELETE FROM tbl_movil_parametros WHERE id = $id_parametros";
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'ELIMINO', "$sql");
+  $elimino = $mysqli->real_escape_string($sql);
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'ELIMINO', "$elimino");
   $resultado = $mysqli->query($sql);
   if($resultado === TRUE){
             echo '<script type="text/javascript">
@@ -23,9 +24,6 @@ if ($opcion == 'eliminar') {
                      showConfirmButton: false,
                      timer: 3000
                   });
-                  $(".FormularioAjax")[0].reset();
-                                 window.location = "../vistas/movil_gestion_parametros_vista.php";
-
               </script>';
           }else{
             echo '<script type="text/javascript">
@@ -36,7 +34,6 @@ if ($opcion == 'eliminar') {
                          showConfirmButton: false,
                          timer: 3000
                       });
-                       $(".FormularioAjax")[0].reset();
                   </script>';
           }
 }elseif ($opcion == 'editar') {
@@ -48,7 +45,8 @@ if ($opcion == 'eliminar') {
   $usuario_mod = $_SESSION['id_usuario'];
   if (!empty($valor) and $valor != 0 ) {
     $sql = "UPDATE tbl_movil_parametros set  valor= '$valor', fecha_modificacion = sysdate(), modificado_por = '$usuario_mod' WHERE id = $id_parametros";
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'MODIFICO', 'EL PARÁMETRO' . $id_parametros. '');
+    $actualizar = $mysqli->real_escape_string($sql);
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'MODIFICO', "$actualizar");
   $mysqli->query($sql);
   header('location: ../vistas/movil_gestion_parametros_vista.php?msj=2');
   }else{
@@ -73,7 +71,7 @@ if ($opcion == 'eliminar') {
         $resultado_nombre = $mysqli->query($nombreUser);
         $nombre = $resultado_nombre->fetch_assoc();
         $user = $nombre['Usuario'];
-        $sql = "INSERT into tbl_movil_parametros (parametro,descripcion,valor,fecha_modificacion,creado_por) VALUES ('$parametro', '$descripcion', '$valor',sysdate(),'$user')";
+        $sql = "INSERT into tbl_movil_parametros (parametro,descripcion,valor,fecha_modificacion,creado_por) VALUES ('$parametro', '$descripcion', '$valor','sysdate()','$user')";
         $resultado = $mysqli->query($sql);
     
         if ($resultado) {//-----------------------
@@ -87,7 +85,7 @@ if ($opcion == 'eliminar') {
       } else {
       header('location: ../vistas/movil_gestion_parametros_vista.php?msj=3');
       }
-    }else{
+    } else {
       header('location: ../vistas/movil_crear_parametros_vista.php?msj=5');
     }
 }//fin else

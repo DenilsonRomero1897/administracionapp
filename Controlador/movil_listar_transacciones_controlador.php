@@ -1,5 +1,5 @@
 <?php require_once('../clases/Conexion.php');?>
-<table id="tabla_transacciones" class="table table-bordered table-striped">
+<table id="tabla_transacciones" class="table table-bordered table-striped" style="width: 100%;">
     <thead>
         <tr>
             <th>ID</th>
@@ -12,16 +12,23 @@
     </thead>
     <tbody>
         <?php
-             $sql_tabla_transaccion_movil = "select * from tbl_movil_transacciones";
+             $sql_tabla_transaccion_movil = "SELECT id,fecha_envio,request_envio,response,estado FROM tbl_movil_transacciones";
              if (isset($_POST)) {
+                 if (!empty($_POST['final']) or !empty($_POST['buscar'])) {
+                    $sql_tabla_transaccion_movil .= " WHERE ";
+                 }
                  if (!empty($_POST['inicio']) and !empty($_POST['final'])) {
                      $inicio = $_POST['inicio'];
                      $final = $_POST['final'];
-                     $sql_tabla_transaccion_movil .= " WHERE fecha_envio BETWEEN '$inicio' AND '$final'";
+                     $sql_tabla_transaccion_movil .= " fecha_envio BETWEEN '$inicio' AND '$final'";
                  }
+                 if (!empty($_POST['buscar'])) {
+                     $dato = $_POST['buscar'];
+                     $sql_tabla_transaccion_movil .= " request_envio like '%$dato%' or response like '%$dato%' or estado like '%$dato%'";
+                 }
+                }
                  $transacciones = array();
                  $resultadotabla_transacciones = $mysqli->query($sql_tabla_transaccion_movil);
-                 var_dump($resultadotabla_transacciones);
                  while ($row = $resultadotabla_transacciones->fetch_array(MYSQLI_ASSOC)) {
                      $transacciones[] = $row;
                  ?>
@@ -67,7 +74,7 @@ $(function() {
         pdf.text(110, 30, "DEPARTAMENTO DE INFORMÁTICA ");
         pdf.setFont('Arial', 'B');
         pdf.setFontSize(14);
-        pdf.text(120, 38, "REPORTE DE TRANSACCIONES");
+        pdf.text(110, 38, "REPORTE DE TRANSACCIONES");
         pdf.setFontSize(11);
         pdf.text(250,43,'<?php echo $fecha?>');
         var columns = ["#", "Fecha de envio","Request de envio","Response","Estado"];

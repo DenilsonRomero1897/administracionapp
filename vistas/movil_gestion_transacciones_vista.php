@@ -23,7 +23,7 @@ if ($visualizacion == 0) {
 
    </script>';
 } else {
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'GESTIÓN DE TRANSACCIONES');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'GESTION DE TRANSACCIONES');
 }
 
 // /* Esta condicion sirve para  verificar el valor que se esta enviando al momento de dar click en el icono modicar */
@@ -129,7 +129,7 @@ ob_end_flush();
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Gestión de Transacciones</h1>
+            <h1>Gestion de Transacciones</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -152,11 +152,14 @@ ob_end_flush();
         
       <div class="col-md-3"></div>
       <label> Fecha Desde: </label>
-      <input type="date" class="form-control" placeholder="Start"  name="date1"/>
+      <input type="date" class="form-control" placeholder="Start"  name="date1" id="inicio"/>
       <label> Hasta:  </label>
-      <input type="date" class="form-control" placeholder="End"  name="date2"/>
+      <input type="date" class="form-control" placeholder="End"  name="date2" id="final"/>
       <button class="btn btn-primary" name="search" onclick="readProducts();"><span class="glyphicon .glyphicon-search"></span>buscar</button> <a href="../vistas/movil_gestion_transacciones_vista.php" type="button" class="btn btn-success"><span class = "glyphicon glyphicon-refresh"><span>actualizar</a>
- 
+ <!--buscador-->
+ <div class="float-right mt-5 ml-5">
+          <input class="form-control" placeholder="Buscar..." type="text" id="buscartext" name="buscar" onpaste="return false" onkeyup="leer(this.value)">
+        </div>
     
         <div class="card-body" id="Transacciones">
         
@@ -167,8 +170,8 @@ ob_end_flush();
 
   <script type="text/javascript">
      function readProducts() {
-      var fecha1 = document.getElementById('date1').value;
-      var fecha2 = document.getElementById('date2').value;
+      var fecha1 = document.getElementById('inicio').value;
+      var fecha2 = document.getElementById('final').value;
       var parametro = {'inicio':fecha1,'final':fecha2}
       $.ajax({
         data: parametro, //datos que se envian a traves de ajax

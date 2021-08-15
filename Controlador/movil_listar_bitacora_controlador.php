@@ -13,19 +13,23 @@
     </thead>
     <tbody>
         <?php
-        $sql_tabla_bitacora_movil = "select u.Usuario, o.objeto, b.accion, b.descripcion, Date_format(b.fecha,'%Y-%m-%d %H:%i:%S') as Fecha from tbl_usuarios u, tbl_movil_bitacoras b, tbl_objetos o where u.Id_usuario=b.usuario_id and b.objeto_id=o.Id_objeto";
+        $sql_tabla_bitacora_movil = "SELECT u.Usuario, o.objeto, b.accion, b.descripcion, b.fecha from tbl_usuarios u
+        INNER JOIN tbl_movil_bitacoras b
+        INNER JOIN tbl_objetos o on u.Id_usuario=b.usuario_id and b.objeto_id=o.Id_objeto";
         if (isset($_POST)) {
+             if (!empty($_POST['final']) or !empty($_POST['buscar'])) {
+                $sql_tabla_bitacora_movil .= " WHERE ";
+            }
             if (!empty($_POST['inicio']) and !empty($_POST['final'])) {
                 $inicio = $_POST['inicio'];
                 $final = $_POST['final'];
-                $sql_tabla_bitacora_movil .= " AND Fecha BETWEEN '$inicio' AND '$final'";
+                $sql_tabla_bitacora_movil .= "fecha BETWEEN '$inicio' AND '$final'";
             }
             if (!empty($_POST['buscar'])) {
                 $dato = $_POST['buscar'];
-                $sql_tabla_bitacora_movil .= " AND u.Usuario LIKE '%$dato%' or o.objeto LIKE '%$dato%' or b.accion LIKE '%$dato%'";
+                $sql_tabla_bitacora_movil .= "u.Usuario LIKE '%$dato%' or o.objeto LIKE '%$dato%' or b.accion LIKE '%$dato%'";
               }
         }
-        var_dump($sql_tabla_bitacora_movil);
         $bitacoras = array();
         $resultadotabla_bitacora = $mysqli->query($sql_tabla_bitacora_movil);
         while ($row = $resultadotabla_bitacora->fetch_array(MYSQLI_ASSOC)) {
@@ -36,7 +40,7 @@
                 <td><?php echo $row['objeto']; ?></td>
                 <td><?php echo strtoupper($row['accion']); ?></td>
                 <td><?php echo strtoupper($row['descripcion']); ?></td>
-                <td><?php echo $row['Fecha']; ?></td>
+                <td><?php echo $row['fecha']; ?></td>
             </tr>
         <?php } ?>
     </tbody>
@@ -79,7 +83,7 @@
         var columns = ["#", "Usuario", "Objeto", "Acción", "Descripción", "Fecha"];
         var data = [];
         for (var i = 0; i < arrayJS.length; i++) {
-            data.push([i + 1, arrayJS[i]['Usuario'], arrayJS[i]['objeto'], arrayJS[i]['accion'], arrayJS[i]['descripcion'], arrayJS[i]['Fecha']]);
+            data.push([i + 1, arrayJS[i]['Usuario'], arrayJS[i]['objeto'], arrayJS[i]['accion'], arrayJS[i]['descripcion'], arrayJS[i]['fecha']]);
         }
 
         pdf.autoTable(columns, data, {

@@ -76,6 +76,7 @@ if ($visualizacion == 0) {
       
       <!-- /.card-header -->
       <div class="row">
+        <div class="col-2"></div>
         <div class="col-1 ml-2"><label> Inicio: </label></div>
       <div class="col-2">
       <input type="date" class="form-control" placeholder="Start" id="date1" name="date1" required/>
@@ -87,12 +88,12 @@ if ($visualizacion == 0) {
       <div class="col-2">
       <button class="btn btn-primary" name="search" onclick="readProducts();"><span class="glyphicon .glyphicon-search"></span>buscar</button>
       </div>
+     
+      </div>
       <!--buscador-->
-      <div class="float-right mt-5 ml-5">
+      <div class="float-right mt-3 ml-5">
           <input class="form-control" placeholder="Buscar..." type="text" id="buscartext" name="buscar" onpaste="return false" onkeyup="leer(this.value)">
         </div>
-      </div>
-     
       <div class="card-body" id="bitacora">
        
       </div>
