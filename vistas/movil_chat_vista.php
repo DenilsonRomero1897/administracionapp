@@ -5,6 +5,8 @@ require_once('../clases/funcion_bitacora_movil.php');
 
 require_once('../vistas/pagina_inicio_vista.php');
 
+$Id_objeto = 128;
+
 bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A LA VISTA DEL CHAT ');
 
 
@@ -50,7 +52,7 @@ bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
     <script src="../js/movil_chat.js"></script>
-    
+
     <script>
         $(function() {
             $('[data-toggle="tooltip"]').tooltip()

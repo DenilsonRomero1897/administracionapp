@@ -43,7 +43,7 @@ if (isset($_GET['op'])) {
             $id = $_GET['id'];
             $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
             $subtitulo = isset($_POST['subtitulo']) ? $_POST['subtitulo'] : '';
-            $contenido = isset($_POST['Contenido']) ? $_POST['Contenido'] : '';
+            $contenido = isset($_POST['Contenido']) ? mysqli_real_escape_string($mysqli,$_POST['Contenido']) : '';
             $segmento = $_POST['Segmentos'];
             $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
             $fecha_vencimiento = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_vencimiento']));
@@ -67,6 +67,7 @@ if (isset($_POST['funcion'])) {
                 //se ejecuta el sql respectivo
                 $sql = "DELETE FROM tbl_movil_noticias where id = $id";
                 $resultado = $mysqli->query($sql);
+                bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'ELIMINO',strtoupper("$sql"));
                 if ($resultado) {
                     echo 'hola mundo';
                 }else{
