@@ -30827,10 +30827,10 @@ INSERT INTO `tbl_modalidades_proyecto` (`Id_modalidad`, `modalidad`, `Fecha_crea
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_movil_bitacoras`
+-- Estructura de tabla para la tabla `tbl_movil_bitacora`
 --
 
-CREATE TABLE `tbl_movil_bitacoras` (
+CREATE TABLE `tbl_movil_bitacora` (
   `id` bigint(20) NOT NULL,
   `usuario_id` bigint(20) NOT NULL,
   `objeto_id` bigint(20) NOT NULL,
@@ -30841,11 +30841,11 @@ CREATE TABLE `tbl_movil_bitacoras` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Disparadores `tbl_movil_bitacoras`
+-- Disparadores `tbl_movil_bitacora`
 --
 DELIMITER $$
-CREATE TRIGGER `tgr_movil_bitacora_deleted` BEFORE DELETE ON `tbl_movil_bitacoras` FOR EACH ROW INSERT INTO tbl_movil_bitacoras_deleted                  (id,usuario_id,objeto_id,accion,descripcion,fecha,user_delete,fecha_eliminacion) 
-        values 
+CREATE TRIGGER `tgr_movil_bitacora_deleted` BEFORE DELETE ON `tbl_movil_bitacora` FOR EACH ROW INSERT INTO tbl_movil_bitacora_deleted                  (id,usuario_id,objeto_id,accion,descripcion,fecha,user_delete,fecha_eliminacion) 
+        values
         (OLD.id,OLD.usuario_id,OLD.objeto_id,OLD.accion,OLD.descripcion,OLD.fecha,OLD.token,CURRENT_USER,NOW())
 $$
 DELIMITER ;
@@ -30853,10 +30853,10 @@ DELIMITER ;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `tbl_movil_bitacoras_deleted`
+-- Estructura de tabla para la tabla `tbl_movil_bitacora_deleted`
 --
 
-CREATE TABLE `tbl_movil_bitacoras_deleted` (
+CREATE TABLE `tbl_movil_bitacora_deleted` (
   `id` bigint(20) NOT NULL,
   `usuario_id` bigint(20) DEFAULT NULL,
   `objeto_id` bigint(20) DEFAULT NULL,
