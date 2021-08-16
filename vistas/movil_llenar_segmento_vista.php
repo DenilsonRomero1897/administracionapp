@@ -89,9 +89,7 @@ ob_end_flush();
   <link href="dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Custom styles for this template -->
   <link href="assets/sticky-footer-navbar.css" rel="stylesheet">
-  <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
-  <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
-  <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+  
   <script type="text/javascript">
   </script>
 </head>
