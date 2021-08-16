@@ -6,10 +6,10 @@
 		{
 			   require ('../clases/Conexion.php');
 			    $descripcion2 = $mysqli->escape_string($descripcion);
-			   	$sql = "INSERT INTO  tbl_movil_bitacora (usuario_id, objeto_id, accion , descripcion , fecha)
+			   	$sql_bitacora = "INSERT INTO  tbl_movil_bitacora (usuario_id, objeto_id, accion , descripcion , fecha)
     			 VALUES ('$usuario_id', '$objeto_id' , '$accion', '$descripcion2' , sysdate())";
-		
-			$mysqli->query($sql);
+		        var_dump($sql_bitacora); 
+			$mysqli->query($sql_bitacora);
 		}
 		
 }

@@ -181,15 +181,15 @@ ob_end_flush();
 
                 </div>
                 </div>
-              </div>
-
-              <br>
-
-            </div>
-          </div>
-          <p class="text-center" style="margin-top: 20px;">
+                <p class="text-center" style="margin-top: 20px;">
             <button type="submit" class="btn btn-primary" id="btn_guardar_parametro" name="btn_guardar_parametro"><i class="zmdi zmdi-floppy"></i>Guardar</button>
           </p>
+              </div>
+            
+            </div>
+           
+          </div>
+         
         </form>
         <!-- /.card-body -->
         <div class="card-footer">

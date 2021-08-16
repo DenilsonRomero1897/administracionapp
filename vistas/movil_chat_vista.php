@@ -18,7 +18,7 @@ bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://unpkg.com/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
     <script defer src="https://unpkg.com/alpinejs@3.x.x/dist/cdn.min.js"></script>
-
+    <script src="../js/movil_chat.js" defer></script>
 </head>
 
 <body>
@@ -50,13 +50,10 @@ bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 
             </div>
         </div>
     </div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
-    <script src="../js/movil_chat.js"></script>
 
     <script>
         $(function() {
-            $('[data-toggle="tooltip"]').tooltip()
-            
+            $('[data-toggle="tooltip"]').tooltip();
         })
     </script>
 

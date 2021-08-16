@@ -13,9 +13,9 @@ require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
 
 
-$Id_objeto = 3;
+$Id_objeto = 127;
 
-bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto, 'INGRESO', 'A CREAR TIPO MENSAJE);
+bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto, 'INGRESO', 'A CREAR TIPO MENSAJE');
 
 $visualizacion = permiso_ver($Id_objeto);
 if (isset($_REQUEST['msj'])) {

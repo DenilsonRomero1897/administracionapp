@@ -7,6 +7,7 @@
               <th>TITULO</th>
               <th>CONTENIDO</th>
               <th>FECHA Y HORA</th>
+              <th>REMITENTE</th>
               <th>SEGMENTO</th>
               <th>TIPO NOTIFICACIÓN</th>
               <th>URL IMAGEN</th>
@@ -22,8 +23,9 @@
                 n.titulo,
                 n.descripcion,
                 n.fecha,
+                n.remitente,
                 s.nombre,
-                p.descripcion,
+                p.descripcion as tipo_notificacion,
                 n.image_url
             FROM
                 tbl_movil_notificaciones n inner join tbl_movil_segmentos s on n.segmento_id=s.id 
@@ -45,8 +47,9 @@
                 <td><?php echo $fila['titulo']; ?></td>
                 <td><?php echo $fila['descripcion']; ?></td>
                 <td><?php echo $fila['fecha']; ?></td>
+                <td><?php echo $fila['remitente']; ?></td>
                 <td><?php echo $fila['nombre']; ?></td>
-                <td><?php echo $fila['descripcion']; ?></td>
+                <td><?php echo $fila['tipo_notificacion']; ?></td>
                 <td><?php echo $fila['image_url'] ?></td>
 
                 <td style="text-align: center;">
@@ -103,7 +106,7 @@
           var columns = ["#", "Titulo", "Descripción", "Fecha y Hora", "Remitente", "Segmento" ,"Tipo Notificación", "Imagen"];
           var data = [];
           for (var i = 0; i < arrayJS.length; i++) {
-            data.push([i + 1, arrayJS[i]['titulo'], arrayJS[i]['descripcion'], arrayJS[i]['fecha'], arrayJS[i]['remitente'], arrayJS[i]['segmento'], arrayJS[i]['tipo_notificacion'],arrayJS[i]['image_url']]);
+            data.push([i + 1, arrayJS[i]['titulo'], arrayJS[i]['descripcion'], arrayJS[i]['fecha'], arrayJS[i]['remitente'], arrayJS[i]['nombre'], arrayJS[i]['tipo_notificacion'],arrayJS[i]['image_url']]);
           }
 
           pdf.autoTable(columns, data, {
@@ -125,7 +128,6 @@
         }
         addFooters(pdf);
         window.open(pdf.output('bloburl'),'REPORTE');
-        //pdf.save('Reporte_Notificaciones_'+ '<?php echo $fecha?>' +'.pdf');
 
         });
 </script>

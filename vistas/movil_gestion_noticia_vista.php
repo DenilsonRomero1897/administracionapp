@@ -26,7 +26,7 @@ if ($visualizacion == 0) {
 }
 
 if (isset($_GET['id'])) {
-  $id = (int)$_GET['id'];
+  $id = $_GET['id'];
 
   $sql = "SELECT * FROM tbl_movil_noticias WHERE id = '$id'";
   $resultado = $mysqli->query($sql);
@@ -40,9 +40,7 @@ if (isset($_GET['id'])) {
   $_SESSION['txtFecha'] = strtotime($row['fecha']);
   $_SESSION['txtFecha_vencimiento'] = strtotime($row['fecha_vencimiento']);
   $_SESSION['txtSegmento_id'] = $row['segmento_id'];
-  $sql_archivos = "SELECT n.id as noticia,r.id as recurso,r.url FROM `tbl_movil_tipo_recursos` r INNER JOIN tbl_movil_noticia_recurso nr
-  INNER JOIN tbl_movil_noticias n on r.id=nr.recurso_id and n.id=nr.noticia_id and n.id = $id";
-  $rspta = $mysqli->query($sql_archivos);
+
   
 
 
@@ -116,7 +114,7 @@ if (isset($_REQUEST['msj'])) {
 
 <head>
   <title></title>
-<script src="../js/movil_gestion_noticias.js"></script>
+<script src="../js/movil_gestion_noticias.js" defer></script>
 </head>
 
 <body onload="readProducts()">
@@ -162,7 +160,7 @@ if (isset($_REQUEST['msj'])) {
     </div>
 
       <!--modal editar noticias-->
-      <form action="../Controlador/movil_noticia_controlador.php?op=editar&id=<?php $id ?>" method="post" data-form="update" autocomplete="off">
+      <form action="../Controlador/movil_noticia_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
 
         <div class="modal fade" id="modal_modificar_noticia">
           <div class="modal-dialog">
@@ -234,10 +232,14 @@ if (isset($_REQUEST['msj'])) {
                               </tr>
                             </thead>
                             <tbody>
-                              <?php while ($row = $rspta->fetch_array(MYSQLI_ASSOC)) { ?>
+                              <?php 
+                                $sql_archivos = "SELECT n.id as noticia,r.id as recurso,r.url FROM `tbl_movil_tipo_recursos` r INNER JOIN tbl_movil_noticia_recurso nr
+                                INNER JOIN tbl_movil_noticias n on r.id=nr.recurso_id and n.id=nr.noticia_id and n.id = $id";
+                                $rspta = $mysqli->query($sql_archivos);
+                              while ($row2 = $rspta->fetch_array(MYSQLI_ASSOC)) { ?>
                                 <tr>
-                                  <td><?php echo $row['url']; ?></td>
-                                  <td><a onclick="eliminar_archivos(<?php echo $row['noticia'] ?>,<?php echo $row['recurso'] ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
+                                  <td><?php echo $row2['url']; ?></td>
+                                  <td><a onclick="eliminar_archivos(<?php echo $row2['noticia'] ?>,<?php echo $row2['recurso'] ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                               <?php } ?>
                             </tbody>

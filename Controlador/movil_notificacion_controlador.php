@@ -10,7 +10,7 @@ require_once("../Modelos/movil_notificaciones_modelo.php");
 if (isset($_GET['op'])) {
 $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
 $datos = array();
-$Id_objeto = 130;
+$Id_objeto = 127;
 switch ($_GET['op']) {
     
     case 'insert':
@@ -27,8 +27,7 @@ switch ($_GET['op']) {
         $tipo_notificacion = (int)$id_tipo_notificacion['id'];
         $image = subirDocumentos();
         
-        //
-        $sql = "INSERT into tbl_movil_notificaciones (titulo,descripcion,fecha,remitente,segmento_id,tipo_notificacion_id,image_enable) VALUES ('$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$url')";
+        $sql = "INSERT into tbl_movil_notificaciones  VALUES (null,'$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$image')";
         $resultado = $mysqli->query($sql);
             if($resultado === TRUE){
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
@@ -39,7 +38,11 @@ switch ($_GET['op']) {
                 $resultado = $mysqli->query($sql)->fetch_assoc();
                 $usuario = $resultado['Usuario'];
                 $password = $resultado['contrasena'];
-                
+                //traer el id de la notificacion insertada
+                $sql_id = "SELECT id FROM tbl_movil_notificaciones WHERE fecha = '$fecha_publicacion'";
+                $rspta = $mysqli->query($sql_id);
+                $row = $rspta->fetch_assoc();
+                $id_notificacion = (int)$row['id'];
                 //subir imagen de la notificacion 
                 $datos = array("idLote" => $id_notificacion,
                                  "usuario" => $usuario,
@@ -48,14 +51,10 @@ switch ($_GET['op']) {
                                  "contenido" => $contenido,
                                  "urlRecurso" => $image,
                                  "segmento" => $segmento);
-
                 $response = consumoApi($url, $datos);
-                $response_mensaje = $response['mensaje'];
-                $sql = "INSERT INTO tbl_movil_transacciones values (null,sysdate(),'envio de notificaciones','$response2','completada',1)";
+                $response2 = $response['mensaje'];
+                $sql = "INSERT INTO tbl_movil_transacciones values (null,sysdate(),'envio de notificaciones','$response2','completada')";
                 $resultado = $mysqli->query($sql);
-                
-
-
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }
         break;
@@ -63,13 +62,13 @@ switch ($_GET['op']) {
     case 'editar':
         $id = $_GET['id'];
         $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
-        $contenido = isset($_POST['Contenido']) ? $_POST['Contenido'] : '';
+        $contenido = isset($_POST['Contenido']) ? strtoupper($_POST['Contenido']) : '';
         $segmento = $_POST['Segmentos'];
         $tipo_notificacion = $_POST['tipo_notificacion'];
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
-        $sql = "UPDATE tbl_movil_notificaciones SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion', remitente = 'ADMIN', segmento_id = $segmento, tipo_notificacion_id = $tipo_notificacion , image_enable = 0 where id = $id";
+        $sql = "UPDATE tbl_movil_notificaciones SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion', remitente = 'ADMIN', segmento_id = $segmento, tipo_notificacion_id = $tipo_notificacion where id = $id";
         $resultado = $mysqli->query($sql);
-            if($resultado === TRUE){
+            if($resultado){
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }
@@ -84,7 +83,9 @@ if (isset($_POST['funcion'])) {
                 //se ejecuta el sql respectivo
                 $sql = "DELETE FROM tbl_movil_notificaciones where id = $id";
                 $resultado = $mysqli->query($sql);
+                bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'ELIMINO',strtoupper("$sql"));
                 if ($resultado) {
+                    
                     echo 'hola mundo';
                 }else{
                     echo '';
@@ -94,11 +95,11 @@ if (isset($_POST['funcion'])) {
 
 
 function subirDocumentos(){
-    $tmp_name = $_FILES['subir_archivo']['tmp_name'][0];
-    $name = $_FILES['subir_archivo']['name'][ 0 ];
+    $tmp_name = $_FILES['subir_archivo']['tmp_name'];
+    $name = $_FILES['subir_archivo']['name'];
     if(is_array($_FILES) && count($_FILES) > 0){
         if(move_uploaded_file($tmp_name,"../archivos/movil/notificacion/".$name)){
-          $nombrearchivo= '../archivos/movil/'.$name;
+          $nombrearchivo= '../archivos/movil/notificacion/'.$name;
           return $nombrearchivo;
         }else{
             echo 0;

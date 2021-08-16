@@ -41,6 +41,7 @@ if (isset($_GET['op'])) {
             
         case 'editar':
             $id = $_GET['id'];
+            var_dump($_POST,$_GET);
             $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
             $subtitulo = isset($_POST['subtitulo']) ? $_POST['subtitulo'] : '';
             $contenido = isset($_POST['Contenido']) ? mysqli_real_escape_string($mysqli,$_POST['Contenido']) : '';
@@ -48,6 +49,7 @@ if (isset($_GET['op'])) {
             $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
             $fecha_vencimiento = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_vencimiento']));
             $sql = "UPDATE tbl_movil_noticias SET titulo = '$titulo', subtitulo = '$subtitulo', descripcion = '$contenido', fecha = '$fecha_publicacion',fecha_vencimiento = '$fecha_vencimiento', remitente = 'ADMIN', segmento_id = $segmento where id = $id";
+            var_dump($sql);
             $resultado = $mysqli->query($sql);
                 if($resultado === TRUE){
                     bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));

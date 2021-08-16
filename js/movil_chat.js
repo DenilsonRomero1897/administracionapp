@@ -8,12 +8,11 @@ function getChats(id_chat,id_usuario) {
     });
 }
 
-function getUser() {
-    var busqueda = document.getElementById('search').value;
-    console.log(busqueda);
+function getUser(buscar = '') {
     var parametros = {
         "funcion": 'buscarUsuarios'
     }
+    console.log(buscar);
     $.ajax({
         data: parametros, //datos que se envian a traves de ajax
         url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
@@ -57,7 +56,7 @@ function enviar(id_chat,id_usuario){
         data: parametros, //datos que se envian a traves de ajax
         url: '../Controlador/movil_envio_info_chat_controlador.php', //archivo que recibe la peticion
         type: 'POST',
-        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+        success: function() { //una vez que el archivo recibe el request lo procesa y lo devuelve
             getChats(id_chat,id_usuario);
         }
     });
