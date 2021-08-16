@@ -8,11 +8,10 @@ function getChats(id_chat,id_usuario) {
     });
 }
 
-function getUser(buscar = '') {
+function getUser() {
     var parametros = {
         "funcion": 'buscarUsuarios'
     }
-    console.log(buscar);
     $.ajax({
         data: parametros, //datos que se envian a traves de ajax
         url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
@@ -58,6 +57,23 @@ function enviar(id_chat,id_usuario){
         type: 'POST',
         success: function() { //una vez que el archivo recibe el request lo procesa y lo devuelve
             getChats(id_chat,id_usuario);
+        }
+    });
+}
+function filtrarUsuarios(buscar) {
+    var parametros = {
+        "funcion": 'filtrarUsuarios',
+        "buscar":buscar
+    }
+    $.ajax({
+        data: parametros, //datos que se envian a traves de ajax
+        url: '../Controlador/movil_chat_controlador.php', //archivo que recibe la peticion
+        type: 'post', //método de envio
+        beforeSend: function() {
+            $("#filtro_chat").html("Procesando, espere por favor...");
+        },
+        success: function(response) { //una vez que el archivo recibe el request lo procesa y lo devuelve
+            $("#filtro_chat").html(response);
         }
     });
 }
