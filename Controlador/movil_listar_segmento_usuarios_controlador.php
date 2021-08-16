@@ -7,7 +7,6 @@
     }
 
 ?>
-
 <table id="tabla_segmento_usuario" class="table table-bordered table-striped" style="width:100%">
     <thead>
         <tr>
@@ -36,14 +35,15 @@
                             <i class="far fa-trash-alt"></i>
                         </button>
                 </td>
-            </tr>
+           </tr>
         <?php } ?>
     </tbody>
 </table>
 
 <script>
- $(function() {
+   $(document).ready(function () {
       $('#tabla_segmento_usuario').DataTable({
+        dom: 'Bfrtip',
         "paging": true,
         "lengthChange": true,
         "searching": true,
@@ -55,8 +55,7 @@
           "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
         }
       });
-    });
-
+        });
     var arrayJS = <?php echo json_encode($segmento_usuario) ?>;
     <?php date_default_timezone_set("America/Tegucigalpa");
         $fecha = date('d-m-Y h:i:s'); ?>
@@ -100,6 +99,5 @@
         }
         addFooters(pdf);
         window.open(pdf.output('bloburl'),'REPORTE');
-        //pdf.save('Reporte_Segmento_'+'<?php echo $nombre_segmento?>' +'.pdf');
         });
 </script>

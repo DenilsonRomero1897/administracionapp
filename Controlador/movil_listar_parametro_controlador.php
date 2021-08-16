@@ -18,7 +18,7 @@ $instancia_conexion = new conexion(); ?>
    </thead>
    <tbody>
       <?php
-      $sql_parametros = "select * from tbl_movil_parametros";
+      $sql_parametros = "SELECT p.id,p.parametro,p.descripcion,p.valor,p.fecha_modificacion,p.creado_por,u.Usuario from tbl_movil_parametros p INNER JOIN tbl_usuarios u on u.Id_usuario = p.modificado_por";
       if (isset($_POST)) {
          if (!empty($_POST['buscar'])) {
              $dato = $_POST['buscar'];
@@ -37,7 +37,7 @@ $instancia_conexion = new conexion(); ?>
             <td><?php echo $parametro['valor']; ?></td>
             <td><?php echo $parametro['fecha_modificacion']; ?></td>
             <td><?php echo $parametro['creado_por']; ?></td>
-            <td><?php echo $parametro['modificado_por']; ?></td>
+            <td><?php echo $parametro['Usuario']; ?></td>
 
             <td style="text-align: center;">
                <a href="../vistas/movil_gestion_parametros_vista.php?&id=<?php echo $parametro['id']; ?>" class="btn btn-primary btn-raised btn-xs">

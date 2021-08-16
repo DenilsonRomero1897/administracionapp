@@ -10,6 +10,7 @@ require_once("../Modelos/movil_notificaciones_modelo.php");
 if (isset($_GET['op'])) {
 $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
 $datos = array();
+//id_objeto vista notificaciones
 $Id_objeto = 127;
 switch ($_GET['op']) {
     
@@ -29,8 +30,8 @@ switch ($_GET['op']) {
         
         $sql = "INSERT into tbl_movil_notificaciones  VALUES (null,'$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$image')";
         $resultado = $mysqli->query($sql);
+        bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
             if($resultado === TRUE){
-                bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
                 
                  //Llenado del arreglo
                 $id_usuario = $_SESSION['id_usuario'];
@@ -68,8 +69,8 @@ switch ($_GET['op']) {
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
         $sql = "UPDATE tbl_movil_notificaciones SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion', remitente = 'ADMIN', segmento_id = $segmento, tipo_notificacion_id = $tipo_notificacion where id = $id";
         $resultado = $mysqli->query($sql);
-            if($resultado){
-                bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));
+        bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));   
+        if($resultado){
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }
         break;
@@ -85,7 +86,6 @@ if (isset($_POST['funcion'])) {
                 $resultado = $mysqli->query($sql);
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'ELIMINO',strtoupper("$sql"));
                 if ($resultado) {
-                    
                     echo 'hola mundo';
                 }else{
                     echo '';

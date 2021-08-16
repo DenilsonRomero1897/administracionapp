@@ -9,19 +9,19 @@ $opcion = isset($_GET['op']) ? $_GET['op'] : '';
 
 if ($opcion == 'editar') {
   $id_segmento = isset($_GET["id"]) ? ($_GET["id"]) : "";
-  $nombre = isset($_POST["nombre"]) ? ($_POST["nombre"]) : "";
-  $descripcion = isset($_POST["descripcion"]) ? ($_POST["descripcion"]) : "";
+  $nombre = isset($_POST["nombre"]) ? strtoupper($_POST["nombre"]) : "";
+  $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
   $sql="UPDATE tbl_movil_segmentos set nombre = '$nombre', descripcion = '$descripcion' WHERE id = $id_segmento";
   bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'MODIFICO', strtoupper("$sql"));
   $mysqli->query($sql);
-  header('location: ../vistas/movil_gestion_segmento_vista.php?msj=2');
+  header('location: ../vistas/movil_gestion_segmentos_vista.php?msj=2');
 
 } else { // insertar datos
-  $nombre = isset($_POST["nombre"]) ? (strtoupper($_POST["nombre"])) : "";
-  $descripcion = isset($_POST["descripcion"]) ? (strtoupper($_POST["descripcion"])) : "";
-  $creadopor = isset($_SESSION['id_usuario']) ? ($_SESSION['id_usuario']) : "";
-  $tipo_persona = isset($_POST["TP"]) ? ($_POST["TP"]) : "";
-  $genero = isset($_POST["genero"]) ? ($_POST["genero"]) : "";
+  $nombre = isset($_POST["nombre"]) ? strtoupper($_POST["nombre"]) : "";
+  $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
+  $creadopor = isset($_SESSION['id_usuario']) ? $_SESSION['id_usuario'] : "";
+  $tipo_persona = isset($_POST["TP"]) ? $_POST["TP"] : "";
+  $genero = isset($_POST["genero"]) ? $_POST["genero"] : "";
 
 ///Logica para el que se repite
 $sqlexiste = ("select count(nombre) as nombre  from tbl_movil_segmentos where nombre='$nombre'");

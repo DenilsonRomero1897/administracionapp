@@ -80,14 +80,13 @@ function filtroUser()
         tbl_personas p on u.id_persona = p.id_persona";
 
         if (!empty($dato)) {
-            $sql .= " WHERE p.nombres LIKE '%$dato' or p.apellidos LIKE '%$dato'";
+            $sql .= " WHERE p.nombres LIKE '%$dato%' or p.apellidos LIKE '%$dato%'";
         }
         
         $resultado = $mysqli->query($sql);
       while ($row = $resultado->fetch_array(MYSQLI_ASSOC)) {
         $id = $row['Id_usuario'];
         $nombre_usuario = $row['nombres'].' '.$row['apellidos'];
-        var_dump($row); 
      ?>   
     <a onclick='getid(<?php echo $id ?>)'
     class='hover:bg-gray-100 border-b border-gray-300 px-3 py-2 cursor-pointer flex items-center text-sm focus:outline-none focus:border-gray-300 transition duration-150 ease-in-out'>

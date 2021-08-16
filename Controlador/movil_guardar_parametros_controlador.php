@@ -46,8 +46,8 @@ if ($opcion == 'eliminar') {
   if (!empty($valor) and $valor != 0 ) {
     $sql = "UPDATE tbl_movil_parametros set  valor= '$valor', fecha_modificacion = sysdate(), modificado_por = '$usuario_mod' WHERE id = $id_parametros";
     $actualizar = $mysqli->real_escape_string($sql);
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'MODIFICO', "$actualizar");
   $mysqli->query($sql);
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'MODIFICO', "$actualizar");
   header('location: ../vistas/movil_gestion_parametros_vista.php?msj=2');
   }else{
     header("location: ../vistas/movil_gestion_parametros_vista.php?id=$id_parametros&msj=5");
@@ -73,10 +73,8 @@ if ($opcion == 'eliminar') {
         $user = $nombre['Usuario'];
         $sql = "INSERT into tbl_movil_parametros (parametro,descripcion,valor,fecha_modificacion,creado_por) VALUES ('$parametro', '$descripcion', '$valor',sysdate(),'$user')";
         $resultado = $mysqli->query($sql);
-    
+        bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INSERTO',strtoupper("$sql"));
         if ($resultado) {//-----------------------
-          bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INSERTO',strtoupper("$sql"));
-
           header('location: ../vistas/movil_gestion_parametros_vista.php?msj=2');
         } else {
           echo "Error: " . $sql;
