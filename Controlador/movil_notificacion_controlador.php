@@ -99,8 +99,9 @@ function subirDocumentos(){
     $name = $_FILES['subir_archivo']['name'];
     if(is_array($_FILES) && count($_FILES) > 0){
         if(move_uploaded_file($tmp_name,"../archivos/movil/notificacion/".$name)){
-          $nombrearchivo= '../archivos/movil/notificacion/'.$name;
-          return $nombrearchivo;
+            $ext_url = 'https://apiappinfomatica.000webhostapp.com';
+          $nombrearchivo= '/archivos/movil/notificacion/'.$name;
+          return $ext_url.$nombrearchivo;
         }else{
             echo 0;
         }

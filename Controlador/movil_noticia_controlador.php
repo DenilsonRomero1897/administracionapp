@@ -8,7 +8,6 @@ require_once("../Controlador/movil_api_controlador.php");
 //id_objeto vista noticias
 $Id_objeto = 128;
 if (isset($_GET['op'])) {
-    $url ='http://localhost/apiAppInformatica/modulos/envioNotificaciones.php';
     $datos = [];
     switch ($_GET['op']) {
     
@@ -26,11 +25,8 @@ if (isset($_GET['op'])) {
             if($resultado === TRUE){
                    $idNoticia = $modelo->buscar_id_noticia($titulo,$fecha_publicacion);
                    $i = 0;
-                    
                    foreach ($_FILES['txt_documentos'] as $item){
-                       
                         $idRecurso = subirDocumentos($i);
-                       
                         $modelo->insert_noticia_recurso((int)$idNoticia['id'],(int)$idRecurso['id']); 
                        $i += 1;
                    }
@@ -92,13 +88,13 @@ if (isset($_POST['funcion'])) {
 function subirDocumentos($i){
     
     $MP = new modelo_registro_noticia();
-    //$nombrearchivo = htmlspecialchars($_POST['txt_documentos']['name']['0'],ENT_QUOTES,'UTF-8');
     $tmp_name = $_FILES['txt_documentos']['tmp_name']["$i"];
     $name = $_FILES['txt_documentos']['name']["$i"];
     if(is_array($_FILES) && count($_FILES)>0){
         if(move_uploaded_file($tmp_name,"../archivos/movil/".$name)){
-          $nombrearchivo= '../archivos/movil/'.$name;
-          $MP->Registrar_foto($nombrearchivo);  
+          $ext_url = 'https://apiappinfomatica.000webhostapp.com';
+          $nombrearchivo= '/archivos/movil/'.$name;
+          $MP->Registrar_foto($ext_url.$nombrearchivo);  
           $idRecurso = $MP->buscar_id_recurso($nombrearchivo);
           return $idRecurso;
         }else{
