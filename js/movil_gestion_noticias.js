@@ -39,7 +39,7 @@ function readProducts() {
         url: '../Controlador/movil_noticia_controlador.php', //archivo que recibe la peticion
         type: 'POST', //método de envio
         success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-
+            console.log(data);
           if (data != '') {
             readProducts();
             datoseliminados();
