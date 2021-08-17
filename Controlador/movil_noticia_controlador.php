@@ -41,6 +41,7 @@ if (isset($_GET['op'])) {
               break;
             
         case 'editar':
+            $modelo = new modelo_registro_noticia();
             $id = $_GET['id'];
             $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
             $subtitulo = isset($_POST['subtitulo']) ? $_POST['subtitulo'] : '';
@@ -53,14 +54,12 @@ if (isset($_GET['op'])) {
             $resultado = $mysqli->query($sql);
             bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));
             if($resultado === TRUE){
-                    $idNoticia = $modelo->buscar_id_noticia($titulo,$fecha_publicacion);
                     $i = 0;
-                     
                     foreach ($_FILES['txt_documentos'] as $item){
                         
                          $idRecurso = subirDocumentos($i);
                         
-                         $modelo->insert_noticia_recurso((int)$idNoticia['id'],(int)$idRecurso['id']); 
+                         $modelo->insert_noticia_recurso((int)$id,(int)$idRecurso['id']); 
                         $i += 1;
                     }
                    

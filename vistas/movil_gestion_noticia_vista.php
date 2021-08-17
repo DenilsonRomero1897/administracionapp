@@ -160,7 +160,7 @@ if (isset($_REQUEST['msj'])) {
     </div>
 
       <!--modal editar noticias-->
-      <form action="../Controlador/movil_noticia_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off">
+      <form action="../Controlador/movil_noticia_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off" enctype="multipart/form-data">
 
         <div class="modal fade" id="modal_modificar_noticia">
           <div class="modal-dialog">
