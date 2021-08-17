@@ -9,7 +9,6 @@ if (isset($_POST)) {
 
 function enviarDatos(){
     global $mysqli;
-    $id_usuario = isset($_POST['id_usuario']) ? $_POST['id_usuario'] : '';
     $id_chat= isset($_POST['id_chat']) ? $_POST['id_chat'] : '';; 
     $message= isset($_POST['message']) ? $_POST['message'] : '';;
     

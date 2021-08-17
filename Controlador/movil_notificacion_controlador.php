@@ -26,7 +26,7 @@ switch ($_GET['op']) {
         $resul = $mysqli->query($sql_id_notificacion);
         $id_tipo_notificacion = $resul->fetch_assoc();
         $tipo_notificacion = (int)$id_tipo_notificacion['id'];
-        $image = subirDocumentos();
+        $image = subirImagen();
         
         $sql = "INSERT into tbl_movil_notificaciones  VALUES (null,'$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$image')";
         $resultado = $mysqli->query($sql);
@@ -94,7 +94,7 @@ if (isset($_POST['funcion'])) {
 }
 
 
-function subirDocumentos(){
+function subirImagen(){
     $tmp_name = $_FILES['subir_archivo']['tmp_name'];
     $name = $_FILES['subir_archivo']['name'];
     if(is_array($_FILES) && count($_FILES) > 0){
