@@ -64,22 +64,22 @@
   <?php date_default_timezone_set("America/Tegucigalpa");
         $fecha = date('d-m-Y h:i:s'); ?>
   $("#GenerarReporte").click(function() {
-    var pdf = new jsPDF('');
+    var pdf = new jsPDF('landscape');
     var logo = new Image();
     logo.src = '../dist/img/logo_ia.jpg';
     pdf.addImage(logo, 15, 10, 30, 30);
     pdf.setFont('Arial', );
     pdf.setFontSize(12);
-    pdf.text(50, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
-    pdf.text(50, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
-    pdf.text(50, 30, "DEPARTAMENTO DE INFORMÁTICA ");
-    pdf.setFont('Arial', 'B');
-    pdf.setFontSize(14);
-    pdf.text(50, 38, "REPORTE TIPO NOTIFICACIÓN");
-    var columns = ["   ","#","Descripción de Notificación"];
+    pdf.text(90, 15, "UNIVERSIDAD NACIONAL AUTÓNOMA DE HONDURAS");
+          pdf.text(70, 23, "FACULTAD DE CIENCIAS ECONÓMICAS, ADMINISTRATIVAS Y CONTABLES");
+          pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
+          pdf.setFont('Arial','B');
+          pdf.setFontSize(14);
+          pdf.text(105,38,"REPORTE TIPO NOTIFICACION");
+    var columns = ["#","Descripción de Notificación"];
     var data = [];
     for (var i = 0; i < arrayJS.length; i++) {
-      data.push(['   ',i + 1,arrayJS[i]['descripcion']]);
+      data.push([i + 1,arrayJS[i]['descripcion']]);
     }
 
     pdf.autoTable(columns, data, {
@@ -95,13 +95,13 @@
             pdf.setFontSize(9)
             for (var i = 1; i <= pageCount; i++) {
                 pdf.setPage(i)
-                pdf.text('Pag. ' + String(i) + ' de ' + String(pageCount), pdf.internal.pageSize.width / 2, 300, {
+                pdf.text('Pag. ' + String(i) + ' de ' + String(pageCount), pdf.internal.pageSize.width / 2, 200, {
                     align: 'center'
                 })
             }
         }
         addFooters(pdf);
-        window.open(pdf.output('bloburl'),'REPORTE');
+        window.open(pdf.output('bloburl','reporte'),'REPORTE');
         //pdf.save('Reporte_Tipo_Notificacion_'+'<?php echo $fecha?>' +'.pdf');
 
   });

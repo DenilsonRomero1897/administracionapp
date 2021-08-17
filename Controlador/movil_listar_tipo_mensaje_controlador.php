@@ -100,7 +100,7 @@
             pdf.setFontSize(9)
             for (var i = 1; i <= pageCount; i++) {
                 pdf.setPage(i)
-                pdf.text('Pag. ' + String(i) + ' de ' + String(pageCount), pdf.internal.pageSize.width / 2, 300, {
+                pdf.text('Pag. ' + String(i) + ' de ' + String(pageCount), pdf.internal.pageSize.width / 2, 200, {
                     align: 'center'
                 })
             }
