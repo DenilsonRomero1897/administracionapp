@@ -101,7 +101,7 @@
             }
         }
         addFooters(pdf);
-        window.open(pdf.output('bloburl','reporte'),'REPORTE');
+        window.open(pdf.output('bloburl'),'REPORTE');
         //pdf.save('Reporte_Tipo_Notificacion_'+'<?php echo $fecha?>' +'.pdf');
 
   });
