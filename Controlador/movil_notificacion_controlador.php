@@ -26,6 +26,7 @@ switch ($_GET['op']) {
         $resul = $mysqli->query($sql_id_notificacion);
         $id_tipo_notificacion = $resul->fetch_assoc();
         $tipo_notificacion = (int)$id_tipo_notificacion['id'];
+        //subir imagen de la notificacion 
         $image = subirImagen();
         
         $sql = "INSERT into tbl_movil_notificaciones  VALUES (null,'$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$image')";
@@ -44,7 +45,7 @@ switch ($_GET['op']) {
                 $rspta = $mysqli->query($sql_id);
                 $row = $rspta->fetch_assoc();
                 $id_notificacion = (int)$row['id'];
-                //subir imagen de la notificacion 
+                //arreglo de datos que se envia al api
                 $datos = array("idLote" => $id_notificacion,
                                  "usuario" => $usuario,
                                  "password" => $password,
@@ -67,17 +68,48 @@ switch ($_GET['op']) {
         $segmento = $_POST['Segmentos'];
         $tipo_notificacion = $_POST['tipo_notificacion'];
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
-        $image_url = isset($_POST['txt_imagen']) ? $_POST['txt_imagen'] : 'null';
         //comprobar que el campo image_url sea igual a null
-        if (is_array($_FILES) && count($_FILES)>0) {
-        if ($image_url == 'null') {
+        $sql_comprobacion = "SELECT count(image_url) as exist from tbl_movil_notificaciones WHERE id = 1 
+        and NOT image_url = 'null'";
+        $comprobacion = $mysqli->query($sql_comprobacion)->fetch_assoc();
+        if ($comprobacion['exist'] < 1) {
+            //se puede subir una imagen
+            if (is_array($_FILES) && count($_FILES)>0) {
+            //se quiere subir una imagen
             $image_url = subirImagen();
-        }else{
+            $sql = "UPDATE tbl_movil_notificaciones SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion', remitente = 'ADMIN', segmento_id = $segmento, tipo_notificacion_id = $tipo_notificacion, image_url = '$image_url' where id = $id";
+            }else{
+                //no se quiere subir una imagen
+                $sql = "UPDATE tbl_movil_notificaciones SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion', remitente = 'ADMIN', segmento_id = $segmento, tipo_notificacion_id = $tipo_notificacion, image_url = 'null' where id = $id";
+            }
+        } else{
+            //no se puede subir imagen ya que ya existe una
+            if (is_array($_FILES) && count($_FILES)>0) {
+            //se quiere subir una imagen
             header("location: ../vistas/movil_gestion_notificaciones_vista.php?id=$id&msj=5");
+            }else{
+                //no se quiere subir una imagen
+                $sql = "UPDATE tbl_movil_notificaciones SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion', remitente = 'ADMIN', segmento_id = $segmento, tipo_notificacion_id = $tipo_notificacion where id = $id";
+            }
+            
         }
-        }
-        $sql = "UPDATE tbl_movil_notificaciones SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion', remitente = 'ADMIN', segmento_id = $segmento, tipo_notificacion_id = $tipo_notificacion, image_url = $image_url where id = $id";
         $resultado = $mysqli->query($sql);
+        $id_usuario = $_SESSION['id_usuario'];
+                $sql = "SELECT Usuario,contrasena FROM tbl_usuarios WHERE Id_usuario = $id_usuario";
+                $resultado = $mysqli->query($sql)->fetch_assoc();
+                $usuario = $resultado['Usuario'];
+                $password = $resultado['contrasena'];
+        $datos = array("idLote" => $id,
+                                 "usuario" => $usuario,
+                                 "password" => $password,
+                                 "titulo" => $titulo,
+                                 "contenido" => $contenido,
+                                 "urlRecurso" => $image_url,
+                                 "segmento" => $segmento);
+                $response = consumoApi($url, $datos);
+                $response2 = $response['mensaje'];
+                $sql = "INSERT INTO tbl_movil_transacciones values (null,sysdate(),'envio de notificaciones','$response2','completada')";
+                $resultado = $mysqli->query($sql);
         bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));   
         if($resultado){
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');

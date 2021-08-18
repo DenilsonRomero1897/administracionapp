@@ -169,8 +169,8 @@ if (isset($_REQUEST['msj'])) {
 
         <form action="../Controlador/movil_notificacion_controlador.php?op=editar&id=<?php echo $id ?>" method="post" data-form="update" autocomplete="off" enctype="multipart/form-data">
 
-            <div class="modal fade" id="modal_modificar_notificacion">
-                <div class="modal-dialog">
+            <div class="modal fade bd-example-modal-lg" tabindex="-1" id="modal_modificar_notificacion">
+                <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Modificar Notificacion</h4>
@@ -241,11 +241,11 @@ if (isset($_REQUEST['msj'])) {
                                             <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" value="<?php echo date("Y-m-d\TH:i", $_SESSION['txtFecha']); ?>" name="txt_fecha_Publicacion" required onkeydown="return false">
 
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group" style="width: 300px;">
                                             <!-- archivos adjuntos -->
                                             <label>Archivos Adjuntos:</label>
                                             <div id="tabla_archivos">
-                                                <table id="tabla" class="table table-bordered table-striped">
+                                            <table id="tabla_imagen" class="table table-bordered table-striped" style="width: 100%;">
                                                     <thead>
                                                         <tr>
                                                             <th>URL</th>
@@ -270,7 +270,7 @@ if (isset($_REQUEST['msj'])) {
                                             <label>No necesita mas imagenes!</label>
                                             <?php else :?>
                                             <label> Nueva Imagen:</label>
-                                            <input class="form-control" type="file" class="form-control" id="txt_imagen" name="txt_imagen" onchange="validarType();">
+                                            <input class="form-control" type="file" class="form-control" id="subir_archivo" name="subir_archivo">
                                             <?php endif;?>
                                         </div>
                                     </div>
@@ -295,18 +295,51 @@ if (isset($_REQUEST['msj'])) {
 
         </form>
 <script>
+//validar el tipo de archivo
+$(document).on('change','input[type="file"]',function(){
+	var fileName = this.files[0].name;
+	var fileSize = this.files[0].size;
 
-function validarType(){
-    //sirve para validar el tipo de archivo subido
-    var archivo = $("#txt_imagen").val();
-    var extensiones = archivo.substring(archivo.lastIndexOf("."));
-    console.log(extensiones);
-    if(extensiones != ".JPG" || extensiones != ".PNG")
-{
-    alert("El archivo de tipo " + extensiones + " no es válido, solo se aceptan imagenes JPG o PNG");
-    location.reload(true);
-}
-}
+	if(fileSize > 3000000){
+		alert('El archivo no debe superar los 3MB');
+		this.value = '';
+		this.files[0].name = '';
+	}else{
+		// recuperamos la extensión del archivo
+		var ext = fileName.split('.').pop();
+		
+		// Convertimos en minúscula porque 
+		// la extensión del archivo puede estar en mayúscula
+		ext = ext.toLowerCase();
+    
+		// console.log(ext);
+		switch (ext) {
+			case 'jpg':
+			case 'jpeg':
+			case 'png': break;
+			default:
+				alert('El archivo no tiene la extensión adecuada');
+				this.value = ''; // reset del valor
+				this.files[0].name = '';
+		}
+	}
+});
+$(function() {
+    $('#tabla_imagen').DataTable({
+      "paging": false,
+      "lengthChange": true,
+      "searching": false,
+      "ordering": false,
+      "info": false,
+      "autoWidth": false,
+      "responsive": true,
+      "language": {
+        "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
+      }
+    });
+  });
+      
+
 
 function eliminar_img(id) {
   var parametro = {
