@@ -135,11 +135,6 @@ ob_end_flush();
     </section>
   </div>
   <script>
-    function sumarDias(fecha) {
-      fecha.setDate(fecha.getDate() + dias);
-      return fecha;
-    }
-
     function check(e) {
       tecla = (document.all) ? e.keyCode : e.which;
 

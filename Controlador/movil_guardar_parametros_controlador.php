@@ -71,7 +71,7 @@ if ($opcion == 'eliminar') {
         $resultado_nombre = $mysqli->query($nombreUser);
         $nombre = $resultado_nombre->fetch_assoc();
         $user = $nombre['Usuario'];
-        $sql = "INSERT into tbl_movil_parametros (parametro,descripcion,valor,fecha_modificacion,creado_por) VALUES ('$parametro', '$descripcion', '$valor',sysdate(),'$user')";
+        $sql = "INSERT into tbl_movil_parametros (parametro,descripcion,valor,fecha_modificacion,creado_por,modificado_por) VALUES ('$parametro', '$descripcion', '$valor',sysdate(),'$user',1)";
         $resultado = $mysqli->query($sql);
         bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INSERTO',strtoupper("$sql"));
         if ($resultado) {//-----------------------

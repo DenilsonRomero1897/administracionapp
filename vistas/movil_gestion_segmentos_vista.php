@@ -209,13 +209,6 @@ ob_end_flush();
   </div><!-- fin content wrapper -->
 
   <script>
-    function toggle(source) {
-      checkboxes = document.getElementsByName('persona[]');
-      for (var i = 0, n = checkboxes.length; i < n; i++) {
-        checkboxes[i].checked = source.checked;
-      }
-
-    }
     function leer(buscar){
       var buscar;
       var parametro = {"buscar":buscar}

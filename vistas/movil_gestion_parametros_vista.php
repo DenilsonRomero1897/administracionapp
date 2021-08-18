@@ -201,7 +201,6 @@ ob_end_flush();
     </form>
     <script>
       function leer(buscar) {
-        var buscar;
         var parametro = {
           "buscar": buscar
         }
