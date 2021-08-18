@@ -67,7 +67,16 @@ switch ($_GET['op']) {
         $segmento = $_POST['Segmentos'];
         $tipo_notificacion = $_POST['tipo_notificacion'];
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
-        $sql = "UPDATE tbl_movil_notificaciones SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion', remitente = 'ADMIN', segmento_id = $segmento, tipo_notificacion_id = $tipo_notificacion where id = $id";
+        $image_url = isset($_POST['txt_imagen']) ? $_POST['txt_imagen'] : 'null';
+        //comprobar que el campo image_url sea igual a null
+        if (is_array($_FILES) && count($_FILES)>0) {
+        if ($image_url == 'null') {
+            $image_url = subirImagen();
+        }else{
+            header("location: ../vistas/movil_gestion_notificaciones_vista.php?id=$id&msj=5");
+        }
+        }
+        $sql = "UPDATE tbl_movil_notificaciones SET titulo = '$titulo', descripcion = '$contenido', fecha = '$fecha_publicacion', remitente = 'ADMIN', segmento_id = $segmento, tipo_notificacion_id = $tipo_notificacion, image_url = $image_url where id = $id";
         $resultado = $mysqli->query($sql);
         bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));   
         if($resultado){
@@ -85,6 +94,19 @@ if (isset($_POST['funcion'])) {
                 $sql = "DELETE FROM tbl_movil_notificaciones where id = $id";
                 $resultado = $mysqli->query($sql);
                 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'ELIMINO',strtoupper("$sql"));
+                if ($resultado) {
+                    echo 'hola mundo';
+                }else{
+                    echo '';
+                }
+    }
+}
+if (isset($_POST['funcion'])) {
+    if ($_POST['funcion']=='eliminar_imagen') {
+        $id = (int)$_POST['id'];
+                //se ejecuta el sql respectivo
+                $sql = "UPDATE tbl_movil_notificaciones set image_url='null' where id = $id";
+                $resultado = $mysqli->query($sql);
                 if ($resultado) {
                     echo 'hola mundo';
                 }else{

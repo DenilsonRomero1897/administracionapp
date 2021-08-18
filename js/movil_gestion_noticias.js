@@ -13,7 +13,6 @@ function readProducts() {
     });
   }
   function leer(buscar){
-    var buscar;
     var parametro = {"buscar":buscar}
     $.ajax({
       data: parametro, //datos que se envian a traves de ajax
@@ -79,7 +78,6 @@ function readProducts() {
         url: '../Controlador/movil_tabla_archivos_noticia_controlador.php', //archivo que recibe la peticion
         type: 'POST', //método de envio
         success: function(data) { //una vez que el archivo recibe el request lo procesa y lo devuelve
-         console.log(data);
           if (data == '') {
             location.reload(true);
           }
