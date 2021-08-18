@@ -1,16 +1,39 @@
 <?php
+session_start();
+ob_start();
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_visualizar.php');
+require_once('../clases/permisos_usuario.php');
+require_once('../clases/funcion_permisos.php');
+require_once('../clases/funcion_bitacora_movil.php');
 
-if (permiso_ver('124') == '1') {
+$Id_objeto = 180;
+$visualizacion = permiso_ver($Id_objeto);
+if ($visualizacion == 0) {
+  echo '<script type="text/javascript">
+  swal({
+        title:"",
+        text:"Lo sentimos no tiene permiso de visualizar la pantalla",
+        type: "error",
+        showConfirmButton: false,
+        timer: 3000
+      });
+  window.location = "../vistas/pagina_principal_vista.php";
+
+   </script>';
+} else {
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A MENU NOTICIAS');
+}
+
+if (permiso_ver('162') == '1') {
 
   $_SESSION['crear_noticia_vista'] = "...";
 } else {
   $_SESSION['crear_noticia_vista'] = "No 
   tiene permisos para visualizar";
 }
-if (permiso_ver('125') == '1') {
+if (permiso_ver('168') == '1') {
 
   $_SESSION['gestion_noticias_vista'] = "...";
 } else {
@@ -109,3 +132,4 @@ if (permiso_ver('125') == '1') {
 </body>
 
 </html>
+<?php ob_end_flush(); ?>

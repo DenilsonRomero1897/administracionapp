@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+ob_start();
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/conexion_mantenimientos.php');
 require_once('../clases/funcion_bitacora_movil.php');
@@ -7,7 +8,7 @@ require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
 
-$Id_objeto = 127;
+$Id_objeto = 177;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
   echo '<script type="text/javascript">
@@ -22,7 +23,7 @@ if ($visualizacion == 0) {
 
    </script>';
 } else {
-  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A GESTION DE SEGMENTOS ');
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A MANTENIMIENTO UBICACION RECURSO');
 }
 
 // /* Esta condicion sirve para  verificar el valor que se esta enviando al momento de dar click en el icono modicar */
@@ -111,25 +112,15 @@ if (isset($_REQUEST['msj'])) {
                 </script>';
   }
 }
-ob_end_flush();
-
-
 ?>
-
-
-
 
 <!DOCTYPE html>
 <html>
-
 <head>
   <title></title>
 </head>
 
-
 <body>
-
-
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -151,10 +142,7 @@ ob_end_flush();
       </div><!-- /.container-fluid -->
     </section>
 
-
     <!--Pantalla 2-->
-
-
 
     <div class="card card-default">
       <div class="card-header">
@@ -179,9 +167,7 @@ ob_end_flush();
               <tr>
                 <td><?php echo $segmento['']; ?></td>
                 <td><?php echo $segmento['']; ?></td>
-               
-                
-
+              
                 <td style="text-align: center;">
 
                   <a href="../vistas/movil_gestion_segmentos_vista.php?&id=<?php echo $segmento['id']; ?>" class="btn btn-primary btn-raised btn-xs">
@@ -208,7 +194,6 @@ ob_end_flush();
       <!-- /.card-body -->
     </div> 
 
-
     <!-- /.card-body -->
     <div class="card-footer">
 
@@ -216,10 +201,6 @@ ob_end_flush();
   </div>
 
   </div>
-
-
-
-
 
   </section>
 
@@ -301,3 +282,4 @@ ob_end_flush();
 </body>
 
 </html>
+<?php ob_end_flush() ?>

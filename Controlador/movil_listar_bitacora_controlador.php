@@ -15,7 +15,7 @@
         <?php
         $sql_tabla_bitacora_movil = "SELECT u.Usuario, o.objeto, b.accion, b.descripcion, b.fecha from tbl_usuarios u
         INNER JOIN tbl_movil_bitacora b
-        INNER JOIN tbl_objetos o on u.Id_usuario=b.usuario_id and b.objeto_id=o.Id_objeto";
+        INNER JOIN tbl_objetos o on u.Id_usuario=b.usuario_id and b.objeto_id=o.Id_objeto ORDER BY b.fecha DESC";
         if (isset($_POST)) {
              if (!empty($_POST['final']) or !empty($_POST['buscar'])) {
                 $sql_tabla_bitacora_movil .= " WHERE ";

@@ -1,11 +1,15 @@
 <?php
+
+
+session_start();
+ob_start();
 require_once('../clases/Conexion.php');
 
 require_once('../clases/funcion_bitacora_movil.php');
 
 require_once('../vistas/pagina_inicio_vista.php');
 
-$Id_objeto = 128;
+$Id_objeto = 161;
 
 bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A LA VISTA DEL CHAT ');
 
@@ -58,3 +62,5 @@ bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 
     </script>
 
 </body>
+
+<?php ob_end_flush();?>

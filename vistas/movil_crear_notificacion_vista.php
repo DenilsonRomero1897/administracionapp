@@ -1,14 +1,14 @@
 <?php
 
-ob_start();
 session_start();
+ob_start();
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 
-$Id_objeto = 128;
+$Id_objeto = 163;
 
 bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A CREAR NOTIFICACIÓN');
 
@@ -140,3 +140,4 @@ ob_end_flush();
 
   </script>
 </body>
+<?php ob_end_flush() ?>

@@ -1,11 +1,12 @@
 <?php
 session_start();
+ob_start();
 require_once('../clases/Conexion.php');
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 
-$Id_objeto = 128;
+$Id_objeto = 160;
 
 $visualizacion = permiso_ver($Id_objeto);
 
@@ -147,3 +148,4 @@ if ($visualizacion == 0) {
 </body>
 
 </html>
+<?php ob_end_flush(); ?>

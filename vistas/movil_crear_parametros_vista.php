@@ -1,10 +1,7 @@
 <?php
 
-ob_start();
-
-
 session_start();
-
+ob_start();
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/conexion_mantenimientos.php');
 require_once('../clases/funcion_bitacora_movil.php');
@@ -13,7 +10,7 @@ require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
 
 
-$Id_objeto = 11;
+$Id_objeto = 164;
 
 bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto, 'INGRESO', 'A CREAR PARÁMETROS');
 
@@ -89,8 +86,6 @@ if (isset($_REQUEST['msj'])) {
 //     $_SESSION['btn_guardar_segmentos'] = "disabled";
 //   }
 // }
-
-ob_end_flush();
 
 
 ?>
@@ -203,3 +198,4 @@ ob_end_flush();
   </div>
 </body>
 </html>
+<?php ob_end_flush() ?>

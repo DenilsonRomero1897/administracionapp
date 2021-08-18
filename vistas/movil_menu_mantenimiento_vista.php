@@ -1,18 +1,31 @@
 <?php
+session_start();
+ob_start();
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_visualizar.php');
+require_once('../clases/permisos_usuario.php');
+require_once('../clases/funcion_permisos.php');
+require_once('../clases/funcion_bitacora_movil.php');
 
+$Id_objeto = 179;
+$visualizacion = permiso_ver($Id_objeto);
+if ($visualizacion == 0) {
+  echo '<script type="text/javascript">
+  swal({
+        title:"",
+        text:"Lo sentimos no tiene permiso de visualizar la pantalla",
+        type: "error",
+        showConfirmButton: false,
+        timer: 3000
+      });
+  window.location = "../vistas/pagina_principal_vista.php";
 
-
-if (permiso_ver('126') == '1') {
-
-  $_SESSION['movil_crear_tipo_recurso_vista'] = "...";
+   </script>';
 } else {
-  $_SESSION['movil_crear_tipo_recurso_vista'] = "No 
-  tiene permisos para visualizar";
+  bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A MENU MANTENIMIENTO ');
 }
-if (permiso_ver('127') == '1') {
+if (permiso_ver('176') == '1') {
 
   $_SESSION['movil_mantenimiento_tipo_recurso_vista'] = "...";
 } else {
@@ -20,29 +33,28 @@ if (permiso_ver('127') == '1') {
   tiene permisos para visualizar";
 }
 
-
-if (permiso_ver('128') == '1') {
+if (permiso_ver('167') == '1') {
 
   $_SESSION['movil_crear_tipo_notificacion_vista'] = "...";
 } else {
   $_SESSION['movil_crear_tipo_notificacion_vista'] = "No 
   tiene permisos para visualizar";
 }
-if (permiso_ver('2') == '1') {
+if (permiso_ver('175') == '1') {
 
   $_SESSION['movil_mantenimiento_tipo_notificacion_vista'] = "...";
 } else {
   $_SESSION['movil_mantenimiento_tipo_notificacion_vista'] = "No 
   tiene permisos para visualizar";
 }
-if (permiso_ver('3') == '1') {
+if (permiso_ver('166') == '1') {
 
   $_SESSION['movil_crear_tipo_mensaje_vista'] = "...";
 } else {
   $_SESSION['movil_crear_tipo_mensaje_vista'] = "No 
   tiene permisos para visualizar";
 }
-if (permiso_ver('4') == '1') {
+if (permiso_ver('174') == '1') {
 
   $_SESSION['movil_mantenimiento_tipo_mensaje_vista'] = "...";
 } else {
@@ -235,3 +247,4 @@ if (permiso_ver('4') == '1') {
 </body>
 
 </html>
+<?php ob_end_flush(); ?>

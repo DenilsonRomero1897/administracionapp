@@ -1,8 +1,7 @@
 <?php
 
-ob_start();
-
 session_start();
+ob_start();
 
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/conexion_mantenimientos.php');
@@ -10,11 +9,9 @@ require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 
-$Id_objeto = 128;
+$Id_objeto = 162;
 
 bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A CREAR NOTICIA');
-
-ob_end_flush();
 
 ?>
 <!DOCTYPE html>
@@ -149,3 +146,4 @@ ob_end_flush();
     }
   </script>
 </body>
+<?php ob_end_flush() ?>

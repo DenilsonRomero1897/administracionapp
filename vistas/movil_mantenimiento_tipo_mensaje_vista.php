@@ -1,13 +1,13 @@
 <?php
-
+session_start();
+ob_start();
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/conexion_mantenimientos.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
-/*require_once('../Modelos/movil_segmentos_modelo.php');*/
 
-$Id_objeto = 128;
+$Id_objeto = 174;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
   echo '<script type="text/javascript">
@@ -108,9 +108,6 @@ if (isset($_REQUEST['msj'])) {
                 </script>';
   }
 }
-ob_end_flush();
-
-
 ?>
 
 
@@ -268,3 +265,4 @@ ob_end_flush();
 </body>
 
 </html>
+<?php ob_end_flush() ?>

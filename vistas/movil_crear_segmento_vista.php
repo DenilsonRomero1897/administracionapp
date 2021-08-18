@@ -1,9 +1,6 @@
 <?php
-
-ob_start();
-
 session_start();
-
+ob_start();
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/conexion_mantenimientos.php');
 require_once('../clases/funcion_bitacora_movil.php');
@@ -12,7 +9,7 @@ require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
 ////////////////declaracion de variables para la busqueda//////////
 
-$Id_objeto = 15;
+$Id_objeto = 165;
 
 bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A CREAR SEGMENTOS');
 
@@ -156,3 +153,4 @@ ob_end_flush();
 </body>
 
 </html>
+<?php ob_end_flush() ?>

@@ -51,6 +51,7 @@ function enviar(id_chat,id_usuario){
         "id_usuario": id_usuario,
          "message": message 
     }
+    if(message != ''){
     $.ajax({
         data: parametros, //datos que se envian a traves de ajax
         url: '../Controlador/movil_envio_info_chat_controlador.php', //archivo que recibe la peticion
@@ -59,6 +60,16 @@ function enviar(id_chat,id_usuario){
             getChats(id_chat,id_usuario);
         }
     });
+    
+}else{
+    swal({
+        title: "",
+        text: "No se pueden enviar mensajes vacios!!",
+        type: "error",
+        showConfirmButton: false,
+        timer: 3000
+      });
+}
 }
 function filtrarUsuarios(buscar) {
     var parametros = {
