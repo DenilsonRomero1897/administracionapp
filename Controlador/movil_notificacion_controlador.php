@@ -5,8 +5,6 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../Controlador/movil_api_controlador.php');
 require_once('../Controlador/movil_transacciones_controlador.php');
-require_once("../Modelos/movil_notificaciones_modelo.php");
-
 if (isset($_GET['op'])) {
 $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
 $datos = array();
