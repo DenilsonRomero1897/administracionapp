@@ -41,11 +41,12 @@ if (isset($_GET['id'])) {
   $row = $resultado->fetch_array(MYSQLI_ASSOC);
 
   $id = $row['id'];
+  $_SESSION['txtnotificacion'] = $row['tipo_notificacion'];
   $_SESSION['txtdescripcion'] = $row['descripcion'];
 
 
 
-  if (isset($_SESSION['txtdescripcion'])) {
+  if (isset($_SESSION['txtnotificacion'])) {
 
 
 ?>
@@ -167,9 +168,13 @@ if (isset($_REQUEST['msj'])) {
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-12">
+                    <div class="form-group">
+                        <label>Tipo Notificacion: </label>
+                        <input class="form-control" type="text" id="tipo_notificacion" name="tipo_notificacion" style="text-transform: uppercase" onpaste="return false"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="255" value="<?php echo $_SESSION['txtnotificacion']; ?>">
+                      </div>
                       <div class="form-group">
                         <label>Descripción del tipo notificación </label>
-                        <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onpaste="return false"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtdescripcion']; ?>">
+                        <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onpaste="return false"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="255" value="<?php echo $_SESSION['txtdescripcion']; ?>">
                       </div>
                     </div>
                   </div>

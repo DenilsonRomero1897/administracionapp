@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-08-2021 a las 02:40:55
+-- Tiempo de generación: 19-08-2021 a las 03:49:18
 -- Versión del servidor: 10.4.18-MariaDB
 -- Versión de PHP: 8.0.5
 
@@ -5807,7 +5807,7 @@ CREATE TABLE `tbl_movil_bitacora` (
   `descripcion` varchar(255) DEFAULT NULL,
   `fecha` datetime DEFAULT NULL,
   `token` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_bitacora`
@@ -6023,7 +6023,7 @@ CREATE TABLE `tbl_movil_bitacora_deleted` (
   `token` varchar(255) NOT NULL,
   `user_delete` varchar(100) DEFAULT NULL,
   `fecha_eliminacion` datetime DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -6039,7 +6039,7 @@ CREATE TABLE `tbl_movil_mensajes_chat` (
   `flag_lectura` int(1) NOT NULL,
   `tipo_mensaje` int(11) NOT NULL,
   `fecha` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_mensajes_chat`
@@ -6063,7 +6063,7 @@ CREATE TABLE `tbl_movil_noticias` (
   `fecha_vencimiento` datetime NOT NULL,
   `remitente` varchar(45) NOT NULL,
   `segmento_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_noticias`
@@ -6081,7 +6081,7 @@ INSERT INTO `tbl_movil_noticias` (`id`, `titulo`, `subtitulo`, `descripcion`, `f
 CREATE TABLE `tbl_movil_noticia_recurso` (
   `noticia_id` bigint(20) NOT NULL,
   `recurso_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_noticia_recurso`
@@ -6106,7 +6106,7 @@ CREATE TABLE `tbl_movil_notificaciones` (
   `segmento_id` bigint(20) NOT NULL,
   `tipo_notificacion_id` int(11) NOT NULL,
   `image_url` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_notificaciones`
@@ -6129,7 +6129,7 @@ CREATE TABLE `tbl_movil_parametros` (
   `fecha_modificacion` datetime NOT NULL,
   `creado_por` varchar(90) NOT NULL,
   `modificado_por` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_parametros`
@@ -6151,7 +6151,7 @@ CREATE TABLE `tbl_movil_segmentos` (
   `descripcion` varchar(200) DEFAULT NULL,
   `creado_por` varchar(45) NOT NULL,
   `fecha_creacion` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_segmentos`
@@ -6169,7 +6169,7 @@ INSERT INTO `tbl_movil_segmentos` (`id`, `nombre`, `descripcion`, `creado_por`, 
 CREATE TABLE `tbl_movil_segmento_usuario` (
   `usuario_id` bigint(20) NOT NULL,
   `segmento_id` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_segmento_usuario`
@@ -6190,7 +6190,7 @@ CREATE TABLE `tbl_movil_session_chats` (
   `id_session_chat` bigint(20) NOT NULL,
   `id_usuario1` bigint(20) NOT NULL,
   `id_usuario2` bigint(20) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_session_chats`
@@ -6208,7 +6208,7 @@ INSERT INTO `tbl_movil_session_chats` (`id_session_chat`, `id_usuario1`, `id_usu
 CREATE TABLE `tbl_movil_tipo_mensajes` (
   `id` int(11) NOT NULL,
   `tipo_mensaje` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_tipo_mensajes`
@@ -6226,17 +6226,18 @@ INSERT INTO `tbl_movil_tipo_mensajes` (`id`, `tipo_mensaje`) VALUES
 
 CREATE TABLE `tbl_movil_tipo_notificaciones` (
   `id` int(11) NOT NULL,
-  `descripcion` varchar(200) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `tipo_notificacion` varchar(255) NOT NULL,
+  `descripcion` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_tipo_notificaciones`
 --
 
-INSERT INTO `tbl_movil_tipo_notificaciones` (`id`, `descripcion`) VALUES
-(1, 'NOTIFICACION NORMAL'),
-(2, 'NOTIFICACION NOTICIA'),
-(3, 'NOTIFICACION CHAT');
+INSERT INTO `tbl_movil_tipo_notificaciones` (`id`, `tipo_notificacion`, `descripcion`) VALUES
+(1, 'NOTIFICACION', 'NOTIFICACIONES NORMALES'),
+(2, 'NOTICIA', 'NOTIFICACIONES SOBRE NOTICIAS'),
+(3, 'CHAT', 'NOTIFICACIONES DE MENSAJES DEL CHAT');
 
 -- --------------------------------------------------------
 
@@ -6248,7 +6249,7 @@ CREATE TABLE `tbl_movil_tipo_recursos` (
   `id` bigint(20) NOT NULL,
   `descripcion` varchar(90) DEFAULT NULL,
   `url` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_tipo_recursos`
@@ -6270,7 +6271,7 @@ CREATE TABLE `tbl_movil_transacciones` (
   `request_envio` varchar(45) DEFAULT NULL,
   `response` varchar(45) DEFAULT NULL,
   `estado` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_transacciones`

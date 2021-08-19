@@ -139,64 +139,39 @@ if (isset($_REQUEST['msj'])) {
                 <button type="button" class="btn btn-tool" data-card-widget="collapse"><i class="fas fa-minus"></i></button>
               </div>
             </div>
-
-
-            <tbody>
-              <tr>
-
-
-              </tr>
-            </tbody>
-
-
             <!-- /.card-header -->
             <div class="card-body">
               <div class="row">
-
                 <div class="col-md-12">
                   <div class="form-group">
-                    <label for="descripcion"> Descripción de la Notificación </label>
-                    <input autofocus class="form-control" type="text" maxlength="60" id="descripcion" name="descripcion" required style="text-transform: uppercase"  onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                    <label for="descripcion"> Tipo de Notificación </label>
+                    <input autofocus class="form-control" type="text" maxlength="255" id="tio_notificacion" name="tipo_notificacion" required style="text-transform: uppercase"  onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                   </div>
-
-
-              
-
+                  <div class="form-group">
+                    <label for="descripcion"> Descripción de la Notificación </label>
+                    <input autofocus class="form-control" type="text" maxlength="255" id="descripcion" name="descripcion" required style="text-transform: uppercase"  onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                  </div>
                 </div>
-
               </div>
-
-              
-
               <br>
-
             </div>
           </div>
           <p class="text-center" style="margin-top: 20px;">
             <button type="submit" class="btn btn-primary" id="btn_guardar_tiponotificacion" name="btn_guardar_tiponotificacion"><i class="zmdi zmdi-floppy"></i>Guardar</button>
           </p>
         </form>
-
-
         <!-- /.card-body -->
         <div class="card-footer">
 
         </div>
       </div>
-
-
-
       <div class="RespuestaAjax"></div>
       </form>
 
   </div>
   </section>
 
-
   </div>
-
-
-  
 
 </body>
 

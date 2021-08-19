@@ -20,9 +20,9 @@ switch ($_GET['op']) {
         $contenido = isset($_POST['Contenido']) ? strtoupper($_POST['Contenido']) : '';
         $segmento = isset($_POST['Segmentos']) ? $_POST['Segmentos'] : '';
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
-        $notificacion = isset($_POST['notificacion']) ? $_POST['notificacion'] : 'NOTIFICACION NORMAL';
+        $notificacion = isset($_POST['notificacion']) ? $_POST['notificacion'] : 'notificacion';
         //buscar el id notificacion normal
-        $sql_id_notificacion = "SELECT id FROM tbl_movil_tipo_notificaciones WHERE descripcion = '$notificacion'";
+        $sql_id_notificacion = "SELECT id FROM tbl_movil_tipo_notificaciones WHERE tipo_notificacion = '$notificacion'";
         $resul = $mysqli->query($sql_id_notificacion);
         $id_tipo_notificacion = $resul->fetch_assoc();
         $tipo_notificacion = (int)$id_tipo_notificacion['id'];
@@ -99,7 +99,7 @@ switch ($_GET['op']) {
                 $resultado = $mysqli->query($sql)->fetch_assoc();
                 $usuario = $resultado['Usuario'];
                 $password = $resultado['contrasena'];
-        $datos = array("idLote" => $id,
+                   $datos = array("idLote" => $id,
                                  "usuario" => $usuario,
                                  "password" => $password,
                                  "titulo" => $titulo,

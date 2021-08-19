@@ -4,7 +4,8 @@
   <thead>
     <tr>
       <th>ID</th>
-      <th>TITULO</th>
+      <th>TIPO</th>
+      <th>DESCRIPCION</th>
       <th>EDITAR</th>
       <th>BORRAR</th>
 
@@ -16,7 +17,7 @@
     if (isset($_POST)) {
       if (!empty($_POST['buscar'])) {
         $dato = $_POST['buscar'];
-        $sql_tiponotificacion .= " WHERE descripcion LIKE '%$dato%'";
+        $sql_tiponotificacion .= " WHERE descripcion LIKE '%$dato%' or tipo_notificacion LIKE '%$dato%'";
       }
     }
     $Tipo_notificaciones = array();
@@ -26,6 +27,7 @@
       ?>
       <tr>
         <td><?php echo $notificacion['id']; ?></td>
+        <td><?php echo $notificacion['tipo_notificacion']; ?></td>
         <td><?php echo $notificacion['descripcion']; ?></td>
         <td style="text-align: center;">
           <a href="../vistas/movil_mantenimiento_tipo_notificacion_vista.php?&id=<?php echo $notificacion['id']; ?>" class="btn btn-primary btn-raised btn-xs">
@@ -76,10 +78,10 @@
           pdf.setFont('Arial','B');
           pdf.setFontSize(14);
           pdf.text(105,38,"REPORTE TIPO NOTIFICACION");
-    var columns = ["#","Descripción de Notificación"];
+    var columns = ["#","Tipo Notificacion","Descripcion"];
     var data = [];
     for (var i = 0; i < arrayJS.length; i++) {
-      data.push([i + 1,arrayJS[i]['descripcion']]);
+      data.push([i + 1,arrayJS[i]['tipo_notificacion'],arrayJS[i]['descripcion']]);
     }
 
     pdf.autoTable(columns, data, {
@@ -102,7 +104,6 @@
         }
         addFooters(pdf);
         window.open(pdf.output('bloburl'),'REPORTE');
-        //pdf.save('Reporte_Tipo_Notificacion_'+'<?php echo $fecha?>' +'.pdf');
 
   });
 </script>
