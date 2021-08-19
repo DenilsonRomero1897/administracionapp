@@ -1,10 +1,10 @@
 <?php
 session_start();
-
+ob_start();
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 
-$Id_objeto = 127;
+$Id_objeto = 171;
 $opcion = isset($_GET['op']) ? $_GET['op'] : '';
 
 if ($opcion == 'editar') {
@@ -51,4 +51,4 @@ if ($_POST['nombre']  <> ' ' and  $_POST['descripcion'] <> '') {
 }
 
 }
-
+ob_end_flush();

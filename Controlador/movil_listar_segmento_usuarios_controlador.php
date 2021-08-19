@@ -1,4 +1,7 @@
-<?php require_once('../clases/Conexion.php'); 
+<?php 
+session_start();
+ob_start();
+require_once('../clases/Conexion.php'); 
     if (isset($_POST)) {
         $segmento = $_POST['segmento'];
         $sql_nombre_segmento = "SELECT nombre FROM tbl_movil_segmentos WHERE id=$segmento";
@@ -101,3 +104,5 @@
         window.open(pdf.output('bloburl'),'REPORTE');
         });
 </script>
+
+<?php ob_end_flush(); ?>

@@ -1,5 +1,6 @@
 <?php
-
+session_start();
+ob_start();
 $funcion = isset($_POST['funcion']) ? $_POST['funcion'] : '';
 if ($funcion == 'buscarUsuarios') {
     getUser();
@@ -100,4 +101,6 @@ function filtroUser()
 
 <?php }
   
-}?>
+}
+ob_end_flush();
+?>

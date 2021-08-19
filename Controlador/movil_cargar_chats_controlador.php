@@ -1,6 +1,7 @@
 <?php require '../clases/Conexion.php';
     
        session_start();
+       ob_start();
        //traer los datos de la base de datos
        //traer el ultimo mensaje para mostrar en la bandeja
        $resultado = $mysqli->query("SELECT mc.id_session_chat,mc.mensaje,sc.id_usuario2,u.Usuario FROM tbl_movil_mensajes_chat mc 
@@ -29,3 +30,4 @@
      </a>
     ";
     }
+    ob_end_flush();

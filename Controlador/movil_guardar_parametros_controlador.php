@@ -1,11 +1,11 @@
 <?php
 session_start();
-
+ob_start();
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 
 
-$Id_objeto = 12;
+$Id_objeto = 170;
 $opcion = isset($_GET['op']) ? $_GET['op'] : '';
 
 
@@ -87,3 +87,5 @@ if ($opcion == 'eliminar') {
       header('location: ../vistas/movil_crear_parametros_vista.php?msj=5');
     }
 }//fin else
+
+ob_end_flush();

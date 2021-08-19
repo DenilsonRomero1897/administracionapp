@@ -1,11 +1,11 @@
 <?php
 session_start();
-
+ob_start();
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 
 
-$Id_objeto = 128;
+$Id_objeto = 176;
 $opcion = $_GET['op'];
 
 if (isset($_POST['funcion'])) {
@@ -102,3 +102,4 @@ if ($_POST['descripcion']  <> ' ' and  $_POST['url'] <> '' ) {
 }
 
 }
+ob_end_flush();

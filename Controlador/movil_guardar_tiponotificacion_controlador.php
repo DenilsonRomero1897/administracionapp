@@ -1,11 +1,11 @@
 <?php
 session_start();
-
+ob_start();
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 
 
-$Id_objeto = 128;
+$Id_objeto = 175;
 $opcion = $_GET['op'];
 
 
@@ -35,7 +35,7 @@ if ($opcion == 'editar') {
 }else{
   $tipo_notificacion = isset($_POST['tipo_notificacion']) ? strtoupper($_POST['tipo_notificaion']) : '';
   $descripcion = isset($_POST["descripcion"]) ? strtoupper($_POST["descripcion"]) : "";
-///Logica para el que se repite
+//Logica para el que se repite
 $sqlexiste = ("select count(tipo_notificacion) as notificacion from tbl_movil_tipo_notificaciones where tipo_notificacion='$tipo_notificacion'");
 //Obtener la fila del query
 $existe = mysqli_fetch_assoc($mysqli->query($sqlexiste));
@@ -62,3 +62,4 @@ if (!empty($_POST['tipo_notificacion'])) { /* Condicion para que no se repita el
 }
 
 }
+ob_end_flush();

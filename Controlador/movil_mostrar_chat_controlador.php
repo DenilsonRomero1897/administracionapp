@@ -1,4 +1,6 @@
 <?php
+session_start();
+ob_start();
 if ($_POST['funcion'] == 'mostrar') {
     $id_chat = isset($_POST['id_chat']) ? (int)$_POST['id_chat'] : '';
     $id_usuario = isset($_POST['id_usuario']) ? (int)$_POST['id_usuario'] : '';
@@ -69,3 +71,4 @@ class mostrarChat
 </div>";
     }
 }
+ob_end_flush();

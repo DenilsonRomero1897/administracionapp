@@ -2,8 +2,9 @@
 require_once ('../clases/Conexion.php');
 require_once ('../clases/funcion_bitacora_movil.php');
 session_start();
+ob_start();
 //id_objeto vista segmentos
-$Id_objeto = 127;
+$Id_objeto = 171;
 if (isset($_POST)) {
    if ($_POST['funcion']=='eliminar') {
       $id = (int)$_POST['id'];
@@ -24,5 +25,5 @@ if (isset($_POST)) {
    echo 'no existe el metodo post';
 }
 
-
+ob_end_flush();
 ?>

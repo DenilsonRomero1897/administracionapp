@@ -1,4 +1,7 @@
-<?php require_once('../clases/Conexion.php'); ?>
+<?php 
+session_start();
+ob_start();
+require_once('../clases/Conexion.php'); ?>
 <table id="tabla" class="table table-bordered table-striped">
           <thead>
             <tr>
@@ -113,3 +116,4 @@
 
 
 </script>
+<?php ob_end_flush(); ?>

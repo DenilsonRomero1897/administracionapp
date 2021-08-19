@@ -1,4 +1,8 @@
-<?php require_once('../clases/Conexion.php');?>
+<?php 
+session_start();
+ob_start();
+require_once('../clases/Conexion.php');
+?>
 
 
 <table id="tabla_bitacora" class="table table-bordered table-striped" style="width: 100%;">
@@ -105,7 +109,7 @@
         }
         addFooters(pdf);
         window.open(pdf.output('bloburl'),'REPORTE');
-        //pdf.save('Reporte_Bitacora_'+ '<?php echo $fecha?>' +'.pdf');
 
     });
 </script>
+<?php ob_end_flush(); ?>

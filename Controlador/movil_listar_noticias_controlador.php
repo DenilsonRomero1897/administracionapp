@@ -1,4 +1,7 @@
-<?php require_once('../clases/Conexion.php');
+<?php 
+session_start();
+ob_start();
+require_once('../clases/Conexion.php');
 require_once('../clases/conexion_mantenimientos.php');
 
 $instancia_conexion = new conexion();
@@ -122,3 +125,4 @@ $instancia_conexion = new conexion();
     //pdf.save('ReporteNoticia_'+ '<?php echo $fecha?>' +'.pdf');
   }
 </script>
+<?php ob_end_flush();?>

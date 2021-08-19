@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+ob_start();
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../Controlador/movil_api_controlador.php');
@@ -11,7 +11,7 @@ if (isset($_GET['op'])) {
 $url ='https://apiappinfomatica.000webhostapp.com/modulos/notificaciones/envioNotificaciones.php';
 $datos = array();
 //id_objeto vista notificaciones
-$Id_objeto = 127;
+$Id_objeto = 169;
 switch ($_GET['op']) {
     
     case 'insert':
@@ -163,3 +163,5 @@ function subirImagen(){
         return $nombrearchivo = "NULL";
     }
 }
+
+ob_end_flush();

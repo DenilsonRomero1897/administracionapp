@@ -1,12 +1,12 @@
 <?php
 session_start();
-
+ob_start();
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once("../Modelos/movil_noticia_modelo.php");
 require_once("../Controlador/movil_api_controlador.php");
 //id_objeto vista noticias
-$Id_objeto = 128;
+$Id_objeto = 168;
 if (isset($_GET['op'])) {
     $datos = [];
     switch ($_GET['op']) {
@@ -104,4 +104,6 @@ function subirDocumentos($i){
         echo 0;
     }
 }
+
+ob_end_flush();
 ?>

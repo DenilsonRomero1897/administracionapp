@@ -1,4 +1,7 @@
-<?php require_once('../clases/Conexion.php'); ?>
+<?php 
+       session_start();
+       ob_start();
+       require_once('../clases/Conexion.php'); ?>
 
 <table id="tabla-notificaciones" class="table table-bordered table-striped" style="width:100%">
           <thead>
@@ -131,3 +134,4 @@
 
         });
 </script>
+<?php ob_end_flush(); ?>
