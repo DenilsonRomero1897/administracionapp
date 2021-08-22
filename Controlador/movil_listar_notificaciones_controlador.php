@@ -14,8 +14,9 @@
               <th>SEGMENTO</th>
               <th>TIPO NOTIFICACIÓN</th>
               <th>URL IMAGEN</th>
+              <th>MOSTRAR APP</th>
               <th>EDITAR</th>
-              <th>ELIMINAR</th>
+              <th>DESACTIVAR</th>
             </tr>
           </thead>
           <tbody>
@@ -29,7 +30,8 @@
                 n.remitente,
                 s.nombre,
                 p.descripcion as tipo_notificacion,
-                n.image_url
+                n.image_url,
+                n.estado
             FROM
                 tbl_movil_notificaciones n inner join tbl_movil_segmentos s on n.segmento_id=s.id 
                 inner join  tbl_movil_tipo_notificaciones p on n.tipo_notificacion_id=p.id";
@@ -54,6 +56,11 @@
                 <td><?php echo $fila['nombre']; ?></td>
                 <td><?php echo $fila['tipo_notificacion']; ?></td>
                 <td><?php echo $fila['image_url']; ?></td>
+                <td><?php if($fila['estado'] == 1){
+                  echo 'SI';
+                }else{
+                  echo 'NO';
+                } ?></td>
 
                 <td style="text-align: center;">
                   <a href="../vistas/movil_gestion_notificaciones_vista.php?&id=<?php echo $fila['id']; ?>" class="btn btn-primary btn-raised btn-xs">

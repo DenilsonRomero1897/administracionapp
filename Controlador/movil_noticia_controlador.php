@@ -13,8 +13,8 @@ if (isset($_GET['op'])) {
     
         case 'insert':
             $modelo = new modelo_registro_noticia();
-            $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
-            $subtitulo = isset($_POST['subtitulo']) ? strtoupper($_POST['subtitulo']) : '';
+            $titulo = isset($_POST['titulo']) ? ucfirst($_POST['titulo']) : '';
+            $subtitulo = isset($_POST['subtitulo']) ? ucfirst($_POST['subtitulo']) : '';
             $contenido = isset($_POST['Contenido']) ? mysqli_real_escape_string($mysqli,$_POST['Contenido']) : '';
             $segmento = isset($_POST['Segmentos']) ? $_POST['Segmentos'] : '';
             $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
@@ -39,8 +39,8 @@ if (isset($_GET['op'])) {
         case 'editar':
             $modelo = new modelo_registro_noticia();
             $id = $_GET['id'];
-            $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
-            $subtitulo = isset($_POST['subtitulo']) ? $_POST['subtitulo'] : '';
+            $titulo = isset($_POST['titulo']) ? ucfirst($_POST['titulo']) : '';
+            $subtitulo = isset($_POST['subtitulo']) ? ucfirst($_POST['subtitulo']) : '';
             $contenido = isset($_POST['Contenido']) ? mysqli_real_escape_string($mysqli,$_POST['Contenido']) : '';
             $segmento = $_POST['Segmentos'];
             $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));

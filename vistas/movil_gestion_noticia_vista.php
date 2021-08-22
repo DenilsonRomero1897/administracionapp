@@ -185,12 +185,12 @@ if (isset($_REQUEST['msj'])) {
 
                       <div class="form-group">
                         <label for="subtitulo">Subtítulo:</label>
-                        <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtSubtitulo'] ?>" maxlength="90" id="subtitulo" name="subtitulo" required onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                        <input class="form-control" type="text" value="<?php echo $_SESSION['txtSubtitulo'] ?>" maxlength="90" id="subtitulo" name="subtitulo" required onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                       </div>
 
                       <div class="form-group">
                         <label for="Contenido">Contenido:</label>
-                        <input class="form-control" type="text" value="<?php echo $_SESSION['txtDescripcion'] ?>" maxlength="1000" id="Contenido" name="Contenido" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                        <input class="form-control" type="text" value="<?php echo $_SESSION['txtDescripcion'] ?>" maxlength="1000" id="Contenido" name="Contenido" required onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                       </div>
 
                       <div class="form-group">

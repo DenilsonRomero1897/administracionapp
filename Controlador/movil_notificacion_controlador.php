@@ -121,9 +121,9 @@ if (isset($_POST['funcion'])) {
     if ($_POST['funcion']=='eliminar') {
         $id = (int)$_POST['id'];
                 //se ejecuta el sql respectivo
-                $sql = "DELETE FROM tbl_movil_notificaciones where id = $id";
+                $sql = "UPDATE tbl_movil_notificaciones set estado = 0 where id = $id";
                 $resultado = $mysqli->query($sql);
-                bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'ELIMINO',strtoupper("$sql"));
+                bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'DESACTIVO',strtoupper("$sql"));
                 if ($resultado) {
                     echo 'hola mundo';
                 }else{
