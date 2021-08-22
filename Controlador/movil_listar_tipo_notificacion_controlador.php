@@ -80,8 +80,8 @@ require_once('../clases/Conexion.php'); ?>
           pdf.text(105, 30, "DEPARTAMENTO DE INFORMÁTICA ");
           pdf.setFont('Arial','B');
           pdf.setFontSize(14);
-          pdf.text(105,38,"REPORTE TIPO NOTIFICACION");
-    var columns = ["#","Tipo Notificacion","Descripcion"];
+          pdf.text(105,38,"REPORTE TIPO NOTIFICACIÓN");
+    var columns = ["#","Tipo Notificación","Descripción"];
     var data = [];
     for (var i = 0; i < arrayJS.length; i++) {
       data.push([i + 1,arrayJS[i]['tipo_notificacion'],arrayJS[i]['descripcion']]);

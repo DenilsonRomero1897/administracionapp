@@ -80,7 +80,7 @@ $(function() {
         pdf.text(110, 38, "REPORTE DE TRANSACCIONES");
         pdf.setFontSize(11);
         pdf.text(250,43,'<?php echo $fecha?>');
-        var columns = ["#", "Fecha de envio","Request de envio","Response","Estado"];
+        var columns = ["#", "Fecha de envío","Request de envío","Response","Estado"];
           var data = [];
           for (var i = 0; i < arrayJS.length; i++) {
             data.push([i + 1, arrayJS[i]['fecha_envio'],arrayJS[i]['request_envio'],arrayJS[i]['response'], arrayJS[i]['estado']]);

@@ -106,7 +106,7 @@
           pdf.text(105, 38, "REPORTE DE NOTIFICACIONES");
           pdf.setFontSize(11);
           pdf.text(250,43,'<?php echo $fecha?>');
-          var columns = ["#", "Titulo", "Descripción", "Fecha y Hora", "Remitente", "Segmento" ,"Tipo Notificación", "Imagen"];
+          var columns = ["#", "Título", "Descripción", "Fecha y Hora", "Remitente", "Segmento" ,"Tipo Notificación", "Imagen"];
           var data = [];
           for (var i = 0; i < arrayJS.length; i++) {
             data.push([i + 1, arrayJS[i]['titulo'], arrayJS[i]['descripcion'], arrayJS[i]['fecha'], arrayJS[i]['remitente'], arrayJS[i]['nombre'], arrayJS[i]['tipo_notificacion'],arrayJS[i]['image_url']]);
