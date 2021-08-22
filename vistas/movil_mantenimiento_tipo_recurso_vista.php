@@ -183,14 +183,14 @@ if (isset($_REQUEST['msj'])) {
                   <div class="form-group">
                     <label>Descripción</label>
 
-                    <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtdescripcion']; ?>">
+                    <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="90" value="<?php echo $_SESSION['txtdescripcion']; ?>">
 
                   </div>
 
                   <div class="form-group">
                     <label>URL</label>
 
-                    <input class="form-control" type="text" id="url" name="url" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txturl']; ?>">
+                    <input class="form-control" type="text" id="url" name="url" readonly onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="255" value="<?php echo $_SESSION['txturl']; ?>">
 
                   </div>
 

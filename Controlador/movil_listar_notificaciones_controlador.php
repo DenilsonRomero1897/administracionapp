@@ -21,19 +21,9 @@
           </thead>
           <tbody>
             <?php
-            $sql = "
-            select
-                n.id,
-                n.titulo,
-                n.descripcion,
-                n.fecha,
-                n.remitente,
-                s.nombre,
-                p.descripcion as tipo_notificacion,
-                n.image_url,
+            $sql = "SELECT n.id,n.titulo,n.descripcion,n.fecha,n.remitente,s.nombre,p.descripcion as tipo_notificacion,n.image_url,
                 n.estado
-            FROM
-                tbl_movil_notificaciones n inner join tbl_movil_segmentos s on n.segmento_id=s.id 
+            FROM tbl_movil_notificaciones n inner join tbl_movil_segmentos s on n.segmento_id=s.id 
                 inner join  tbl_movil_tipo_notificaciones p on n.tipo_notificacion_id=p.id";
                 if (isset($_POST)) {
                   if (!empty($_POST['buscar'])) {
