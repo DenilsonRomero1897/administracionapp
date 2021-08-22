@@ -1,5 +1,8 @@
 <?php
-session_start();
+if(!isset($_SESSION)){
+    session_start();
+}
+
 ob_start();
 if ($_POST['funcion'] == 'mostrar') {
     $id_chat = isset($_POST['id_chat']) ? (int)$_POST['id_chat'] : '';

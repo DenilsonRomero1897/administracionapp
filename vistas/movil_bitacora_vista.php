@@ -77,13 +77,13 @@ if ($visualizacion == 0) {
       
       <!-- /.card-header -->
       <div class="row">
-        <div class="col-2"></div>
+        <div class="col-1"></div>
         <div class="col-1 ml-2"><label> Inicio: </label></div>
-      <div class="col-2">
+      <div class="col-3">
       <input type="date" class="form-control" placeholder="Start" id="date1" name="date1" required/>
       </div>
       <div class="col-1"><label> Hasta:  </label></div>
-      <div class="col-2">
+      <div class="col-3">
       <input type="date" class="form-control" placeholder="End" id="date2" name="date2" required/>
       </div>
       <div class="col-2">

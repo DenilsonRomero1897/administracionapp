@@ -106,7 +106,12 @@ switch ($_GET['op']) {
                                  "segmento" => $segmento);
                 $response = consumoApi($url, $datos);
                 $response2 = $response['mensaje'];
-                $sql = "INSERT INTO tbl_movil_transacciones values (null,sysdate(),'envio de notificaciones','$response2','completada')";
+                if($response2 != 'Las notificaciones se enviaron con exito'){
+                    $resultado_transaccion = 'No Completada';
+                }else{
+                    $resultado_transaccion = 'Completada';
+                }
+                $sql = "INSERT INTO tbl_movil_transacciones values (null,sysdate(),'envio de notificaciones','$response2','$resultado_transaccion')";
                 $resultado = $mysqli->query($sql);
         bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));   
         if($resultado){
