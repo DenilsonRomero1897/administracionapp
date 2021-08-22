@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 22-08-2021 a las 04:27:34
+-- Tiempo de generación: 22-08-2021 a las 22:16:43
 -- Versión del servidor: 10.4.20-MariaDB
 -- Versión de PHP: 8.0.9
 
@@ -231,7 +231,70 @@ INSERT INTO `tbl_movil_bitacora` (`id`, `usuario_id`, `objeto_id`, `accion`, `de
 (179, 75, 176, 'INGRESO', 'MANTENIMIENTO TIPO RECURSO ', '2021-08-18 16:37:27', ''),
 (180, 75, 176, 'INGRESO', 'MANTENIMIENTO TIPO RECURSO ', '2021-08-18 16:37:39', ''),
 (181, 75, 178, 'INGRESO', 'A MENU GESTION', '2021-08-18 16:38:56', ''),
-(182, 75, 172, 'INGRESO', 'GESTION DE TRANSACCIONES', '2021-08-18 16:38:58', '');
+(182, 75, 172, 'INGRESO', 'GESTION DE TRANSACCIONES', '2021-08-18 16:38:58', ''),
+(183, 1, 181, 'INGRESO', 'A MENU NOTIFICACIONES', '2021-08-22 01:10:48', ''),
+(184, 1, 169, 'INGRESO', 'A GESTIÓN DE NOTIFICACIONES ', '2021-08-22 01:10:50', ''),
+(185, 1, 169, 'INGRESO', 'A GESTIÓN DE NOTIFICACIONES ', '2021-08-22 01:24:03', ''),
+(186, 1, 163, 'INGRESO', 'A CREAR NOTIFICACIÓN', '2021-08-22 01:24:10', ''),
+(187, 1, 163, 'INGRESO', 'A CREAR NOTIFICACIÓN', '2021-08-22 01:36:49', ''),
+(188, 1, 169, 'INSERTO', 'INSERT INTO TBL_MOVIL_NOTIFICACIONES  VALUES (NULL,\'PRUEBAS INFORMATICAS\',\'PRUEBAS\',\'2021-08-22 02:40:00\',\'ADMIN\',1,1,\'\')', '2021-08-22 01:41:03', ''),
+(189, 1, 169, 'INGRESO', 'A GESTIÓN DE NOTIFICACIONES ', '2021-08-22 01:41:04', ''),
+(190, 1, 180, 'INGRESO', 'A MENU NOTICIAS', '2021-08-22 01:41:15', ''),
+(191, 1, 162, 'INGRESO', 'A CREAR NOTICIA', '2021-08-22 01:41:17', ''),
+(192, 1, 168, 'INSERTO', 'INSERT INTO TBL_MOVIL_NOTICIAS (TITULO,SUBTITULO,DESCRIPCION,FECHA,FECHA_VENCIMIENTO,REMITENTE,SEGMENTO_ID) VALUES (\'PRUEBAS INFORMATICAS\',\'SEGUNDO PARCIAL\',\'HOLA MUNDO AJAS\',\'2021-08-23 02:44:00\',\'2021-09-23 01:43:00\',\'ADMIN\',1)', '2021-08-22 01:44:01', ''),
+(193, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:44:02', ''),
+(194, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:44:11', ''),
+(195, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:56:45', ''),
+(196, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:56:50', ''),
+(197, 1, 168, 'MODIFICO', 'UPDATE TBL_MOVIL_NOTICIAS SET TITULO = \'PRUEBAS INFORMATICAS\', SUBTITULO = \'SEGUNDO PARCIAL\', DESCRIPCION = \'HOLA MUNDO AJAS\', FECHA = \'2021-08-23 02:44:00\',FECHA_VENCIMIENTO = \'2021-09-23 01:43:00\', REMITENTE = \'ADMIN\', SEGMENTO_ID = 1 WHERE ID = 2', '2021-08-22 01:56:53', ''),
+(198, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:56:53', ''),
+(199, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:59:13', ''),
+(200, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:59:16', ''),
+(201, 1, 168, 'MODIFICO', 'UPDATE TBL_MOVIL_NOTICIAS SET TITULO = \'PRUEBAS INFORMATICAS\', SUBTITULO = \'SEGUNDO PARCIAL\', DESCRIPCION = \'HOLA MUNDO AJAS\', FECHA = \'2021-08-23 02:44:00\',FECHA_VENCIMIENTO = \'2021-09-23 01:43:00\', REMITENTE = \'ADMIN\', SEGMENTO_ID = 1 WHERE ID = 2', '2021-08-22 01:59:21', ''),
+(202, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:59:22', ''),
+(203, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:59:24', ''),
+(204, 1, 168, 'MODIFICO', 'UPDATE TBL_MOVIL_NOTICIAS SET TITULO = \'PRUEBAS INFORMATICAS\', SUBTITULO = \'SEGUNDO PARCIAL\', DESCRIPCION = \'HOLA MUND\', FECHA = \'2021-08-23 02:44:00\',FECHA_VENCIMIENTO = \'2021-09-23 01:43:00\', REMITENTE = \'ADMIN\', SEGMENTO_ID = 1 WHERE ID = 2', '2021-08-22 01:59:31', ''),
+(205, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:59:32', ''),
+(206, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:59:35', ''),
+(207, 1, 168, 'MODIFICO', 'UPDATE TBL_MOVIL_NOTICIAS SET TITULO = \'PRUBEAS\', SUBTITULO = \'HOLA\', DESCRIPCION = \'HOLA MUND\', FECHA = \'2021-08-23 02:44:00\',FECHA_VENCIMIENTO = \'2021-09-23 01:43:00\', REMITENTE = \'ADMIN\', SEGMENTO_ID = 1 WHERE ID = 2', '2021-08-22 01:59:45', ''),
+(208, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 01:59:45', ''),
+(209, 1, 181, 'INGRESO', 'A MENU NOTIFICACIONES', '2021-08-22 01:59:51', ''),
+(210, 1, 169, 'INGRESO', 'A GESTIÓN DE NOTIFICACIONES ', '2021-08-22 01:59:52', ''),
+(211, 1, 169, 'INGRESO', 'A GESTIÓN DE NOTIFICACIONES ', '2021-08-22 02:02:47', ''),
+(212, 1, 179, 'INGRESO', 'A MENU MANTENIMIENTO ', '2021-08-22 11:33:50', ''),
+(213, 1, 176, 'INGRESO', 'MANTENIMIENTO TIPO RECURSO ', '2021-08-22 11:34:03', ''),
+(214, 1, 176, 'INGRESO', 'MANTENIMIENTO TIPO RECURSO ', '2021-08-22 11:38:12', ''),
+(215, 1, 181, 'INGRESO', 'A MENU NOTIFICACIONES', '2021-08-22 11:38:18', ''),
+(216, 1, 169, 'INGRESO', 'A GESTIÓN DE NOTIFICACIONES ', '2021-08-22 11:38:20', ''),
+(217, 1, 169, 'INGRESO', 'A GESTIÓN DE NOTIFICACIONES ', '2021-08-22 11:43:07', ''),
+(218, 1, 169, 'INGRESO', 'A GESTIÓN DE NOTIFICACIONES ', '2021-08-22 11:45:36', ''),
+(219, 1, 169, 'INGRESO', 'A GESTIÓN DE NOTIFICACIONES ', '2021-08-22 11:46:05', ''),
+(220, 1, 169, 'INGRESO', 'A GESTIÓN DE NOTIFICACIONES ', '2021-08-22 11:47:09', ''),
+(221, 1, 181, 'INGRESO', 'A MENU NOTIFICACIONES', '2021-08-22 12:13:45', ''),
+(222, 1, 180, 'INGRESO', 'A MENU NOTICIAS', '2021-08-22 12:13:49', ''),
+(223, 1, 168, 'INGRESO', 'A GESTIÓN DE NOTICIAS ', '2021-08-22 12:13:51', ''),
+(224, 1, 161, 'INGRESO', 'A LA VISTA DEL CHAT ', '2021-08-22 12:13:56', ''),
+(225, 1, 161, 'INGRESO', 'A LA VISTA DEL CHAT ', '2021-08-22 12:16:58', ''),
+(226, 75, 161, 'INGRESO', 'A LA VISTA DEL CHAT ', '2021-08-22 12:17:12', ''),
+(227, 75, 161, 'INGRESO', 'A LA VISTA DEL CHAT ', '2021-08-22 12:18:20', ''),
+(228, 75, 160, 'INGRESO', 'A BITÁCORA DEL SISTEMA MÓVIL', '2021-08-22 12:18:33', ''),
+(229, 75, 160, 'INGRESO', 'A BITÁCORA DEL SISTEMA MÓVIL', '2021-08-22 12:19:19', ''),
+(230, 75, 160, 'INGRESO', 'A BITÁCORA DEL SISTEMA MÓVIL', '2021-08-22 12:19:48', ''),
+(231, 75, 160, 'INGRESO', 'A BITÁCORA DEL SISTEMA MÓVIL', '2021-08-22 12:20:03', ''),
+(232, 75, 160, 'INGRESO', 'A BITÁCORA DEL SISTEMA MÓVIL', '2021-08-22 12:20:29', ''),
+(233, 75, 160, 'INGRESO', 'A BITÁCORA DEL SISTEMA MÓVIL', '2021-08-22 12:21:10', ''),
+(234, 75, 160, 'INGRESO', 'A BITÁCORA DEL SISTEMA MÓVIL', '2021-08-22 12:21:19', ''),
+(235, 75, 179, 'INGRESO', 'A MENU MANTENIMIENTO ', '2021-08-22 12:22:36', ''),
+(236, 75, 175, 'INGRESO', 'MANTENIMIENTO TIPO NOTIFICACIÓN', '2021-08-22 12:22:39', ''),
+(237, 75, 179, 'INGRESO', 'A MENU MANTENIMIENTO ', '2021-08-22 12:23:25', ''),
+(238, 75, 174, 'INGRESO', 'MANTENIMIENTO TIPO MENSAJE', '2021-08-22 12:23:27', ''),
+(239, 75, 178, 'INGRESO', 'A MENU GESTION', '2021-08-22 12:23:31', ''),
+(240, 75, 171, 'INGRESO', 'A GESTIÓN DE SEGMENTOS ', '2021-08-22 12:23:33', ''),
+(241, 75, 173, 'Ingreso', 'A llenar Segmento', '2021-08-22 12:23:39', ''),
+(242, 75, 171, 'INGRESO', 'A GESTIÓN DE SEGMENTOS ', '2021-08-22 12:24:24', ''),
+(243, 75, 178, 'INGRESO', 'A MENU GESTION', '2021-08-22 12:24:29', ''),
+(244, 75, 172, 'INGRESO', 'GESTION DE TRANSACCIONES', '2021-08-22 12:24:30', ''),
+(245, 75, 172, 'INGRESO', 'GESTION DE TRANSACCIONES', '2021-08-22 13:09:52', '');
 
 --
 -- Disparadores `tbl_movil_bitacora`
@@ -306,7 +369,8 @@ CREATE TABLE `tbl_movil_noticias` (
 --
 
 INSERT INTO `tbl_movil_noticias` (`id`, `titulo`, `subtitulo`, `descripcion`, `fecha`, `fecha_vencimiento`, `remitente`, `segmento_id`) VALUES
-(1, 'NUEVA', 'SEGUNDO PARCIAL', 'hola riccy', '2021-08-17 21:32:00', '2021-09-18 23:34:00', 'ADMIN', 1);
+(1, 'NUEVA', 'SEGUNDO PARCIAL', 'hola riccy', '2021-08-17 21:32:00', '2021-09-18 23:34:00', 'ADMIN', 1),
+(2, 'Prubeas', 'Hola', 'hola mund', '2021-08-23 02:44:00', '2021-09-23 01:43:00', 'ADMIN', 1);
 
 -- --------------------------------------------------------
 
@@ -341,15 +405,17 @@ CREATE TABLE `tbl_movil_notificaciones` (
   `remitente` varchar(45) DEFAULT NULL,
   `segmento_id` bigint(20) NOT NULL,
   `tipo_notificacion_id` int(11) NOT NULL,
-  `image_url` varchar(255) NOT NULL
+  `image_url` varchar(255) NOT NULL,
+  `estado` int(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tbl_movil_notificaciones`
 --
 
-INSERT INTO `tbl_movil_notificaciones` (`id`, `titulo`, `descripcion`, `fecha`, `remitente`, `segmento_id`, `tipo_notificacion_id`, `image_url`) VALUES
-(1, 'PRUEBA NOTIFICACION', 'NUEVA NOTIFICACION', '2021-08-18 05:24:00', 'ADMIN', 1, 1, 'https://apiappinfomatica.000webhostapp.com/archivos/movil/notificacion/chat v1.0.PNG');
+INSERT INTO `tbl_movil_notificaciones` (`id`, `titulo`, `descripcion`, `fecha`, `remitente`, `segmento_id`, `tipo_notificacion_id`, `image_url`, `estado`) VALUES
+(1, 'PRUEBA NOTIFICACION', 'NUEVA NOTIFICACION', '2021-08-18 05:24:00', 'ADMIN', 1, 1, 'https://apiappinfomatica.000webhostapp.com/archivos/movil/notificacion/chat v1.0.PNG', 1),
+(2, 'Pruebas informaticas', 'Pruebas', '2021-08-22 02:40:00', 'ADMIN', 1, 1, '', 0);
 
 -- --------------------------------------------------------
 
@@ -414,7 +480,9 @@ CREATE TABLE `tbl_movil_segmento_usuario` (
 INSERT INTO `tbl_movil_segmento_usuario` (`usuario_id`, `segmento_id`) VALUES
 (59, 1),
 (55, 1),
-(53, 1);
+(53, 1),
+(74, 1),
+(75, 1);
 
 -- --------------------------------------------------------
 
@@ -433,7 +501,9 @@ CREATE TABLE `tbl_movil_session_chats` (
 --
 
 INSERT INTO `tbl_movil_session_chats` (`id_session_chat`, `id_usuario1`, `id_usuario2`) VALUES
-(1, 1, 1);
+(1, 1, 1),
+(2, 1, 55),
+(3, 1, 45);
 
 -- --------------------------------------------------------
 
@@ -515,7 +585,8 @@ CREATE TABLE `tbl_movil_transacciones` (
 
 INSERT INTO `tbl_movil_transacciones` (`id`, `fecha_envio`, `request_envio`, `response`, `estado`) VALUES
 (1, '2021-08-18 00:13:18', 'envio de notificaciones', 'No se encontraron datos', 'completada'),
-(2, '2021-08-18 00:16:44', 'envio de notificaciones', 'No se encontraron datos', 'completada');
+(2, '2021-08-18 00:16:44', 'envio de notificaciones', 'No se encontraron datos', 'completada'),
+(3, '2021-08-22 01:41:04', 'envio de notificaciones', 'Error con las variables enviadas a la API RES', 'completada');
 
 -- --------------------------------------------------------
 
@@ -1476,7 +1547,7 @@ ALTER TABLE `tbl_usuarios`
 -- AUTO_INCREMENT de la tabla `tbl_movil_bitacora`
 --
 ALTER TABLE `tbl_movil_bitacora`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=183;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=246;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_mensajes_chat`
@@ -1488,13 +1559,13 @@ ALTER TABLE `tbl_movil_mensajes_chat`
 -- AUTO_INCREMENT de la tabla `tbl_movil_noticias`
 --
 ALTER TABLE `tbl_movil_noticias`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_notificaciones`
 --
 ALTER TABLE `tbl_movil_notificaciones`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_parametros`
@@ -1512,7 +1583,7 @@ ALTER TABLE `tbl_movil_segmentos`
 -- AUTO_INCREMENT de la tabla `tbl_movil_session_chats`
 --
 ALTER TABLE `tbl_movil_session_chats`
-  MODIFY `id_session_chat` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_session_chat` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_movil_tipo_mensajes`
@@ -1536,7 +1607,7 @@ ALTER TABLE `tbl_movil_tipo_recursos`
 -- AUTO_INCREMENT de la tabla `tbl_movil_transacciones`
 --
 ALTER TABLE `tbl_movil_transacciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tbl_permisos_usuarios`
