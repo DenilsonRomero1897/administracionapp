@@ -19,7 +19,7 @@ require_once('../clases/Conexion.php');
         <?php
         $sql_tabla_bitacora_movil = "SELECT u.Usuario, o.objeto, b.accion, b.descripcion, b.fecha from tbl_usuarios u
         INNER JOIN tbl_movil_bitacora b
-        INNER JOIN tbl_objetos o on u.Id_usuario=b.usuario_id and b.objeto_id=o.Id_objeto ORDER BY b.fecha DESC";
+        INNER JOIN tbl_objetos o on u.Id_usuario=b.usuario_id and b.objeto_id=o.Id_objeto";
         if (isset($_POST)) {
              if (!empty($_POST['final']) or !empty($_POST['buscar'])) {
                 $sql_tabla_bitacora_movil .= " WHERE ";
@@ -31,9 +31,10 @@ require_once('../clases/Conexion.php');
             }
             if (!empty($_POST['buscar'])) {
                 $dato = $_POST['buscar'];
-                $sql_tabla_bitacora_movil .= "u.Usuario LIKE '%$dato%' or o.objeto LIKE '%$dato%' or b.accion LIKE '%$dato%'";
+                $sql_tabla_bitacora_movil .= " u.Usuario LIKE '%$dato%' or o.objeto LIKE '%$dato%' or b.accion LIKE '%$dato%'";
               }
         }
+        $sql_tabla_bitacora_movil .= " ORDER BY b.fecha DESC";
         $bitacoras = array();
         $resultadotabla_bitacora = $mysqli->query($sql_tabla_bitacora_movil);
         while ($row = $resultadotabla_bitacora->fetch_array(MYSQLI_ASSOC)) {
