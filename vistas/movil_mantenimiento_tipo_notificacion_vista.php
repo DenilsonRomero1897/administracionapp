@@ -169,7 +169,7 @@ if (isset($_REQUEST['msj'])) {
                   <div class="row">
                     <div class="col-md-12">
                     <div class="form-group">
-                        <label>Tipo Notificacion: </label>
+                        <label>Tipo Notificación: </label>
                         <input class="form-control" type="text" id="tipo_notificacion" name="tipo_notificacion" style="text-transform: uppercase" onpaste="return false"  onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="255" value="<?php echo $_SESSION['txtnotificacion']; ?>">
                       </div>
                       <div class="form-group">

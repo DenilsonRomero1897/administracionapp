@@ -174,7 +174,7 @@ if (isset($_REQUEST['msj'])) {
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title">Modificar Notificacion</h4>
+                            <h4 class="modal-title">Modificar Notificación</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -217,7 +217,7 @@ if (isset($_REQUEST['msj'])) {
                                         </div>
 
                                         <div class="form-group">
-                                            <label>Tipo Notificacion: </label>
+                                            <label>Tipo Notificación: </label>
                                             <select class="form-control" name="tipo_notificacion" id="tipo_notificacion">
                                                 <option value="">Seleccione una opción :</option>
                                                 <?php

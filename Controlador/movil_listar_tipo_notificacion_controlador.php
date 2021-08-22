@@ -8,7 +8,7 @@ require_once('../clases/Conexion.php'); ?>
     <tr>
       <th>ID</th>
       <th>TIPO</th>
-      <th>DESCRIPCION</th>
+      <th>DESCRIPCIÓN</th>
       <th>EDITAR</th>
       <th>BORRAR</th>
 

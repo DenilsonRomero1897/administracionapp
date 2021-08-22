@@ -7,7 +7,7 @@
           <thead>
             <tr>
               <th>ID</th>
-              <th>TITULO</th>
+              <th>TÍTULO</th>
               <th>CONTENIDO</th>
               <th>FECHA Y HORA</th>
               <th>REMITENTE</th>

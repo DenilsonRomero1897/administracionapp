@@ -178,7 +178,7 @@ if (isset($_REQUEST['msj'])) {
                     </div>
 
                     <div class="form-group">
-                      <label>Descripcion</label>
+                      <label>Descripción</label>
 
                       <input class="form-control" type="text" id="descripcion" name="descripcion" style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" required="" maxlength="30" value="<?php echo $_SESSION['txtDescripcion']; ?>">
 
