@@ -27,7 +27,7 @@ switch ($_GET['op']) {
         //subir imagen de la notificacion 
         $image = subirImagen();
         
-        $sql = "INSERT into tbl_movil_notificaciones  VALUES (null,'$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$image')";
+        $sql = "INSERT into tbl_movil_notificaciones  VALUES (null,'$titulo','$contenido','$fecha_publicacion','ADMIN',$segmento,$tipo_notificacion,'$image',1)";
         $resultado = $mysqli->query($sql);
         bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'INSERTO',strtoupper("$sql"));
             if($resultado === TRUE){
@@ -53,8 +53,13 @@ switch ($_GET['op']) {
                                  "segmento" => $segmento);
                 $response = consumoApi($url, $datos);
                 $response2 = $response['mensaje'];
-                $sql = "INSERT INTO tbl_movil_transacciones values (null,sysdate(),'envio de notificaciones','$response2','completada')";
-                $resultado = $mysqli->query($sql);
+                if($response2 != 'Las notificaciones se enviaron con exito'){
+                    $resultado_transaccion = 'No Completada';
+                }else{
+                    $resultado_transaccion = 'Completada';
+                }
+                transaccion('envio de notificaciones',"$response2","$resultado_transaccion",$mysqli);
+                
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');
             }
         break;
@@ -111,8 +116,7 @@ switch ($_GET['op']) {
                 }else{
                     $resultado_transaccion = 'Completada';
                 }
-                $sql = "INSERT INTO tbl_movil_transacciones values (null,sysdate(),'envio de notificaciones','$response2','$resultado_transaccion')";
-                $resultado = $mysqli->query($sql);
+                transaccion('envio de notificaciones',"$response2","$resultado_transaccion",$mysqli);
         bitacora_movil::evento_bitacora($_SESSION['id_usuario'],$Id_objeto,'MODIFICO',strtoupper("$sql"));   
         if($resultado){
                 header('location: ../vistas/movil_gestion_notificaciones_vista.php?msj=2');

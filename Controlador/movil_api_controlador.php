@@ -10,8 +10,10 @@
 //var_dump($decoded);
 
 //curl_close($ch);
-session_start();
-ob_start();
+if(!isset($_SESSION)){ 
+     session_start();
+}
+     ob_start();
 //peticion post
 function consumoApi($url, $datos){
         $ch = curl_init();
