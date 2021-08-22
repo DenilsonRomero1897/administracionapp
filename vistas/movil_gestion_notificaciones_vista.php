@@ -192,9 +192,8 @@ if (isset($_REQUEST['msj'])) {
                                         <div class="form-group">
                                             <label for="titulo"> Título:</label>
                                             <input autofocus class="form-control" type="text"
-                                                value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="45" id="titulo"
-                                                name="titulo" required style="text-transform: uppercase"
-                                                onpaste="return false" onkeypress="return Letras(event)"
+                                                value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="90" id="titulo"
+                                                name="titulo" required onpaste="return false" onkeypress="return Letras(event)"
                                                 onkeyup="DobleEspacio(this, event)"
                                                 onkeypress="return comprobar(this.value, event, this.id)">
                                         </div>
@@ -203,8 +202,7 @@ if (isset($_REQUEST['msj'])) {
                                             <label for="Contenido">Contenido:</label>
                                             <input class="form-control" type="text"
                                                 value="<?php echo $_SESSION['txtDescripcion'] ?>" maxlength="255"
-                                                id="Contenido" name="Contenido" required
-                                                style="text-transform: uppercase" onpaste="return false"
+                                                id="Contenido" name="Contenido" required onpaste="return false"
                                                 onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)"
                                                 onkeypress="return comprobar(this.value, event, this.id)">
                                         </div>
@@ -255,6 +253,7 @@ if (isset($_REQUEST['msj'])) {
                                             <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
                                             <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion"
                                                 value="<?php echo date("Y-m-d\TH:i", $_SESSION['txtFecha']); ?>"
+                                                min="<?php echo date("Y-m-d\TH:i",strtotime(date("Y-m-d\TH:i")."+ 1 hour"));?>" max="<?php echo date("Y-m-d\TH:i",strtotime(date("Y-m-d\TH:i")."+ 1 week"));?>"
                                                 name="txt_fecha_Publicacion" required onkeydown="return false">
 
                                         </div>
@@ -349,12 +348,12 @@ if (isset($_REQUEST['msj'])) {
         $(function() {
             $('#tabla_imagen').DataTable({
                 "paging": false,
-                "lengthChange": true,
+                "lengthChange": false,
                 "searching": false,
                 "ordering": false,
                 "info": false,
                 "autoWidth": false,
-                "responsive": true,
+                "responsive": false,
                 "language": {
                     "url": "//cdn.datatables.net/plug-ins/1.10.25/i18n/Spanish.json"
                 }

@@ -14,8 +14,8 @@ switch ($_GET['op']) {
     
     case 'insert':
        
-        $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
-        $contenido = isset($_POST['Contenido']) ? strtoupper($_POST['Contenido']) : '';
+        $titulo = isset($_POST['titulo']) ? ucfirst($_POST['titulo']) : '';
+        $contenido = isset($_POST['Contenido']) ? ucfirst($_POST['Contenido']) : '';
         $segmento = isset($_POST['Segmentos']) ? $_POST['Segmentos'] : '';
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));
         $notificacion = isset($_POST['notificacion']) ? $_POST['notificacion'] : 'notificacion';
@@ -61,8 +61,8 @@ switch ($_GET['op']) {
         
     case 'editar':
         $id = $_GET['id'];
-        $titulo = isset($_POST['titulo']) ? strtoupper($_POST['titulo']) : '';
-        $contenido = isset($_POST['Contenido']) ? strtoupper($_POST['Contenido']) : '';
+        $titulo = isset($_POST['titulo']) ? ucfirst($_POST['titulo']) : '';
+        $contenido = isset($_POST['Contenido']) ? ucfirst($_POST['Contenido']) : '';
         $segmento = $_POST['Segmentos'];
         $tipo_notificacion = $_POST['tipo_notificacion'];
         $fecha_publicacion = date('Y-m-d H:i:s',strtotime($_POST['txt_fecha_Publicacion']));

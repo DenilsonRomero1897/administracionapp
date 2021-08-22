@@ -53,7 +53,7 @@
                 <td><?php echo $fila['remitente']; ?></td>
                 <td><?php echo $fila['nombre']; ?></td>
                 <td><?php echo $fila['tipo_notificacion']; ?></td>
-                <td><?php echo $fila['image_url'] ?></td>
+                <td><?php echo $fila['image_url']; ?></td>
 
                 <td style="text-align: center;">
                   <a href="../vistas/movil_gestion_notificaciones_vista.php?&id=<?php echo $fila['id']; ?>" class="btn btn-primary btn-raised btn-xs">

@@ -5,7 +5,7 @@
     $servidor= "127.0.0.1";
     $usuario= "root";
     $password = "";
-    $base= "bdadministracionapp";
+    $base= "bdadministracionapp2";
 
 	$mysqli = new mysqli($servidor, $usuario,$password,$base);
 	$connection = mysqli_connect($servidor, $usuario,$password,$base) or die("Error " . mysqli_error($connection));
