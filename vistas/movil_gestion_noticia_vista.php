@@ -6,7 +6,7 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
-
+date_default_timezone_set("America/Tegucigalpa");
 $Id_objeto = 168;
 $visualizacion = permiso_ver($Id_objeto);
 
@@ -180,17 +180,17 @@ if (isset($_REQUEST['msj'])) {
 
                       <div class="form-group">
                         <label for="titulo">Título:</label>
-                        <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="45" id="titulo" name="titulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                        <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="90" id="titulo" name="titulo" required onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                       </div>
 
                       <div class="form-group">
                         <label for="subtitulo">Subtítulo:</label>
-                        <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtSubtitulo'] ?>" maxlength="45" id="subtitulo" name="subtitulo" required style="text-transform: uppercase" onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                        <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtSubtitulo'] ?>" maxlength="90" id="subtitulo" name="subtitulo" required onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                       </div>
 
                       <div class="form-group">
                         <label for="Contenido">Contenido:</label>
-                        <input class="form-control" type="text" value="<?php echo $_SESSION['txtDescripcion'] ?>" maxlength="255" id="Contenido" name="Contenido" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
+                        <input class="form-control" type="text" value="<?php echo $_SESSION['txtDescripcion'] ?>" maxlength="1000" id="Contenido" name="Contenido" required style="text-transform: uppercase" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
                       </div>
 
                       <div class="form-group">
@@ -214,12 +214,12 @@ if (isset($_REQUEST['msj'])) {
                       <div class="form-group">
                         <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                         <label for="txt_fecha_Publicacion">Fecha y Hora de Publicación:</label>
-                        <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" value="<?php echo date("Y-m-d\TH:i",$_SESSION['txtFecha']);?>" onkeydown="return false">
+                        <input class="form-control" type="datetime-local" id="txt_fecha_Publicacion" name="txt_fecha_Publicacion" value="<?php echo date("Y-m-d\TH:i",$_SESSION['txtFecha']);?>" min="<?php echo date("Y-m-d\TH:i"); ?>" onkeydown="return false">
                       </div>
                       <div class="form-group">
                         <!-- FECHA DE PUBLICACION txt_fecha_Publicacion -->
                         <label for="txt_fecha_vencimiento">Fecha y Hora de Vencimiento:</label>
-                        <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" value="<?php echo date("Y-m-d\TH:i",$_SESSION['txtFecha_vencimiento']);?>" onkeydown="return false">
+                        <input class="form-control" type="datetime-local" id="txt_fecha_vencimiento" name="txt_fecha_vencimiento" value="<?php echo date("Y-m-d\TH:i",$_SESSION['txtFecha_vencimiento']);?>" min="<?php echo date("Y-m-d\TH:i",strtotime(date("Y-m-d\TH:i")."+ 1 month"));?>" max="<?php echo date("Y-m-d\TH:i",strtotime(date("Y-m-d\TH:i")."+ 3 month"));?>" onkeydown="return false">
                       </div>
                       <div class="form-group">
                         <!-- archivos adjuntos -->

@@ -7,7 +7,7 @@ require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
-
+date_default_timezone_set("America/Tegucigalpa");
 $Id_objeto = 163;
 
 bitacora_movil::evento_bitacora($_SESSION['id_usuario'], $Id_objeto, 'INGRESO', 'A CREAR NOTIFICACIÓN');

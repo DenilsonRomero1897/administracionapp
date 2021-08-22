@@ -7,7 +7,7 @@ require_once('../clases/funcion_bitacora_movil.php');
 require_once('../clases/funcion_visualizar.php');
 require_once('../clases/funcion_permisos.php');
 /*require_once('../Modelos/movil_segmentos_modelo.php');*/
-
+date_default_timezone_set("America/Tegucigalpa");
 $Id_objeto = 177;
 $visualizacion = permiso_ver($Id_objeto);
 if ($visualizacion == 0) {
