@@ -239,7 +239,7 @@ if (isset($_REQUEST['msj'])) {
                                 $rspta = $mysqli->query($sql_archivos);
                               while ($row2 = $rspta->fetch_array(MYSQLI_ASSOC)) { ?>
                                 <tr>
-                                  <td><?php echo $row2['url']; ?></td>
+                                  <td><?php echo str_replace('https://apiappinfomatica.000webhostapp.com','..',$row2['url']); ?></td>
                                   <td><a onclick="eliminar_archivos(<?php echo $row2['noticia'] ?>,<?php echo $row2['recurso'] ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                               <?php } ?>

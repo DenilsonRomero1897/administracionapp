@@ -172,8 +172,8 @@ if (isset($_REQUEST['msj'])) {
         <form action="../Controlador/movil_notificacion_controlador.php?op=editar&id=<?php echo $id ?>" method="post"
             data-form="update" autocomplete="off" enctype="multipart/form-data">
 
-            <div class="modal fade bd-example-modal-lg" tabindex="-1" id="modal_modificar_notificacion">
-                <div class="modal-dialog modal-lg">
+            <div class="modal fade" tabindex="-1" id="modal_modificar_notificacion">
+                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="modal-title">Modificar Notificación</h4>
@@ -270,7 +270,7 @@ if (isset($_REQUEST['msj'])) {
                                                     </thead>
                                                     <tbody>
                                                         <tr>
-                                                            <td><?php echo $_SESSION['txtUrl']; ?></td>
+                                                            <td><?php echo str_replace('https://apiappinfomatica.000webhostapp.com','..',$_SESSION['txtUrl']) ; ?></td>
                                                             <?php if ($_SESSION['txtUrl'] != 'null') :?>
                                                             <td><a onclick="eliminar_img(<?php echo $id; ?>);"
                                                                     class="btn btn-danger btn-xs"><i
