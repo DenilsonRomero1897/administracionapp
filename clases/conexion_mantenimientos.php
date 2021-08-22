@@ -1,7 +1,7 @@
 <?php
 require_once "global.php";
 
-$conexion = new mysqli('127.0.0.1', 'root', '', 'bdadministracionapp2');
+$conexion = new mysqli('127.0.0.1', 'root', '', 'bdadministracionapp');
 
 mysqli_query($conexion, 'SET NAMES "' . DB_ENCODE . '"');
 
