@@ -95,7 +95,7 @@ function subirDocumentos($i){
           $ext_url = 'https://apiappinfomatica.000webhostapp.com';
           $nombrearchivo= '/archivos/movil/'.$name;
           $MP->Registrar_foto($ext_url.$nombrearchivo);  
-          $idRecurso = $MP->buscar_id_recurso($nombrearchivo);
+          $idRecurso = $MP->buscar_id_recurso($ext_url.$nombrearchivo);
           return $idRecurso;
         }else{
             echo 0;
