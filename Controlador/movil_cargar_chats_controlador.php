@@ -1,6 +1,8 @@
 <?php require '../clases/Conexion.php';
     
-       session_start();
+    if(!isset($_SESSION)){ 
+        session_start();
+    }
        ob_start();
        //traer los datos de la base de datos
        //traer el ultimo mensaje para mostrar en la bandeja

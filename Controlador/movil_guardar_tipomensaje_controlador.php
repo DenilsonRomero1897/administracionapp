@@ -1,6 +1,8 @@
 <?php
-session_start();
-
+if(!isset($_SESSION)){ 
+  session_start();
+}
+ob_start();
 require_once('../clases/Conexion.php');
 require_once('../clases/funcion_bitacora_movil.php');
 
@@ -102,3 +104,4 @@ if ($_POST['tipo_mensaje']  ) {
 }
 
 }
+ob_end_flush();

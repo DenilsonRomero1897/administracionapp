@@ -1,6 +1,8 @@
 <?php
 
-session_start();
+if (session_status() === PHP_SESSION_NONE) {
+  session_start();
+}
 ob_start();
 require_once('../vistas/pagina_inicio_vista.php');
 require_once('../clases/conexion_mantenimientos.php');

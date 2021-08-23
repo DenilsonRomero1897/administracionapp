@@ -1,5 +1,7 @@
 <?php
-session_start();
+if(!isset($_SESSION)){ 
+    session_start();
+}
 ob_start();
 $funcion = isset($_POST['funcion']) ? $_POST['funcion'] : '';
 if ($funcion == 'buscarUsuarios') {

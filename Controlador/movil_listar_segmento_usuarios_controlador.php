@@ -1,5 +1,7 @@
 <?php 
-session_start();
+if(!isset($_SESSION)){ 
+  session_start();
+}
 ob_start();
 require_once('../clases/Conexion.php'); 
     if (isset($_POST)) {

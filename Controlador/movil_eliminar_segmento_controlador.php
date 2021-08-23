@@ -1,7 +1,9 @@
 <?php 
 require_once ('../clases/Conexion.php');
 require_once ('../clases/funcion_bitacora_movil.php');
-session_start();
+if(!isset($_SESSION)){ 
+   session_start();
+}
 ob_start();
 //id_objeto vista segmentos
 $Id_objeto = 171;
