@@ -506,6 +506,7 @@ if (session_status() === PHP_SESSION_NONE) {
       <!-- /.sidebar -->
     </aside>
 
+     
 
 
   </div>

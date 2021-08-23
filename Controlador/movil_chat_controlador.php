@@ -52,7 +52,6 @@ function CrearChat($id){
     $rspta = $mysqli->query($sql_existe)->fetch_assoc();
     if($rspta['existe'] == '1'){
         //se abre el chat 
-        $message = 'existe';
         $id_chat = $rspta['id_session_chat'];
         $chat->mostrarChat($id_chat,$id);
        
