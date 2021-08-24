@@ -55,7 +55,7 @@ switch ($_GET['op']) {
                                  "segmento" => $segmento);
                 $response = consumoApi($url, $datos);
                 $response2 = $response['mensaje'];
-                if($response2 != 'Las notificaciones se enviaron con exito'){
+                if($response2 != 'Se enviaron las notificaciones correctamente'){
                     $resultado_transaccion = 'No Completada';
                 }else{
                     $resultado_transaccion = 'Completada';
@@ -113,7 +113,7 @@ switch ($_GET['op']) {
                                  "segmento" => $segmento);
                 $response = consumoApi($url, $datos);
                 $response2 = $response['mensaje'];
-                if($response2 != 'Las notificaciones se enviaron con exito'){
+                if($response2 != 'Se enviaron las notificaciones correctamente'){
                     $resultado_transaccion = 'No Completada';
                 }else{
                     $resultado_transaccion = 'Completada';
