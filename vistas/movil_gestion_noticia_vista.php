@@ -145,6 +145,7 @@ if (isset($_REQUEST['msj'])) {
 
     <!--Pantalla 2-->
     <div class="card card-default">
+    
       <div class="card-header">
         <div class="card-tools">
           <a class="btn btn-primary btn-xs" href="../vistas/movil_crear_noticia_vista.php">Nuevo</a>
@@ -179,7 +180,7 @@ if (isset($_REQUEST['msj'])) {
                 <div class="card-body">
                   <div class="row">
                     <div class="col-md-12">
-
+                    
                       <div class="form-group">
                         <label for="titulo">Título:</label>
                         <input autofocus class="form-control" type="text" value="<?php echo $_SESSION['txtTitulo'] ?>" maxlength="90" id="titulo" name="titulo" required onpaste="return false" onkeypress="return Letras(event)" onkeyup="DobleEspacio(this, event)" onkeypress="return comprobar(this.value, event, this.id)">
@@ -242,7 +243,7 @@ if (isset($_REQUEST['msj'])) {
                                 $rspta = $mysqli->query($sql_archivos);
                               while ($row2 = $rspta->fetch_array(MYSQLI_ASSOC)) { ?>
                                 <tr>
-                                  <td><?php echo str_replace('http://desarrollo.informaticaunah.com','..',$row2['url']); ?></td>
+                                  <td><?php echo str_replace(base_url,'..',$row2['url']); ?></td>
                                   <td><a onclick="eliminar_archivos(<?php echo $row2['noticia'] ?>,<?php echo $row2['recurso'] ?>)" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></a></td>
                                 </tr>
                               <?php } ?>
